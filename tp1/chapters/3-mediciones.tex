@@ -1,9 +1,10 @@
 \chapter{Mediciones y Simulaciones}
 
 \section{Mediciones de Parámetros (Av, Zo, Zi, Avf, Zof, Zif)}
-En esta sección se presentan los resultados de las mediciones realizadas sobre el circuito implementado, tanto a lazo abierto como a lazo cerrado.
+En esta sección se presentan los resultados de las mediciones realizadas sobre el circuito implementado, tanto a lazo 
+abierto como a lazo cerrado.
 
-\begin{table}[H]
+\begin{table}[!ht]
     \centering
     \begin{tabular}{|l|c|c|c|}
         \hline
@@ -20,20 +21,22 @@ En esta sección se presentan los resultados de las mediciones realizadas sobre 
 \end{table}
 
 \section{Medición de Desensibilidad}
-Para esta prueba se provocó una variación máxima de $A_v$ del $45\%$, modificando un componente del amplificador (por ejemplo, [INDICAR COMPONENTE MODIFICADO]). Las mediciones se realizaron a una frecuencia de $f_s = 1.5 \text{ kHz}$, utilizando:
+Para esta prueba se provocó una variación máxima de $A_v$ del $45 \percent$, modificando un componente del 
+amplificador (por ejemplo, [INDICAR COMPONENTE MODIFICADO]). Las mediciones se realizaron a una frecuencia de 
+$f_s = 1.5 \text{ kHz}$, utilizando:
 \begin{itemize}
-    \item $V_s = 250 \text{ mV}$ para medir $A_{vf}$.
-    \item $V_s = 10 \text{ mV}$ para medir $A_v$.
+    \item $V_s = 250 \mV$ para medir $A_{vf}$.
+    \item $V_s = 10 \mV$ para medir $A_v$.
 \end{itemize}
 
-\begin{table}[H]
+\begin{table}[!ht]
     \centering
     \begin{tabular}{|l|c|c|}
         \hline
         \textbf{Condición} & \textbf{$A_v$ (Medida)} & \textbf{$A_{vf}$ (Medida)} \\ \hline
         Original & [COMPLETAR] & [COMPLETAR] \\ \hline
         Con variación & [COMPLETAR] & [COMPLETAR] \\ \hline
-        \textbf{Variación Porcentual ($\Delta \%$)} & [COMPLETAR] & [COMPLETAR] \\ \hline
+        \textbf{Variación Porcentual ($\Delta \percent$)} & [COMPLETAR] & [COMPLETAR] \\ \hline
     \end{tabular}
     \caption{Medición de Desensibilidad}
     \label{tab:desensibilidad}
@@ -42,31 +45,31 @@ Para esta prueba se provocó una variación máxima de $A_v$ del $45\%$, modific
 [COMPLETAR CON OBSERVACIONES SOBRE LA DESENSIBILIDAD OBSERVADA]
 
 \section{Respuesta en Frecuencia}
-Se obtuvieron las curvas de respuesta en frecuencia de la ganancia, tanto a lazo abierto como a lazo cerrado, correspondientes al circuito implementado.
+Se obtuvieron las curvas de respuesta en frecuencia de la ganancia, tanto a lazo abierto como a lazo cerrado, 
+correspondientes al circuito implementado.
 
 \vspace{1cm}
-% Espacio para incluir la gráfica de respuesta en frecuencia (Bode) obtenida de forma práctica
-\begin{figure}[H]
+\begin{figure}[!ht]
     \centering
     % \includegraphics[width=0.8\textwidth]{images/bode_practico.png}
-    % \caption{Gráfica de respuesta en frecuencia (Lazo Abierto y Lazo Cerrado).}
-    % \label{fig:bode_practico}
     [AQUÍ VA EL GRÁFICO BODE DE LAS MEDICIONES PRÁCTICAS]
+    \caption{Gráfica de respuesta en frecuencia (Lazo Abierto y Lazo Cerrado).}
+    \label{fig:bode_practico}
 \end{figure}
 
 [COMPLETAR CON ANÁLISIS DE ANCHO DE BANDA Y FRECUENCIAS DE CORTE]
 
 \section{Verificación mediante Simulación}
-Haciendo uso del software de simulación, se procedió a verificar los valores de ganancia y respuesta en frecuencia obtenidos en el punto anterior.
+Haciendo uso del software de simulación, se procedió a verificar los valores de ganancia y respuesta en frecuencia 
+obtenidos en el punto anterior.
 
 \vspace{1cm}
-% Espacio para incluir capturas de simulación
-\begin{figure}[H]
+\begin{figure}[!ht]
     \centering
     % \includegraphics[width=0.8\textwidth]{images/simulacion_bode.png}
-    % \caption{Respuesta en frecuencia simulada.}
-    % \label{fig:simulacion_bode}
     [AQUÍ VAN LAS CAPTURAS DE SIMULACIÓN]
+    \caption{Respuesta en frecuencia simulada.}
+    \label{fig:simulacion_bode}
 \end{figure}
 
 [COMPLETAR CON ANÁLISIS COMPARATIVO ENTRE SIMULACIÓN Y PRÁCTICA]
