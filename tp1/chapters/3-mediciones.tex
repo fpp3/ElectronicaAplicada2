@@ -1,8 +1,80 @@
 \chapter{Mediciones y Simulaciones}
 
 \section{Mediciones de Parámetros (Av, Zo, Zi, Avf, Zof, Zif)}
-En esta sección se presentan los resultados de las mediciones realizadas sobre el circuito implementado, tanto a lazo 
-abierto como a lazo cerrado.
+En esta sección se detallan los procedimientos realizados para la obtención de los parámetros dinámicos del 
+amplificador. Las mediciones se efectuaron utilizando un osciloscopio digital, un generador de funciones y 
+multímetros para la verificación de los puntos de reposo.
+
+\subsection{Ganancia de Tensión y Respuesta en Frecuencia}
+Para medir la ganancia de tensión ($A_v$ y $A_{vf}$), se inyectó una señal senoidal en la entrada del 
+amplificador. Se ajustó la amplitud para asegurar que la señal de salida no presentara distorsión por recorte.
+Para lazo abierto, se midieron $v_i$ y $v_o$ directamente con el osciloscopio, mientras que para lazo cerrado se 
+repitió el proceso midiendo $v_{if}$ y $v_{of}$.
+
+\begin{figure}[!ht]
+    \centering
+    \begin{subfigure}[t]{0.4\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/osc_sen_vi.png}
+        \caption{tension de entrada.}
+    \end{subfigure}
+    \hspace{1cm}
+    \begin{subfigure}[t]{0.4\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/osc_sen_vo.png}
+        \caption{tension de salida.}
+    \end{subfigure}
+    \caption{mediciones a lazo abierto.}
+\end{figure}
+\begin{figure}[!ht]
+    \centering
+    \begin{subfigure}[t]{0.4\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/osc_sen_vif.png}
+        \caption{tension de entrada.}
+    \end{subfigure}
+    \hspace{1cm}
+    \begin{subfigure}[t]{0.4\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/osc_sen_vof.png}
+        \caption{tension de salida.}
+    \end{subfigure}
+    \caption{mediciones a lazo cerrado.}
+\end{figure}
+
+\subsection{Impedancia de Entrada}
+La impedancia de entrada se midió a lazo abierto siguiendo el método de la caída a la mitad de la tensión de salida. 
+El procedimiento consistió en:
+\begin{enumerate}
+    \item Lograr la Máxima Excursión Simétrica (MES) a la salida con la carga $R_L$ conectada.
+    \item Insertar un potenciómetro de $100 \kohm$ en serie con la entrada del amplificador.
+    \item Ajustar el potenciómetro hasta que la amplitud de la señal de salida $v_o$ caiga exactamente a la mitad de 
+    su valor inicial.
+    \item Retirar el potenciómetro y medir su resistencia con un multímetro; dicho valor corresponde a la 
+    impedancia de entrada $Z_i$.
+\end{enumerate}
+
+En la Figura \ref{fig:placa_pruebas} se puede observar la placa de pruebas (PCB) utilizada para realizar estas y todas
+las mediciones dinámicas del trabajo práctico.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{pictures/mult_zi_la.jpeg}
+    \caption{Circuito implementado en PCB utilizado para el relevamiento de parámetros.}
+    \label{fig:placa_pruebas}
+\end{figure}
+
+\subsection{Impedancia de Salida}
+Para la impedancia de salida, también a lazo abierto, se procedió de la siguiente manera:
+\begin{enumerate}
+    \item Desconectar la carga para dejar la salida en vacío y asegurar que en la salida se observe la MES.
+    \item Conectar en paralelo a la salida un potenciómetro de $10 \kohm$.
+    \item Ajustar el potenciómetro hasta lograr que la tensión de salida $v_o$ caiga a la mitad de su valor en vacío.
+    \item El valor de resistencia del potenciómetro medido con el multímetro corresponde a la impedancia de salida $Z_o$.
+\end{enumerate}
+
+\subsection{Resultados de Parámetros Dinámicos}
+Los valores resultantes de aplicar los procedimientos anteriores se resumen en la Tabla \ref{tab:parametros}.
 
 \begin{table}[!ht]
     \centering
@@ -10,7 +82,7 @@ abierto como a lazo cerrado.
         \hline
         \textbf{Parámetro}  & \textbf{Valor Simulado} & \textbf{Valor Medido} \\ \hline
         $A_v$ (Lazo Abierto) & $76.5$ & $69,5$ \\ \hline
-        $Z_i$ (Lazo Abierto) & $56.82 \kohm$ & [COMPLETAR] \\ \hline
+        $Z_i$ (Lazo Abierto) & $56.82 \kohm$ & $34.9 \si{\kilo\ohm}$ \\ \hline
         $Z_o$ (Lazo Abierto) & $1.98 \kohm$ & [COMPLETAR] \\ \hline
         $A_{vf}$ (Lazo Cerrado) & $10.75$ & $9,5$ \\ \hline
         $Z_{if}$ (Lazo Cerrado) & $182.2 \kohm$ & [COMPLETAR] \\ \hline
