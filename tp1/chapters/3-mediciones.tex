@@ -61,13 +61,11 @@ correspondientes al circuito implementado.
     \label{fig:bode_practico}
 \end{figure}
 
-[COMPLETAR CON ANÁLISIS DE ANCHO DE BANDA Y FRECUENCIAS DE CORTE]
-
 \section{Verificación mediante Simulación}
 Haciendo uso del software de simulación, se procedió a verificar los valores de ganancia y respuesta en frecuencia 
-obtenidos en el punto anterior, a partir del circuito visto en la Figura \ref{fig:circuito_ltspice}
-El comando \textbf{.ac dec 100 10 2M} hará un barrido en frecuencia de la fuente V1, de $10 \si{\hertz}$ a 
-$2 \si{\mega\hertz}$
+obtenidos en el punto anterior, a partir del circuito visto en la Figura \ref{fig:circuito_ltspice}.
+El comando \textbf{.ac dec 100 10 2M} hará un barrido en frecuencia de la fuente V1 en la entrada, de $10\ \si{\hertz}$ a 
+$2\ \si{\mega\hertz}$, estableciendo las condiciones necesarias para caracterizar la respuesta en frecuencia del circuito.
 
 \vspace{1cm}
 \begin{figure}[!ht]
@@ -80,8 +78,8 @@ $2 \si{\mega\hertz}$
 \vspace{1cm}
 
 En la Figura \ref{fig:sim_LA} se puede ver como nuestro ancho de banda en lazo abierto esta definido entre los puntos
-donde la relacion de salida y entrada cae por debajo de los $3 \si{\decibel}$. Esto nos da un ancho de banda de
-$772235,23 \si{\hertz}$
+donde la relacion de salida y entrada cae por debajo de los $3\ \si{\decibel}$. Esto nos da un ancho de banda de
+$772235,23\ \si{\hertz}$.
 \begin{figure}[!ht]
     \centering
     \input{figures/fig_plot_f-resp_LA.tex}
@@ -90,9 +88,9 @@ $772235,23 \si{\hertz}$
 \end{figure}
 
 Ahora hacemos el mismo analisis para el circuito a lazo cerrado, donde aumentamos el limite del barrido en la 
-simulacion a $20 \si{\mega\hertz}$ para obtener un mejor resultado. Viendose en la Figura \ref{fig:sim_LC}, nuestro 
-ancho de banda aumento considerablemente llegando a los $6.16 \si{\mega\hertz}$, aunque la magnitud disminuyó a 
-unos $20.91 \si{\decibel}$
+simulacion a $20\ \si{\mega\hertz}$ para obtener un mejor resultado. Viendose en la Figura \ref{fig:sim_LC}, nuestro 
+ancho de banda aumento considerablemente llegando a los $6.16\ \si{\mega\hertz}$, aunque la magnitud disminuyó a 
+unos $20.91\ \si{\decibel}$.
 
 \begin{figure}[!ht]
     \centering
@@ -101,4 +99,3 @@ unos $20.91 \si{\decibel}$
     \label{fig:sim_LC}
 \end{figure}
 
-[COMPLETAR CON ANÁLISIS COMPARATIVO ENTRE SIMULACIÓN Y PRÁCTICA]
