@@ -6,15 +6,15 @@ abierto como a lazo cerrado.
 
 \begin{table}[!ht]
     \centering
-    \begin{tabular}{|l|c|c|c|}
+    \begin{tabular}{|l|c|c|}
         \hline
-        \textbf{Parámetro} & \textbf{Valor Teórico} & \textbf{Valor Simulado} & \textbf{Valor Medido} \\ \hline
-        $A_v$ (Lazo Abierto) & [COMPLETAR] & $76.5$ & [COMPLETAR] \\ \hline
-        $Z_i$ (Lazo Abierto) & [COMPLETAR] & $56.82 \kohm$ & [COMPLETAR] \\ \hline
-        $Z_o$ (Lazo Abierto) & [COMPLETAR] & $1.98 \kohm$ & [COMPLETAR] \\ \hline
-        $A_{vf}$ (Lazo Cerrado) & [COMPLETAR] & $10.75$ & [COMPLETAR] \\ \hline
-        $Z_{if}$ (Lazo Cerrado) & [COMPLETAR] & $182.2 \kohm$ & [COMPLETAR] \\ \hline
-        $Z_{of}$ (Lazo Cerrado) & [COMPLETAR] & $277.41 \ohm$ & [COMPLETAR] \\ \hline
+        \textbf{Parámetro}  & \textbf{Valor Simulado} & \textbf{Valor Medido} \\ \hline
+        $A_v$ (Lazo Abierto) & $76.5$ & $69,5$ \\ \hline
+        $Z_i$ (Lazo Abierto) & $56.82 \kohm$ & [COMPLETAR] \\ \hline
+        $Z_o$ (Lazo Abierto) & $1.98 \kohm$ & [COMPLETAR] \\ \hline
+        $A_{vf}$ (Lazo Cerrado) & $10.75$ & $9,5$ \\ \hline
+        $Z_{if}$ (Lazo Cerrado) & $182.2 \kohm$ & [COMPLETAR] \\ \hline
+        $Z_{of}$ (Lazo Cerrado) & $277.41 \ohm$ & [COMPLETAR] \\ \hline
     \end{tabular}
     \caption{Comparativa de Parámetros Dinámicos}
     \label{tab:parametros}
@@ -22,11 +22,10 @@ abierto como a lazo cerrado.
 
 \section{Medición de Desensibilidad}
 Para esta prueba se provocó una variación máxima de $A_v$ del $45 \percent$, modificando un componente del 
-amplificador (por ejemplo, [INDICAR COMPONENTE MODIFICADO]). Las mediciones se realizaron a una frecuencia de 
-$f_s = 1.5 \si{\kilo\hertz}$, utilizando:
+amplificador. Las mediciones se realizaron a una frecuencia de $f_s = 1.5 \text{ kHz}$, utilizando:
 \begin{itemize}
-    \item $V_s = 250 \mV$ para medir $A_{vf}$.
-    \item $V_s = 10 \mV$ para medir $A_v$.
+    \item $V_i = 40 \mV_{pp}$ para medir $A_v$ (Lazo Abierto).
+    \item $V_{if} = 200 \mV_{pp}$ para medir $A_{vf}$ (Lazo Cerrado).
 \end{itemize}
 
 \begin{table}[!ht]
@@ -34,15 +33,20 @@ $f_s = 1.5 \si{\kilo\hertz}$, utilizando:
     \begin{tabular}{|l|c|c|}
         \hline
         \textbf{Condición} & \textbf{$A_v$ (Medida)} & \textbf{$A_{vf}$ (Medida)} \\ \hline
-        Original & [COMPLETAR] & [COMPLETAR] \\ \hline
-        Con variación & [COMPLETAR] & [COMPLETAR] \\ \hline
-        \textbf{Variación Porcentual ($\Delta \percent$)} & [COMPLETAR] & [COMPLETAR] \\ \hline
+        Original & $69,5$ & $9,5$ \\ \hline
+        Con variación ($45\%$) & $31,25$ & $8,3$ \\ \hline
+        \textbf{Variación Porcentual ($\Delta \percent$)} & $55\%$ & $13\%$ \\ \hline
     \end{tabular}
     \caption{Medición de Desensibilidad}
     \label{tab:desensibilidad}
 \end{table}
 
-[COMPLETAR CON OBSERVACIONES SOBRE LA DESENSIBILIDAD OBSERVADA]
+A partir de las variaciones porcentuales obtenidas, se calcula el factor de desensibilización práctico $D$:
+\begin{equation}
+    D = \frac{\Delta \% A_v}{\Delta \% A_{vf}} = \frac{55\%}{13\%} = 4,23
+\end{equation}
+
+Este valor indica que, ante una degradación del $55\%$ en la ganancia de lazo abierto, la ganancia de lazo cerrado solo se vio afectada en un $13\%$, demostrando la estabilidad que aporta la realimentación negativa al sistema.
 
 \section{Respuesta en Frecuencia}
 Se obtuvieron las curvas de respuesta en frecuencia de la ganancia, tanto a lazo abierto como a lazo cerrado, 
