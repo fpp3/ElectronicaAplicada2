@@ -9,12 +9,12 @@ abierto como a lazo cerrado.
     \begin{tabular}{|l|c|c|c|}
         \hline
         \textbf{Parámetro} & \textbf{Valor Teórico} & \textbf{Valor Simulado} & \textbf{Valor Medido} \\ \hline
-        $A_v$ (Lazo Abierto) & [COMPLETAR] & 76.5 & [COMPLETAR] \\ \hline
-        $Z_i$ (Lazo Abierto) & [COMPLETAR] & 56.82 \kohm & [COMPLETAR] \\ \hline
-        $Z_o$ (Lazo Abierto) & [COMPLETAR] & 1.98 \kohm & [COMPLETAR] \\ \hline
-        $A_{vf}$ (Lazo Cerrado) & [COMPLETAR] & 10.75 & [COMPLETAR] \\ \hline
-        $Z_{if}$ (Lazo Cerrado) & [COMPLETAR] & 182.2 \kohm & [COMPLETAR] \\ \hline
-        $Z_{of}$ (Lazo Cerrado) & [COMPLETAR] & 277.41 \ohm & [COMPLETAR] \\ \hline
+        $A_v$ (Lazo Abierto) & [COMPLETAR] & $76.5$ & [COMPLETAR] \\ \hline
+        $Z_i$ (Lazo Abierto) & [COMPLETAR] & $56.82 \kohm$ & [COMPLETAR] \\ \hline
+        $Z_o$ (Lazo Abierto) & [COMPLETAR] & $1.98 \kohm$ & [COMPLETAR] \\ \hline
+        $A_{vf}$ (Lazo Cerrado) &aparte [COMPLETAR] & $10.75$ & [COMPLETAR] \\ \hline
+        $Z_{if}$ (Lazo Cerrado) & [COMPLETAR] & $182.2 \kohm$ & [COMPLETAR] \\ \hline
+        $Z_{of}$ (Lazo Cerrado) & [COMPLETAR] & $277.41 \ohm$ & [COMPLETAR] \\ \hline
     \end{tabular}
     \caption{Comparativa de Parámetros Dinámicos}
     \label{tab:parametros}
@@ -78,38 +78,7 @@ En la Figura \ref{fig:sim_LA} se puede ver como nuestro ancho de banda en lazo a
 donde la relacion de salida y entrada cae por debajo de los 3 \si{\decibel}. Esto nos da un ancho de banda de 772235.23 \si{\hertz}
 \begin{figure}[!ht]
     \centering
-    \begin{tikzpicture}
-        \begin{semilogxaxis}[
-            width=0.9\linewidth,
-            height=8cm,
-            clip mode=individual,
-            ylabel style={sloped like x axis, at={(0.2,1.08)} },
-            xlabel={Frecuencia (Hz)},
-            ylabel={Magnitud (dB)},
-            grid=both,
-            xmin=10, xmax=2000000,
-            ymin=-4, ymax=40,
-            ytick distance=4,
-            extra x ticks={176.17, 772080},
-            extra x tick labels={176, 772k},
-            extra x tick style={grid=none, tick label style={yshift=-15pt, font=\footnotesize}}
-        ]
-            % Gráfica principal
-            \addplot [red, thick] table [
-                x index=0,
-                y index=1
-            ] {data/resp_freq_LA.txt};
-
-            % Línea horizontal a -3dB (ahora arranca desde X=10)
-            \addplot [black, dashed, forget plot] coordinates {(10, 34.76) (2000000, 34.76)}
-                node[pos=0.965, above, font=\footnotesize] {$-3$ dB};
-
-            % Líneas verticales
-            \addplot [black, dashed, forget plot] coordinates {(176.17, 34.76) (176.17, -4)};
-            \addplot [black, dashed, forget plot] coordinates {(772080, 34.76) (772080, -4)};
-
-        \end{semilogxaxis}
-    \end{tikzpicture}
+    \input{figures/fig_plot_f-resp_LA.tex}
     \caption{Respuesta en frecuencia lazo abierto}
     \label{fig:sim_LA}
 \end{figure}
@@ -118,41 +87,9 @@ Ahora hacemos el mismo analisis para el circuito a lazo cerrado, donde aumentamo
 a 20 \si{\mega\hertz} para obtener un mejor resultado. Viendose en la Figura \ref{fig:sim_LC}, nuestro ancho de banda
 aumento considerablemente llegando a los 6.16 \si{\mega\hertz}, aunque la magnitud disminuyó a unos 20.91 \si{\decibel}
 
-\begin{figure}[H]
+\begin{figure}[!ht]
     \centering
-    \begin{tikzpicture}
-        \begin{semilogxaxis}[
-            width=0.9\linewidth,
-            height=8cm,
-            clip mode=individual,
-            ylabel style={sloped like x axis, at={(0.2,1.08)} },
-            xlabel={Frecuencia (Hz)},
-            ylabel={Magnitud (dB)},
-            grid=both,
-            xmin=10, xmax=20000000,
-            ymin=-26, ymax=25,
-            ytick distance=4,
-            % --- Nuevas frecuencias de corte para lazo cerrado ---
-            extra x ticks={350, 6160000},
-            extra x tick labels={350, 6.16M},
-            extra x tick style={grid=none, tick label style={yshift=-15pt, font=\footnotesize}}
-        ]
-            % Gráfica principal
-            \addplot [red, thick] table [
-                x index=0,
-                y index=1
-            ] {data/resp_freq_LC.txt};
-
-            % Línea horizontal a -3dB del nuevo máximo (20.91 - 3 = 17.91 dB)
-            \addplot [black, dashed, forget plot] coordinates {(10, 17.91) (20000000, 17.91)}
-                node[pos=0.964, above, font=\footnotesize] {$-3$ dB};
-
-            % Líneas verticales bajando hasta el nuevo límite inferior (-26 dB)
-            \addplot [black, dashed, forget plot] coordinates {(350, 17.91) (350, -26)};
-            \addplot [black, dashed, forget plot] coordinates {(6160000, 17.91) (6160000, -26)};
-
-        \end{semilogxaxis}
-    \end{tikzpicture}
+    \input{figures/fig_plot_f-resp_LC.tex}
     \caption{Respuesta en frecuencia lazo cerrado}
     \label{fig:sim_LC}
 \end{figure}

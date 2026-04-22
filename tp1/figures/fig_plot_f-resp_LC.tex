@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+    \begin{semilogxaxis}[
+        width=0.9\linewidth,
+        height=8cm,
+        clip mode=individual,
+        ylabel style={sloped like x axis, at={(0.2,1.08)} },
+        xlabel={Frecuencia (Hz)},
+        ylabel={Magnitud (dB)},
+        grid=both,
+        xmin=10, xmax=20000000,
+        ymin=-26, ymax=25,
+        ytick distance=4,
+        % --- Nuevas frecuencias de corte para lazo cerrado ---
+        extra x ticks={350, 6160000},
+        extra x tick labels={350, 6.16M},
+        extra x tick style={grid=none, tick label style={yshift=-15pt, font=\footnotesize}}
+    ]
+        % Gráfica principal
+        \addplot [red, thick] table [
+            x index=0,
+            y index=1
+        ] {sources/plots/resp_freq_LC.txt};
+
+        % Línea horizontal a -3dB del nuevo máximo (20.91 - 3 = 17.91 dB)
+        \addplot [black, dashed, forget plot] coordinates {(10, 17.91) (20000000, 17.91)}
+            node[pos=0.964, above, font=\footnotesize] {$-3$ dB};
+
+        % Líneas verticales bajando hasta el nuevo límite inferior (-26 dB)
+        \addplot [black, dashed, forget plot] coordinates {(350, 17.91) (350, -26)};
+        \addplot [black, dashed, forget plot] coordinates {(6160000, 17.91) (6160000, -26)};
+
+    \end{semilogxaxis}
+\end{tikzpicture}

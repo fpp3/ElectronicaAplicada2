@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+    \begin{semilogxaxis}[
+        width=0.9\linewidth,
+        height=8cm,
+        clip mode=individual,
+        ylabel style={sloped like x axis, at={(0.2,1.08)} },
+        xlabel={Frecuencia (Hz)},
+        ylabel={Magnitud (dB)},
+        grid=both,
+        xmin=10, xmax=2000000,
+        ymin=-4, ymax=40,
+        ytick distance=4,
+        extra x ticks={176.17, 772080},
+        extra x tick labels={176, 772k},
+        extra x tick style={grid=none, tick label style={yshift=-15pt, font=\footnotesize}}
+    ]
+        % Gráfica principal
+        \addplot [red, thick] table [
+            x index=0,
+            y index=1
+        ] {sources/plots/resp_freq_LA.txt};
+
+        % Línea horizontal a -3dB (ahora arranca desde X=10)
+        \addplot [black, dashed, forget plot] coordinates {(10, 34.76) (2000000, 34.76)}
+            node[pos=0.965, above, font=\footnotesize] {$-3$ dB};
+
+        % Líneas verticales
+        \addplot [black, dashed, forget plot] coordinates {(176.17, 34.76) (176.17, -4)};
+        \addplot [black, dashed, forget plot] coordinates {(772080, 34.76) (772080, -4)};
+
+    \end{semilogxaxis}
+\end{tikzpicture}
+
