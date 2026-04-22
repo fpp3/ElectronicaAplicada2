@@ -7,15 +7,23 @@
         ylabel={Ganancia},
         grid=both,
         xmin=10, xmax=2000000,
-        ymin=-4, ymax=30,
-        ytick distance=5,
+        ymin=-4, ymax=80,
+        ytick distance=10,
     ]
         % Gráfica principal
         \addplot [red, thick] table [
             x index=0,
             y index=1
-        ] {sources/plots/resp_freq_LC.txt};
+        ] {sources/plots/resp_freq_LA_LC_lab.txt};
+        \addlegendentry{Lazo Abierto}
+
+        \addplot [blue, thick] table [
+            x index=0,
+            y index=2
+        ] {sources/plots/resp_freq_LA_LC_lab.txt};
+        \addlegendentry{Lazo Cerrado}
 
 
     \end{semilogxaxis}
 \end{tikzpicture}
+

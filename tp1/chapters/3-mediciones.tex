@@ -49,25 +49,58 @@ A partir de las variaciones porcentuales obtenidas, se calcula el factor de dese
 Este valor indica que, ante una degradación del $55\%$ en la ganancia de lazo abierto, la ganancia de lazo cerrado solo se vio afectada en un $13\%$, demostrando la estabilidad que aporta la realimentación negativa al sistema.
 
 \section{Respuesta en Frecuencia}
-Se obtuvieron las curvas de respuesta en frecuencia de la ganancia, tanto a lazo abierto como a lazo cerrado, 
-correspondientes al circuito implementado.
+Para la medicion de la respuesta en frecuencia del amplificador en ambos modos, se utilizaron las mismas amplitudes de
+señal de entrada que para las mediciones anteriores. Solo se modificó la frecuencia de la señal. El barrido de
+frecuencias que se realizo es el siguiente:
 
-\vspace{1cm}
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Frecuencia} & \textbf{$A_v$ (LA)} & \textbf{$A_{vf}$ (LC)} \\ \hline
+        $10 \si{\hertz}$        & & \\ \hline
+        $50 \si{\hertz}$        & & \\ \hline
+        $100 \si{\hertz}$       & & \\ \hline
+        $200 \si{\hertz}$       & & \\ \hline
+        $500 \si{\hertz}$       & & \\ \hline
+        $800 \si{\hertz}$       & & \\ \hline
+        $1 \si{\kilo\hertz}$    & & \\ \hline
+        $1.5 \si{\kilo\hertz}$  & & \\ \hline
+        $2 \si{\kilo\hertz}$    & & \\ \hline
+        $5 \si{\kilo\hertz}$    & & \\ \hline
+        $8 \si{\kilo\hertz}$    & & \\ \hline
+        $10 \si{\kilo\hertz}$   & & \\ \hline
+        $50 \si{\kilo\hertz}$   & & \\ \hline
+        $100 \si{\kilo\hertz}$  & & \\ \hline
+        $200 \si{\kilo\hertz}$  & & \\ \hline
+        $400 \si{\kilo\hertz}$  & & \\ \hline
+        $500 \si{\kilo\hertz}$  & & \\ \hline
+        $800 \si{\kilo\hertz}$  & & \\ \hline
+        $1 \si{\mega\hertz}$    & & \\ \hline
+        $1.5 \si{\mega\hertz}$  & & \\ \hline
+        $2 \si{\mega\hertz}$    & & \\ \hline
+    \end{tabular}
+    \label{tab:rta_frec}
+    \caption{Ganancias obtenidas de la respuesta en frecuencia.}
+\end{table}
+
+A modo de comparacion, en la figura \ref{fig:practico_LA_LC} se muestran las graficas de ganancia en funcion de la
+frecuencia de ambos amplificadores.
+
 \begin{figure}[!ht]
     \centering
-    % \includegraphics[width=0.8\textwidth]{images/bode_practico.png}
-    [AQUÍ VA EL GRÁFICO BODE DE LAS MEDICIONES PRÁCTICAS]
+\input{figures/fig_plot_f-resp_LA_LC_lab.tex}
     \caption{Gráfica de respuesta en frecuencia (Lazo Abierto y Lazo Cerrado).}
-    \label{fig:bode_practico}
+    \label{fig:practico_LA_LC}
 \end{figure}
+
+Se puede apreciar que la respuesta en frecuencia del amplificador a lazo abierto, es bastante acotada, pudiendo suponer
+una frecuencia de corte a $1 \si{\kilo\hertz}$ y a $1 \si{\mega\hertz}$.
 
 \section{Verificación mediante Simulación}
 Haciendo uso del software de simulación, se procedió a verificar los valores de ganancia y respuesta en frecuencia 
 obtenidos en el punto anterior, a partir del circuito visto en la Figura \ref{fig:circuito_ltspice}.
-El comando \textbf{.ac dec 100 10 2M} hará un barrido en frecuencia de la fuente V1 en la entrada, de $10\ \si{\hertz}$ a 
-$2\ \si{\mega\hertz}$, estableciendo las condiciones necesarias para caracterizar la respuesta en frecuencia del circuito.
 
-\vspace{1cm}
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.8\textwidth]{images/circuito_ltspice.png}
@@ -75,11 +108,9 @@ $2\ \si{\mega\hertz}$, estableciendo las condiciones necesarias para caracteriza
     \label{fig:circuito_ltspice}
 \end{figure}
 
-\vspace{1cm}
+El comando \textbf{.ac dec 100 10 2M} hará un barrido en frecuencia de la fuente V1, de $10 \si{\hertz}$ a 
+$2 \si{\mega\hertz}$
 
-En la Figura \ref{fig:sim_LA} se puede ver como nuestro ancho de banda en lazo abierto esta definido entre los puntos
-donde la relacion de salida y entrada cae por debajo de los $3\ \si{\decibel}$. Esto nos da un ancho de banda de
-$772235,23\ \si{\hertz}$.
 \begin{figure}[!ht]
     \centering
     \input{figures/fig_plot_f-resp_LA.tex}
@@ -88,9 +119,11 @@ $772235,23\ \si{\hertz}$.
 \end{figure}
 
 Ahora hacemos el mismo analisis para el circuito a lazo cerrado, donde aumentamos el limite del barrido en la 
-simulacion a $20\ \si{\mega\hertz}$ para obtener un mejor resultado. Viendose en la Figura \ref{fig:sim_LC}, nuestro 
-ancho de banda aumento considerablemente llegando a los $6.16\ \si{\mega\hertz}$, aunque la magnitud disminuyó a 
-unos $20.91\ \si{\decibel}$.
+simulacion a $20 \si{\mega\hertz}$ para obtener un mejor resultado. Viendose en la Figura \ref{fig:sim_LC}, nuestro 
+ancho de banda aumento considerablemente. Esto se logro al costo de la ganancia, la cual disminuyo al rededor de 7 veces
+a la de lazo abierto. Esto se debe a que la relacion de area bajo la curva de ancho de banda, debe permanecer constante,
+por lo que siempre que se aumenta el ancho de banda de alguna forma, la ganancia va a disminuir en igual proporcion al
+aumento.
 
 \begin{figure}[!ht]
     \centering
