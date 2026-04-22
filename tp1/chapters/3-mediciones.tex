@@ -47,12 +47,19 @@ La impedancia de entrada se midió a lazo abierto siguiendo el método de la ca�
 El procedimiento consistió en:
 \begin{enumerate}
     \item Lograr la Máxima Excursión Simétrica (MES) a la salida con la carga $R_L$ conectada.
-    \item Insertar un potenciómetro de $100 \kohm$ en serie con la entrada del amplificador.
+    \item Insertar un potenciómetro de $\SI{100}{\kilo\ohm}$ en serie con la entrada del amplificador.
     \item Ajustar el potenciómetro hasta que la amplitud de la señal de salida $v_o$ caiga exactamente a la mitad de 
     su valor inicial.
     \item Retirar el potenciómetro y medir su resistencia con un multímetro; dicho valor corresponde a la 
     impedancia de entrada $Z_i$.
 \end{enumerate}
+
+\begin{figure}[!ht]
+    \centering
+    \input{tikz/fig_medicion_zi.tex}
+    \caption{Esquema de medición de la impedancia de entrada $Z_i$.}
+    \label{fig:medicion_zi}
+\end{figure}
 
 En la Figura \ref{fig:placa_pruebas} se puede observar la placa de pruebas (PCB) utilizada para realizar estas y todas
 las mediciones dinámicas del trabajo práctico.
@@ -68,10 +75,17 @@ las mediciones dinámicas del trabajo práctico.
 Para la impedancia de salida, también a lazo abierto, se procedió de la siguiente manera:
 \begin{enumerate}
     \item Desconectar la carga para dejar la salida en vacío y asegurar que en la salida se observe la MES.
-    \item Conectar en paralelo a la salida un potenciómetro de $10 \kohm$.
+    \item Conectar en paralelo a la salida un potenciómetro de $\SI{10}{\kilo\ohm}$.
     \item Ajustar el potenciómetro hasta lograr que la tensión de salida $v_o$ caiga a la mitad de su valor en vacío.
     \item El valor de resistencia del potenciómetro medido con el multímetro corresponde a la impedancia de salida $Z_o$.
 \end{enumerate}
+
+\begin{figure}[!ht]
+    \centering
+    \input{tikz/fig_medicion_zo.tex}
+    \caption{Esquema de medición de la impedancia de salida $Z_o$.}
+    \label{fig:medicion_zo}
+\end{figure}
 
 \subsection{Resultados de Parámetros Dinámicos}
 Los valores resultantes de aplicar los procedimientos anteriores se resumen en la Tabla \ref{tab:parametros}.
@@ -161,7 +175,7 @@ frecuencia de ambos amplificadores.
 
 \begin{figure}[!ht]
     \centering
-\input{figures/fig_plot_f-resp_LA_LC_lab.tex}
+\input{tikz/fig_plot_f-resp_LA_LC_lab.tex}
     \caption{Gráfica de respuesta en frecuencia (Lazo Abierto y Lazo Cerrado).}
     \label{fig:practico_LA_LC}
 \end{figure}
@@ -185,7 +199,7 @@ $2 \si{\mega\hertz}$
 
 \begin{figure}[!ht]
     \centering
-    \input{figures/fig_plot_f-resp_LA.tex}
+    \input{tikz/fig_plot_f-resp_LA.tex}
     \caption{Respuesta en frecuencia lazo abierto}
     \label{fig:sim_LA}
 \end{figure}
@@ -199,7 +213,7 @@ aumento.
 
 \begin{figure}[!ht]
     \centering
-    \input{figures/fig_plot_f-resp_LC.tex}
+    \input{tikz/fig_plot_f-resp_LC.tex}
     \caption{Respuesta en frecuencia lazo cerrado}
     \label{fig:sim_LC}
 \end{figure}
