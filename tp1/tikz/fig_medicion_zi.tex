@@ -1,29 +1,15 @@
-\begin{tikzpicture}[american, scale=1.1, transform shape]
-    % Masa inferior
-    \draw (0,0) node[ground]{} -- (8,0);
-
-    % Entrada: Fuente Vs
-    \draw (0,0) to[sinusoidal voltage source, l=$V_s$] (0,3) -- (1,3);
-    
-    % Potenciómetro como Reóstato (Puente corto arriba)
-    \draw (1,3) to[american potentiometer, n=pot1] (3,3);
-    \draw (pot1.left) -- ++(0,0.5) -| (pot1.wiper); % Puente físico corto y prolijo
-    \node[anchor=south, color=blue!70!black] at (2,3.5) {$\SI{100}{\kilo\ohm}$};
-    \node[anchor=south] at (2,2.5) {$R_{pot}$};
-
-    % Conexión al Amplificador
-    \draw (3,3) -- (4,3);
-    
-    % Bloque Amplificador
-    \draw (4,4) -- (4,2) -- (6,3) -- cycle;
-    \node at (4.7, 3) {Amp.};
-    
-    % Indicación de Zi
-    \draw[<->, >=stealth, dashed] (3.6, 2.2) -- (3.6, 3.8);
-    \node[anchor=east] at (3.5, 3) {$Z_i$};
-
-    % Salida y Carga
-    \draw (6,3) to[short, -*] (7,3) -- (8,3) node[right] {$v_o$};
-    \draw (7,3) to[american resistor, l=$R_L$] (7,0);
-
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (11.75, 3.25) to[american potentiometer, l={$R_{pot}$}] (15, 3.25);
+	\node[plain mono amp](N1) at (16.19, 3.25){} node[anchor=east] at ([xshift=0.27cm]N1.text){$Amp$};
+	\draw (17.38, 3.25) -- (19.25, 3.25);
+	\draw (10.5, 3.25) to[sinusoidal current source, l={$V_s$}] (10.5, -0);
+	\draw (13.375, 3.81) -| (14.25, 3.75) -| (14.25, 3.25);
+	\draw (10.5, -0) -- (19.25, -0);
+	\node[ground] at (15, -0){};
+	\draw[line width=0.8pt, dash pattern={on 3.2pt off 3.2pt}] (15.25, 4.25) -- (15.25, 2.25);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (15, 3.75){};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm](N2) at (14.875, 4){} node[anchor=center] at (N2.text){$Z_i$};
+	\draw (10.5, 3.25) |- (12.5, 3.25);
+	\draw (19.25, -0) -| (19.25, 3) -| (19.25, 3.25);
 \end{tikzpicture}
