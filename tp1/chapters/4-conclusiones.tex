@@ -1,15 +1,17 @@
 \chapter{Conclusiones}
 
 Habiendo implementado el circuito propuesto, se verificaron experimentalmente las características intrínsecas de los
-amplificadores con retroalimentación negativa frente a su modelo simulado y teorico. Los niveles de ganancia medidos presentaron
+amplificadores con retroalimentación negativa frente a su modelo simulado y teórico. Los niveles de ganancia medidos presentaron
 una alta concordancia con los valores teóricos, registrando un error porcentual de apenas 9.15\% respecto a la
 simulación, y evidenciando la caída de ganancia en lazo cerrado característica de esta topología.
 
-En cuanto a las impedancias, estas también reflejaron las mejoras proyectadas, midiendo -.
+En cuanto a las impedancias, estas también reflejaron las mejoras proyectadas, logrando un incremento significativo en la 
+impedancia de entrada (pasando de $34.9 \si{\kilo\ohm}$ a $147.63 \si{\kilo\ohm}$) y una disminución en la impedancia de salida 
+a lazo cerrado ($496.45 \si{\ohm}$), tal como se predice para la realimentación de tensión en serie.
 
 Por otro lado, la medición de desensibilidad demostró empíricamente la estabilidad del diseño: se obtuvo una variación
 de solo el 13\% en la ganancia de lazo cerrado frente a una drástica variación del 55\% en lazo abierto, confirmando la
-estabilidad del sistema.
+estabilidad del sistema y validando el factor de desensibilidad práctico calculado ($D = 4,23$).
 
 Finalmente, el análisis de la respuesta en frecuencia arrojó resultados precisos, visualizándose la atenuación de la
 ganancia acompañada por el consecuente aumento en el ancho de banda, validando así los compromisos fundamentales en el
@@ -18,7 +20,9 @@ diseño de esta clase de amplificadores.
 \vspace{1cm}
 \noindent\textbf{Principales observaciones:}
 \begin{itemize}
-    \item [OBSERVACIÓN 1]
-    \item [OBSERVACIÓN 2]
-    \item [OBSERVACIÓN 3]
+    \item Resultó dificultosa la localización inicial de las consignas del trabajo práctico debido a la nomenclatura poco 
+    clara de los archivos cargados en la universidad virtual, lo que demoró el inicio de las actividades de laboratorio.
+    \item Durante el relevamiento de la desensibilidad, se detectaron mediciones erráticas causadas por la colocación 
+    incorrecta de una resistencia en el prototipo. Una vez subsanado este error de montaje, los valores de ganancia se 
+    estabilizaron y permitieron obtener un factor de desensibilidad coherente con la teoría.
 \end{itemize}

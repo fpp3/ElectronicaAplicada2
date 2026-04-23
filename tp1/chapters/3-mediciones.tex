@@ -87,28 +87,9 @@ Para la impedancia de salida, también a lazo abierto, se procedió de la siguie
     \label{fig:medicion_zo}
 \end{figure}
 
-\subsection{Resultados de Parámetros Dinámicos}
-Los valores resultantes de aplicar los procedimientos anteriores se resumen en la Tabla \ref{tab:parametros}.
-
-\begin{table}[!ht]
-    \centering
-    \begin{tabular}{|l|c|c|}
-        \hline
-        \textbf{Parámetro}  & \textbf{Valor Simulado} & \textbf{Valor Medido} \\ \hline
-        $A_v$ (Lazo Abierto) & $76.5$ & $69,5$ \\ \hline
-        $Z_i$ (Lazo Abierto) & $56.82 \kohm$ & $34.9 \si{\kilo\ohm}$ \\ \hline
-        $Z_o$ (Lazo Abierto) & $1.98 \kohm$ & [COMPLETAR] \\ \hline
-        $A_{vf}$ (Lazo Cerrado) & $10.75$ & $9,5$ \\ \hline
-        $Z_{if}$ (Lazo Cerrado) & $182.2 \kohm$ & [COMPLETAR] \\ \hline
-        $Z_{of}$ (Lazo Cerrado) & $277.41 \ohm$ & [COMPLETAR] \\ \hline
-    \end{tabular}
-    \caption{Comparativa de Parámetros Dinámicos}
-    \label{tab:parametros}
-\end{table}
-
-\section{Medición de Desensibilidad}
-  Para esta prueba se provocó una variación máxima de $A_v$ del $45 \percent$, modificando una resistencia de emisor, en
-  este caso, $R_{e3}$. Las mediciones se realizaron a una frecuencia de $f_s = 1.5 \text{ kHz}$, utilizando:
+\subsection{Medición de Desensibilidad}
+Para esta prueba se provocó una variación máxima de $A_v$ del $45 \percent$, modificando la resistencia de emisor del 
+amplificador. Las mediciones se realizaron a una frecuencia de $f_s = 1.5 \text{ kHz}$, utilizando:
 \begin{itemize}
     \item $V_i = 40 \mV_{pp}$ para medir $A_v$ (Lazo Abierto).
     \item $V_{if} = 200 \mV_{pp}$ para medir $A_{vf}$ (Lazo Cerrado).
@@ -134,6 +115,35 @@ A partir de las variaciones porcentuales obtenidas, se calcula el factor de dese
 
 Este valor indica que, ante una degradación del $55\%$ en la ganancia de lazo abierto, la ganancia de lazo cerrado solo se vio afectada en un $13\%$, demostrando la estabilidad que aporta la realimentación negativa al sistema.
 
+\subsection{Cálculo de Impedancias de Lazo Cerrado}
+A partir del factor de desensibilidad medido anteriormente ($D = 4,23$), y dado que se trata de una topología de realimentación de tensión en serie, se procedió a calcular las impedancias de lazo cerrado mediante las siguientes expresiones:
+\begin{equation}
+    Z_{if} = Z_i \cdot D = 34.9 \si{\kilo\ohm} \cdot 4,23 = 147,63 \si{\kilo\ohm}
+\end{equation}
+\begin{equation}
+    Z_{of} = \frac{Z_o}{D} = \frac{2,1 \si{\kilo\ohm}}{4,23} = 496,45 \si{\ohm}
+\end{equation}
+
+\subsection{Resultados de Parámetros Dinámicos}
+Los valores resultantes de aplicar los procedimientos anteriores y los cálculos de desensibilidad se resumen en la Tabla \ref{tab:parametros}.
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Parámetro}  & \textbf{Valor Simulado} & \textbf{Valor Medido} \\ \hline
+        $A_v$ (Lazo Abierto) & $76.5$ & $69,5$ \\ \hline
+        $Z_i$ (Lazo Abierto) & $56.82 \kohm$ & $34.9 \si{\kilo\ohm}$ \\ \hline
+        $Z_o$ (Lazo Abierto) & $1.98 \kohm$ & $2.1 \si{\kilo\ohm}$ \\ \hline
+        $A_{vf}$ (Lazo Cerrado) & $10.75$ & $9,5$ \\ \hline
+        $Z_{if}$ (Lazo Cerrado) & $182.2 \kohm$ & $147.63 \si{\kilo\ohm}$ \\ \hline
+        $Z_{of}$ (Lazo Cerrado) & $277.41 \ohm$ & $496.45 \si{\ohm}$ \\ \hline
+    \end{tabular}
+    \caption{Comparativa de Parámetros Dinámicos}
+    \label{tab:parametros}
+\end{table}
+
+
 \section{Respuesta en Frecuencia}
 Para la medicion de la respuesta en frecuencia del amplificador en ambos modos, se utilizaron las mismas amplitudes de
 señal de entrada que para las mediciones anteriores. Solo se modificó la frecuencia de la señal. El barrido de
@@ -144,27 +154,27 @@ frecuencias que se realizo es el siguiente:
     \begin{tabular}{|c|c|c|}
         \hline
         \textbf{Frecuencia} & \textbf{$A_v$ (LA)} & \textbf{$A_{vf}$ (LC)} \\ \hline
-        $10 \si{\hertz}$        & & \\ \hline
-        $50 \si{\hertz}$        & & \\ \hline
-        $100 \si{\hertz}$       & & \\ \hline
-        $200 \si{\hertz}$       & & \\ \hline
-        $500 \si{\hertz}$       & & \\ \hline
-        $800 \si{\hertz}$       & & \\ \hline
-        $1 \si{\kilo\hertz}$    & & \\ \hline
-        $1.5 \si{\kilo\hertz}$  & & \\ \hline
-        $2 \si{\kilo\hertz}$    & & \\ \hline
-        $5 \si{\kilo\hertz}$    & & \\ \hline
-        $8 \si{\kilo\hertz}$    & & \\ \hline
-        $10 \si{\kilo\hertz}$   & & \\ \hline
-        $50 \si{\kilo\hertz}$   & & \\ \hline
-        $100 \si{\kilo\hertz}$  & & \\ \hline
-        $200 \si{\kilo\hertz}$  & & \\ \hline
-        $400 \si{\kilo\hertz}$  & & \\ \hline
-        $500 \si{\kilo\hertz}$  & & \\ \hline
-        $800 \si{\kilo\hertz}$  & & \\ \hline
-        $1 \si{\mega\hertz}$    & & \\ \hline
-        $1.5 \si{\mega\hertz}$  & & \\ \hline
-        $2 \si{\mega\hertz}$    & & \\ \hline
+        $10 \si{\hertz}$        & $1.1$     & $0.125$ \\ \hline
+        $50 \si{\hertz}$        & $14.9$    & $0.91$ \\ \hline
+        $100 \si{\hertz}$       & $33.75$   & $2.1$ \\ \hline
+        $200 \si{\hertz}$       & $54$      & $4.64$ \\ \hline
+        $500 \si{\hertz}$       & $60.5$    & $8.4$ \\ \hline
+        $800 \si{\hertz}$       & $58.5$    & $9.5$ \\ \hline
+        $1 \si{\kilo\hertz}$    & $54$      & $10$ \\ \hline
+        $1.5 \si{\kilo\hertz}$  & $63.5$    & $10.3$ \\ \hline
+        $2 \si{\kilo\hertz}$    & $62$      & $10.1$ \\ \hline
+        $5 \si{\kilo\hertz}$    & $59$      & $9.8$ \\ \hline
+        $8 \si{\kilo\hertz}$    & $60.5$    & $10$ \\ \hline
+        $10 \si{\kilo\hertz}$   & $60.5$    & $9.8$ \\ \hline
+        $50 \si{\kilo\hertz}$   & $59$      & $10$ \\ \hline
+        $100 \si{\kilo\hertz}$  & $62$      & $10$ \\ \hline
+        $200 \si{\kilo\hertz}$  & $60$      & $9.9$ \\ \hline
+        $400 \si{\kilo\hertz}$  & $54$      & $9.7$ \\ \hline
+        $500 \si{\kilo\hertz}$  & $51$      & $9.8$ \\ \hline
+        $800 \si{\kilo\hertz}$  & $41$      & $9.7$ \\ \hline
+        $1 \si{\mega\hertz}$    & $37$      & $9.5$ \\ \hline
+        $1.5 \si{\mega\hertz}$  & $25$      & $9.1$ \\ \hline
+        $2 \si{\mega\hertz}$    & $17$      & $8.2$ \\ \hline
     \end{tabular}
     \label{tab:rta_frec}
     \caption{Ganancias obtenidas de la respuesta en frecuencia.}
@@ -189,7 +199,7 @@ obtenidos en el punto anterior, a partir del circuito visto en la Figura \ref{fi
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/circuito_ltspice.png}
+    \includegraphics[width=0.7\textwidth]{images/circuito_ltspice.png}
     \caption{Circuito visto desde LTSpice.}
     \label{fig:circuito_ltspice}
 \end{figure}
