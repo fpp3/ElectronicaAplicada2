@@ -1,0 +1,2 @@
+.model MBD101   D(Is=192.1p Rs=.1 Ikf=0 N=1 Xti=3 Eg=1.11 Cjo=893.8f M=98.29m
++		Vj=.75 Fc=.5 Isr=16.91n Nr=2 Bv=5 Ibv=10u)
