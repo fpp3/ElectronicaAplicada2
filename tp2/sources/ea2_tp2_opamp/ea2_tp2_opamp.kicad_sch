@@ -695,129 +695,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector:TestPoint"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.762)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "TP"
-				(at 0 6.858 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "TestPoint"
-				(at 0 5.08 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 5.08 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 5.08 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "test point"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "test point tp"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "Pin* Test*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "TestPoint_0_1"
-				(circle
-					(center 0 3.302)
-					(radius 0.762)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "TestPoint_1_1"
-				(pin passive line
-					(at 0 0 90)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Device:C"
 			(pin_numbers
 				(hide yes)
@@ -2428,16 +2305,6 @@
 	)
 	(wire
 		(pts
-			(xy 218.44 147.32) (xy 215.9 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "04899aa8-5fca-4ba5-a5f3-20f85f74d5cd")
-	)
-	(wire
-		(pts
 			(xy 165.1 48.26) (xy 175.26 48.26)
 		)
 		(stroke
@@ -2698,16 +2565,6 @@
 	)
 	(wire
 		(pts
-			(xy 218.44 142.24) (xy 215.9 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "229bf564-7884-4f1c-a0ea-367a3bed7f76")
-	)
-	(wire
-		(pts
 			(xy 231.14 24.13) (xy 231.14 27.94)
 		)
 		(stroke
@@ -2878,16 +2735,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 152.4) (xy 254 152.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "36558850-f3e8-4386-a346-aa6cc9fffd12")
-	)
-	(wire
-		(pts
 			(xy 38.1 114.3) (xy 46.99 114.3)
 		)
 		(stroke
@@ -2905,16 +2752,6 @@
 			(type default)
 		)
 		(uuid "370f0e33-431d-45af-8ee7-6d791fe85bd9")
-	)
-	(wire
-		(pts
-			(xy 256.54 157.48) (xy 254 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3917776e-fc4b-475e-a4df-c5c13e2fcf25")
 	)
 	(wire
 		(pts
@@ -3098,26 +2935,6 @@
 	)
 	(wire
 		(pts
-			(xy 218.44 152.4) (xy 215.9 152.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5940510c-2fcb-46ee-97f2-e8a7138f054b")
-	)
-	(wire
-		(pts
-			(xy 256.54 142.24) (xy 254 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "59af9c6e-88e0-40aa-87d8-bb8d8869a0de")
-	)
-	(wire
-		(pts
 			(xy 175.26 118.11) (xy 175.26 120.65)
 		)
 		(stroke
@@ -3155,16 +2972,6 @@
 			(type default)
 		)
 		(uuid "5c57b62b-af2f-4a51-ab56-ba306485566a")
-	)
-	(wire
-		(pts
-			(xy 218.44 137.16) (xy 215.9 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5d472703-1075-49df-a057-ea393ff268a0")
 	)
 	(wire
 		(pts
@@ -3498,16 +3305,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 137.16) (xy 254 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "946d63b8-c9e3-4e07-bf14-7771a3b8df65")
-	)
-	(wire
-		(pts
 			(xy 149.86 82.55) (xy 149.86 71.12)
 		)
 		(stroke
@@ -3545,16 +3342,6 @@
 			(type default)
 		)
 		(uuid "97813a2d-d69f-4639-83ee-8f7cdf03fd85")
-	)
-	(wire
-		(pts
-			(xy 218.44 157.48) (xy 215.9 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "986f0d0d-13b3-4ff1-a275-c110b30535f6")
 	)
 	(polyline
 		(pts
@@ -3825,16 +3612,6 @@
 			(type default)
 		)
 		(uuid "c62fafca-d543-437a-8331-8a43941d374f")
-	)
-	(wire
-		(pts
-			(xy 256.54 147.32) (xy 254 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c90d1c3c-bd47-44d5-8e2d-0bb3505feb73")
 	)
 	(wire
 		(pts
@@ -4256,56 +4033,6 @@
 		)
 		(uuid "46c4ec38-b10c-4e6f-a065-731b93a2b747")
 	)
-	(label "vi_offseted"
-		(at 218.44 147.32 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "580eea37-57d3-41b0-a4c8-039cbff3a63b")
-	)
-	(label "derivated"
-		(at 256.54 142.24 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "693feb88-ee49-4ece-91d5-bbd61081cfa7")
-	)
-	(label "integrated"
-		(at 218.44 157.48 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "75f4b76e-b9a0-40bc-bf41-b551fe402717")
-	)
-	(label "derivated_twice"
-		(at 256.54 147.32 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "79db4433-15b9-4624-b972-62ca5a96bf8e")
-	)
-	(label "vi_buffered"
-		(at 218.44 142.24 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7d2ec795-e354-4aeb-9518-4ebe69dc5de5")
-	)
 	(label "derivated_twice"
 		(at 204.47 52.07 180)
 		(effects
@@ -4335,26 +4062,6 @@
 			(justify left bottom)
 		)
 		(uuid "a3a46eb7-9ac4-4d25-b351-abf6906179e3")
-	)
-	(label "vi"
-		(at 218.44 137.16 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a9dc416d-0d5d-416a-9fe4-993b45e10912")
-	)
-	(label "derivated_pre"
-		(at 256.54 137.16 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a9ebdd0b-e6d6-48c5-9aca-ea8e9893e63f")
 	)
 	(label "vi"
 		(at 163.83 167.64 0)
@@ -4445,36 +4152,6 @@
 			(justify left bottom)
 		)
 		(uuid "defcdf41-0dd2-409e-8282-9d488c8280ac")
-	)
-	(label "rectified_pre"
-		(at 256.54 152.4 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e97ace14-0439-40ec-adcc-d8f536585632")
-	)
-	(label "rectified"
-		(at 256.54 157.48 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ef5ef65d-1ccb-44f5-aa3a-784b1cacbee3")
-	)
-	(label "integrated_pre"
-		(at 218.44 152.4 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "eff2a28c-0b18-4dd8-ac43-dd505cf0dccf")
 	)
 	(label "derivated_twice"
 		(at 175.26 130.81 0)
@@ -5247,82 +4924,6 @@
 			(project "ea2_tp2_opamp"
 				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
 					(reference "R33")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 254 157.48 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "18cc4a93-5103-48fb-8d9b-ba8451aa74ae")
-		(property "Reference" "TP10"
-			(at 244.348 155.956 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TestPoint"
-			(at 244.348 158.496 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 254 152.4 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 254 152.4 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 254 157.48 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "12598a57-6f5e-4ba9-a143-284922c629b7")
-		)
-		(instances
-			(project "ea2_tp2_opamp"
-				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
-					(reference "TP10")
 					(unit 1)
 				)
 			)
@@ -6975,82 +6576,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 215.9 152.4 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "57930908-2fda-4c9b-b7d3-9da5bfc113e3")
-		(property "Reference" "TP4"
-			(at 206.248 150.876 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TestPoint"
-			(at 206.248 153.416 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 215.9 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 215.9 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 215.9 152.4 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "6bac3eda-7ebf-4754-91de-cd48a396d8c2")
-		)
-		(instances
-			(project "ea2_tp2_opamp"
-				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
-					(reference "TP4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:D_Schottky")
 		(at 210.82 71.12 0)
 		(unit 1)
@@ -7249,82 +6774,6 @@
 			(project "ea2_tp2_opamp"
 				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
 					(reference "R16")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 215.9 157.48 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "59bab729-12c5-46ff-bc91-40cbd2cd5eff")
-		(property "Reference" "TP5"
-			(at 206.248 155.956 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TestPoint"
-			(at 206.248 158.496 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 215.9 152.4 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 215.9 152.4 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 215.9 157.48 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "64acd4a0-2519-437e-be82-b1e45245634c")
-		)
-		(instances
-			(project "ea2_tp2_opamp"
-				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
-					(reference "TP5")
 					(unit 1)
 				)
 			)
@@ -7727,82 +7176,6 @@
 			(project "ea2_tp2_opamp"
 				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
 					(reference "R25")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 254 152.4 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "621cab0b-f6de-406a-9d55-16c33b04ca53")
-		(property "Reference" "TP9"
-			(at 244.348 150.876 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TestPoint"
-			(at 244.348 153.416 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 254 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 254 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 254 152.4 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "a19b9bb9-8868-44c0-a3c4-7cdee97dd518")
-		)
-		(instances
-			(project "ea2_tp2_opamp"
-				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
-					(reference "TP9")
 					(unit 1)
 				)
 			)
@@ -9249,82 +8622,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 215.9 137.16 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "8376ce19-a072-433a-b358-d425710fdd5f")
-		(property "Reference" "TP1"
-			(at 206.248 135.636 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TestPoint"
-			(at 206.248 138.176 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 215.9 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 215.9 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 215.9 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "6cb3ba67-e311-4f88-8f2e-e549a7684e7c")
-		)
-		(instances
-			(project "ea2_tp2_opamp"
-				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
-					(reference "TP1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:-12V")
 		(at 120.65 187.96 180)
 		(unit 1)
@@ -9555,82 +8852,6 @@
 			(project "ea2_tp2_opamp"
 				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
 					(reference "#PWR021")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 215.9 147.32 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "8897e8f0-fc68-42a2-b240-7cae7b4f4872")
-		(property "Reference" "TP3"
-			(at 206.248 145.796 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TestPoint"
-			(at 206.248 148.336 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 215.9 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 215.9 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 215.9 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "f471ac4a-6891-41f1-9a73-361a04a47ffe")
-		)
-		(instances
-			(project "ea2_tp2_opamp"
-				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
-					(reference "TP3")
 					(unit 1)
 				)
 			)
@@ -10427,82 +9648,6 @@
 			(project "ea2_tp2_opamp"
 				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
 					(reference "R36")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 254 142.24 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "a0495557-11de-472c-acb2-37dcc4c3a09d")
-		(property "Reference" "TP7"
-			(at 244.348 140.716 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TestPoint"
-			(at 244.348 143.256 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 254 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 254 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 254 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "8a4b63d7-c723-4bc0-9f48-29130b0824e6")
-		)
-		(instances
-			(project "ea2_tp2_opamp"
-				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
-					(reference "TP7")
 					(unit 1)
 				)
 			)
@@ -11765,158 +10910,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 254 147.32 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "be84c64d-dde2-4585-a953-4ae2966e544d")
-		(property "Reference" "TP8"
-			(at 244.348 145.796 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TestPoint"
-			(at 244.348 148.336 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 254 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 254 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 254 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "d4820c4c-57f1-49db-a11e-f06dd459cfeb")
-		)
-		(instances
-			(project "ea2_tp2_opamp"
-				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
-					(reference "TP8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 215.9 142.24 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "c0a7bd42-7214-4e3f-b636-ce933fc5503e")
-		(property "Reference" "TP2"
-			(at 206.248 140.716 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TestPoint"
-			(at 206.248 143.256 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 215.9 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 215.9 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 215.9 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "24c134b4-804e-48f1-8a9b-379960a6aa37")
-		)
-		(instances
-			(project "ea2_tp2_opamp"
-				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
-					(reference "TP2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 144.78 45.72 0)
 		(unit 1)
@@ -12147,82 +11140,6 @@
 			(project "ea2_tp2_opamp"
 				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
 					(reference "C3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 254 137.16 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim yes)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "d4f089c0-bdf2-4e25-b349-0106880ba2b0")
-		(property "Reference" "TP6"
-			(at 244.348 135.636 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TestPoint"
-			(at 244.348 138.176 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 254 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 254 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 254 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "7e56c312-43a6-498b-924f-6ee5d0726c48")
-		)
-		(instances
-			(project "ea2_tp2_opamp"
-				(path "/61f8a8f8-ec93-4a14-8398-718b7d33de3e"
-					(reference "TP6")
 					(unit 1)
 				)
 			)
