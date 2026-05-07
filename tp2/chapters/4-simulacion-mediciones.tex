@@ -1,12 +1,26 @@
 \chapter{Simulación y Mediciones}
 \label{chap:simulacion-mediciones}
 
-En este capítulo se presentan los resultados obtenidos mediante simulación en LTspice y las mediciones realizadas en el laboratorio.
+En este capítulo se presentan los resultados obtenidos mediante simulación en LTspice, procesados a partir de los datos exportados en formato CSV.
 
 \section{Resultados de Simulación}
-Se realizaron simulaciones transitorias para verificar que las señales cumplen con las amplitudes y niveles de offset requeridos a $\SI{4300}{\hertz}$.
+Se realizaron simulaciones transitorias a una frecuencia de $\SI{4300}{\hertz}$ para verificar el cumplimiento de las especificaciones de amplitud y offset de cada etapa.
 
-% TODO: Incluir capturas de pantalla de las simulaciones en la carpeta images/ y referenciarlas aquí.
+\begin{figure}[!ht]
+    \centering
+    \input{figures/plot_simulacion.tex}
+    \caption{Resultados de la simulación transitoria para todas las etapas del sistema.}
+    \label{fig:plot_simulacion}
+\end{figure}
+
+A continuación se detalla el comportamiento de cada señal:
+
+\begin{itemize}
+    \item \textbf{Señal 1:} Onda cuadrada con niveles de offset ajustados.
+    \item \textbf{Señal 2:} Onda triangular obtenida mediante integración de la señal 1.
+    \item \textbf{Señal 3:} Pulsos rectangulares generados por comparación.
+    \item \textbf{Señal 4:} Picos de corta duración generados por derivación.
+\end{itemize}
 
 \section{Mediciones de Laboratorio}
-Las mediciones confirman el correcto funcionamiento del diseño...
+Las mediciones confirman el correcto funcionamiento del diseño físico en el protoboard...

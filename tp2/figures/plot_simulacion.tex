@@ -1,0 +1,47 @@
+\usepgfplotslibrary{groupplots}
+
+\pgfplotsset{
+    table/col sep=comma
+}
+
+\begin{tikzpicture}
+    \begin{groupplot}[
+        group style={
+            group size=1 by 6,
+            vertical sep=0.8cm, % Reducido para ahorrar espacio
+            x descriptions at=edge bottom,
+        },
+        width=\textwidth,
+        height=3.1cm, % Reducido un poco más para seguridad
+        xlabel={Tiempo [ms]},
+        grid=both,
+        xmin=9.05, xmax=9.52,
+        scaled x ticks=false,
+        x tick label style={/pgf/number format/fixed, /pgf/number format/precision=2},
+    ]
+        % 1. BUFFER
+        \nextgroupplot[ylabel={Buffer [V]}, title={1. Etapa de Buffer}]
+        \addplot[blue, thick] table [x expr=\thisrow{time}*1000, y={V(/vi_buffered)}] {sources/plots/sim_clean.csv};
+        
+        % 2. LEVEL SHIFT
+        \nextgroupplot[ylabel={Offset [V]}, title={2. Etapa de Level Shift (Señal 1)}]
+        \addplot[blue!70!black, thick] table [x expr=\thisrow{time}*1000, y={V(/vi_offseted)}] {sources/plots/sim_clean.csv};
+        
+        % 3. INTEGRATOR
+        \nextgroupplot[ylabel={Integrador [V]}, title={3. Etapa de Integración (Señal 2)}]
+        \addplot[red, thick] table [x expr=\thisrow{time}*1000, y={V(/integrated)}] {sources/plots/sim_clean.csv};
+
+        % 4. DERIVATOR 1
+        \nextgroupplot[ylabel={Deriv. 1 [V]}, title={4. Primera Derivación}]
+        \addplot[magenta, thick] table [x expr=\thisrow{time}*1000, y={V(/derivated_pre)}] {sources/plots/sim_clean.csv};
+
+        % 5. DERIVATOR 2
+        \nextgroupplot[ylabel={Deriv. 2 [V]}, title={5. Segunda Derivación}]
+        \addplot[cyan, thick] table [x expr=\thisrow{time}*1000, y={V(/derivated_twice)}] {sources/plots/sim_clean.csv};
+
+        % 6. RECTIFIER
+        \nextgroupplot[ylabel={Rectif. [V]}, title={6. Etapa de Rectificación (Señal 4)}]
+        \addplot[green!60!black, thick] table [x expr=\thisrow{time}*1000, y={V(/rectified)}] {sources/plots/sim_clean.csv};
+        
+    \end{groupplot}
+\end{tikzpicture}
