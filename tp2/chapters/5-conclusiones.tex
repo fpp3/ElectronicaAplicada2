@@ -1,0 +1,11 @@
+\chapter{Conclusiones}
+\label{chap:conclusiones}
+
+Tras el diseño y la simulación del sistema de generación de señales con amplificadores operacionales, se pueden extraer las siguientes conclusiones:
+
+\begin{itemize}
+    \item El uso de operacionales con entrada JFET (TL084) permitió cumplir con los requisitos de alta impedancia de entrada y baja corriente de polarización, minimizando errores en las etapas de integración.
+    \item La implementación de una referencia de tensión de precisión con un buffer fue fundamental para estabilizar el nivel de continua de la señal triangular, evitando derivas causadas por variaciones en la carga o en la fuente de alimentación.
+    \item Se verificó que el Slew Rate de los dispositivos elegidos es suficiente para la frecuencia de operación de $\SI{4300}{\hertz}$, manteniendo la integridad de los flancos en las señales cuadradas y triangulares.
+    \item El sistema secuencial permite una gran flexibilidad, permitiendo ajustar cada etapa de forma independiente siempre que se respete la adaptación de niveles entre ellas.
+\end{itemize}

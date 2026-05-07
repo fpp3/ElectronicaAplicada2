@@ -1,0 +1,22 @@
+\chapter{Introducción}
+\label{chap:introduccion}
+
+Este trabajo práctico consiste en el diseño y la implementación de un sistema basado en amplificadores operacionales que permite la generación secuencial de diferentes señales a partir de una señal de entrada cuadrada.
+
+\section{Objetivos}
+\begin{itemize}
+    \item Diseñar los circuitos correspondientes para obtener, en el orden indicado, las señales diagramadas de manera sucesiva partiendo de la señal anterior.
+    \item Controlar el posicionamiento del nivel de continua (offset) de cada señal según los requerimientos.
+    \item Garantizar una impedancia de entrada del sistema de $\SI{15}{\kilo\ohm}$.
+    \item Establecer el nivel de continua de la señal 2 mediante una referencia de precisión con un seguidor de tensión (buffer).
+    \item Realizar el análisis de parámetros críticos de los operacionales seleccionados.
+\end{itemize}
+
+\section{Especificaciones de las señales}
+Las señales deben operar a una frecuencia de $\SI{4300}{\hertz}$. Las formas de onda requeridas son:
+\begin{enumerate}
+    \item \textbf{Señal 1:} Onda cuadrada de $\SI{1.5}{\volt}$ a $\SI{-1}{\volt}$ ($\SI{2.5}{V_{pp}}$).
+    \item \textbf{Señal 2:} Onda triangular de $\SI{4}{\volt}$ a $\SI{-1.5}{\volt}$ ($\SI{5.5}{V_{pp}}$).
+    \item \textbf{Señal 3:} Señal de pulsos rectangulares de $\SI{3}{\volt}$ a $\SI{0}{\volt}$.
+    \item \textbf{Señal 4:} Pulsos de corta duración (picos) con amplitud de $\SI{1}{\volt}$.
+\end{enumerate}

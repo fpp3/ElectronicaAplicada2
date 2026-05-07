@@ -1,0 +1,18 @@
+\chapter{Análisis de parámetros de los componentes}
+\label{chap:analisis-parametros}
+
+Para el desarrollo del presente trabajo práctico se han seleccionado los amplificadores operacionales TL084 y TL082, debido a sus características de alta impedancia de entrada (JFET) y buen desempeño en frecuencia.
+
+A continuación se analizan los parámetros críticos extraídos de las hojas de datos:
+
+\section{\texorpdfstring{Tensión de Offset ($V_{os}$)}{Tensión de Offset (Vos)}}
+La tensión de offset es la tensión que debe aplicarse entre las entradas para que la salida sea cero. Para el TL084, el valor típico es de $\SI{3}{\milli\volt}$. En etapas de integración, este parámetro es crítico ya que se integra en el tiempo, pudiendo causar derivas en la señal de salida.
+
+\section{Relación de Rechazo al Modo Común (CMRR)}
+Mide la capacidad del dispositivo de rechazar señales que aparecen en ambas entradas simultáneamente. El TL084 presenta un CMRR típico de $\SI{86}{\decibel}$.
+
+\section{Slew Rate (SR)}
+Indica la máxima velocidad de cambio de la tensión de salida. Para el TL084, es de $\SI{13}{\volt\per\micro\second}$. Dado que trabajamos a $\SI{4300}{\hertz}$, este valor es más que suficiente para evitar distorsiones en las transiciones de la onda cuadrada y los flancos de la triangular.
+
+\section{\texorpdfstring{Corriente de Polarización de Entrada ($I_b$)}{Corriente de Polarización de Entrada (Ib)}}
+Al poseer entradas JFET, la corriente de polarización es extremadamente baja (típicamente $\SI{30}{\pico\ampere}$), lo cual es ideal para mantener la precisión en circuitos con resistencias elevadas.

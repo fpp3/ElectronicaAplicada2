@@ -1,0 +1,26 @@
+\chapter{Diseño y Cálculos}
+\label{chap:diseno-calculos}
+
+El sistema se divide en cuatro etapas principales, cada una encargada de generar una de las señales requeridas.
+
+\section{Etapa 1: Generación de Señal 1 (Cuadrada)}
+Se requiere una onda cuadrada de $\SI{1.5}{\volt}$ a $\SI{-1}{\volt}$. 
+La impedancia de entrada debe ser de $\SI{15}{\kilo\ohm}$.
+
+% TODO: Agregar cálculos de la red de realimentación y offset para esta etapa.
+
+\section{Etapa 2: Generación de Señal 2 (Triangular)}
+Esta etapa recibe la señal cuadrada y realiza una integración para obtener una onda triangular. 
+Rango: $\SI{4}{\volt}$ a $\SI{-1.5}{\volt}$.
+Se utiliza una referencia de precisión con buffer para establecer el nivel de continua.
+
+% TODO: Agregar cálculos de la constante de tiempo RC del integrador.
+
+\section{Etapa 3: Generación de Señal 3 (Pulsos)}
+La señal 3 es una onda de pulsos de $\SI{3}{\volt}$ a $\SI{0}{\volt}$. Se obtiene mediante un comparador.
+
+\section{Etapa 4: Generación de Señal 4 (Picos)}
+Para obtener los picos de $\SI{1}{\volt}$, se emplea un circuito derivador o una red RC de constante de tiempo muy pequeña seguida de un rectificador o limitador.
+
+\section{Impedancia de Salida del Sistema}
+La impedancia de salida se determina analizando la última etapa configurada...
