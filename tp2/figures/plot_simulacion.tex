@@ -1,7 +1,8 @@
 \usepgfplotslibrary{groupplots}
 
 \pgfplotsset{
-    table/col sep=comma
+    table/col sep=semicolon,
+    /pgf/number format/read comma as period
 }
 
 \begin{tikzpicture}
@@ -15,33 +16,34 @@
         height=3.1cm, % Reducido un poco más para seguridad
         xlabel={Tiempo [ms]},
         grid=both,
-        xmin=9.05, xmax=9.52,
+        xmin=0.00905, xmax=0.00952,
         scaled x ticks=false,
+        xticklabel={\pgfmathparse{\tick*1000}\pgfmathprintnumber{\pgfmathresult}},
         x tick label style={/pgf/number format/fixed, /pgf/number format/precision=2},
     ]
         % 1. BUFFER
         \nextgroupplot[ylabel={Buffer [V]}, title={1. Etapa de Buffer}]
-        \addplot[blue, thick] table [x expr=\thisrow{time}*1000, y={V(/vi_buffered)}] {sources/plots/sim_clean.csv};
+        \addplot[blue, thick] table [x=time, y={V(/vi_buffered)}] {sources/plots/sim.csv};
         
         % 2. LEVEL SHIFT
         \nextgroupplot[ylabel={Offset [V]}, title={2. Etapa de Level Shift (Señal 1)}]
-        \addplot[blue!70!black, thick] table [x expr=\thisrow{time}*1000, y={V(/vi_offseted)}] {sources/plots/sim_clean.csv};
+        \addplot[blue!70!black, thick] table [x=time, y={V(/vi_offseted)}] {sources/plots/sim.csv};
         
         % 3. INTEGRATOR
         \nextgroupplot[ylabel={Integrador [V]}, title={3. Etapa de Integración (Señal 2)}]
-        \addplot[red, thick] table [x expr=\thisrow{time}*1000, y={V(/integrated)}] {sources/plots/sim_clean.csv};
+        \addplot[red, thick] table [x=time, y={V(/integrated)}] {sources/plots/sim.csv};
 
         % 4. DERIVATOR 1
         \nextgroupplot[ylabel={Deriv. 1 [V]}, title={4. Primera Derivación}]
-        \addplot[magenta, thick] table [x expr=\thisrow{time}*1000, y={V(/derivated_pre)}] {sources/plots/sim_clean.csv};
+        \addplot[magenta, thick] table [x=time, y={V(/derivated_pre)}] {sources/plots/sim.csv};
 
         % 5. DERIVATOR 2
         \nextgroupplot[ylabel={Deriv. 2 [V]}, title={5. Segunda Derivación}]
-        \addplot[cyan, thick] table [x expr=\thisrow{time}*1000, y={V(/derivated_twice)}] {sources/plots/sim_clean.csv};
+        \addplot[cyan, thick] table [x=time, y={V(/derivated_twice)}] {sources/plots/sim.csv};
 
         % 6. RECTIFIER
         \nextgroupplot[ylabel={Rectif. [V]}, title={6. Etapa de Rectificación (Señal 4)}]
-        \addplot[green!60!black, thick] table [x expr=\thisrow{time}*1000, y={V(/rectified)}] {sources/plots/sim_clean.csv};
+        \addplot[green!60!black, thick] table [x=time, y={V(/rectified)}] {sources/plots/sim.csv};
         
     \end{groupplot}
 \end{tikzpicture}
