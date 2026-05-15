@@ -1,0 +1,507 @@
+{
+    "version": "0.1",
+    "tikzSettings": {},
+    "components": [
+        {
+            "type": "node",
+            "position": {
+                "x": 3.148,
+                "y": -75.675
+            },
+            "scale": {
+                "x": 1,
+                "y": -1
+            },
+            "id": "op amp"
+        },
+        {
+            "type": "node",
+            "position": {
+                "x": -2.268,
+                "y": 94.11
+            },
+            "scale": {
+                "x": 1,
+                "y": -1
+            },
+            "id": "op amp"
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": -245.669,
+                    "y": -94.195
+                },
+                {
+                    "x": -179.528,
+                    "y": -94.195
+                }
+            ],
+            "label": {
+                "value": "MBD101"
+            },
+            "id": "empty Schottky diode"
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": -170.079,
+                    "y": 112.63
+                },
+                {
+                    "x": -245.669,
+                    "y": 112.63
+                }
+            ],
+            "label": {
+                "value": "MBD101",
+                "otherSide": true
+            },
+            "id": "empty Schottky diode"
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": -132.283,
+                    "y": -94.488
+                },
+                {
+                    "x": -132.283,
+                    "y": -37.795
+                }
+            ],
+            "label": {
+                "value": "100k\\Omega"
+            },
+            "id": "american resistor"
+        },
+        {
+            "type": "node",
+            "position": {
+                "x": -132.283,
+                "y": -37.795
+            },
+            "id": "ground"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": -41.828,
+                    "y": -57.156
+                },
+                {
+                    "x": 56.693,
+                    "y": -18.898
+                },
+                {
+                    "x": 56.693,
+                    "y": -75.591
+                },
+                {
+                    "x": 48.125,
+                    "y": -75.675
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "|-",
+                "-|",
+                "|-"
+            ]
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": 113.386,
+                    "y": -75.591
+                },
+                {
+                    "x": 113.386,
+                    "y": -9.449
+                }
+            ],
+            "label": {
+                "value": "56k\\Omega"
+            },
+            "id": "american resistor"
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": 113.386,
+                    "y": 94.488
+                },
+                {
+                    "x": 113.386,
+                    "y": 28.346
+                }
+            ],
+            "label": {
+                "value": "56k\\Omega"
+            },
+            "id": "american resistor"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": 113.386,
+                    "y": 94.11
+                },
+                {
+                    "x": 42.708,
+                    "y": 93.732
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": 113.386,
+                    "y": 28.346
+                },
+                {
+                    "x": 113.386,
+                    "y": -9.449
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": 113.386,
+                    "y": 94.488
+                },
+                {
+                    "x": 103.937,
+                    "y": 160.63
+                },
+                {
+                    "x": -9.449,
+                    "y": 160.63
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "|-",
+                "|-"
+            ]
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": -9.449,
+                    "y": 160.63
+                },
+                {
+                    "x": -75.591,
+                    "y": 160.63
+                }
+            ],
+            "label": {
+                "value": "22k\\Omega"
+            },
+            "id": "american resistor"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": -75.591,
+                    "y": 159.874
+                },
+                {
+                    "x": -75.591,
+                    "y": 112.63
+                },
+                {
+                    "x": -47.244,
+                    "y": 112.63
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|",
+                "-|"
+            ]
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": -160.63,
+                    "y": 113.386
+                },
+                {
+                    "x": -160.63,
+                    "y": 188.976
+                }
+            ],
+            "label": {
+                "value": "100k\\Omega"
+            },
+            "id": "american resistor"
+        },
+        {
+            "type": "node",
+            "position": {
+                "x": -160.63,
+                "y": 188.976
+            },
+            "id": "ground"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": -113.386,
+                    "y": 75.591
+                },
+                {
+                    "x": -47.244,
+                    "y": 75.591
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "|-"
+            ]
+        },
+        {
+            "type": "node",
+            "position": {
+                "x": -122.835,
+                "y": 75.591
+            },
+            "rotation": -90,
+            "id": "ground"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": -113.386,
+                    "y": 75.591
+                },
+                {
+                    "x": -122.835,
+                    "y": 75.591
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": -179.528,
+                    "y": -94.195
+                },
+                {
+                    "x": -41.828,
+                    "y": -93.902
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": -245.669,
+                    "y": 112.63
+                },
+                {
+                    "x": -245.669,
+                    "y": -94.195
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "|-"
+            ]
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": 56.693,
+                    "y": -75.675
+                },
+                {
+                    "x": 113.386,
+                    "y": -75.591
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": -160.63,
+                    "y": 112.63
+                },
+                {
+                    "x": -75.591,
+                    "y": 112.63
+                }
+            ],
+            "label": {
+                "value": "22k\\Omega"
+            },
+            "id": "american resistor"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": -160.63,
+                    "y": 113.386
+                },
+                {
+                    "x": -160.63,
+                    "y": 112.63
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": -170.079,
+                    "y": 112.63
+                },
+                {
+                    "x": -160.63,
+                    "y": 112.63
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        },
+        {
+            "type": "node",
+            "label": {
+                "value": "V_i",
+                "anchor": "east",
+                "position": "east",
+                "distance": "0.29cm"
+            },
+            "position": {
+                "x": -264.567,
+                "y": 9.449
+            },
+            "id": "ocirc"
+        },
+        {
+            "type": "node",
+            "label": {
+                "value": "V_{rectified}",
+                "anchor": "west",
+                "position": "west",
+                "relativeToComponent": true,
+                "distance": "0.32cm"
+            },
+            "position": {
+                "x": 141.732,
+                "y": 9.449
+            },
+            "id": "ocirc"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": -264.567,
+                    "y": 9.449
+                },
+                {
+                    "x": -245.669,
+                    "y": 9.449
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": 113.386,
+                    "y": 9.449
+                },
+                {
+                    "x": 141.732,
+                    "y": 9.449
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        }
+    ]
+}

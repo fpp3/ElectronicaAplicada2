@@ -1,0 +1,263 @@
+{
+    "version": "0.1",
+    "tikzSettings": {},
+    "components": [
+        {
+            "type": "node",
+            "position": {
+                "x": 94.488,
+                "y": -9.449
+            },
+            "scale": {
+                "x": 1,
+                "y": -1
+            },
+            "id": "op amp"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": 162.61,
+                    "y": 56.328
+                },
+                {
+                    "x": 139.464,
+                    "y": -9.449
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "|-"
+            ]
+        },
+        {
+            "type": "node",
+            "label": {
+                "value": "V_i",
+                "anchor": "default",
+                "position": "north"
+            },
+            "position": {
+                "x": -170.079,
+                "y": 9.449
+            },
+            "id": "ocirc"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": 162.61,
+                    "y": -9.449
+                },
+                {
+                    "x": 219.302,
+                    "y": -9.814
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        },
+        {
+            "type": "node",
+            "label": {
+                "value": "V_{Derivated}",
+                "anchor": "default",
+                "position": "north"
+            },
+            "position": {
+                "x": 219.302,
+                "y": -9.814
+            },
+            "id": "ocirc"
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": 49.224,
+                    "y": 56.328
+                },
+                {
+                    "x": 162.61,
+                    "y": 56.328
+                }
+            ],
+            "label": {
+                "value": "63k\\Omega",
+                "otherSide": true
+            },
+            "id": "american resistor"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": 11.717,
+                    "y": -27.968
+                },
+                {
+                    "x": 49.512,
+                    "y": -27.968
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": 49.224,
+                    "y": 56.328
+                },
+                {
+                    "x": 49.224,
+                    "y": 9.084
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "|-"
+            ]
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": 49.224,
+                    "y": 103.937
+                },
+                {
+                    "x": 160.63,
+                    "y": 103.937
+                }
+            ],
+            "label": {
+                "value": "56pF",
+                "otherSide": true
+            },
+            "id": "capacitor"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": 160.63,
+                    "y": 56.693
+                },
+                {
+                    "x": 162.61,
+                    "y": 56.328
+                },
+                {
+                    "x": 160.63,
+                    "y": 103.937
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|",
+                "|-"
+            ]
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": 49.224,
+                    "y": 103.937
+                },
+                {
+                    "x": 49.224,
+                    "y": 56.328
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                null
+            ]
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": -122.835,
+                    "y": 9.449
+                },
+                {
+                    "x": -35.528,
+                    "y": 9.071
+                }
+            ],
+            "label": {
+                "value": "4.7k\\Omega",
+                "otherSide": true
+            },
+            "id": "american resistor"
+        },
+        {
+            "type": "wire",
+            "points": [
+                {
+                    "x": -170.079,
+                    "y": 9.449
+                },
+                {
+                    "x": -122.835,
+                    "y": 9.449
+                }
+            ],
+            "stroke": {
+                "width": "0.4pt"
+            },
+            "directions": [
+                "-|"
+            ]
+        },
+        {
+            "type": "node",
+            "position": {
+                "x": 11.717,
+                "y": -27.968
+            },
+            "rotation": -90,
+            "id": "ground"
+        },
+        {
+            "type": "path",
+            "points": [
+                {
+                    "x": -35.528,
+                    "y": 9.071
+                },
+                {
+                    "x": 49.512,
+                    "y": 9.071
+                }
+            ],
+            "label": {
+                "value": "1nF",
+                "otherSide": true
+            },
+            "id": "capacitor"
+        }
+    ]
+}
