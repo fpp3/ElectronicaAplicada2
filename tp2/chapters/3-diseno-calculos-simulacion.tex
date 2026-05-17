@@ -1,0 +1,394 @@
+\chapter{Diseño, cálculos y simulaciones}
+\label{chap:diseno-calculos}
+La señal de entrada se puede ver en la figura \ref{plot:vi}. Cabe destacar que el análisis de la simulación comienza a
+los $9.05 \si{\milli\second}$ para permitir que se estabilicen todos los elementos. Este arranque desfasado se mantiene
+para todos los gráficos de la simulación.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/plot_vi.tex}
+  \caption{señal de entrada.}
+  \label{plot:vi}
+\end{figure}
+
+\section{Etapa 1: Adaptación de impedancia}
+La impedancia de entrada debe ser de $\SI{15}{\kilo\ohm}$. Para ello, se utilizó la configuración buffer o seguidor de
+tensión de los amplificadores operacionales. Debido a que la impedancia de entrada está por el orden de los megaohm,
+podemos decir que es despreciable y colocar cualquier resistencia en paralelo entre la entrada y la masa para generar la
+adaptación de impedancia deseada. El circuito a implementar para esta etapa se puede ver en la figura
+\ref{crkt:adaptacion.impedancia}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/crkt_adaptador_impedancia.tex}
+  \caption{circuito amplificador operacional en configuración seguidor con impedancia de entrada especificada.}
+  \label{crkt:adaptacion.impedancia}
+\end{figure}
+
+La señal resultante de esta etapa es idéntica a la señal de entrada.
+
+\section{Etapa 2: Ajuste de la tensión de offset}
+La señal de salida de la 2da etapa debe ser igual a la de la entrada con un offset de $-1 \si{\volt}$. Para lograr
+esto, se usa el amplificador no inversor con una tensión de referencia. Esta tensión debería ser obtenida mediante un
+dispositivo que provea una referencia constante, como un diodo zenner programable (ej.: TL431). Debido a que este
+trabajo practico no requiere tanta exactitud en los valores de tensión, optamos por usar divisores resistivos como
+referencias. Como el amplificador operacional no genera una carga significativa (debido a la altísima impedancia de
+entrada) sobre el divisor resistivo, no hay problema en usarlo. En la implementación se utilizara un
+potenciómetro en estos divisores resistivos para poder mitigar las tolerancias de fabricación de las resistencias mismas
+y cualquier resistencia de contacto. El circuito a implementar para esta etapa se puede ver en la figura
+\ref{crkt:offset}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/crkt_level_shifter.tex}
+  \caption{circuito amplificador operacional en configuración amplificador no inversor con tensión de offset.}
+  \label{crkt:offset}
+\end{figure}
+
+La simulación de esta etapa dio como resultado la señal que se puede ver en la figura \ref{plot:offset}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/plot_offset.tex}
+  \caption{señal de entrada con offset.}
+  \label{plot:offset}
+\end{figure}
+
+\section{Etapa 3: Señal diente de sierra}
+Sabiendo que la señal anterior es una onda cuadrada con offset, debido a que el área de la misma crece y decrece con el
+tiempo gracias al offset agregado anteriormente, podemos generar la señal diente de sierra obteniendo una tensión que
+varíe a la par del área debajo de la curva, en este caso, la señal cuadrada con offset. Para ello, utilizaremos el
+circuito propuesto por el profesor que se puede ver en la figura \ref{crkt:integrador}, dado que se comparten las
+condiciones de operación.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/crkt_integrator_pre.tex}
+  \caption{circuito amplificador operacional en configuración integrador.}
+  \label{crkt:integrador}
+\end{figure}
+
+La simulación de esta etapa dio como resultado la señal que se puede ver en la figura \ref{plot:integrador.pre}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/plot_integrated_pre.tex}
+  \caption{señal integrada.}
+  \label{plot:integrador.pre}
+\end{figure}
+
+Como la señal no cumple con los mínimos y máximos establecidos anteriormente, es necesario amplificar y agregar un
+offset a la señal integrada. Para ello, se puede utilizar un amplificador operacional en configuración diferenciador,
+como se puede ver en la figura \ref{crkt:diferenciador}. La ecuación \ref{eq:diferenciador.vo} describe como va a ser la
+salida en función de los potenciales en la entrada inversora y no inversora.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[c]{0.6\textwidth}
+    \input{figures/crkt_diferenciador.tex}
+    \caption{circuito.}
+    \label{crkt:diferenciador}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[c]{0.3\textwidth}
+    \begin{equation}
+      v_o = \left(v_2 - v_1 \right) \frac{R_2}{R_1}
+      \label{eq:diferenciador.vo}
+    \end{equation}
+    \caption{ecuación.}
+  \end{subfigure}
+  \caption{amplificador operacional en connfiguración diferenciador.}
+\end{figure}
+
+Para poder obtener los potenciales y ganancias, es mas fácil ver la ecuación \ref{eq:diferenciador.vo} como dos
+ecuaciones diferentes, ignorando los valores resistivos y reemplazándolos por el termino de ganancia $A_v$. De esta
+forma, podemos interpretar las dos ecuaciones como un "mapeo", donde mapeamos un punto ($v_1$ o $v_2$) en otro punto
+($v_o$).
+\begin{equation}
+  v_{o1} = \left( v_{21} - v_{11} \right) A_v \qquad v_{o2} = \left( v_{22} - v_{12} \right) A_v
+\end{equation}
+
+Dividiendo ambas ecuaciones y definiendo la constante $k = \frac{v_{o2}}{v_{o1}}$, se obtiene la relación base:
+\begin{equation}
+  k \cdot (v_{21} - v_{11}) = v_{22} - v_{12}
+  \label{eq:base_desarrollo}
+\end{equation}
+
+Para resolver esta ecuación, definimos $S$ como los valores de la señal de entrada y $X$ como la tensión de referencia
+constante. Se presentan dos configuraciones posibles:
+\begin{itemize}
+    \item \textbf{Caso 1 (Señal en entrada no inversora):} $v_{2x} = S_x$ y $v_{1x} = X$.
+    \item \textbf{Caso 2 (Señal en entrada inversora):} $v_{1x} = S_x$ y $v_{2x} = X$.
+\end{itemize}
+
+Sustituyendo estos valores en la ecuación \ref{eq:base_desarrollo}, se observa que ambos casos conducen a la misma
+estructura algebraica:
+\begin{align*}
+    \text{Caso 1: } & k(S_1 - X) = S_2 - X \implies kS_1 - S_2 = X(k - 1) \\
+    \text{Caso 2: } & k(X - S_1) = X - S_2 \implies kS_1 - S_2 = X(k - 1)
+\end{align*}
+
+De esta forma, se llega a una única expresión para la tensión de referencia, independiente de la configuración elegida:
+\begin{equation}
+    X = \frac{k \cdot S_1 - S_2}{k - 1}
+    \label{eq:diferenciador.offset}
+\end{equation}
+
+Finalmente, la ganancia se calcula despejándola de cualquiera de las ecuaciones iniciales: 
+\begin{equation}
+  A_v = \left| \frac{v_{o1}}{S_1 - X} \right|
+  \label{eq:diferenciador.ganancia}
+\end{equation}
+
+El signo de la ecuación \ref{eq:diferenciador.pend.curva} determinará si la señal debe inyectarse por la entrada no
+inversora ($G > 0$) o por la inversora ($G < 0$).
+\begin{equation}
+  G = \frac{v_{o2} - v_{o1}}{S_2 - S_1}
+  \label{eq:diferenciador.pend.curva}
+\end{equation}
+
+Con las herramientas planteadas anteriormente, podemos ahora calcular la referencia y ganancias para adaptar la salida
+del amplificador integrador. De antemano podemos ver que tenemos que generar una inversión de fase para hacer que el
+área bajo la curva de la señal de entrada se correlacione con la tensión de salida del integrador. Para ello, tomamos el
+caso 2 mencionado anteriormente, y corroboramos si realmente la señal tiene que ir en la entrada inversora utilizando la
+ecuación \ref{eq:diferenciador.pend.curva}. Considerando:
+\begin{align*}
+  S_1 = v_{iM} = -1.81 \si{\volt} &\to v_{o1} = v_{om} = -1.5 \si{\volt} \\
+  S_2 = v_{im} = -3.25 \si{\volt} &\to v_{o2} = v_{oM} = 4 \si{\volt}
+\end{align*}
+entonces:
+\begin{align*}
+  G &= \frac{4 \si{\volt} - (-1.5\si{\volt})}{-3.25\si{\volt} - (-1.81\si{\volt})} \\
+  G &= -3.8 \quad \to \text{ señal en entrada inversora}
+\end{align*}
+
+Habiendo corroborado que la señal de entrada tiene que ir a la entrada inversora, podemos calcular el offset a calcular
+a partir de la ecuación \ref{eq:diferenciador.offset}:
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+    \begin{align*}
+      k &= \frac{v_{o2}}{v_{o1}} \\
+      k &= \frac{4 \si{\volt}}{-1.5 \si{\volt}} \\
+      k &= -\frac{8}{3}
+    \end{align*}
+  \end{subfigure}
+  \hspace{.5cm}
+  \begin{subfigure}[t]{0.45\textwidth}
+    \begin{align*}
+      X &= \frac{-\frac{8}{3} \cdot (-1.81 \si{\volt}) - (-3.25 \si{\volt})}{-\frac{8}{3} - 1} \\
+      X &\approx -2.2 \si{\volt}
+    \end{align*}
+  \end{subfigure}
+\end{figure}
+
+En este caso, el offset es negativo. Esto significaría un problema si la fuente de alimentación del circuito
+diferenciador no fuese partida, pero en este caso, como la alimentación es $\pm 12 \si{\volt}$ no hay problema, simplemente el
+divisor resistivo debe ser conectado a $-12 \si{\volt}$.
+
+Por ultimo, la ganancia la podemos calcular utilizando la ecuación \ref{eq:diferenciador.ganancia}:
+\begin{align*}
+  A_v &= \left| \frac{-1.5 \si{\volt}}{-1.8 \si{\volt} - (-2.2 \si{\volt})} \right| \\
+  A_v &\approx 3.9
+\end{align*}
+
+El juego de resistencias que cumplen esta relación son:
+
+\begin{equation*}
+  R_1 = 100 \si{\kilo \ohm} \quad R_2 = 390 \si{\kilo \ohm}
+\end{equation*}
+
+Colocando la señal de salida del integrador en la entrada inversora y la tensión de referencia negativa en la entrada no
+inversora, la simulación dio los resultados que se pueden ver en la figura \ref{plot:integrador}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/plot_integrated.tex}
+  \caption{señal integrada con amplitud y desfase correcto.}
+  \label{plot:integrador}
+\end{figure}
+
+\section{Etapa 4: Volver a la señal de entrada}
+Con la señal diente de sierra siendo generada a partir de la integral de la señal de entrada cuadrada, ahora debemos
+volver a la señal de onda cuadrada a partir de la diente de sierra. Para "deshacer" los efectos matemáticos de la señal
+diente de sierra, podemos colocar un amplificador operacional en configuración derivadora, para volver a la señal
+cuadrada original. Nuevamente, para este circuito, utilizamos el propuesto por el profesor que se puede ver en la
+figura \ref{crkt:derivador}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/crkt_derivator.tex}
+  \caption{circuito amplificador operacional en configuración derivador.}
+  \label{crkt:derivador}
+\end{figure}
+
+La simulación de esta etapa dio como resultado la señal que se puede ver en la figura \ref{plot:derivated_pre}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/plot_derivated_pre.tex}
+  \caption{señal de entrada recompuesta.}
+  \label{plot:derivated_pre}
+\end{figure}
+
+Nuevamente, esta señal de salida se encuentra fuera del rango solicitado, por lo que volvemos a hacer uso de las
+ecuaciones \ref{eq:diferenciador.pend.curva}, \ref{eq:diferenciador.offset} y \ref{eq:diferenciador.ganancia}.
+Considerando:
+\begin{align*}
+  S_1 = v_{im} = -3.16 \si{\volt} &\to v_{o1} = v_{oM} = 3 \si{\volt} \\
+  S_2 = v_{iM} = 3.16 \si{\volt} &\to v_{o2} = v_{om} = 0 \si{\volt}
+\end{align*}
+entonces:
+\begin{align*}
+  G &= \frac{0 \si{\volt} - 3\si{\volt}}{3.16\si{\volt} - (-3.16\si{\volt})} \\
+  G &= -0.47 \quad \to \text{ señal en entrada inversora}
+\end{align*}
+
+Habiendo corroborado que la señal de entrada tiene que ir a la entrada inversora, podemos calcular el offset a calcular
+a partir de la ecuación \ref{eq:diferenciador.offset}:
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+    \begin{align*}
+      k &= \frac{v_{o2}}{v_{o1}} \\
+      k &= \frac{0 \si{\volt}}{3 \si{\volt}} \\
+      k &= 0
+    \end{align*}
+  \end{subfigure}
+  \hspace{.5cm}
+  \begin{subfigure}[t]{0.45\textwidth}
+    \begin{align*}
+      X &= \frac{0 \si{\volt} - 3.16 \si{\volt}}{- 1} \\
+      X &= 3.16 \si{\volt}
+    \end{align*}
+  \end{subfigure}
+\end{figure}
+
+Por ultimo, la ganancia la podemos calcular utilizando la ecuación \ref{eq:diferenciador.ganancia}:
+\begin{align*}
+  A_v &= \left| \frac{3 \si{\volt}}{-3.16 \si{\volt} - 3.16 \si{\volt})} \right| \\
+  A_v &\approx 0.48
+\end{align*}
+
+El juego de resistencias que cumplen esta relación son:
+
+\begin{equation*}
+  R_1 = 68 \si{\kilo \ohm} \quad R_2 = 33 \si{\kilo \ohm}
+\end{equation*}
+
+Colocando la señal de salida del integrador en la entrada inversora y la tensión de referencia negativa en la entrada no
+inversora, la simulación dio los resultados que se pueden ver en la figura \ref{plot:derivador}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/plot_derivated.tex}
+  \caption{señal derivada con amplitud y desfase correcto.}
+  \label{plot:derivador}
+\end{figure}
+
+\section{Etapa 5: Detección de flancos de subida y bajada}
+Con la señal cuadrada ya recompuesta, el siguiente paso es obtener los picos de pendiente generados en los flancos de la
+señal cuadrada. Idealmente, según la definición de una onda cuadrada, la derivada de la misma seria el impulso delta
+($\delta_{(t)}$). Como no es perfecta la recomposicion de la señal cuadrada, la señal resultante será parecida a un pico
+delta ideal. Nuevamente se utilizo el circuito propuesto por el profesor que se puede ver en la figura
+\ref{crkt:2do.derivador}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/crkt_2nd_derivator.tex}
+  \caption{circuito amplificador operacional en configuración derivador.}
+  \label{crkt:2do.derivador}
+\end{figure}
+
+La simulación de esta etapa dio como resultado la señal que se puede ver en la figura \ref{plot:2do.derivador}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/plot_2nd_derivated.tex}
+  \caption{señal cuadrada con doble derivada.}
+  \label{plot:2do.derivador}
+\end{figure}
+
+\section{Etapa 6: Rectificación}
+Por ultimo, la señal solicitada debe ser la segunda derivada pero sin picos negativos, es decir, rectificada. La
+diferencia está en que esta rectificación no sera hecha con elementos pasivos, si no que también con amplificadores
+operacionales. Esto tiene sus ventajas y desventajas. La ventaja es que se omite el potencial de polarización requerido
+por los diodos de silicio o germanio, debido a la baja tensión de offset del amplificador seleccionado. La desventaja,
+es solo una señal y no es posible demandarle mucha corriente, debido a que el amplificador operacional no está preparado
+para ello; debería antes pasar por otro circuito (como un amplificador) para dotar esa señal de potencia. Para realizar la
+rectificación, se utilizó el circuito propuesto por el profesor que se puede ver en la figura \ref{crkt:rectificador}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/crkt_rectificador.tex}
+  \caption{circuito amplificador operacional en configuración rectificadora.}
+  \label{crkt:rectificador}
+\end{figure}
+
+La simulación de esta etapa dio como resultado la señal que se puede ver en la figura \ref{plot:rectified_pre}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/plot_rectified_pre.tex}
+  \caption{señal doble derivada rectificada.}
+  \label{plot:rectified_pre}
+\end{figure}
+
+Nuevamente, esta señal de salida se encuentra fuera del rango solicitado, por lo que podríamos usar las ecuaciones
+previamente utilizadas para el amplificador en configuración diferenciador, pero como no hay necesidad de cambiar el
+offset ni cambiar la fase, basta simplemente con utilizar el amplificador no inversor para llegar al potencial pico
+deseado.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[c]{0.6\textwidth}
+    \input{figures/crkt_amplificador_no_inversor.tex}
+    \caption{circuito.}
+    \label{crkt:amplificador.no.inversor}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[c]{0.3\textwidth}
+    \begin{equation}
+      v_o = v_i \frac{R_2}{R_1}
+      \label{eq:amplificador.no.inversor.vo}
+    \end{equation}
+    \caption{ecuación.}
+  \end{subfigure}
+  \caption{amplificador operacional en configuración no inversora.}
+\end{figure}
+
+Como el pico de tensión que hay a la salida del rectificador es de $0.63 \si{\volt}$ y el potencial objetivo es de $1
+\si{\volt}$ basta con encontrar la relación de ganancia:
+
+\begin{align*}
+  A_v &= \frac{v_o}{v_i} \\
+  A_v &= \frac{1 \si{\volt}}{0.63 \si{\volt}} \\
+  A_v &= 1.58
+\end{align*}
+
+El juego de resistencias que cumplen esta relación son:
+
+\begin{equation*}
+  R_1 = 56 \si{\kilo \ohm} \quad R_2 = 33 \si{\kilo \ohm}
+\end{equation*}
+
+Colocando la señal de salida del integrador en la entrada inversora y la tensión de referencia negativa en la entrada no
+inversora, la simulación dio los resultados que se pueden ver en la figura \ref{plot:rectified}.
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/plot_rectified.tex}
+  \caption{señal rectificada con amplitud correcta.}
+  \label{plot:rectified}
+\end{figure}
+
+\section{Señales Resultantes}
+El esquematico completo está anexado al final del informe.
+
+\begin{figure}[!ht]
+    \centering
+    \input{figures/plot_simulacion.tex}
+    \caption{Resultados de la simulación transitoria para todas las etapas del sistema.}
+    \label{fig:plot_simulacion}
+\end{figure}
+

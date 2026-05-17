@@ -9,11 +9,11 @@
     \begin{groupplot}[
         group style={
             group size=1 by 6,
-            vertical sep=0.8cm, % Reducido para ahorrar espacio
+            vertical sep=1cm, % Reducido para ahorrar espacio
             x descriptions at=edge bottom,
         },
-        width=\textwidth,
-        height=3.1cm, % Reducido un poco más para seguridad
+        width=.9\textwidth,
+        height=3.5cm, % Reducido un poco más para seguridad
         xlabel={Tiempo [ms]},
         grid=both,
         xmin=0.00905, xmax=0.00952,
@@ -26,23 +26,23 @@
         \addplot[blue, thick] table [x=time, y={V(/vi_buffered)}] {sources/plots/sim.csv};
         
         % 2. LEVEL SHIFT
-        \nextgroupplot[ylabel={Offset [V]}, title={2. Etapa de Level Shift (Señal 1)}]
+        \nextgroupplot[ylabel={Offset [V]}, title={2. Etapa de Offset}]
         \addplot[blue!70!black, thick] table [x=time, y={V(/vi_offseted)}] {sources/plots/sim.csv};
         
         % 3. INTEGRATOR
-        \nextgroupplot[ylabel={Integrador [V]}, title={3. Etapa de Integración (Señal 2)}]
+        \nextgroupplot[ylabel={Integrador [V]}, title={3. Etapa de Integración}]
         \addplot[red, thick] table [x=time, y={V(/integrated)}] {sources/plots/sim.csv};
 
         % 4. DERIVATOR 1
         \nextgroupplot[ylabel={Deriv. 1 [V]}, title={4. Primera Derivación}]
-        \addplot[magenta, thick] table [x=time, y={V(/derivated_pre)}] {sources/plots/sim.csv};
+        \addplot[magenta, thick] table [x=time, y={V(/derivated)}] {sources/plots/sim.csv};
 
         % 5. DERIVATOR 2
         \nextgroupplot[ylabel={Deriv. 2 [V]}, title={5. Segunda Derivación}]
         \addplot[cyan, thick] table [x=time, y={V(/derivated_twice)}] {sources/plots/sim.csv};
 
         % 6. RECTIFIER
-        \nextgroupplot[ylabel={Rectif. [V]}, title={6. Etapa de Rectificación (Señal 4)}]
+        \nextgroupplot[ylabel={Rectif. [V]}, title={6. Etapa de Rectificación}]
         \addplot[green!60!black, thick] table [x=time, y={V(/rectified)}] {sources/plots/sim.csv};
         
     \end{groupplot}

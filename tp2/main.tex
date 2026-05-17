@@ -1,5 +1,6 @@
 \documentclass[]{informeutn}
 \usepackage{siunitx}
+\usepgfplotslibrary{groupplots}
 
 % Paquetes adicionales
 \usepackage{csquotes}
@@ -9,6 +10,11 @@
 \usepackage{listings}
 \usepackage{pdflscape}
 \usepackage{pdfpages}
+
+% We will externalize the figures
+\usetikzlibrary{external}
+\tikzexternalize
+\tikzset{external/optimize command away=\includepdf}
 
 \lstdefinestyle{ltspice}{
   backgroundcolor=\color{gray!10},
@@ -23,7 +29,7 @@
 \materia{Electrónica Aplicada 2}
 \titulo{Trabajo Práctico 2}
 \subtitulo{Amplificadores Operacionales}
-\comision{Curso 4R2}
+\comision{4R2}
 \autores{
     Gil, Ignacio - 401891\\
     Grasso, Gaston - 401892\\
@@ -41,8 +47,8 @@
 
 \input{chapters/1-introduccion.tex}
 \input{chapters/2-analisis-parametros.tex}
-\input{chapters/3-diseno-calculos.tex}
-\input{chapters/4-simulacion-mediciones.tex}
+\input{chapters/3-diseno-calculos-simulacion.tex}
+\input{chapters/4-implementacion.tex}
 \input{chapters/5-conclusiones.tex}
 \input{chapters/6-anexos.tex}
 

@@ -1,0 +1,32 @@
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\node[op amp, yscale=-1] at (0.083, 2.002){};
+	\node[op amp, yscale=-1] at (-0.06, -2.49){};
+	\draw (-6.5, 2.492) to[empty Schottky diode, l={$MBD101$}] (-4.75, 2.492);
+	\draw (-4.5, -2.98) to[empty Schottky diode, l_={$MBD101$}] (-6.5, -2.98);
+	\draw (-3.5, 2.5) to[american resistor, l={$100k\Omega$}] (-3.5, 1);
+	\node[ground] at (-3.5, 1){};
+	\draw (-1.107, 1.512) |- (1.5, 0.5) -| (1.5, 2) |- (1.273, 2.002);
+	\draw (3, 2) to[american resistor, l_={$56k\Omega$}] (3, 0.25);
+	\draw (3, -2.5) to[american resistor, l={$56k\Omega$}] (3, -0.75);
+	\draw (3, -2.49) -| (1.13, -2.48);
+	\draw (3, -0.75) -| (3, 0.25);
+	\draw (3, -2.5) |- (2.75, -4.25) |- (-0.25, -4.25);
+	\draw (-0.25, -4.25) to[american resistor, l_={$22k\Omega$}] (-2, -4.25);
+	\draw (-2, -4.23) -| (-2, -2.98) -- (-1.25, -2.98);
+	\draw (-4.25, -3) to[american resistor, l={$100k\Omega$}] (-4.25, -5);
+	\node[ground] at (-4.25, -5){};
+	\draw (-3, -2) |- (-1.25, -2);
+	\node[ground, rotate=-90] at (-3.25, -2){};
+	\draw (-3, -2) -- (-3.25, -2);
+	\draw (-4.75, 2.492) -| (-1.107, 2.484);
+	\draw (-6.5, -2.98) -- (-6.5, 2.492);
+	\draw (1.5, 2.002) -| (3, 2);
+	\draw (-4.25, -2.98) to[american resistor, l={$22k\Omega$}] (-2, -2.98);
+	\draw (-4.25, -3) -| (-4.25, -2.98);
+	\draw (-4.5, -2.98) -- (-4.25, -2.98);
+	\node[ocirc](N1) at (-7, -0.25){} node[anchor=east] at ([xshift=-0.17cm]N1.east){$V_{2nd-derivated}$};
+	\node[ocirc](N2) at (3.75, -0.25){} node[anchor=west] at ([xshift=0.2cm]N2.west){$V_{rectified}$};
+	\draw (-7, -0.25) -- (-6.5, -0.25);
+	\draw (3, -0.25) -- (3.75, -0.25);
+\end{tikzpicture}

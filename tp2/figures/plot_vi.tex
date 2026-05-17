@@ -1,0 +1,21 @@
+\pgfplotsset{
+    table/col sep=semicolon,
+    /pgf/number format/read comma as period
+}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        width=.9\textwidth,
+        height=5cm, % Reducido un poco más para seguridad
+        xlabel={Tiempo [ms]},
+        grid=both,
+        xmin=0.00905, xmax=0.00952,
+        scaled x ticks=false,
+        xticklabel={\pgfmathparse{\tick*1000}\pgfmathprintnumber{\pgfmathresult}},
+        x tick label style={/pgf/number format/fixed, /pgf/number format/precision=2},
+        extra y ticks={\pgfkeysvalueof{/pgfplots/ymax}},
+        ylabel={Amplitud [V]}
+    ]
+        \addplot[blue, thick] table [x=time, y={V(/vi)}] {sources/plots/sim.csv};
+    \end{axis}
+\end{tikzpicture}

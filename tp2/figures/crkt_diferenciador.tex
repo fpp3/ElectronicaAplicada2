@@ -1,0 +1,21 @@
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\node[op amp, yscale=-1] at (2.5, 0.25){};
+	\draw (4.302, -1.49) |- (3.69, 0.25);
+	\draw (4.302, 0.25) -| (5.802, 0.26);
+	\node[ocirc](N1) at (5.802, 0.26){} node[anchor=south] at (N1.north){$v_o$};
+	\draw (1.302, -1.49) to[american resistor, l={$R_2$}] (3.302, -1.49);
+	\draw (3.302, -1.49) -- (4.302, -1.49);
+	\draw (-0.698, -0.24) to[american resistor, l={$R_1$}] (1.302, -0.24);
+	\draw (-1.69, 0.74) to[american resistor, l={$R_1$}] (0.31, 0.74);
+	\draw (0.31, 2.74) to[american resistor, l={$R_2$}] (0.31, 0.74);
+	\draw (0.31, 0.74) -- (1.31, 0.74);
+	\node[ground, xscale=-1, yscale=-1] at (0.31, 2.74){};
+	\draw (1.302, -1.49) -- (1.302, -0.24);
+	\draw (-1.69, 0.74) -| (-3.25, 0.75);
+	\draw (-0.698, -0.24) -| (-2, -0.25);
+	\node[ground] at (-2, -1.75){};
+	\node[ground] at (-3.25, -1.75){};
+	\draw (-2, -0.25) to[open, o-o, v=$v_1$, voltage=straight] (-2, -1.75);
+	\draw (-3.25, 0.74) to[open, o-o, v=$v_2$, voltage/bump b=1.6, voltage=straight] (-3.25, -1.75);
+\end{tikzpicture}

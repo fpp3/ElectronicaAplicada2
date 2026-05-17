@@ -1,0 +1,26 @@
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\node[op amp, yscale=-1] at (0.198, -0.01){};
+	\draw (-2.25, -1.75) -| (-2.25, -0.5) -- (-1, -0.5);
+	\draw (2, -1.75) |- (1.388, -0.01);
+	\node[ocirc](N1) at (-6, 0.48){} node[anchor=south] at (N1.north){$V_{buffered}$};
+	\draw (2, -0.01) -| (3.5, -0);
+	\node[ocirc](N2) at (3.5, -0){} node[anchor=south] at (N2.north){$V_{offseted}$};
+	\draw (-5, 0.48) to[american resistor, l={$100k\Omega$}] (-3, 0.48);
+	\draw (-3, 0.48) to[american resistor, l_={$100k\Omega$}] (-3, 2.48);
+	\draw (-2.25, -0.5) to[american resistor, l_={$100k\Omega$}] (-3.75, -0.5);
+	\draw (-4, -1.25) to[american resistor, l_={$10k\Omega$}] (-6, -1.25);
+	\draw (-1, -1.75) to[american resistor, l={$100k\Omega$}] (1, -1.75);
+	\draw (-3.75, -1.25) to[american potentiometer, l={$\approx909.091\Omega$}, label distance=-0.02cm, v_=$1V$, voltage/distance from node=0.7, voltage/bump b=4.2, voltage/shift=1.4, voltage=american] (-3.75, -3);
+	\draw (-3.19, -2.125) |- (-3.75, -1.25) -- (-4, -1.25);
+	\draw (-3.75, -0.5) -| (-3.75, -1.25);
+	\draw (-2.25, -1.75) -- (-1, -1.75);
+	\draw (1, -1.75) -- (2, -1.75);
+	\draw (-5, 0.48) -- (-6, 0.48);
+	\node[ground] at (-3.75, -3){};
+	\node[ground] at (-3.75, -3){};
+	\node[ocirc](N3) at (-6.5, -1.25){} node[anchor=south] at (N3.north){$12V$};
+	\node[ground, xscale=-1, yscale=-1] at (-3, 2.48){};
+	\draw (-0.992, 0.48) -- (-3, 0.48);
+	\draw (-6, -1.25) -- (-6.5, -1.25);
+\end{tikzpicture}
