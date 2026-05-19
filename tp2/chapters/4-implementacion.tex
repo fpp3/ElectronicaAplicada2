@@ -1,1 +1,119 @@
-\chapter{Implementación}
+\chapter{Implementación y mediciones}
+\label{chap:implementacion}
+
+En esta sección se detallan los resultados obtenidos en la implementación física del circuito, analizando el comportamiento de cada etapa y comparándolo con lo obtenido en la simulación.
+
+\section{Etapa 1: Adaptación de impedancia}
+% Detallar resultados de la medición de la primera etapa.
+\begin{figure}[!ht]
+  \centering
+  %\includegraphics[width=0.8\textwidth]{pictures/osc_etapa1.png}
+  \caption{Medición de la señal a la salida del seguidor de tensión.}
+  \label{fig:medicion.etapa1}
+\end{figure}
+
+\section{Etapa 2: Ajuste de la tensión de offset}
+% Detallar resultados de la medición de la segunda etapa.
+\begin{figure}[!ht]
+  \centering
+  %\includegraphics[width=0.8\textwidth]{pictures/osc_etapa2.png}
+  \caption{Medición de la señal con offset aplicado.}
+  \label{fig:medicion.etapa2}
+\end{figure}
+
+\section{Etapa 3: Señal diente de sierra}
+Nuevamente, esta señal de salida se encuentra fuera del rango solicitado, por lo que volvemos a hacer uso de las
+ecuaciones \ref{eq:diferenciador.pend.curva}, \ref{eq:diferenciador.offset} y \ref{eq:diferenciador.ganancia}.
+Considerando:
+\begin{align*}
+  S_1 = v_{im} = -0.44 \si{\volt} &\to v_{o1} = v_{oM} = -1.5 \si{\volt} \\
+  S_2 = v_{iM} = -1.59 \si{\volt} &\to v_{o2} = v_{om} = 4 \si{\volt}
+\end{align*}
+entonces:
+\begin{align*}
+  G &= \frac{4 \si{\volt} - (-1.5)\si{\volt}}{-1.59\si{\volt} - (-0.44\si{\volt})} \\
+  G &= -4.78 \quad \to \text{ señal en entrada inversora}
+\end{align*}
+
+Habiendo corroborado que la señal de entrada tiene que ir a la entrada inversora, podemos calcular el offset a calcular
+a partir de la ecuación \ref{eq:diferenciador.offset}:
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+    \begin{align*}
+      k &= \frac{v_{o2}}{v_{o1}} \\
+      k &= \frac{4 \si{\volt}}{-1.5 \si{\volt}} \\
+      k &= -2.6
+    \end{align*}
+  \end{subfigure}
+  \hspace{.5cm}
+  \begin{subfigure}[t]{0.45\textwidth}
+    \begin{align*}
+      X &= \frac{-2.6 \cdot -0.44 \si{\volt} - (-1.59) \si{\volt}}{-2.6 - 1} \\
+      X &= -0.759 \si{\volt}
+    \end{align*}
+  \end{subfigure}
+\end{figure}
+
+Por ultimo, la ganancia la podemos calcular utilizando la ecuación \ref{eq:diferenciador.ganancia}:
+\begin{align*}
+  A_v &= \left| \frac{ -1.5 \si{\volt}}{-0.44 \si{\volt} - (-0.75) \si{\volt})} \right| \\
+  A_v &\approx 4.702
+\end{align*}
+
+El juego de resistencias que cumplen esta relación son:
+
+\begin{equation*}
+  R_1 = 5.6 \si{\kilo \ohm} \quad R_2 = 27 \si{\kilo \ohm}
+\end{equation*}
+
+Colocando la señal de salida del integrador en la entrada inversora y la tensión de referencia negativa en la entrada no
+inversora, la simulación dio los resultados que se pueden ver en la figura \ref{plot:derivador}.
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    %\includegraphics[width=\textwidth]{pictures/osc_etapa3_offset.png}
+    \caption{Señal integrada con offset.}
+    \label{fig:medicion.etapa3.offset}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    %\includegraphics[width=\textwidth]{pictures/osc_etapa3_correccion.png}
+    \caption{Señal integrada con corrección.}
+    \label{fig:medicion.etapa3.correccion}
+  \end{subfigure}
+  \caption{Medición de la etapa de integración (diente de sierra).}
+  \label{fig:medicion.etapa3}
+\end{figure}
+
+\section{Etapa 4: Volver a la señal de entrada}
+% Detallar resultados de la medición de la cuarta etapa (derivador).
+\begin{figure}[!ht]
+  \centering
+  %\includegraphics[width=0.8\textwidth]{pictures/osc_etapa4.png}
+  \caption{Medición de la señal cuadrada recompuesta.}
+  \label{fig:medicion.etapa4}
+\end{figure}
+
+\section{Etapa 5: Detección de flancos de subida y bajada}
+% Detallar resultados de la medición de la quinta etapa (doble derivada).
+\begin{figure}[!ht]
+  \centering
+  %\includegraphics[width=0.8\textwidth]{pictures/osc_etapa5.png}
+  \caption{Medición de los picos generados por la doble derivada.}
+  \label{fig:medicion.etapa5}
+\end{figure}
+
+\section{Etapa 6: Rectificación}
+% Detallar resultados de la medición de la sexta etapa (rectificador + amplificador).
+\begin{figure}[!ht]
+  \centering
+  %\includegraphics[width=0.8\textwidth]{pictures/osc_etapa6.png}
+  \caption{Medición de la señal final rectificada y amplificada.}
+  \label{fig:medicion.etapa6}
+\end{figure}
+
+\section{Análisis de resultados finales}
+% Comparativa general entre la simulación y la implementación física.
