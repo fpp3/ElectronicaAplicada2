@@ -1,13 +1,22 @@
 \chapter{Implementación y mediciones}
 \label{chap:implementacion}
 
-En esta sección se detallan los resultados obtenidos en la implementación física del circuito, analizando el comportamiento de cada etapa y comparándolo con lo obtenido en la simulación.
+En esta sección se detallan los resultados obtenidos en la implementación física del circuito, tomando como referencia
+el esquematico presente en la seccion de anexos. Durante el armmado, se fue analizando el comportamiento de cada etapa y
+comparándolo con lo obtenido en la simulación. Los graficos y las estapas son presentados en el mismo orden que en el
+capitulo de diseño, calculos y simulacion, por lo que puede cruzar resultados y sacar conclusiones.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{pictures/crkt_implementacion.jpeg}
+  \caption{circuito implementado en la protoboard.}
+\end{figure}
 
 \section{Etapa 1: Adaptación de impedancia}
 % Detallar resultados de la medición de la primera etapa.
 \begin{figure}[!ht]
   \centering
-  %\includegraphics[width=0.8\textwidth]{pictures/osc_etapa1.png}
+  \includegraphics[width=0.5\textwidth]{images/osc_vi.png}
   \caption{Medición de la señal a la salida del seguidor de tensión.}
   \label{fig:medicion.etapa1}
 \end{figure}
@@ -16,27 +25,30 @@ En esta sección se detallan los resultados obtenidos en la implementación fís
 % Detallar resultados de la medición de la segunda etapa.
 \begin{figure}[!ht]
   \centering
-  %\includegraphics[width=0.8\textwidth]{pictures/osc_etapa2.png}
+  \includegraphics[width=0.5\textwidth]{images/osc_v_offsetted.png}
   \caption{Medición de la señal con offset aplicado.}
   \label{fig:medicion.etapa2}
 \end{figure}
 
 \section{Etapa 3: Señal diente de sierra}
-Nuevamente, esta señal de salida se encuentra fuera del rango solicitado, por lo que volvemos a hacer uso de las
-ecuaciones \ref{eq:diferenciador.pend.curva}, \ref{eq:diferenciador.offset} y \ref{eq:diferenciador.ganancia}.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/osc_v_integrated_pre.png}
+  \caption{Medición de la señal integrada.}
+  \label{fig:medicion.etapa3}
+\end{figure}
+
+Al momento de la impmenentacion, la señal de salida del intgrador tenia con potenciales diferentes a los de la
+simulacion. Como la desicion fue no alterar los calculos hechos por el profesor, decidimos simplemente hacer uso de las
+ecuaciones \ref{eq:diferenciador.offset} y \ref{eq:diferenciador.ganancia} para recalcular el circuito diferenciador de
+la etapa.
 Considerando:
 \begin{align*}
   S_1 = v_{im} = -0.44 \si{\volt} &\to v_{o1} = v_{oM} = -1.5 \si{\volt} \\
   S_2 = v_{iM} = -1.59 \si{\volt} &\to v_{o2} = v_{om} = 4 \si{\volt}
 \end{align*}
 entonces:
-\begin{align*}
-  G &= \frac{4 \si{\volt} - (-1.5)\si{\volt}}{-1.59\si{\volt} - (-0.44\si{\volt})} \\
-  G &= -4.78 \quad \to \text{ señal en entrada inversora}
-\end{align*}
-
-Habiendo corroborado que la señal de entrada tiene que ir a la entrada inversora, podemos calcular el offset a calcular
-a partir de la ecuación \ref{eq:diferenciador.offset}:
 \begin{figure}[!ht]
   \centering
   \begin{subfigure}[t]{0.45\textwidth}
@@ -68,40 +80,35 @@ El juego de resistencias que cumplen esta relación son:
 \end{equation*}
 
 Colocando la señal de salida del integrador en la entrada inversora y la tensión de referencia negativa en la entrada no
-inversora, la simulación dio los resultados que se pueden ver en la figura \ref{plot:derivador}.
+inversora, la implementación dio los resultados que se pueden ver en la figura \ref{fig:medicion.etapa3.1}.
 \begin{figure}[!ht]
   \centering
-  \begin{subfigure}[t]{0.48\textwidth}
-    \centering
-    %\includegraphics[width=\textwidth]{pictures/osc_etapa3_offset.png}
-    \caption{Señal integrada con offset.}
-    \label{fig:medicion.etapa3.offset}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[t]{0.48\textwidth}
-    \centering
-    %\includegraphics[width=\textwidth]{pictures/osc_etapa3_correccion.png}
-    \caption{Señal integrada con corrección.}
-    \label{fig:medicion.etapa3.correccion}
-  \end{subfigure}
-  \caption{Medición de la etapa de integración (diente de sierra).}
-  \label{fig:medicion.etapa3}
+  \includegraphics[width=0.5\textwidth]{images/osc_v_integrated.png}
+  \caption{Señal integrada con corrección.}
+  \label{fig:medicion.etapa3.1}
 \end{figure}
 
 \section{Etapa 4: Volver a la señal de entrada}
 % Detallar resultados de la medición de la cuarta etapa (derivador).
-\begin{figure}[!ht]
+\begin{figure}[H]
   \centering
-  %\includegraphics[width=0.8\textwidth]{pictures/osc_etapa4.png}
+  \includegraphics[width=0.5\textwidth]{images/osc_v_derivated_pre.png}
   \caption{Medición de la señal cuadrada recompuesta.}
   \label{fig:medicion.etapa4}
 \end{figure}
 
-\section{Etapa 5: Detección de flancos de subida y bajada}
-% Detallar resultados de la medición de la quinta etapa (doble derivada).
 \begin{figure}[!ht]
   \centering
-  %\includegraphics[width=0.8\textwidth]{pictures/osc_etapa5.png}
+  \includegraphics[width=0.5\textwidth]{images/osc_v_derivated.png}
+  \caption{Medición de la señal cuadrada recompuesta con amplitud y desfase correctos.}
+  \label{fig:medicion.etapa4.1}
+\end{figure}
+
+\section{Etapa 5: Detección de flancos de subida y bajada}
+% Detallar resultados de la medición de la quinta etapa (doble derivada).
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/osc_v_derivated_twice.png}
   \caption{Medición de los picos generados por la doble derivada.}
   \label{fig:medicion.etapa5}
 \end{figure}
@@ -110,10 +117,94 @@ inversora, la simulación dio los resultados que se pueden ver en la figura \ref
 % Detallar resultados de la medición de la sexta etapa (rectificador + amplificador).
 \begin{figure}[!ht]
   \centering
-  %\includegraphics[width=0.8\textwidth]{pictures/osc_etapa6.png}
-  \caption{Medición de la señal final rectificada y amplificada.}
+  \includegraphics[width=0.5\textwidth]{images/osc_v_rectified_pre.png}
+  \caption{Medición de la señal final rectificada.}
   \label{fig:medicion.etapa6}
 \end{figure}
 
+En esta etapa tambien nos encontramos con la misma particularidad de la salida del integrador, los potenciales no
+coincidian con los simulados. En este caso, recalcular las resistencias fue mucho mas facil debido a que la ganancia
+necesaria era de $A_v = 2$. La ecuacion de ganancia para el amplificador no inversor es:
+\begin{align*}
+  A_v &= 1 + \frac{R_2}{R_1} \\
+  2 &= 1 + \frac{R_2}{R_1} \\
+  1 &= \frac{R_2}{R_1}
+\end{align*}
+Cualquier juego de resistencias iguales va a cumplir la igualdad. Elegimos utilizar dos resistencias de $10 \si{\kilo
+\ohm}$. Luego de implementado el circuito, obtuvimos la salida que se puede ver a continuacion.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/osc_v_rectified.png}
+  \caption{Medición de la señal final rectificada y amplificada.}
+  \label{fig:medicion.etapa6.1}
+\end{figure}
+
+\section{Determinación de la impedancia de salida}
+La impedancia de salida del sistema completo está determinada por la impedancia de salida de la última etapa configurada
+con un amplificador operacional en lazo cerrado. Para un TL084, la impedancia de salida en lazo abierto ($Z_{ol}$) es
+típicamente de $\SI{100}{\ohm}$. Al utilizar realimentación negativa, la impedancia de salida efectiva ($Z_{out}$) se
+reduce según la ganancia de lazo. Para corroborar, utilizamos el metodo empleado en el TP1, utilizando un potenciometro,
+y consiguiendo que la salida sea exactamente la mitad que sin carga.
+
+\begin{figure}[H]
+  \centering
+  \input{figures/fig_medicion_zo.tex}
+  \caption{medicion de la impedancia de salida.}
+\end{figure}
+
+Con este metodo de medicion, obtivumos una impedancia de salida de:
+\begin{equation}
+  Z_o = 8.8 \si{\ohm}
+\end{equation}
+lo cual corrobora que el amplificador operacional se aproxima mucho a los parametros ideales.
+
+\section{Instrumental utilizado}
+Para la realización de las mediciones y la verificación del circuito se utilizó el siguiente instrumental de
+laboratorio:
+\begin{itemize}
+    \item Osciloscopio digital.
+    \item Generador de funciones.
+    \item Fuente de alimentación simétrica regulada.
+    \item Multímetro digital.
+    \item Protoboard y cables de conexión.
+\end{itemize}
+
 \section{Análisis de resultados finales}
-% Comparativa general entre la simulación y la implementación física.
+
+A continuación se presenta una tabla comparativa entre los valores obtenidos en la simulación y los medidos durante la
+implementación física:
+
+\begin{table}[!ht]
+\centering
+\caption{Comparativa de niveles de tensión entre simulación e implementación.}
+\label{tab:comparativa}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Etapa / Señal} & \textbf{Parámetro} & \textbf{Valor Simulado [\si{\volt}]} & \textbf{Valor Medido [\si{\volt}]} \\ \hline
+Señal 1 (Entrada) & Amplitud (p-p) & 2.50 & 2.50 \\ \hline
+Señal 2 (Triangular) & Máximo / Mínimo & 4.00 / -1.50 & 4.00 / -1.50 \\ \hline
+Señal 3 (Cuadrada) & Máximo / Mínimo & 3.00 / 0.00 & 3.05 / 0.05 \\ \hline
+Señal 4 (Pulsos) & Pico máximo & 1.00 & 0.98 \\ \hline
+\end{tabular}
+}
+\end{table}
+
+Al comparar los resultados obtenidos en el laboratorio con las simulaciones previas, se observa una correlación
+satisfactoria en la morfología de las señales, aunque con discrepancias menores en los niveles de tensión continua y
+amplitudes máximas.
+ Estas diferencias, particularmente notables en las etapas de integración y rectificación, obligaron a un
+reajuste de los valores resistivos en tiempo real para compensar las derivas de los componentes reales y las no
+idealidades de los amplificadores operacionales.
+
+Un factor determinante durante la implementación fue la calidad de las conexiones. El uso de una protoboard resultó
+problemático por los falsos contactos, lo que introdujo ruido transitorio y variaciones inesperadas en los niveles de
+offset, obligando a una revisión constante de la integridad física del circuito. Por otro lado, la decisión de priorizar
+el uso de resistencias bajo el estándar E24 fue favorecedora al momento de tener que implementar todo; la disponibilidad
+de estos valores comerciales facilitó enormemente los reajustes realizados en las etapas 3 y 6, permitiendo alcanzar los
+objetivos de diseño sin recurrir a asociaciones complejas de componentes.
+
+Finalmente, se verificó que el sistema es capaz de procesar y transformar la señal de entrada manteniendo la coherencia
+temporal (frecuencia y fase), validando el modelo teórico de cascada de etapas con amplificadores operacionales.
+

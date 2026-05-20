@@ -1,11 +1,26 @@
 \chapter{Conclusiones}
 \label{chap:conclusiones}
 
-Tras el diseño y la simulación del sistema de generación de señales con amplificadores operacionales, se pueden extraer las siguientes conclusiones:
+Tras el diseño, la simulación y la implementación física del sistema de procesamiento de señales, se concluye que los
+objetivos planteados fueron alcanzados satisfactoriamente. El análisis de los resultados permite extraer las siguientes
+observaciones finales:
 
 \begin{itemize}
-    \item El uso de operacionales con entrada JFET (TL084) permitió cumplir con los requisitos de alta impedancia de entrada y baja corriente de polarización, minimizando errores en las etapas de integración.
-    \item La implementación de una referencia de tensión de precisión con un buffer fue fundamental para estabilizar el nivel de continua de la señal triangular, evitando derivas causadas por variaciones en la carga o en la fuente de alimentación.
-    \item Se verificó que el Slew Rate de los dispositivos elegidos es suficiente para la frecuencia de operación de $\SI{4300}{\hertz}$, manteniendo la integridad de los flancos en las señales cuadradas y triangulares.
-    \item El sistema secuencial permite una gran flexibilidad, permitiendo ajustar cada etapa de forma independiente siempre que se respete la adaptación de niveles entre ellas.
+    \item La arquitectura modular basada en etapas secuenciales demostró ser robusta, permitiendo la corrección puntual
+    de parámetros en las etapas 3 y 6 sin comprometer el funcionamiento global del sistema.
+    \item El uso de operacionales con entrada JFET (TL084) fue clave para minimizar los errores por corrientes de
+    polarización en los integradores, garantizando una señal triangular limpia y con pendientes constantes.
+    \item La implementación física puso de manifiesto que el uso de una protoboard resultó problemático por los falsos
+    contactos. Esta limitación técnica generó dificultades para estabilizar las mediciones y reafirma la importancia de
+    considerar montajes más permanentes (como PCB) para circuitos con múltiples etapas de ganancia y realimentación.
+    \item Se destaca que priorizar el uso de resistencias bajo el estándar E24 fue favorecedor al momento de tener que
+    implementar todo. La facilidad para encontrar valores comerciales que se ajustaran a los cálculos de diseño redujo
+    el tiempo de montaje y facilitó el ajuste de las ganancias finales.
+    \item La discrepancia observada entre la simulación y la práctica subraya la necesidad de incluir márgenes de ajuste
+    (como el uso de trimpots) o de realizar recalculaciones rápidas basadas en componentes reales para absorber las
+    tolerancias de fabricación.
 \end{itemize}
+
+En definitiva, el trabajo práctico permitió consolidar los conceptos de diseño con amplificadores operacionales en
+configuraciones lineales y no lineales, enfrentando con éxito los desafíos inherentes a la transición del modelo teórico
+al prototipo físico.

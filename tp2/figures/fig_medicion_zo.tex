@@ -1,0 +1,14 @@
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (19.25, 3.25) to[american potentiometer, l={$R_{pot}$}] (19.25, 0);
+	\node[plain mono amp](N1) at (16.19, 3.25){} node[anchor=east] at ([xshift=0.27cm]N1.text){$Amp$};
+	\draw (17.38, 3.25) -- (19.25, 3.25);
+	\draw (13, 3.25) to[sinusoidal current source, l={$V_s$}] (13, -0);
+	\draw (19.81, 1.625) |- (19.75, 0.75) |- (19.25, 0.75);
+	\draw (13, -0) -- (19.25, -0);
+	\node[ground] at (16.25, -0){};
+	\draw[line width=0.8pt, dash pattern={on 3.2pt off 3.2pt}] (17.25, 4.25) -- (17.25, 2.25);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (15, 3.75){};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm](N2) at (17.75, 3.875){} node[anchor=center] at (N2.text){$Z_o$};
+	\draw (13, 3.25) |- (15, 3.25);
+\end{tikzpicture}

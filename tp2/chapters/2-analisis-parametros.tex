@@ -20,6 +20,17 @@ Indica la máxima velocidad de cambio de la tensión de salida. Para el TL08X, e
 Dado que trabajamos a $\SI{4300}{\hertz}$, este valor es más que suficiente para evitar distorsiones en las transiciones
 de la onda cuadrada y los flancos de la triangular.
 
+\section{Tiempo de crecimiento ($t_r$)}
+El tiempo de crecimiento está relacionado con el ancho de banda de ganancia unitaria ($f_t \approx \SI{3}{\mega\hertz}$).
+Para señales de pequeña amplitud, se puede estimar como $t_r \approx 0.35 / f_t \approx \SI{116}{\nano\second}$. Sin
+embargo, para las amplitudes manejadas en este práctico, el tiempo de transición estará limitado principalmente por el
+Slew Rate.
+
 \section{\texorpdfstring{Corriente de Polarización de Entrada ($I_b$)}{Corriente de Polarización de Entrada (Ib)}}
 Al poseer entradas JFET, la corriente de polarización es extremadamente baja (típicamente $\SI{30}{\pico\ampere}$), lo
 cual es ideal para mantener la precisión en circuitos con resistencias elevadas.
+
+\section{Hojas de Datos}
+Para el diseño se consultaron las hojas de datos oficiales de Texas Instruments para el TL084, cuyos parámetros
+principales se resumen en este capítulo. Los documentos completos pueden encontrarse referenciados en la bibliografía.
+
