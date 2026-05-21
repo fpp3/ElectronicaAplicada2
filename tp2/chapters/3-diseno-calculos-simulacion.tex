@@ -54,9 +54,9 @@ La simulación de esta etapa dio como resultado la señal que se puede ver en la
   \label{plot:offset}
 \end{figure}
 
-\section{Etapa 3: Señal diente de sierra}
+\section{Etapa 3: Señal triangular}
 Sabiendo que la señal anterior es una onda cuadrada con offset, debido a que el área de la misma crece y decrece con el
-tiempo gracias al offset agregado anteriormente, podemos generar la señal diente de sierra obteniendo una tensión que
+tiempo gracias al offset agregado anteriormente, podemos generar la señal triangular obteniendo una tensión que
 varíe a la par del área debajo de la curva, en este caso, la señal cuadrada con offset. Para ello, utilizaremos el
 circuito propuesto por el profesor que se puede ver en la figura \ref{crkt:integrador}, dado que se comparten las
 condiciones de operación.
@@ -209,9 +209,9 @@ inversora, la simulación dio los resultados que se pueden ver en la figura \ref
 \end{figure}
 
 \section{Etapa 4: Volver a la señal de entrada}
-Con la señal diente de sierra siendo generada a partir de la integral de la señal de entrada cuadrada, ahora debemos
-volver a la señal de onda cuadrada a partir de la diente de sierra. Para "deshacer" los efectos matemáticos de la señal
-diente de sierra, podemos colocar un amplificador operacional en configuración derivadora, para volver a la señal
+Con la señal triangular siendo generada a partir de la integral de la señal de entrada cuadrada, ahora debemos
+volver a la señal de onda cuadrada a partir de la triangular. Para "deshacer" los efectos matemáticos de la señal
+triangular, podemos colocar un amplificador operacional en configuración derivadora, para volver a la señal
 cuadrada original. Nuevamente, para este circuito, utilizamos el propuesto por el profesor que se puede ver en la
 figura \ref{crkt:derivador}.
 

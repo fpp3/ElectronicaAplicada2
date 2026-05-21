@@ -1,38 +1,60 @@
 \begin{tikzpicture}
     \begin{groupplot}[
         group style={
-            group size=1 by 4,
-            vertical sep=1.2cm,
+            group size=1 by 6,
+            vertical sep=0.8cm,
             x descriptions at=edge bottom,
         },
-        width=0.9\textwidth,
-        height=3.5cm,
-        domain=0:465,
+        width=0.85\textwidth,
+        height=4cm,
+        domain=0:465.12,
         samples=500,
         grid=both,
         xlabel={Tiempo [\si{\micro\second}]},
-        xmin=0, xmax=465,
+        xmin=0, xmax=465.12,
         every axis/.append style={
             label style={font=\small},
             tick label style={font=\small}
         }
     ]
     
-    % Señal 1: Cuadrada 1.5V a -1V
-    \nextgroupplot[ylabel={Señal 1 [\si{\volt}]}, ymin=-1.5, ymax=2, ytick={-1, 0, 1.5}]
-    \addplot[blue, thick, const plot] coordinates {(0,1.5) (116.28,-1) (232.56,1.5) (348.84,-1) (465,-1)};
+    % Señal 1: Cuadrada 0V a 2.5V
+    \nextgroupplot[ylabel={S1 [\si{\volt}]}, ymin=-0.5, ymax=3, ytick={0, 2.5}]
+    \addplot[blue, thick, const plot] coordinates {(0,2.5) (116.28,0) (232.56,2.5) (348.84,0) (465.12,0)};
+    \node[anchor=south east, font=\scriptsize] at (rel axis cs:1,1) {$f = 4300 \si{Hz}$};
 
-    % Señal 2: Triangular 4V a -1.5V
-    \nextgroupplot[ylabel={Señal 2 [\si{\volt}]}, ymin=-2, ymax=4.5, ytick={-1.5, 0, 4}]
-    \addplot[red, thick] coordinates {(0,-1.5) (116.28,4) (232.56,-1.5) (348.84,4) (465,-1.5)};
+    % Señal 2: Cuadrada 1.5V a -1V
+    \nextgroupplot[ylabel={S2 [\si{\volt}]}, ymin=-1.5, ymax=2, ytick={-1, 0, 1.5}]
+    \addplot[red, thick, const plot] coordinates {(0,1.5) (116.28,-1) (232.56,1.5) (348.84,-1) (465.12,-1)};
 
-    % Señal 3: Cuadrada 3V a 0V
-    \nextgroupplot[ylabel={Señal 3 [\si{\volt}]}, ymin=-0.5, ymax=3.5, ytick={0, 3}]
-    \addplot[orange, thick, const plot] coordinates {(0,3) (116.28,0) (232.56,3) (348.84,0) (465,3)};
+    % Señal 3: Triangular 4V a -1.5V
+    \nextgroupplot[ylabel={S3 [\si{\volt}]}, ymin=-2, ymax=4.5, ytick={-1.5, 0, 4}]
+    \addplot[orange, thick] coordinates {(0,-1.5) (116.28,4) (232.56,-1.5) (348.84,4) (465.12,-1.5)};
 
-    % Señal 4: Pulsos 1V a 0V
-    \nextgroupplot[ylabel={Señal 4 [\si{\volt}]}, ymin=-0.2, ymax=1.2, ytick={0, 1}]
-    \addplot[teal, thick] coordinates {(0,0) (2,1) (10,0) (232.56,0) (234.56,1) (242.56,0) (465,0)};
+    % Señal 4: Cuadrada 3V a 0V
+    \nextgroupplot[ylabel={S4 [\si{\volt}]}, ymin=-0.5, ymax=3.5, ytick={0, 3}]
+    \addplot[teal, thick, const plot] coordinates {(0,3) (116.28,0) (232.56,3) (348.84,0) (465.12,0)};
+
+    % Señal 5: Derivada (Pulsos +/-)
+    \nextgroupplot[ylabel={S5 [\si{\volt}]}, ymin=-1.5, ymax=1.5, ytick={-1, 0, 1}]
+    \addplot[purple, thick] coordinates {
+        (0,0) (1,1) (10,0) 
+        (116.28,0) (117.28,-1) (126.28,0) 
+        (232.56,0) (233.56,1) (242.56,0) 
+        (348.84,0) (349.84,-1) (358.84,0) 
+        (465.12,0)
+    };
+
+    % Señal 6: Rectificada (Pulsos +)
+    \nextgroupplot[ylabel={S6 [\si{\volt}]}, ymin=-0.2, ymax=1.2, ytick={0, 1}]
+    \addplot[brown, thick] coordinates {
+        (0,0) (1,1) (10,0) 
+        (116.28,0) (117.28,1) (126.28,0) 
+        (232.56,0) (233.56,1) (242.56,0) 
+        (348.84,0) (349.84,1) (358.84,0) 
+        (465.12,0)
+    };
     
     \end{groupplot}
+
 \end{tikzpicture}
