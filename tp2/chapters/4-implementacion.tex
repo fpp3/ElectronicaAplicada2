@@ -2,9 +2,9 @@
 \label{chap:implementacion}
 
 En esta sección se detallan los resultados obtenidos en la implementación física del circuito, tomando como referencia
-el esquematico presente en la seccion de anexos. Durante el armmado, se fue analizando el comportamiento de cada etapa y
-comparándolo con lo obtenido en la simulación. Los graficos y las estapas son presentados en el mismo orden que en el
-capitulo de diseño, calculos y simulacion, por lo que puede cruzar resultados y sacar conclusiones.
+el esquemático presente en la sección de anexos. Durante el armado, se fue analizando el comportamiento de cada etapa y
+comparándolo con lo obtenido en la simulación. Los gráficos y las etapas son presentados en el mismo orden que en el
+capitulo de diseño, cálculos y simulación, por lo que puede cruzar resultados y sacar conclusiones.
 
 \begin{figure}[!ht]
   \centering
@@ -39,8 +39,8 @@ capitulo de diseño, calculos y simulacion, por lo que puede cruzar resultados y
   \label{fig:medicion.etapa3}
 \end{figure}
 
-Al momento de la impmenentacion, la señal de salida del intgrador tenia con potenciales diferentes a los de la
-simulacion. Como la desicion fue no alterar los calculos hechos por el profesor, decidimos simplemente hacer uso de las
+Al momento de la implementación, la señal de salida del integrador tenia con potenciales diferentes a los de la
+simulación. Como la desición fue no alterar los cálculos hechos por el profesor, decidimos simplemente hacer uso de las
 ecuaciones \ref{eq:diferenciador.offset} y \ref{eq:diferenciador.ganancia} para recalcular el circuito diferenciador de
 la etapa.
 Considerando:
@@ -122,16 +122,16 @@ inversora, la implementación dio los resultados que se pueden ver en la figura 
   \label{fig:medicion.etapa6}
 \end{figure}
 
-En esta etapa tambien nos encontramos con la misma particularidad de la salida del integrador, los potenciales no
-coincidian con los simulados. En este caso, recalcular las resistencias fue mucho mas facil debido a que la ganancia
-necesaria era de $A_v = 2$. La ecuacion de ganancia para el amplificador no inversor es:
+En esta etapa también nos encontramos con la misma particularidad de la salida del integrador, los potenciales no
+coincidían con los simulados. En este caso, recalcular las resistencias fue mucho mas fácil debido a que la ganancia
+necesaria era de $A_v = 2$. La ecuación de ganancia para el amplificador no inversor es:
 \begin{align*}
   A_v &= 1 + \frac{R_2}{R_1} \\
   2 &= 1 + \frac{R_2}{R_1} \\
   1 &= \frac{R_2}{R_1}
 \end{align*}
 Cualquier juego de resistencias iguales va a cumplir la igualdad. Elegimos utilizar dos resistencias de $10 \si{\kilo
-\ohm}$. Luego de implementado el circuito, obtuvimos la salida que se puede ver a continuacion.
+\ohm}$. Luego de implementado el circuito, obtuvimos la salida que se puede ver a continuación.
 
 \begin{figure}[!ht]
   \centering
@@ -144,20 +144,20 @@ Cualquier juego de resistencias iguales va a cumplir la igualdad. Elegimos utili
 La impedancia de salida del sistema completo está determinada por la impedancia de salida de la última etapa configurada
 con un amplificador operacional en lazo cerrado. Para un TL084, la impedancia de salida en lazo abierto ($Z_{ol}$) es
 típicamente de $\SI{100}{\ohm}$. Al utilizar realimentación negativa, la impedancia de salida efectiva ($Z_{out}$) se
-reduce según la ganancia de lazo. Para corroborar, utilizamos el metodo empleado en el TP1, utilizando un potenciometro,
+reduce según la ganancia de lazo. Para corroborar, utilizamos el método empleado en el TP1, utilizando un potenciómetro,
 y consiguiendo que la salida sea exactamente la mitad que sin carga.
 
 \begin{figure}[H]
   \centering
   \input{figures/fig_medicion_zo.tex}
-  \caption{medicion de la impedancia de salida.}
+  \caption{medición de la impedancia de salida.}
 \end{figure}
 
-Con este metodo de medicion, obtivumos una impedancia de salida de:
+Con este método de medición, obtuvimos una impedancia de salida de:
 \begin{equation}
   Z_o = 8.8 \si{\ohm}
 \end{equation}
-lo cual corrobora que el amplificador operacional se aproxima mucho a los parametros ideales.
+lo cual corrobora que el amplificador operacional se aproxima mucho a los parámetros ideales.
 
 \section{Instrumental utilizado}
 Para la realización de las mediciones y la verificación del circuito se utilizó el siguiente instrumental de
