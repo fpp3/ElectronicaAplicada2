@@ -13,7 +13,8 @@
         scaled x ticks=false,
         xticklabel={\pgfmathparse{\tick*1000}\pgfmathprintnumber{\pgfmathresult}},
         x tick label style={/pgf/number format/fixed, /pgf/number format/precision=2},
-        extra y ticks={\pgfkeysvalueof{/pgfplots/ymin},\pgfkeysvalueof{/pgfplots/ymax}},
+        ytick={\pgfkeysvalueof{/pgfplots/ymin}, 0,2, \pgfkeysvalueof{/pgfplots/ymax}},
+        %extra y ticks={\pgfkeysvalueof{/pgfplots/ymin},\pgfkeysvalueof{/pgfplots/ymax}},
         ylabel={Amplitud [V]}
     ]
         \addplot[blue, thick] table [x=time, y={V(/integrated)}] {sources/plots/sim.csv};
