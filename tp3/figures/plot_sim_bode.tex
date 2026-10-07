@@ -1,0 +1,62 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=0.96\textwidth,
+    height=8.5cm,
+    xmode=log,
+    xmin=1e-2, xmax=3e3,
+    ymin=20, ymax=85,
+    ytick={20, 30, 40, 50, 60, 70, 80},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!25},
+    major grid style={line width=.2pt, draw=gray!45},
+    xlabel={Frecuencia [\unit{\hertz}]},
+    ylabel={Ganancia $|A_v|$ [\unit{\decibel}]},
+    legend style={at={(0.98,0.96)}, anchor=north east, font=\footnotesize}
+  ]
+    % Curva simulada
+    \addplot[very thick, color=blue!85!black] table [x=freq, y=gain_db] {sim/sim_plot-rta_frec.txt};
+    \addlegendentry{Respuesta simulada $|A_v(f)|$}
+
+    % Puntos medidos en laboratorio
+    \addplot[only marks, mark=*, mark size=2pt, color=red!80!black] coordinates {
+      (0.1, 65.58)
+      (0.25, 67.16)
+      (0.5, 67.46)
+      (1, 67.46)
+      (2, 67.46)
+      (5, 67.46)
+      (10, 67.38)
+      (20, 67.16)
+      (25, 66.77)
+      (50, 65.85)
+      (75, 64.30)
+      (100, 62.61)
+      (125, 61.29)
+      (150, 60.00)
+      (200, 58.06)
+      (300, 54.49)
+      (500, 50.42)
+      (700, 47.31)
+      (1000, 43.86)
+      (1500, 40.83)
+      (2000, 38.28)
+    };
+    \addlegendentry{Medición en laboratorio}
+
+    % Linea de referencia -3 dB simulada (60.2 dB)
+    \addplot[dashed, thick, color=blue!70!gray, domain=1e-2:3e3] {60.21};
+    \addlegendentry{Nivel sim. $-\SI{3}{\decibel}$ ($\SI{60.2}{\decibel}$)}
+
+    % Lineas verticales en fL y fH simuladas
+    \draw[dotted, thick, color=blue!80!black] (axis cs:0.0725, 20) -- (axis cs:0.0725, 60.21);
+    \node[anchor=south west, font=\scriptsize, rotate=90, color=blue!80!black] at (axis cs:0.0725, 22) {$f_{L,\text{sim}} \approx \SI{0.07}{\hertz}$};
+
+    % Linea vertical fH simulada (72.3 Hz)
+    \draw[dotted, thick, color=blue!80!black] (axis cs:72.32, 20) -- (axis cs:72.32, 60.21);
+    \node[anchor=south west, font=\scriptsize, rotate=90, color=blue!80!black] at (axis cs:72.32, 23) {$f_{H,\text{sim}} \approx \SI{72.3}{\hertz}$};
+
+    % Linea vertical fH medida (82.2 Hz)
+    \draw[dotted, thick, color=red!80!black] (axis cs:82.2, 20) -- (axis cs:82.2, 63.77);
+    \node[anchor=north west, font=\scriptsize, rotate=90, color=red!80!black] at (axis cs:82.2, 23) {$f_{H,\text{med}} = \SI{82.2}{\hertz}$};
+  \end{axis}
+\end{tikzpicture}

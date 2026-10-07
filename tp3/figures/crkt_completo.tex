@@ -1,0 +1,119 @@
+\begin{tikzpicture}[american, scale=0.76, transform shape]
+
+  % =============================================================
+  % 1. ENTRADAS DE SENAL DIRECTAS (HORIZONTALES)
+  % =============================================================
+  % U1 con yscale=-1 tiene U1.+ en y = 2.99
+  % U2 con yscale=1 tiene U2.+ en y = -2.99
+  \node[ocirc] (in1) at (-0.5, 2.99) {};
+  \node[anchor=east] at (in1.west) {$e_1\text{ (LA)}$};
+  \node[ocirc] (in2) at (-0.5, -2.99) {};
+  \node[anchor=east] at (in2.west) {$e_2\text{ (RA)}$};
+
+  % =============================================================
+  % 2. ETAPA 1: BUFFER DIFERENCIAL (U1 y U2)
+  % =============================================================
+  % U1 (superior, yscale=-1)
+  \node[op amp, yscale=-1] (U1) at (2.2, 2.5) {};
+  \node at (2.0, 2.5) {$U_1$};
+  \draw (in1) -- (U1.+);
+
+  % U2 (inferior)
+  \node[op amp] (U2) at (2.2, -2.5) {};
+  \node at (2.0, -2.5) {$U_2$};
+  \draw (in2) -- (U2.+);
+
+  % Entradas inversoras hacia barra central
+  \draw (U1.-) -- (1.0, 2.01);
+  \draw (U2.-) -- (1.0, -2.01);
+
+  % Resistencia de ganancia R1
+  \draw (1.0, 2.01) -- (1.0, 0.9)
+        to[american resistor, l={$R_1$}] (1.0, -0.9)
+        -- (1.0, -2.01);
+
+  % Realimentacion R2 de U1
+  \draw (1.0, 1.4) node[circ]{} -- (1.5, 1.4)
+        to[american resistor, l_={$R_2$}] (2.9, 1.4)
+        -- (3.4, 1.4) -- (3.4, 2.5) -- (U1.out);
+
+  % Realimentacion R2 de U2
+  \draw (1.0, -1.4) node[circ]{} -- (1.5, -1.4)
+        to[american resistor, l={$R_2$}] (2.9, -1.4)
+        -- (3.4, -1.4) -- (3.4, -2.5) -- (U2.out);
+
+  % =============================================================
+  % 3. ETAPA 2: RESTADOR Y FILTRO PASABANDA ACTIVO (U3)
+  % =============================================================
+  \node[op amp] (U3) at (12.6, 0.0) {};
+  \node at (12.4, 0.0) {$U_3$};
+
+  % Rama superior: U1.out -> C3 serie R3 -> U3.-
+  \draw (U1.out) -- (4.0, 2.5) node[circ]{}
+        to[C, l={$C_3$}] (5.8, 2.5)
+        -- (6.9, 2.5)
+        to[american resistor, l={$R_3$}] (9.1, 2.5)
+        -- (10.0, 2.5) |- (U3.-);
+
+  % Rama inferior: U2.out -> C3 serie R3 -> U3.+
+  \draw (U2.out) -- (4.0, -2.5) node[circ]{}
+        to[C, l_={$C_3$}] (5.8, -2.5)
+        -- (6.9, -2.5)
+        to[american resistor, l_={$R_3$}] (9.1, -2.5)
+        -- (10.0, -2.5) |- (U3.+);
+
+  % Realimentacion en lazo inversor: R4 || C4
+  % U3.- esta en (11.4, 0.49). Derivamos el lazo en x = 10.7
+  \draw (10.7, 0.49) node[circ]{} -- (10.7, 2.4) -- (11.2, 2.4);
+  % Rama R4 (superior)
+  \draw (11.2, 2.4) -- (11.2, 3.2)
+        to[american resistor, l={$R_4$}] (13.6, 3.2)
+        -- (13.6, 2.4);
+  % Rama C4 (inferior)
+  \draw (11.2, 2.4) -- (11.2, 1.6)
+        to[C, l={$C_4$}] (13.6, 1.6)
+        -- (13.6, 2.4);
+  % Cierre vertical limpio hacia la salida de U3
+  \draw (13.6, 2.4) -- (14.4, 2.4) -- (14.4, 0.0);
+
+  % Red no inversora a masa: R4 || C4
+  % U3.+ esta en (11.4, -0.49). Derivamos en x = 10.7 hacia abajo
+  \draw (10.7, -0.49) node[circ]{} -- (10.7, -1.3) -- (11.6, -1.3);
+  % Rama R4 (vertical)
+  \draw (11.6, -1.3) to[american resistor, l_={$R_4$}] (11.6, -2.8);
+  % Rama C4 (vertical paralela)
+  \draw (11.6, -1.3) -- (13.3, -1.3)
+        to[C, l={$C_4$}] (13.3, -2.8);
+  \draw (11.6, -2.8) -- (13.3, -2.8);
+  \draw (12.45, -2.8) node[circ]{} -- (12.45, -3.2) node[ground]{};
+
+  % =============================================================
+  % 4. ETAPA 3: AMPLIFICADOR NO INVERSOR DE SALIDA (U4)
+  % =============================================================
+  \node[op amp] (U4) at (17.8, 0.0) {};
+  \node at (17.6, 0.0) {$U_4$};
+
+  % Salida de U3 hacia entrada no inversora de U4 con conexion limpia en x = 14.4
+  \draw (U3.out) -- (14.4, 0.0) node[circ]{} -- (15.4, 0.0) |- (U4.+);
+
+  % Realimentacion R8 para U4
+  \draw (U4.out) -- (19.8, 0.0) node[circ]{} -- (19.8, 1.8)
+        to[american resistor, l_={$R_8$}] (17.0, 1.8)
+        -| (U4.-);
+  \draw (17.0, 0.49) node[circ]{};
+
+  % Red de ganancia a tierra: R9
+  \draw (17.0, 1.8) -- (17.0, 2.4)
+        to[american resistor, l_={$R_9$}] (17.0, 3.8)
+        node[ground, yscale=-1]{};
+
+  % Resistor de carga de salida a tierra: RL
+  \draw (19.8, 0.0) -- (20.7, 0.0) node[circ]{};
+  \draw (20.7, 0.0) to[american resistor, l={$R_L$}] (20.7, -1.6) node[ground]{};
+
+  % Terminal de salida final
+  \draw (20.7, 0.0) -- (21.8, 0.0);
+  \node[ocirc] (vout) at (21.8, 0.0) {};
+  \node[anchor=west] at (vout.east) {$V_o$};
+
+\end{tikzpicture}

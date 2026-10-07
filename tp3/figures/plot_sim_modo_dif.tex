@@ -1,0 +1,40 @@
+\begin{tikzpicture}
+  \pgfplotsset{
+    scale only axis,
+    xmin=0, xmax=120,
+    xtick={0, 20, 40, 60, 80, 100, 120},
+  }
+  \begin{axis}[
+    width=0.80\textwidth,
+    height=5.2cm,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!25},
+    major grid style={line width=.2pt, draw=gray!45},
+    xlabel={Tiempo [\unit{\milli\second}]},
+    ylabel={Tensión diferencial de entrada $v_d$ [\unit{\milli\volt}]},
+    ylabel style={color=red!80!black},
+    yticklabel style={color=red!80!black},
+    ymin=-30, ymax=40,
+    ytick={-30, -20, -10, 0, 10, 20, 30, 40},
+    axis y line*=left,
+  ]
+    \addplot[thick, dashed, color=red!80!black] table [x expr=\thisrow{time}*1000, y expr=\thisrow{vin}*1000] {sim/sim_plot-ganancia_modo_dif.txt};
+  \end{axis}
+  \begin{axis}[
+    width=0.80\textwidth,
+    height=5.2cm,
+    ylabel={Tensión de salida $V_o$ [\unit{\volt}]},
+    ylabel style={color=blue!80!black},
+    yticklabel style={color=blue!80!black},
+    ymin=-18, ymax=24,
+    ytick={-18, -12, -6, 0, 6, 12, 18, 24},
+    axis y line*=right,
+    axis x line=none,
+    legend style={at={(0.98,0.95)}, anchor=north east, font=\footnotesize}
+  ]
+    \addlegendimage{thick, dashed, color=red!80!black}
+    \addlegendentry{Entrada $v_d$ [\unit{\milli\volt}]}
+    \addplot[thick, color=blue!85!black] table [x expr=\thisrow{time}*1000, y=vout] {sim/sim_plot-ganancia_modo_dif.txt};
+    \addlegendentry{Salida $V_o$ [\unit{\volt}]}
+  \end{axis}
+\end{tikzpicture}

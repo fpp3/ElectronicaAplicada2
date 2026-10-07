@@ -1,0 +1,33 @@
+\begin{tikzpicture}[scale=0.95, transform shape]
+
+  % Estilos de bloques
+  \tikzstyle{instrumento} = [draw, thick, fill=gray!10, rounded corners, minimum width=2.4cm, minimum height=1.5cm, align=center, font=\small]
+  \tikzstyle{dut} = [draw, thick, fill=blue!10, rounded corners, minimum width=3.0cm, minimum height=1.5cm, align=center, font=\small\bfseries]
+  \tikzstyle{linea} = [draw, thick, -stealth]
+
+  % Bloques de instrumentos
+  \node[instrumento] (gen) at (0, 2.5) {Generador de\\Funciones\\{\footnotesize $\SI{1}{\hertz} - \SI{2}{\kilo\hertz}$}};
+  \node[instrumento] (atenuador) at (3.8, 2.5) {Atenuador de\\Precisión\\{\footnotesize Divisor $100:1$}};
+  \node[dut] (amplificador) at (10.2, 2.5) {Amplificador de\\Instrumentación\\{\footnotesize DUT (Bajo Ensayo)}};
+  \node[instrumento, minimum width=6.6cm, minimum height=1.5cm, fill=green!5] (osc) at (7.0, -0.8) {Osciloscopio Digital de 2 Canales\\{\footnotesize CH1: $V_i$ ($\SI{10}{\milli\volt\text{pp}}$) \qquad CH2: $V_o$ ($\unit{\volt\text{pp}}$)}};
+
+  % Conexiones superiores
+  \draw[linea] (gen.east) -- node[above=0.08cm, font=\scriptsize] {$\SI{1}{\volt\text{pp}}$} (atenuador.west);
+  \draw[linea] (atenuador.east) -- (amplificador.west);
+  \node[above=0.08cm, font=\scriptsize] at (7.0, 2.5) {$V_i = \SI{10}{\milli\volt\text{pp}}$};
+
+  % Conexiones al osciloscopio
+  % Canal 1 (CH1 desde entrada del amplificador)
+  \draw[draw, thick, color=red!80!black, -stealth] (7.0, 2.5) node[circ]{} |- (5.0, 0.2) -- (5.0, -0.8);
+  \node[left=0.08cm, font=\scriptsize, color=red!80!black] at (5.0, 0.6) {CH1 ($V_i$)};
+
+  % Canal 2 (CH2 desde salida del amplificador)
+  \draw[draw, thick, color=blue!80!black, -stealth] (amplificador.east) -- ++(0.8, 0) |- (9.0, -0.8);
+  \node[right=0.08cm, font=\scriptsize, color=blue!80!black] at (11.0, 0.6) {CH2 ($V_o$)};
+
+  % Terminal de masa comun
+  \draw[dashed, thick, color=gray] (gen.south) -- ++(0, -0.4) node[ground]{};
+  \draw[dashed, thick, color=gray] (amplificador.south) -- ++(0, -0.4) node[ground]{};
+  \draw[dashed, thick, color=gray] (osc.south) -- ++(0, -0.4) node[ground]{};
+
+\end{tikzpicture}

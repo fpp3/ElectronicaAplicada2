@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=0.88\textwidth,
+    height=6.2cm,
+    xmode=log,
+    xmin=1e-2, xmax=1e3,
+    ymin=20, ymax=78,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!25},
+    major grid style={line width=.2pt, draw=gray!45},
+    xlabel={Frecuencia [\unit{\hertz}]},
+    ylabel={Ganancia $|A_v|$ [\unit{\decibel}]},
+    legend style={at={(0.98,0.95)}, anchor=north east, font=\footnotesize}
+  ]
+    % Curva simulada
+    \addplot[very thick, color=blue!85!black] table [x=freq, y=gain_db] {sim/sim_plot-rta_frec.txt};
+    \addlegendentry{Respuesta simulada $|A_v(f)|$}
+
+    % Linea de referencia -3 dB (60.2 dB)
+    \addplot[dashed, color=red!80!black, domain=1e-2:1e3] {60.21};
+    \addlegendentry{Nivel a $-\SI{3}{\decibel}$ ($\SI{60.2}{\decibel}$)}
+
+    % Lineas verticales en fL y fH
+    \draw[dotted, thick, color=blue!80!black] (axis cs:0.0725, 20) -- (axis cs:0.0725, 60.21);
+    \node[anchor=south west, font=\tiny, rotate=90, color=blue!80!black] at (axis cs:0.0725, 23) {$f_{L,\text{sim}} \approx \SI{0.07}{\hertz}$};
+
+    \draw[dotted, thick, color=blue!80!black] (axis cs:72.32, 20) -- (axis cs:72.32, 60.21);
+    \node[anchor=south west, font=\tiny, rotate=90, color=blue!80!black] at (axis cs:72.32, 23) {$f_{H,\text{sim}} \approx \SI{72.3}{\hertz}$};
+
+    % Anotacion banda pasante
+    \node[anchor=north, font=\scriptsize\bfseries, color=blue!90!black] at (axis cs:2.0, 50.0) {Banda pasante: $\approx \SI{63.2}{\decibel}$};
+  \end{axis}
+\end{tikzpicture}

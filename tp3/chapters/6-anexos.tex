@@ -1,0 +1,42 @@
+\chapter{Anexos}
+\label{sec:anexos}
+
+\section{Directivas y Parámetros de Simulación en LTspice}
+
+Para la validación circuital en el software LTspice se emplearon los modelos SPICE provistos por los fabricantes para
+el operacional TL081 (librería \texttt{TL081.301}) y modelos comparativos (\texttt{op07.lib}).
+
+\begin{lstlisting}[style=ltspice, caption={Directivas SPICE empleadas para la caracterización en frecuencia y en el dominio temporal.}]
+* Analisis de respuesta en frecuencia (Diagrama de Bode)
+.ac dec 20 1m 100k
+
+* Analisis transitorio con senal cardiaca sintetizada
+.tran 0 2 0 100u
+
+* Definicion de la fuente biopotencial ECG desde archivo de texto
+V_ecg in_p in_m PWL file=ecg_source.txt
+
+* Inclusion de modelos de amplificadores operacionales
+.lib TL081.301
+.lib op07.lib
+\end{lstlisting}
+
+\section{Protocolo de Calibración en Laboratorio}
+
+Para la puesta a punto experimental del instrumento se recomienda el siguiente procedimiento secuencial:
+\begin{enumerate}
+  \item Verificación de polarización estática:
+  Conectar las fuentes de alimentación partidas a $\pm \SI{12}{\volt}$ o $\pm \SI{15}{\volt}$. Cortocircuitar ambas
+  entradas a masa ($e_1 = e_2 = \SI{0}{\volt}$) y comprobar con el multímetro que la tensión en la salida $V_o$ sea
+  inferior a $\SI{10}{\milli\volt}$ en continua.
+  \item Calibración de la ganancia de primera y segunda etapa:
+  Inyectar en la entrada diferencial una señal senoidal de $\SI{10}{\milli\volt}$ de amplitud ($\SI{20}{\milli\volt\text{pp}}$) a $\SI{25}{\hertz}$. Con el
+  osciloscopio monitoreando la salida de $U_3$, ajustar el trimpot $R_1$ hasta observar una ganancia intermedia de $44.67\ \text{V/V}$ ($\approx \SI{33.0}{\decibel}$, correspondiente a $\approx \SI{0.89}{\volt\text{pp}}$).
+  \item Calibración de la ganancia global de salida:
+  Trasladar la sonda del osciloscopio al terminal de salida final $V_o$. Sin alterar la señal de entrada, ajustar el
+  trimpot de salida $R_9$ hasta obtener la ganancia total del sistema de diseño ($\approx 1336\ \text{V/V} \equiv \SI{62.5}{\decibel}$ a $\SI{25}{\hertz}$, con $V_o \approx \SI{26.7}{\volt\text{pp}}$ sin saturación dentro de la zona lineal de alimentación).
+  \item Verificación con simulador cardíaco:
+  Conectar el generador de bioseñales virtuales configurado en modo QRS adulto ($1\ \text{mVpp}$ a $60\ \text{bpm}$).
+  Comprobar que en la pantalla del osciloscopio la señal exhiba una amplitud de $\SI{1}{\volt\text{pp}}$ con línea de base
+  estable en cero voltios.
+\end{enumerate}

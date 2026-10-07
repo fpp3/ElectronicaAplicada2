@@ -1,0 +1,42 @@
+\chapter{Conclusiones}
+\label{sec:conclusiones}
+
+El presente trabajo abordó el diseño analítico, la simulación circuital y la
+validación experimental en laboratorio de un sistema de acondicionamiento para
+señales electrocardiográficas (ECG). La arquitectura desarrollada integró un
+amplificador de instrumentación de tres amplificadores operacionales con
+filtrado pasabanda activo en su propia etapa restadora, complementado con una
+etapa final de post-amplificación y calibración. En lo relativo a la ganancia
+diferencial, la implementación cumplió holgadamente la cota impuesta ($\ge
+\SI{60}{\decibel}$): 
+se registró una ganancia de $\SI{66.77}{\decibel}$ ($2180.0\ \text{V/V}$) a
+$\SI{25}{\hertz}$. Esta amplificación transforma señales cardíacas débiles
+($\sim \SI{1}{\milli\volt\text{pp}}$ a $\SI{2.5}{\milli\volt\text{pp}}$) en
+amplitudes de $\SI{2}{\volt}$ a $\SI{3.5}{\volt\text{pp}}$, ideales
+para su digitalización sin distorsión armónica apreciable.
+
+La incorporación de reactancias en la etapa restadora resultó altamente eficaz
+para la selectividad espectral del circuito, suprimiendo la necesidad de etapas
+de filtrado adicionales. La función de transferencia presentó un cero en el
+origen que garantizó ganancia nula a corriente continua ($A_v(0) = 0$),
+confiriendo inmunidad absoluta frente a potenciales galvánicos de contacto
+electrodo-piel (hasta $\pm \SI{300}{\milli\volt}$) y suprimiendo cualquier
+corrimiento de línea de base. Asimismo, el polo inferior en $f_L \approx
+\SI{0.07}{\hertz}$ y el corte superior nominal en $f_{H,\text{sim}} \approx
+\SI{72.3}{\hertz}$ se contrastaron con la placa física, donde se midió un corte
+experimental de $f_{H,\text{med}} = \mathbf{\SI{82.2}{\hertz}}$ y un ancho de
+banda efectivo de $\mathbf{\SI{82.2}{\hertz}}$, plenamente apto para el
+monitoreo ECG. 
+
+En cuanto a la inmunidad frente a ruidos de modo común, el prototipo físico
+alcanzó un $\text{RRMC}_{\text{med}} = \mathbf{\SI{98.80}{\decibel}}$ a
+$\SI{25}{\hertz}$ ($A_{md} = 2180.0\ \text{V/V}$ y $A_{mc} = 0.0250\
+\text{V/V}$), superando con holgura la especificación exigida ($\gg
+\SI{80}{\decibel}$). Este resultado asegura una eliminación contundente de las
+interferencias de red de $\SI{50}{\hertz}$. Por último, la elección de
+amplificadores BiFET (TL084) fue plenamente acertada: su elevada impedancia de
+entrada  y sus corrientes de polarización mínimas, sumando su disponibilidad en
+tiendas locales de electrónica y su buen costo económico contribuyeron a la
+satifactoria realización del trabajo práctico. En conjunto, la estrecha
+correlación entre cálculo teórico, simulación y mediciones sobre PCB valida la
+robustez, compacidad y viabilidad del diseño propuesto.

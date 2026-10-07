@@ -1,0 +1,39 @@
+\begin{tikzpicture}
+  \pgfplotsset{
+    scale only axis,
+    xmin=0, xmax=1.0,
+  }
+  \begin{axis}[
+    width=0.80\textwidth,
+    height=5.5cm,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!25},
+    major grid style={line width=.2pt, draw=gray!45},
+    xlabel={Tiempo [\unit{\second}]},
+    ylabel={Biopotencial de entrada $V_i$ [\unit{\milli\volt}]},
+    ylabel style={color=red!80!black},
+    yticklabel style={color=red!80!black},
+    ymin=-2.0, ymax=8.4,
+    ytick={-2, 0, 2, 4, 6, 8},
+    axis y line*=left,
+  ]
+    \addplot[thick, dashed, color=red!80!black] table [x=time, y expr=\thisrow{vin}*1000] {sim/sim_plot-fuente_ecg.txt};
+  \end{axis}
+  \begin{axis}[
+    width=0.80\textwidth,
+    height=5.5cm,
+    ylabel={Tensión de salida $V_o$ [\unit{\volt}]},
+    ylabel style={color=blue!80!black},
+    yticklabel style={color=blue!80!black},
+    ymin=-1.0, ymax=4.2,
+    ytick={-1, 0, 1, 2, 3, 4},
+    axis y line*=right,
+    axis x line=none,
+    legend style={at={(0.98,0.95)}, anchor=north east, font=\footnotesize}
+  ]
+    \addlegendimage{thick, dashed, color=red!80!black}
+    \addlegendentry{Entrada $V_i$ [\unit{\milli\volt}]}
+    \addplot[thick, color=blue!85!black] table [x=time, y=vout] {sim/sim_plot-fuente_ecg.txt};
+    \addlegendentry{Salida $V_o$ [\unit{\volt}]}
+  \end{axis}
+\end{tikzpicture}

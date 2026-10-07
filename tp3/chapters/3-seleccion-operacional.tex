@@ -1,0 +1,55 @@
+\chapter{Selección del Amplificador Operacional}
+\label{sec:seleccion_ao}
+
+\section{Comparativa entre Tecnologías de Amplificadores Operacionales}
+
+Una vez completado el desarrollo teórico y determinado el dimensionamiento numérico de los componentes pasivos ($R$ y $C$) del amplificador de instrumentación con filtrado activo integrado, corresponde seleccionar el dispositivo semiconductor adecuado para implementar las etapas operacionales ($U_1$ a $U_4$).
+
+Las características exigidas por la aplicación biomédica —impedancia de entrada en el rango de los teraohms para no cargar la interfaz cutánea, corrientes de polarización de apenas decenas de picoamperes para evitar la polarización galvánica de los electrodos y anulación del offset continuo por diseño mediante el polo inferior adoptado— imponen restricciones en la elección tecnológica. Con este fin, se realiza una evaluación comparativa entre dos familias de amplificadores operacionales disponibles en el laboratorio:
+\begin{itemize}
+  \item OP07: Amplificador operacional bipolar (BJT) de ultra-baja tensión de offset y alta estabilidad térmica.
+  \item TL081 / TL084: Amplificador operacional con tecnología BiFET, compuesto por un par diferencial de entrada
+  con transistores de efecto de campo de unión (JFET) y etapas intermedias y de salida bipolares.
+\end{itemize}
+
+En la Tabla~\ref{tab:comparativa_ao} se sintetizan los principales parámetros eléctricos de ambos dispositivos
+extraídos de sus respectivas hojas de datos.
+
+\begin{table}[!ht]
+  \centering
+  \caption{Comparativa de especificaciones entre OP07 y TL081/TL084.}
+  \label{tab:comparativa_ao}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|l|c|c|l|}
+    \hline
+    Parámetro & OP07 (BJT) & TL081 (BiFET) & Relevancia en biopotenciales \\ \hline
+    Tecnología de entrada & Bipolar & JFET & Determina la impedancia y corriente de fuga \\ \hline
+    Impedancia de entrada ($Z_i$) & $\SI{33}{\mega\ohm}$ & $\sim \SI{1}{\tera\ohm}$ ($10^{12}\ \Omega$) & Crítico: no cargar la interfaz piel-electrodo \\ \hline
+    Corriente de polarización ($I_B$) & $\SI{2}{\nano\ampere}$ & $\SI{30}{\pico\ampere}$ & Crítico: evita polarización galvánica \\ \hline
+    Tensión de offset ($V_{OS}$) & $\SI{30}{\micro\volt}$ & $\SI{3}{\milli\volt}$ & Secundario al utilizar acoplamiento en CA \\ \hline
+    Rechazo de Modo Común (RRMC) & $\SI{120}{\decibel}$ & $\SI{86}{\decibel}$ & Ambos cumplen el límite de $\SI{80}{\decibel}$ \\ \hline
+    Velocidad de respuesta (Slew Rate) & $\SI{0.3}{\volt/\micro\second}$ & $\SI{13}{\volt/\micro\second}$ & Sobrado para señales cardíacas ($< \SI{1}{\kilo\hertz}$) \\ \hline
+    Costo y disponibilidad & Elevado & Económico / Estándar & Factor favorable a la familia TL08x \\ \hline
+  \end{tabular}%
+  }
+\end{table}
+
+A partir del análisis de la Tabla~\ref{tab:comparativa_ao}, se selecciona la familia TL08x, específicamente en su
+versión de cuatro amplificadores por encapsulado (TL084), basándose en los siguientes argumentos:
+
+\begin{enumerate}
+  \item Impedancia de entrada ultra-elevada: La presencia de transistores JFET en los terminales de entrada proporciona
+  una impedancia de entrada del orden de $\SI{1}{\tera\ohm}$, superando con holgura el umbral de diseño de
+  $\SI{10}{\mega\ohm}$. Esto garantiza que la atenuación producida por el divisor resistivo formado por la impedancia
+  de la piel y la entrada del amplificador sea prácticamente nula.
+  \item Corriente de polarización despreciable: Una corriente de polarización de tan solo $\SI{30}{\pico\ampere}$
+  evita la acumulación de carga y la electrolisis en la interfaz electrodo-electrolito, preservando la estabilidad del
+  potencial electroquímico durante mediciones prolongadas.
+  \item Cancelación del impacto de la tensión de offset: Si bien el TL081 presenta una tensión de offset significativamente
+  mayor que el OP07 ($\SI{3}{\milli\volt}$ frente a $\SI{30}{\micro\volt}$), esta no representa un inconveniente en el
+  diseño adoptado. Dado que la etapa restadora ($U_3$) cuenta con los capacitores de bloqueo en serie ($C_3 = \SI{2.2}{\micro\farad}$) dimensionados en el capítulo anterior, la ganancia en continua de todo el sistema se anula por completo ($A_{v}(0) = 0$), bloqueando cualquier propagación de offset hacia la salida.
+  \item Ventajas del encapsulado cuádruple (TL084): Al integrar los cuatro operacionales ($U_1$, $U_2$, $U_3$ y $U_4$) en
+  el mismo sustrato semiconductor, se logra un acoplamiento térmico óptimo. Las derivas provocadas por gradientes térmicos
+  ambientales afectan por igual a los amplificadores de entrada, cancelándose mutuamente por simetría diferencial.
+\end{enumerate}
+

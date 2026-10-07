@@ -1,0 +1,337 @@
+\chapter{Desarrollo Teórico y Diseño del Circuito}
+\label{sec:desarrollo_diseno}
+
+\section{Amplificador de Instrumentación}
+
+La arquitectura conceptual del amplificador de instrumentación de tres amplificadores operacionales (Figura~\ref{crkt:amp_inst_teorico}) se compone de dos etapas funcionales bien definidas: en primer lugar, una etapa de entrada diferencial con alta impedancia implementada mediante dos amplificadores operacionales ($U_1$ y $U_2$); en segundo lugar, una etapa restadora de precisión encargada de eliminar las señales de modo común, constituida por un tercer operacional ($U_3$).
+
+\begin{figure}[!ht]
+  \centering
+    \input{figures/crkt_amp_inst_impedancias.tex}%
+  \caption{Diagrama del circuito amplificador de instrumentación.}
+  \label{crkt:amp_inst_teorico}
+\end{figure}
+
+El análisis del circuito se puede realizar a partir del estudio de cada etapa,
+asumiendo amplificadores operacionales ideales en régimen lineal con
+cortocircuito virtual ($v_- = v_+$) e impedancias de entrada infinitas.
+
+En primer lugar, se analiza la segunda etapa correspondiente al restador diferencial de precisión ($U_3$) con sus impedancias balanceadas $Z_3$ y $Z_4$. Dado que la corriente de entrada al pin no inversor del operacional es nula, el potencial $v_{+3}$ queda determinado por el divisor de tensión pasivo conectado a la salida intermedia $e_{o2}$:
+\begin{equation}
+  v_{+3} = e_{o2} \cdot \frac{Z_4}{Z_3 + Z_4}
+  \label{eq:paso1_vplus}
+\end{equation}
+
+Por otro lado, planteando la ley de corrientes de Kirchhoff en el nodo inversor $v_{-3}$ y considerando que tampoco entra corriente al pin inversor del amplificador:
+\begin{equation*}
+  \frac{e_{o1} - v_{-3}}{Z_3} + \frac{e_o - v_{-3}}{Z_4} = 0
+\end{equation*}
+Separando los términos para despejar la tensión de salida $e_o$:
+
+\begin{equation*}
+  \frac{e_o}{Z_4} = \frac{v_{-3}}{Z_4} + \frac{v_{-3}}{Z_3} - \frac{e_{o1}}{Z_3} = v_{-3} \left(\frac{1}{Z_4} + \frac{1}{Z_3}\right) - \frac{e_{o1}}{Z_3}
+\end{equation*}
+Multiplicando toda la igualdad por $Z_4$:
+\begin{equation*}
+  e_o = v_{-3} \left(1 + \frac{Z_4}{Z_3}\right) - e_{o1} \frac{Z_4}{Z_3}
+\end{equation*}
+
+\begin{equation*}
+  e_o = v_{-3} \cdot \frac{Z_3 + Z_4}{Z_3} - e_{o1} \cdot \frac{Z_4}{Z_3}
+\end{equation*}
+
+Considerando la condición de cortocircuito virtual ($v_{-3} = v_{+3}$) y sustituyendo la tensión $v_{+3}$ obtenida previamente~\eqref{eq:paso1_vplus}:
+\begin{equation*}
+  e_o = \left(e_{o2} \cdot \frac{Z_4}{Z_3 + Z_4}\right) \cdot \left(\frac{Z_3 + Z_4}{Z_3}\right) - e_{o1} \cdot \frac{Z_4}{Z_3}
+\end{equation*}
+\begin{equation*}
+  e_o = e_{o2} \cdot \frac{Z_4}{Z_3} - e_{o1} \cdot \frac{Z_4}{Z_3}
+\end{equation*}
+\begin{equation}
+  e_o = (e_{o2} - e_{o1}) \cdot \frac{Z_4}{Z_3}
+  \label{eq:eo_restador}
+\end{equation}
+
+Por su parte, en la primera etapa, las señales de entrada $e_1$ y $e_2$ ingresan
+directamente a los terminales no inversores de los operacionales $U_1$ y $U_2$.
+Por cortocircuito virtual ($v_{-1} = e_1$ y $v_{-2} = e_2$), sobre la impedancia
+central $Z_1$ cae la diferencia $(e_1 - e_2)$, circulando una
+corriente $i = (e_1 - e_2)/Z_1$ que fluye íntegramente a través de las ramas de
+realimentación $Z_2$.
+
+Para la componente diferencial, por simetría el punto medio de $Z_1$ se encuentra a potencial nulo (masa virtual de señal). Cada mitad del circuito queda así desacoplada con una impedancia equivalente $Z_1/2$ a masa, operando como una etapa no inversora con ganancia $1 + \frac{Z_2}{Z_1/2} = 1 + 2\frac{Z_2}{Z_1}$. Se obtienen así las expresiones desacopladas de las salidas intermedias:
+\begin{equation*}
+  e_{o2} = e_2 \cdot \left(1 + 2 \frac{Z_2}{Z_1}\right), \qquad e_{o1} = e_1 \cdot \left(1 + 2 \frac{Z_2}{Z_1}\right)
+\end{equation*}
+Restando miembro a miembro ambas salidas intermedias:
+\begin{equation}
+  e_{o2} - e_{o1} = (e_2 - e_1) \cdot \left(1 + 2 \frac{Z_2}{Z_1}\right)
+  \label{eq:diff_salidas_etapa1}
+\end{equation}
+
+Luego, reemplazando la diferencia entre las salidas intermedias~\eqref{eq:diff_salidas_etapa1} en la ecuación del restador~\eqref{eq:eo_restador}, se obtiene la tensión de salida total del sistema:
+\begin{equation*}
+  e_o = (e_2 - e_1) \cdot \left(1 + 2 \frac{Z_2}{Z_1}\right) \cdot \frac{Z_4}{Z_3}
+\end{equation*}
+Dividiendo ambos miembros por la diferencia $(e_2 - e_1)$, se obtiene la ganancia diferencial de tensión del amplificador de instrumentación:
+\begin{equation*}
+  \frac{e_o}{e_2 - e_1} = \left(1 + 2 \frac{Z_2}{Z_1}\right) \cdot \frac{Z_4}{Z_3}
+\end{equation*}
+
+\section{Filtrado Pasabanda Activo}
+
+El filtrado pasa banda suele implementarse como una etapa pasiva o activa independiente
+a la salida del restador. No obstante, también se puede integrar la respuesta frecuencial
+directamente en las redes de realimentación y entrada de la etapa restadora ($U_3$), según se ilustra en el circuito de
+la Figura~\ref{crkt:sustitucion_z}.
+
+\begin{figure}[!ht]
+  \centering
+  \resizebox{0.75\textwidth}{!}{%
+    \input{figures/crkt_sustitucion_filtro.tex}%
+    }
+  \caption{Topología del amplificador de instrumentación con las impedancias actualizadas para filtrado pasabanda activo.}
+  \label{crkt:sustitucion_z}
+\end{figure}
+
+Para ello se efectúan las siguientes sustituciones de componentes en el dominio de Laplace:
+\begin{itemize}
+  \item $Z_1 = R_1$: Resistencia que calibra la ganancia diferencial de entrada.
+  \item $Z_2 = R_2$: Resistencias de simetría en los lazos de realimentación de $U_1$ y $U_2$.
+  \item $Z_3(s)$: Rama de entrada al restador, compuesta por la conexión serie de un capacitor $C_3$ y un resistor $R_3$:
+  \begin{equation}
+    Z_3(s) = R_3 + \frac{1}{s C_3} = \frac{s R_3 C_3 + 1}{s C_3}
+    \label{eq:z3_s}
+  \end{equation}
+  \item $Z_4(s)$: Rama de realimentación e impedancia a masa, formada por la conexión en paralelo de un resistor $R_4$ y
+  un capacitor $C_4$:
+  \begin{equation}
+    Z_4(s) = R_4 \parallel \frac{1}{s C_4} = \frac{R_4}{s R_4 C_4 + 1}
+    \label{eq:z4_s}
+  \end{equation}
+\end{itemize}
+
+Para preservar el balance del restador y garantizar la máxima atenuación de modo común, las dos ramas de entrada al
+operacional $U_3$ deben ser rigurosamente idénticas ($Z_3 = Z'_3$ y $Z_4 = Z'_4$). Bajo esta condición de puente balanceado
+y aplicando en el dominio transformado de Laplace la relación del restador deducida en~\eqref{eq:eo_restador}, la salida de
+la etapa $U_3$ viene dada por:
+\begin{equation}
+  e_{o3}(s) = (e_{o2}(s) - e_{o1}(s)) \frac{Z_4(s)}{Z_3(s)}
+  \label{eq:salida_u3}
+\end{equation}
+
+Dividiendo las ecuaciones de impedancia~\eqref{eq:z4_s} y~\eqref{eq:z3_s}:
+\begin{equation*}
+  \frac{Z_4(s)}{Z_3(s)} = \frac{\dfrac{R_4}{s R_4 C_4 + 1}}{\dfrac{s R_3 C_3 + 1}{s C_3}} = \frac{s R_4 C_3}{(s R_3 C_3 + 1)(s R_4 C_4 + 1)}
+\end{equation*}
+
+Sustituyendo la diferencia de la primera etapa~\eqref{eq:diff_salidas_etapa1} en~\eqref{eq:salida_u3}, se arriba a la
+función de transferencia analítica completa de las etapas 1 y 2:
+\begin{equation}
+  F(s) = \frac{e_{o3}(s)}{e_2(s) - e_1(s)} = \left(1 + 2 \frac{R_2}{R_1}\right) \frac{s R_4 C_3}{(s R_3 C_3 + 1)(s R_4 C_4 + 1)}
+  \label{eq:ft_completa}
+\end{equation}
+
+\section{Análisis en Frecuencia y Diagrama de Bode}
+
+La función de transferencia $F(s)$ formulada en la ecuación~\eqref{eq:ft_completa} revela de forma directa las singularidades
+que moldean la respuesta en frecuencia:
+\begin{enumerate}
+  \item Cero en el origen ($s = 0$): Proporcionado por el término $s R_4 C_3$ en el numerador, introduce una asíntota de
+  crecimiento de $+20\ \text{dB/década}$ desde frecuencias nulas. Esto asegura que la ganancia a corriente continua sea
+  nula ($F(0) = 0$), eliminando por completo cualquier tensión de offset de entrada o potencial de contacto electrodo-piel.
+  \item Polo inferior ($p_3$): Determinado por la constante de tiempo de la red serie de entrada:
+  \begin{equation*}
+    p_3 = \frac{1}{R_3 C_3} \implies f_L \approx \frac{p_3}{2 \pi} = \frac{1}{2 \pi R_3 C_3}
+  \end{equation*}
+  A partir de $f_L$, la respuesta cambia de $+20\ \text{dB/década}$ a pendiente horizontal ($0\ \text{dB/década}$),
+  dando inicio a la banda pasante.
+  \item Polo superior ($p_4$): Establecido por la constante de tiempo de la red en paralelo de realimentación:
+  \begin{equation*}
+    p_4 = \frac{1}{R_4 C_4} \implies f_H \approx \frac{p_4}{2 \pi} = \frac{1}{2 \pi R_4 C_4}
+  \end{equation*}
+  A partir de $f_H$, la respuesta cae con una pendiente asintótica de $-20\ \text{dB/década}$, atenuando interferencias de
+  alta frecuencia.
+\end{enumerate}
+
+En la Figura~\ref{plot:bode_teorico} se ilustra el comportamiento frecuencial resultante, integrando el trazado asintótico ideal con la curva de respuesta real suavizada para la banda de paso delimitada entre $f_L$ y $f_H$.
+
+\begin{figure}[!ht]
+  \centering
+  \resizebox{0.82\textwidth}{!}{%
+    \input{figures/plot_bode.tex}%
+  }
+  \caption{Respuesta en frecuencia del circuito pasabanda.}
+  \label{plot:bode_teorico}
+\end{figure}
+
+La función de transferencia~\eqref{eq:ft_completa} se puede reescribir en su forma canónica de Bode agrupando los factores del numerador:
+\begin{equation*}
+  F(s) = \frac{K \cdot s}{\left(1 + \dfrac{s}{p_3}\right)\left(1 + \dfrac{s}{p_4}\right)}
+\end{equation*}
+donde los polos están dados por $p_3 = \dfrac{1}{R_3 C_3}$ y $p_4 = \dfrac{1}{R_4 C_4}$, y la constante de escala del numerador $K$ se define analíticamente como:
+\begin{equation}
+    K = \left(1 + 2 \frac{R_2}{R_1}\right) (R_3 C_3) \quad \mbox{(considerando $R_4 = R_3$)}
+    \label{eq:definicion_k}
+\end{equation}
+
+
+Para analizar el efecto de esta constante K, se evalúa la función de
+transferencia en el rango de frecuencias intermedias que delimitan la
+banda de paso ($p_3 \ll \omega \ll p_4$):
+
+\begin{itemize}
+  \item En el polo inferior, dado que $\omega \gg p_3$, se cumple: $1 + \dfrac{s}{p_3} \approx \dfrac{s}{p_3}$.
+  \item En el polo superior, dado que $\omega \ll p_4$, se cumple: $1 + \dfrac{s}{p_4} \approx 1$.
+\end{itemize}
+Sustituyendo ambas aproximaciones en la expresión canónica de $F(s)$:
+\begin{equation*}
+  F(s) \approx \frac{K \cdot s}{\left(\dfrac{s}{p_3}\right) \cdot 1} = K \cdot p_3
+\end{equation*}
+finalmente,
+\begin{equation*}
+  K \cdot p_3 = \left(1 + 2 \frac{R_2}{R_1}\right) R_3 C_3 \cdot \frac{1}{R_3
+    C_3} =
+\end{equation*}
+\begin{equation}
+    = 1 + 2 \frac{R_2}{R_1} = K_{1-2}
+    \label{eq:k_final}
+\end{equation}
+
+Por lo tanto, se puede observar que la amplificación intermedia depende de las resistencias de
+la etapa diferencial.
+
+\section{Determinación de componentes}
+
+La selección de capacitores comerciales es más restringida que la de resistores. Por
+este motivo, se comienza fijando en primer lugar los valores comerciales de los
+capacitores y, en base a ellos y a las frecuencias de corte, se determinan los
+valores resistivos del circuito:
+
+\begin{enumerate}
+  \item Frecuencias de corte de proyecto:
+
+    A partir de las exigencias de diseño para eliminar derivas de baja frecuencia
+    y ruidos electromagnéticos de alta frecuencia, se establecen las
+    frecuencias de corte objetivo:
+  \begin{align*}
+    f_L &\approx \SI{0.07}{\hertz} \implies p_3 = 2\pi f_L \approx \SI{0.4545}{\radian/\second} \\
+    f_H &\approx \SI{72}{\hertz} \implies p_4 = 2\pi f_H \approx \SI{454.55}{\radian/\second}
+  \end{align*}
+
+  \item Selección inicial de capacitores comerciales ($C_4$ y $C_3$):
+  \begin{itemize}
+    \item Para la fijación del polo superior ($p_4$), se selecciona un capacitor comercial de poliéster de:
+    \begin{equation*}
+      C_4 = \SI{2.2}{\nano\farad}
+    \end{equation*}
+    \item Para la fijación del polo inferior ($p_3$):
+    \begin{equation*}
+      C_3 = \SI{2.2}{\micro\farad}
+    \end{equation*}
+  \end{itemize}
+
+  \item Determinación de las resistencias del restador y filtrado ($R_4$ y $R_3$):
+  Con los valores de capacidad ya adoptados, se despejan analíticamente las resistencias requeridas:
+  \begin{itemize}
+    \item A partir de la constante de tiempo del polo superior $p_4 = 1 / (R_4 C_4)$, se calcula $R_4$:
+    \begin{equation*}
+      R_4 = \frac{1}{p_4 C_4} = \frac{1}{454.55 \times 2.2 \times 10^{-9}} \approx \SI{1.000}{\mega\ohm}
+    \end{equation*}
+    Se adopta el valor comercial normalizado de  $\SI{1}{\mega\ohm}$ al $1\%$.
+    \item Para garantizar la simetría y el balance óptimo del puente restador de $U_3$ (requisito esencial para maximizar el RRMC de la segunda etapa), se impone por diseño la igualdad de resistencias $R_3 = R_4$:
+    \begin{equation*}
+      R_3 = \SI{1}{\mega\ohm}\ (1\%)
+    \end{equation*}
+    Verificando con el capacitor $C_3 = \SI{2.2}{\micro\farad}$ previamente seleccionado, la frecuencia de corte inferior resultante es:
+    \begin{equation*}
+      f_L = \frac{1}{2\pi R_3 C_3} = \frac{1}{2\pi \times 10^6 \times 2.2 \times 10^{-6}} \approx \SI{0.0723}{\hertz}
+    \end{equation*}
+    la cual satisface el requerimiento de $\SI{0.07}{\hertz}$.
+  \end{itemize}
+
+  \item Ganancia diferencial de primera etapa ($R_1$ y $R_2$): Fijando los resistores de realimentación de los buffers de entrada en un valor
+        de $R_2 = \SI{100}{\kilo\ohm}$ al $1\%$ y con la constante de tiempo del
+        polo inferior fijada por $R_3 = \SI{1}{\mega\ohm}$ y $C_3 =
+        \SI{2.2}{\micro\farad}$ ($p_3 \approx \SI{0.4545}{\radian/\second}$), se
+        utiliza la expresión deducida en~\eqref{eq:k_final} para obtener la
+        ganancia provista por la etapa de entrada
+        ($K_{1-2} = 1 + 2 R_2/R_1$).
+
+  Adoptando para la resistencia de ganancia el valor comercial normalizado de $R_1 = \SI{4.7}{\kilo\ohm}$
+  \begin{equation*}
+    K_{1-2} = 1 + 2 \frac{R_2}{R_1} = 1 + 2 \frac{\SI{100}{\kilo\ohm}}{\SI{4.7}{\kilo\ohm}} \approx 43.55\ \text{V/V} \equiv \SI{32.78}{\decibel}
+  \end{equation*}
+\end{enumerate}
+
+\section{Etapa de Salida y Ajuste de Ganancia Global}
+
+La especificación de diseño exige una ganancia diferencial global mínima de
+$A_{\text{total}} \ge \SI{60}{\decibel}$ ($1000\ \text{V/V}$). Por lo tanto, se
+requiere una etapa final para obtener esta amplificación que falta. Para ello,
+se emplea un amplificador en configuración no inversor, cuya ganancia está dada
+por:
+\begin{equation*}
+  A_{v4} = 1 + \frac{R_8}{R_9}
+\end{equation*}
+
+Conociendo que las etapas de entrada y filtrado aportan una ganancia intermedia
+de $K_{1-2} \approx 43.55\ \text{V/V}$ ($\SI{32.78}{\decibel}$), la ganancia
+mínima que debe proporcionar la etapa final de amplificación adicional es:
+
+\begin{equation*}
+  A_{v4,\text{mín}} = \frac{A_{\text{total}}}{K_{1-2}} \ge \frac{1000\ \text{V/V}}{43.55\ \text{V/V}} \approx 22.96\ \text{V/V} \equiv \SI{27.22}{\decibel}
+\end{equation*}
+
+Se seleccionan $R_8 = \SI{220}{\kilo\ohm}$ y $R_9 = \SI{7}{\kilo\ohm}$:
+
+\begin{equation*}
+  A_{v4} = 1 + \frac{\SI{220}{\kilo\ohm}}{\SI{7}{\kilo\ohm}} = 1 + 31.43 = 32.43\ \text{V/V} \equiv \SI{30.22}{\decibel}
+\end{equation*}
+
+Así, la ganancia global nominal del circuito en la banda de paso intermedia resulta:
+\begin{equation*}
+  A_{\text{total}} = K_{1-2} \cdot A_{v4} = 43.55 \times 32.43 \approx 1412.3\ \text{V/V} \equiv \SI{63.0}{\decibel}
+\end{equation*}
+
+De este modo, una señal cardíaca de entrada superficial de $\SI{1}{\milli\volt\text{pp}}$ se amplifica hasta alcanzar más de $\SI{1}{\volt\text{pp}}$ en el terminal $V_o$, nivel ideal para su adquisición directa y procesamiento digital.
+
+\section{Esquema Eléctrico Completo del Amplificador}
+
+En la Figura~\ref{crkt:amplificador_completo} se presenta el esquema eléctrico completo del amplificador de
+instrumentación con filtrado pasabanda y etapa de ajuste de ganancia.
+\begin{figure}[!ht]
+  \centering
+  \resizebox{0.98\textwidth}{!}{%
+    \input{figures/crkt_completo.tex}%
+  }
+  \caption{Esquema eléctrico completo del amplificador de instrumentación.}
+  \label{crkt:amplificador_completo}
+\end{figure}
+
+En la Tabla~\ref{tab:componentes_finales} se listan todos los componentes del diseño con sus respectivas tolerancias y
+funciones dentro del sistema.
+
+\begin{table}[!ht]
+  \centering
+  \caption{Listado y especificación de componentes del circuito amplificador de instrumentación.}
+  \label{tab:componentes_finales}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|l|c|l|}
+    \hline
+    Componente & Valor nominal & Función en el circuito \\ \hline
+    $R_1$ & $\SI{4.7}{\kilo\ohm}$ & Fijación de la ganancia diferencial de la etapa 1 \\ \hline
+    $R_2$ ($\times 2$) & $\SI{100}{\kilo\ohm}$ & Simetría y ganancia del lazo de entrada \\ \hline
+    $R_3$ ($\times 2$) & $\SI{1}{\mega\ohm}$ & Determinación del polo inferior y entrada al restador \\ \hline
+    $R_4$ ($\times 2$) & $\SI{1}{\mega\ohm}$ & Determinación del polo superior y balance del restador \\ \hline
+    $R_8$ & $\SI{220}{\kilo\ohm}$ & Realimentación de la etapa no inversora de salida \\ \hline
+    $R_9$ & $\SI{7}{\kilo\ohm}$ & Resistor de fijación y ajuste de ganancia en $U_4$ \\ \hline
+    $R_{10}$ ($R_L$) & $\SI{10}{\kilo\ohm}$ & Resistencia de carga nominal a tierra \\ \hline
+    $C_3$ ($\times 2$) & $\SI{2.2}{\micro\farad}$ & Bloqueo galvánico de CC y fijación de $f_L$ \\ \hline
+    $C_4$ ($\times 2$) & $\SI{2.2}{\nano\farad}$ & Filtro antialiasing activo y fijación de $f_H$ \\ \hline
+    $U_1 - U_4$ & TL084 & Dispositivos activos de procesamiento analógico \\ \hline
+  \end{tabular}%
+  }
+\end{table}
+
+La realización física del circuito sobre placa de circuito impreso (PCB) para su ensayo en banco de trabajo se exhibe en el Capítulo~\ref{sec:simulacion_mediciones} (Figura~\ref{fig:crkt_implementado}), donde se analizan en detalle las mediciones experimentales y su contraste con los valores calculados y simulados.
