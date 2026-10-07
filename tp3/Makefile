@@ -5,10 +5,7 @@ OUTPUT_NAME := $(MATERIA)_$(TP)
 SRC := main.tex
 
 all:
-	latexmk -pdf $(SRC) -shell-escape
-	cp main.pdf $(OUTPUT_NAME).pdf
+	latexmk -shell-escape -pdf -jobname=$(OUTPUT_NAME) $(SRC)
 
 clean:
-	latexmk -CA $(SRC)
-	rm -f main.pdf
-	rm -f *-figure*.*
+	latexmk -CA -jobname=$(OUTPUT_NAME) $(SRC)

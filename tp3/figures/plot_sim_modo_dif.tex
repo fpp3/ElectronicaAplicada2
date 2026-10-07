@@ -18,7 +18,7 @@
     ytick={-30, -20, -10, 0, 10, 20, 30, 40},
     axis y line*=left,
   ]
-    \addplot[thick, dashed, color=red!80!black] table [x expr=\thisrow{time}*1000, y expr=\thisrow{vin}*1000] {sim/sim_plot-ganancia_modo_dif.txt};
+    \addplot[thick, dashed, color=red!80!black] table [x expr=\thisrow{time}*1000, y expr=\thisrow{vin}*1000] {sources/sim/sim_plot-ganancia_modo_dif.txt};
   \end{axis}
   \begin{axis}[
     width=0.80\textwidth,
@@ -34,7 +34,7 @@
   ]
     \addlegendimage{thick, dashed, color=red!80!black}
     \addlegendentry{Entrada $v_d$ [\unit{\milli\volt}]}
-    \addplot[thick, color=blue!85!black] table [x expr=\thisrow{time}*1000, y=vout] {sim/sim_plot-ganancia_modo_dif.txt};
+    \addplot[thick, color=blue!85!black] table [x expr=\thisrow{time}*1000, y=vout] {sources/sim/sim_plot-ganancia_modo_dif.txt};
     \addlegendentry{Salida $V_o$ [\unit{\volt}]}
   \end{axis}
 \end{tikzpicture}

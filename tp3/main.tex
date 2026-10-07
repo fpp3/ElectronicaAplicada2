@@ -1,14 +1,10 @@
-\documentclass[]{informeutn}
+\documentclass[chaptersright]{informeutn}
 
 % Paquetes adicionales requeridos
-\usepackage{siunitx}
 \usepackage{csquotes}
-\usepackage[backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
 \addbibresource{fuentes.bib}
-\usepackage{subcaption}
-\usepackage{listings}
 \usepackage{pdflscape}
-\usepackage{pdfpages}
+\usepackage{svg}
 \usepackage{placeins}
 
 % Estilo de listings para código o netlists de simulación
@@ -24,7 +20,7 @@
 % Datos de la carátula
 \materia{Electrónica Aplicada 2}
 \titulo{Trabajo Práctico 3}
-\subtitulo{Amplificadores de Instrumentación y Respuesta en Frecuencia}
+\subtitulo{Amplificadores de Instrumentación}
 \comision{4R2}
 \autores{
     Gil, Ignacio - 401891\\
@@ -44,14 +40,14 @@
 % Capítulos del informe
 \input{chapters/1-introduccion.tex}
 \input{chapters/2-desarrollo-diseno.tex}
-\input{chapters/4-simulacion-mediciones.tex}
-\input{chapters/5-conclusiones.tex}
+\input{chapters/3-simulacion-mediciones.tex}
+\input{chapters/4-conclusiones.tex}
 
 % Bibliografía
 \nocite{*}
 \printbibliography[heading=bibnumbered, title={Fuentes}]
 
 % Anexos
-\input{chapters/6-anexos.tex}
+\input{chapters/5-anexos.tex}
 
 \end{document}

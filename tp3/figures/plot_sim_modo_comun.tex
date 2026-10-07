@@ -18,7 +18,7 @@
     ytick={-1, -0.5, 0, 0.5, 1, 1.5},
     axis y line*=left,
   ]
-    \addplot[thick, dashed, color=red!80!black] table [x expr=\thisrow{time}*1000, y=vin] {sim/sim_plot-ganancia_modo_com.txt};
+    \addplot[thick, dashed, color=red!80!black] table [x expr=\thisrow{time}*1000, y=vin] {sources/sim/sim_plot-ganancia_modo_com.txt};
   \end{axis}
   \begin{axis}[
     width=0.80\textwidth,
@@ -34,7 +34,7 @@
   ]
     \addlegendimage{thick, dashed, color=red!80!black}
     \addlegendentry{Entrada $v_c$ [\unit{\volt}]}
-    \addplot[thick, color=blue!85!black] table [x expr=\thisrow{time}*1000, y expr=\thisrow{vout}*1000] {sim/sim_plot-ganancia_modo_com.txt};
+    \addplot[thick, color=blue!85!black] table [x expr=\thisrow{time}*1000, y expr=\thisrow{vout}*1000] {sources/sim/sim_plot-ganancia_modo_com.txt};
     \addlegendentry{Salida $v_{oc}$ [\unit{\milli\volt}]}
   \end{axis}
 \end{tikzpicture}

@@ -13,7 +13,7 @@
     legend style={at={(0.98,0.95)}, anchor=north east, font=\footnotesize}
   ]
     % Curva simulada
-    \addplot[very thick, color=blue!85!black] table [x=freq, y=gain_db] {sim/sim_plot-rta_frec.txt};
+    \addplot[very thick, color=blue!85!black] table [x=freq, y=gain_db] {sources/sim/sim_plot-rta_frec.txt};
     \addlegendentry{Respuesta simulada $|A_v(f)|$}
 
     % Linea de referencia -3 dB (60.2 dB)
