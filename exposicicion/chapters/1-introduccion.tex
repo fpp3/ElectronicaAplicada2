@@ -93,33 +93,12 @@ cada compensador.
     Polo $f_1$                                       & \qty{12}{\kilo\hertz} \\
     Polo $f_2$                                       & \qty{70}{\kilo\hertz} \\
     Polo $f_3$                                       & \qty{140}{\kilo\hertz} \\
-    Margen de fase de diseño $MF$                    & \qty{45}{\degree} \\
     Compensador de retardo $f_d$                     & \qty{1.2}{\kilo\hertz} \\
-    Capacitor del compensador de retardo (elegido)   & \qty{100}{\nano\farad} \\
     Red atraso-adelanto, polo $f_p$                  & \qty{220}{\kilo\hertz} \\
     Red atraso-adelanto, cero $f_z$                  & \qty{1.1}{\mega\hertz} \\
-    Capacitor de la red atraso-adelanto (elegido)    & \qty{100}{\pico\farad} \\
     \hline
   \end{tabular}
   \caption{Parámetros de diseño asignados al grupo y valores elegidos.}
   \label{tab:parametros}
 \end{table}
 
-\section{Organización del informe}
-
-El informe se divide en dos partes, una por consigna. En la primera, el Capítulo~\ref{chap:diseno} plantea
-la topología del filtro, deduce su función de transferencia y obtiene las ecuaciones de diseño comunes a
-ambos casos; los Capítulos~\ref{chap:q025} y~\ref{chap:q075} analizan cada filtro por separado (función de
-transferencia numérica, raíces, amortiguamiento y respuesta temporal), y el Capítulo~\ref{chap:comparacion}
-compara ambos diseños y discute las ventajas de cada tipo de amortiguamiento.
-
-% TODO: ajustar las etiquetas de los capítulos de la Consigna 2 a las que usa cada archivo.
-En la segunda parte, el Capítulo~\ref{chap:planta} obtiene el diagrama de Bode de la planta sin compensar y
-mide sobre él el ancho de banda y el margen de ganancia; el Capítulo~\ref{chap:retardo} diseña el
-compensador de retardo y el Capítulo~\ref{chap:atraso-adelanto} la red de atraso-adelanto, repitiendo en cada
-caso el análisis en frecuencia; y el Capítulo~\ref{chap:comparacion-compensadores} contrasta los resultados
-de ambas técnicas de compensación.
-
-Finalmente, el Capítulo~\ref{chap:conclusiones} presenta las conclusiones del trabajo. Todos los resultados
-analíticos de la primera parte fueron verificados numéricamente con el script que se adjunta en el
-Anexo~\ref{chap:anexo}.
