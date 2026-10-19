@@ -1,0 +1,32 @@
+\chapter{Conclusiones}
+
+El análisis de estabilidad en frecuencia desarrollado en este trabajo corrobora la necesidad imperativa de incorporar
+redes de compensación en lazos realimentados de orden superior a dos. La planta original asignada al Grupo 5, caracterizada
+por una ganancia estática $K = 900$ ($59,08\,\si{\decibel}$) y tres polos reales en $12\,\si{\kilo\hertz}$, $70\,\si{\kilo\hertz}$ y
+$140\,\si{\kilo\hertz}$, presenta un margen de ganancia directo fuertemente negativo de $-32,14\,\si{\decibel}$ ante realimentación
+unitaria, lo que ratifica la divergencia incondicional del sistema sin acondicionamiento de lazo. La imposición de un margen
+de fase de diseño $MF = 45^\circ$ permitió establecer de manera unívoca la cota de amortiguación deseada, situando la
+frecuencia de cruce de ganancia en el punto exacto donde la fase alcanza los $-135^\circ$.
+
+El contraste entre las dos metodologías de compensación pasiva evidenció un compromiso severo entre velocidad de respuesta y
+margen de estabilidad. El compensador de retardo, configurado con $R = 1,33\,\si{\kilo\ohm}$ y $C = 100\,\si{\nano\farad}$ para fijar
+el polo en $f_d = 1,2\,\si{\kilo\hertz}$, actúa bajo el principio de polo dominante: fuerza la caída de la curva de módulo a bajas
+frecuencias y sitúa la frecuencia para $MF = 45^\circ$ en $f_{45} = 9,96\,\si{\kilo\hertz}$. Si bien esta acción otorga un margen de
+ganancia elevado de $13,04\,\si{\decibel}$ al cruzar la fase por $-180^\circ$ en $24,35\,\si{\kilo\hertz}$, la penalización sobre el
+ancho de banda de la función de transferencia es severa: la frecuencia de corte a $-3\,\si{\decibel}$ cae a $BW = 1,19\,\si{\kilo\hertz}$,
+contrayéndose a prácticamente una décima parte del valor original de la planta.
+
+En contraposición, el compensador de atraso-adelanto sintetizado a partir de la red serie $R_1 \to R_2 \to C$ ($R_1 = 5,76\,\si{\kilo\ohm}$,
+$R_2 = 1,45\,\si{\kilo\ohm}$, $C = 100\,\si{\pico\farad}$) preserva la dinámica rápida del sistema al posicionar su polo en
+$f_p = 220\,\si{\kilo\hertz}$ y su cero en $f_z = 1,1\,\si{\mega\hertz}$. En este esquema, la frecuencia de corte a $-3\,\si{\decibel}$
+se mantiene prácticamente inalterada en $BW = 11,56\,\si{\kilo\hertz}$, mientras que la frecuencia correspondiente al margen de fase
+de $45^\circ$ se ubica en $f_{45} = 45,11\,\si{\kilo\hertz}$, registrando un margen de ganancia de $8,96\,\si{\decibel}$ frente al cruce
+de $-180^\circ$ en $84,49\,\si{\kilo\hertz}$. Aunque el margen de ganancia resulta $4,08\,\si{\decibel}$ inferior al obtenido mediante
+el retardo puro, el sistema preserva íntegro su ancho de banda base y verifica simultáneamente el criterio estándar de estabilidad
+en ingeniería analógica ($MG \ge 6\,\si{\decibel}$).
+
+Desde una perspectiva constructiva y de viabilidad técnica, la red de atraso-adelanto resulta óptima para etapas de amplificación
+de instrumentación o procesamiento de señales donde el tiempo de establecimiento sea un parámetro crítico, requiriendo un diseño
+cuidadoso de pistas para mitigar capacidades parásitas frente a los $100\,\si{\pico\farad}$ nominales. Por otro lado, la
+compensación por retardo RC se perfila como la alternativa idónea en aplicaciones donde prime la inmunidad al ruido y la
+tolerancia frente a derivas térmicas o dispersión de fabricación, a costa de una respuesta temporal perceptiblemente más lenta.

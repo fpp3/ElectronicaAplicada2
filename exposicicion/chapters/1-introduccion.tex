@@ -1,0 +1,23 @@
+\chapter{Introducción}
+
+En el diseño de sistemas realimentados lineales, la estabilidad y la respuesta dinámica constituyen dos requerimientos
+interdependientes gobernados por la ubicación de los polos y ceros de la función de transferencia de lazo abierto. La
+introducción de realimentación negativa permite controlar la ganancia en continua, reducir distorsiones no lineales e
+incrementar la impedancia de entrada o reducir la de salida según la topología adoptada; no obstante, el desfasaje
+acumulado por los polos parásitos en alta frecuencia puede transformar la realimentación negativa en positiva, conduciendo
+al sistema hacia un comportamiento inestable o fuertemente oscilatorio.
+
+Para evaluar de forma cuantitativa la estabilidad relativa de un sistema realimentado sin necesidad de calcular
+explícitamente las raíces del polinomio característico en lazo cerrado, se recurre a los diagramas de Bode y a los conceptos
+de Margen de Fase ($MF$) y Margen de Ganancia ($MG$). Un margen de fase de $45^\circ$ constituye un criterio clásico de
+compromiso en ingeniería: provee una amortiguación adecuada en la respuesta temporal, limitando el sobreimpulso a valores
+inferiores al $25\%$ y garantizando un tiempo de establecimiento reducido sin riesgo de oscilaciones sostenidas.
+
+El presente informe aborda la resolución analítica de la Consigna 2 para los parámetros asignados al Grupo 5. El trabajo se
+centra en el análisis de una planta de tercer orden con ganancia $K = 900$ y polos reales en $12\,\si{\kilo\hertz}$,
+$70\,\si{\kilo\hertz}$ y $140\,\si{\kilo\hertz}$. A partir de su respuesta en frecuencia, se determinan el ancho de banda
+(frecuencia de corte a $-3\,\si{\decibel}$) y el margen de ganancia correspondiente a un margen de fase de $45^\circ$.
+Posteriormente, se diseñan y dimensionan dos técnicas de compensación pasiva: un compensador de retardo basado en un filtro pasa
+bajos RC fijando $C = 100\,\si{\nano\farad}$, y un compensador de atraso-adelanto con topología serie $R_1 \to R_2 \to C$ fijando
+$C = 100\,\si{\pico\farad}$. Finalmente, se desarrolla un análisis comparativo riguroso que contrasta el comportamiento en frecuencia
+y la preservación del ancho de banda en cada configuración.

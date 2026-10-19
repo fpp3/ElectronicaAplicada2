@@ -1,0 +1,122 @@
+\begin{tikzpicture}
+    \pgfplotsset{
+        bode plot/.style={
+            /pgf/number format/read comma as period,
+            grid=both,
+            major grid style={solid, gray!45},
+            minor grid style={dotted, gray!35},
+            axis line style={black, line width=0.6pt},
+            axis x line* = bottom,
+            axis y line* = left,
+            extra description/.code={
+                \draw[gray!45] (rel axis cs:0,1) -- (rel axis cs:1,1) -- (rel axis cs:1,0);
+            },
+            width=15.5cm,
+            height=6.5cm,
+            xmin=100, xmax=10000000,
+            enlarge x limits=false,
+            tick label style={font=\small},
+            label style={font=\normalsize},
+        }
+    }
+
+    % Subplot 1: Magnitud comparada
+    \begin{semilogxaxis}[
+        bode plot,
+        ylabel={Magnitud [\si{\decibel}]},
+        ymin=-100, ymax=75,
+        ytick={-80, -60, -40, -20, 0, 20, 40, 60},
+        xticklabel=\empty,
+        legend pos=south west,
+        legend style={font=\small, fill=white, fill opacity=0.9, text opacity=1},
+        name=magplot,
+    ]
+        % Planta
+        \addplot[line width=1.3pt, blue!85!black] table [col sep=comma, x=frequency, y=mag_planta] {sources/plots/bode_comparativa.csv};
+        \addlegendentry{Planta original $G(s)$}
+
+        % Retardo
+        \addplot[line width=1.3pt, red!85!black] table [col sep=comma, x=frequency, y=mag_retardo] {sources/plots/bode_comparativa.csv};
+        \addlegendentry{Comp. Retardo $G_{\text{ret}}(s)$}
+
+        % Atraso-Adelanto
+        \addplot[line width=1.3pt, teal!80!black] table [col sep=comma, x=frequency, y=mag_aa] {sources/plots/bode_comparativa.csv};
+        \addlegendentry{Comp. Atraso-Adelanto $G_{\text{aa}}(s)$}
+
+        % Nivel 0 dB
+        \addplot[black!70, densely dotted, line width=0.8pt] coordinates {(100, 0) (10000000, 0)};
+        \node[black!70, anchor=south east, font=\scriptsize] at (axis cs:9000000, 1.5) {$0\,\text{dB}$};
+
+        % Proyecciones verticales f_45
+        \draw[blue!85!black, dashed, line width=0.9pt] (axis cs:52901, -100) -- (axis cs:52901, 43.44);
+        \draw[red!85!black, dashed, line width=0.9pt] (axis cs:9962, -100) -- (axis cs:9962, 38.25);
+        \draw[teal!80!black, dashed, line width=0.9pt] (axis cs:45109, -100) -- (axis cs:45109, 45.18);
+
+        % Marcadores f_45
+        \addplot[only marks, mark=*, mark size=2.5pt, blue!85!black] coordinates {(52901, 43.44)};
+        \node[blue!85!black, fill=white, fill opacity=0.9, text opacity=1, inner sep=1.5pt, font=\scriptsize, anchor=south west] 
+            at (axis cs:56000, 44.5) {$43,44\,\text{dB}$};
+
+        \addplot[only marks, mark=*, mark size=2.5pt, red!85!black] coordinates {(9962, 38.25)};
+        \node[red!85!black, fill=white, fill opacity=0.9, text opacity=1, inner sep=1.5pt, font=\scriptsize, anchor=north] 
+            at (axis cs:9962, 36) {$38,25\,\text{dB}$};
+
+        \addplot[only marks, mark=*, mark size=2.5pt, teal!80!black] coordinates {(45109, 45.18)};
+        \node[teal!80!black, fill=white, fill opacity=0.9, text opacity=1, inner sep=1.5pt, font=\scriptsize, anchor=south east] 
+            at (axis cs:42000, 46.5) {$45,18\,\text{dB}$};
+    \end{semilogxaxis}
+
+    % Subplot 2: Fase comparada (posicionado estrictamente DEBAJO de magplot)
+    \begin{semilogxaxis}[
+        bode plot,
+        xlabel={$f$ [\si{\hertz}]},
+        ylabel={Fase [$^\circ$]},
+        ymin=-370, ymax=10,
+        ytick={-360, -315, -270, -225, -180, -135, -90, -45, 0},
+        at={(magplot.south west)},
+        anchor=north west,
+        yshift=-0.7cm,
+        legend pos=south west,
+        legend style={font=\small, fill=white, fill opacity=0.9, text opacity=1},
+    ]
+        % Planta
+        \addplot[line width=1.3pt, blue!85!black] table [col sep=comma, x=frequency, y=phase_planta] {sources/plots/bode_comparativa.csv};
+        \addlegendentry{Planta original}
+
+        % Retardo
+        \addplot[line width=1.3pt, red!85!black] table [col sep=comma, x=frequency, y=phase_retardo] {sources/plots/bode_comparativa.csv};
+        \addlegendentry{Retardo}
+
+        % Atraso-Adelanto
+        \addplot[line width=1.3pt, teal!80!black] table [col sep=comma, x=frequency, y=phase_aa] {sources/plots/bode_comparativa.csv};
+        \addlegendentry{Atraso-Adelanto}
+
+        % Referencia -135°
+        \addplot[purple, dashed, line width=1.0pt] coordinates {(100, -135) (10000000, -135)};
+        \node[purple, fill=white, fill opacity=0.85, text opacity=1, anchor=south east, font=\small, inner sep=1.5pt] 
+            at (axis cs:9000000, -132) {$-135^\circ\;(MF=45^\circ)$};
+
+        % Referencia -180°
+        \addplot[red!80!black, dotted, line width=1.0pt] coordinates {(100, -180) (10000000, -180)};
+        \node[red!80!black, fill=white, fill opacity=0.85, text opacity=1, anchor=south east, font=\small, inner sep=1.5pt] 
+            at (axis cs:9000000, -177) {$-180^\circ$};
+
+        % Proyecciones verticales f_45
+        \draw[blue!85!black, dashed, line width=0.9pt] (axis cs:52901, -370) -- (axis cs:52901, -135);
+        \draw[red!85!black, dashed, line width=0.9pt] (axis cs:9962, -370) -- (axis cs:9962, -135);
+        \draw[teal!80!black, dashed, line width=0.9pt] (axis cs:45109, -370) -- (axis cs:45109, -135);
+
+        % Cruces en f_45
+        \addplot[only marks, mark=*, mark size=2.5pt, blue!85!black] coordinates {(52901, -135)};
+        \node[blue!85!black, fill=white, fill opacity=0.85, text opacity=1, inner sep=1pt, font=\scriptsize, anchor=south west] 
+            at (axis cs:56000, -130) {$f_{45}=52,90\,\text{kHz}$};
+
+        \addplot[only marks, mark=*, mark size=2.5pt, red!85!black] coordinates {(9962, -135)};
+        \node[red!85!black, fill=white, fill opacity=0.85, text opacity=1, inner sep=1pt, font=\scriptsize, anchor=north] 
+            at (axis cs:9962, -143) {$f_{45}=9,96\,\text{kHz}$};
+
+        \addplot[only marks, mark=*, mark size=2.5pt, teal!80!black] coordinates {(45109, -135)};
+        \node[teal!80!black, fill=white, fill opacity=0.85, text opacity=1, inner sep=1pt, font=\scriptsize, anchor=north east] 
+            at (axis cs:42000, -143) {$f_{45}=45,11\,\text{kHz}$};
+    \end{semilogxaxis}
+\end{tikzpicture}

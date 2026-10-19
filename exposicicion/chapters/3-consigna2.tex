@@ -1,0 +1,328 @@
+\chapter{Consigna 2: Respuesta en Frecuencia y Compensación}
+
+\section{Ítem 1: Diagrama de Bode de la Planta sin Compensar}
+
+De acuerdo con los parámetros obligatorios asignados al Grupo 5 en la Tabla 1 de las consignas, la planta a caracterizar
+posee una ganancia estática $K = 900$ y tres polos reales simples cuyas frecuencias de corte corresponden a $f_1 = 12\,\si{\kilo\hertz}$,
+$f_2 = 70\,\si{\kilo\hertz}$ y $f_3 = 140\,\si{\kilo\hertz}$. La función de transferencia en el dominio de Laplace adopta
+la siguiente expresión canónica:
+
+\begin{equation}
+    G(s) = \frac{K}{\left(1 + \frac{s}{2\pi f_1}\right) \left(1 + \frac{s}{2\pi f_2}\right) \left(1 + \frac{s}{2\pi f_3}\right)}
+    \label{eq.ej2:planta_simbolica}
+\end{equation}
+
+Sustituyendo los valores asignados, resulta:
+
+\begin{equation}
+    G(s) = \frac{900}{\left(1 + \frac{s}{2\pi \cdot 12 \times 10^3}\right) \left(1 + \frac{s}{2\pi \cdot 70 \times 10^3}\right) \left(1 + \frac{s}{2\pi \cdot 140 \times 10^3}\right)}
+    \label{eq.ej2:planta_numerica}
+\end{equation}
+
+En la Figura \ref{fig.ej2:bode_planta} se presenta el diagrama de Bode de la planta con su respuesta en frecuencia exacta, el cual constituye la base gráfica para las determinaciones de estabilidad requeridas.
+
+\begin{figure}[!ht]
+    \centering
+    \input{figures/plot_ej2_bode_planta.tex}
+    \caption{Diagrama de Bode de magnitud y fase de la planta sin compensar $G(s)$, con indicación gráfica del ancho de banda ($BW$), frecuencia para $MF = 45^\circ$ ($f_{45}$) y margen de ganancia ($MG_{45}$).}
+    \label{fig.ej2:bode_planta}
+\end{figure}
+
+\section{Ítem 2: Obtención Gráfica de Frecuencia de Corte y Margen de Ganancia para MF = 45°}
+
+A partir de la inspección directa del diagrama de Bode de la Figura \ref{fig.ej2:bode_planta}, se determinan de forma
+gráfica los parámetros dinámicos y de estabilidad del sistema:
+
+\begin{enumerate}
+    \item \textbf{Ancho de banda a lazo abierto ($BW = f_{-3\,\si{\decibel}}$):} En el gráfico de magnitud, la asíntota de baja
+    frecuencia se sitúa en $59,08\,\si{\decibel}$. Descendiendo una cota vertical de $3\,\si{\decibel}$ hasta el nivel de
+    $56,08\,\si{\decibel}$, se traza una línea horizontal que corta a la respuesta real de la planta. Proyectando dicho punto de
+    intersección verticalmente hacia el eje horizontal de frecuencias, se lee en el gráfico:
+    \begin{equation}
+        BW = f_{-3\,\si{\decibel}} \approx 11,59\,\si{\kilo\hertz}
+    \end{equation}
+    Este valor evidencia que el ancho de banda a lazo abierto se encuentra casi exclusivamente gobernado por el primer polo
+    ($f_1 = 12\,\si{\kilo\hertz}$).
+    \item \textbf{Margen de ganancia para $MF = 45^\circ$ ($MG_{45}$):} Sobre la curva de fase, la condición de margen de
+    fase $MF = 45^\circ$ se alcanza cuando el desfasaje vale $-135^\circ$ ($\phi(f_{45}) = -180^\circ + 45^\circ = -135^\circ$),
+    lo que proyectado sobre el eje de frecuencias sitúa $f_{45} \approx 52,90\,\si{\kilo\hertz}$. Sobre esa misma vertical
+    en el gráfico de magnitud, la ganancia de la planta alcanza:
+    \begin{equation}
+        |G(f_{45})|_{\si{\decibel}} \approx 43,44\,\si{\decibel}
+    \end{equation}
+    Asimismo, se ubica la intersección de la fase con el nivel de $-180^\circ$ (cruce de fase), leyendo sobre el eje horizontal
+    la cota $f_{180} \approx 110,99\,\si{\kilo\hertz}$, donde la ganancia de la planta vale:
+    \begin{equation}
+        |G(f_{180})|_{\si{\decibel}} \approx 32,14\,\si{\decibel}
+    \end{equation}
+    El margen de ganancia disponible cuando el lazo se calibra para entregar $MF = 45^\circ$ se obtiene gráficamente como la
+    distancia vertical en decibeles entre el nivel de lazo en $f_{45}$ y el nivel en $f_{180}$, acotada mediante la flecha
+    naranja de la Figura \ref{fig.ej2:bode_planta}:
+    \begin{equation}
+        MG_{45} = |G(f_{45})|_{\si{\decibel}} - |G(f_{180})|_{\si{\decibel}} = 43,44\,\si{\decibel} - 32,14\,\si{\decibel} = 11,30\,\si{\decibel}
+    \end{equation}
+    Nótese que el margen de ganancia directo de la planta no atenuada respecto del nivel de $0\,\si{\decibel}$ es negativo
+    ($MG = -32,14\,\si{\decibel}$), lo que ratifica que la planta a lazo cerrado con realimentación unitaria es incondicionalmente
+    inestable.
+\end{enumerate}
+
+\clearpage
+
+\section{Ítem 3: Compensador de Retardo}
+
+El compensador de retardo asignado al Grupo 5 se proyecta mediante un filtro pasa bajos pasivo RC constituido por una
+resistencia $R$ en serie y un capacitor $C$ en derivación a masa, de acuerdo con el esquema circuital de la Figura
+\ref{crkt.ej2:retardo}.
+
+\begin{figure}[!ht]
+    \centering
+    \input{figures/crkt_ej2_compensador_retardo.tex}
+    \caption{Esquema circuital del compensador de retardo (filtro pasa bajos RC).}
+    \label{crkt.ej2:retardo}
+\end{figure}
+
+Aplicando divisor de tensión en el dominio de Laplace sobre el capacitor $C$, la función de transferencia de la red resulta:
+
+\begin{equation}
+    G_c(s) = \frac{V_o(s)}{V_i(s)} = \frac{\frac{1}{sC}}{R + \frac{1}{sC}} = \frac{1}{1 + sRC} = \frac{1}{1 + \frac{s}{2\pi f_d}}
+    \label{eq.ej2:fdt_comp_retardo}
+\end{equation}
+
+donde la frecuencia característica asignada al Grupo 5 es $f_d = 1,2\,\si{\kilo\hertz}$. Fijando la capacidad en $C = 100\,\si{\nano\farad} = 10^{-7}\,\si{\farad}$,
+se despeja el valor de la resistencia $R$:
+
+\begin{equation}
+    R = \frac{1}{2\pi f_d C} = \frac{1}{2\pi \cdot 1,2 \times 10^3\,\si{\hertz} \cdot 100 \times 10^{-9}\,\si{\farad}} \approx 1326,29\,\si{\ohm}
+    \label{eq.ej2:calculo_R_retardo}
+\end{equation}
+
+El valor comercial normalizado más próximo al $1\%$ de tolerancia (serie E96) es $R = 1,33\,\si{\kilo\ohm}$ ($1,30\,\si{\kilo\ohm}$
+en serie E24 al $5\%$).
+
+Conectando el compensador en cascada con la planta, la función de transferencia total resulta:
+
+\begin{equation}
+    G_{\text{ret}}(s) = G_c(s) \cdot G(s) = \frac{900}{\left(1 + \frac{s}{2\pi \cdot 1,2 \times 10^3}\right) \left(1 + \frac{s}{2\pi \cdot 12 \times 10^3}\right) \left(1 + \frac{s}{2\pi \cdot 70 \times 10^3}\right) \left(1 + \frac{s}{2\pi \cdot 140 \times 10^3}\right)}
+    \label{eq.ej2:fdt_sistema_retardo}
+\end{equation}
+
+En la Figura \ref{fig.ej2:bode_retardo} se ilustra el diagrama de Bode resultante.
+
+\begin{figure}[!ht]
+    \centering
+    \input{figures/plot_ej2_bode_retardo.tex}
+    \caption{Diagrama de Bode del sistema compensado con red de retardo $G_{\text{ret}}(s)$, indicando gráficamente el ancho de banda ($BW$), la frecuencia para $MF = 45^\circ$ ($f_{45}$) y el margen de ganancia ($MG_{45}$).}
+    \label{fig.ej2:bode_retardo}
+\end{figure}
+
+A partir de la lectura gráfica sobre la Figura \ref{fig.ej2:bode_retardo}, se extraen los siguientes parámetros:
+
+\begin{enumerate}
+    \item \textbf{Ancho de banda ($BW$):} La caída de $3\,\si{\decibel}$ respecto del nivel de continua ($59,08\,\si{\decibel} - 3\,\si{\decibel} = 56,08\,\si{\decibel}$)
+    se ubica ahora en la frecuencia del nuevo polo dominante introducido por el compensador:
+    \begin{equation}
+        BW = f_{-3\,\si{\decibel}} \approx 1,19\,\si{\kilo\hertz}
+    \end{equation}
+    lo que evidencia una reducción drástica del ancho de banda útil a lazo abierto a menos del $10\%$ del valor original.
+
+    \item \textbf{Margen de ganancia para $MF = 45^\circ$ ($MG_{45}$):} Sobre la curva de fase, el punto donde la fase
+    alcanza $-135^\circ$ (correspondiente a $MF = 45^\circ$) se sitúa en $f_{45} \approx 9,96\,\si{\kilo\hertz}$, donde la curva
+    de magnitud entrega:
+    \begin{equation}
+        |G_{\text{ret}}(f_{45})|_{\si{\decibel}} \approx 38,25\,\si{\decibel}
+    \end{equation}
+    Por su parte, la traza de fase corta a $-180^\circ$ en la frecuencia gráfica:
+    \begin{equation}
+        f_{180} \approx 24,35\,\si{\kilo\hertz}
+    \end{equation}
+    donde la magnitud del sistema compensado vale:
+    \begin{equation}
+        |G_{\text{ret}}(f_{180})|_{\si{\decibel}} \approx 25,21\,\si{\decibel}
+    \end{equation}
+    El margen de ganancia para $MF = 45^\circ$ se determina como la diferencia vertical entre ambas cotas:
+    \begin{equation}
+        MG_{45} = |G_{\text{ret}}(f_{45})|_{\si{\decibel}} - |G_{\text{ret}}(f_{180})|_{\si{\decibel}} = 38,25\,\si{\decibel} - 25,21\,\si{\decibel} = 13,04\,\si{\decibel}
+    \end{equation}
+    El margen de ganancia directo respecto de $0\,\si{\decibel}$ se ubica en $-25,21\,\si{\decibel}$.
+\end{enumerate}
+
+\clearpage
+
+\section{Ítem 4: Compensador de Atraso-Adelanto}
+
+La red de compensación de atraso-adelanto se diseña a partir de la topología serie conformada por los elementos $R_1 \to R_2 \to C$,
+tomando la salida de tensión en el nodo intermedio ubicado antes de $R_2$, tal como se representa en el esquemático de la
+Figura \ref{crkt.ej2:atraso_adelanto}.
+
+\begin{figure}[!ht]
+    \centering
+    \input{figures/crkt_ej2_compensador_atraso_adelanto.tex}
+    \caption{Esquema circuital del compensador de atraso-adelanto (red serie $R_1 \to R_2 \to C$).}
+    \label{crkt.ej2:atraso_adelanto}
+\end{figure}
+
+La impedancia de la rama en derivación formada por $R_2$ y $C$ en serie responde a:
+
+\begin{equation}
+    Z_2(s) = R_2 + \frac{1}{sC} = \frac{sR_2C + 1}{sC}
+\end{equation}
+
+mientras que la impedancia de entrada en circuito abierto vale:
+
+\begin{equation}
+    Z_{\text{in}}(s) = R_1 + Z_2(s) = R_1 + R_2 + \frac{1}{sC} = \frac{s(R_1 + R_2)C + 1}{sC}
+\end{equation}
+
+Aplicando divisor de impedancias, la función de transferencia resulta:
+
+\begin{equation}
+    G_{c2}(s) = \frac{V_o(s)}{V_i(s)} = \frac{Z_2(s)}{Z_{\text{in}}(s)} = \frac{sR_2C + 1}{s(R_1 + R_2)C + 1} = \frac{1 + \frac{s}{2\pi f_z}}{1 + \frac{s}{2\pi f_p}}
+    \label{eq.ej2:fdt_atraso_adelanto_canonica}
+\end{equation}
+
+de donde se desprenden las expresiones de las frecuencias singulares:
+
+\begin{equation}
+    f_z = \frac{1}{2\pi R_2 C}, \qquad f_p = \frac{1}{2\pi (R_1 + R_2) C}
+    \label{eq.ej2:fz_fp_expresiones}
+\end{equation}
+
+Dado que $R_1 > 0$, se comprueba rigurosamente que $f_p < f_z$. Para el Grupo 5, los valores asignados son $f_p = 220\,\si{\kilo\hertz}$
+y $f_z = 1,1\,\si{\mega\hertz} = 1100\,\si{\kilo\hertz}$. Fijando $C = 100\,\si{\pico\farad} = 10^{-10}\,\si{\farad}$, se procede al
+cálculo secuencial de las resistencias:
+
+\begin{enumerate}
+    \item \textbf{Cálculo de $R_2$ (a partir de $f_z$):}
+    \begin{equation}
+        R_2 = \frac{1}{2\pi f_z C} = \frac{1}{2\pi \cdot 1,1 \times 10^6\,\si{\hertz} \cdot 100 \times 10^{-12}\,\si{\farad}} \approx 1446,86\,\si{\ohm}
+        \label{eq.ej2:calculo_R2}
+    \end{equation}
+    (Valor normalizado comercial al $1\%$: $R_2 = 1,45\,\si{\kilo\ohm}$).
+
+    \item \textbf{Cálculo de $R_1$ (a partir de $f_p$ y $R_2$):}
+    \begin{equation}
+        R_1 + R_2 = \frac{1}{2\pi f_p C} = \frac{1}{2\pi \cdot 220 \times 10^3\,\si{\hertz} \cdot 100 \times 10^{-12}\,\si{\farad}} \approx 7234,32\,\si{\ohm}
+    \end{equation}
+    Despejando $R_1$:
+    \begin{equation}
+        R_1 = (R_1 + R_2) - R_2 = 7234,32\,\si{\ohm} - 1446,86\,\si{\ohm} \approx 5787,45\,\si{\ohm}
+        \label{eq.ej2:calculo_R1}
+    \end{equation}
+    (Valor normalizado comercial al $1\%$: $R_1 = 5,76\,\si{\kilo\ohm}$).
+\end{enumerate}
+
+
+La función de transferencia en cascada con la planta resulta:
+
+\begin{equation}
+    G_{\text{aa}}(s) = \frac{900 \left(1 + \frac{s}{2\pi \cdot 1,1 \times 10^6}\right)}{\left(1 + \frac{s}{2\pi \cdot 220 \times 10^3}\right) \left(1 + \frac{s}{2\pi \cdot 12 \times 10^3}\right) \left(1 + \frac{s}{2\pi \cdot 70 \times 10^3}\right) \left(1 + \frac{s}{2\pi \cdot 140 \times 10^3}\right)}
+    \label{eq.ej2:fdt_sistema_aa}
+\end{equation}
+
+En la Figura \ref{fig.ej2:bode_aa} se exhibe el diagrama de Bode correspondiente a esta topología.
+
+\begin{figure}[!ht]
+    \centering
+    \input{figures/plot_ej2_bode_atraso_adelanto.tex}
+    \caption{Diagrama de Bode del sistema con compensador de atraso-adelanto $G_{\text{aa}}(s)$, señalando el ancho de banda ($BW$), la frecuencia para $MF = 45^\circ$ ($f_{45}$) y el margen de ganancia ($MG_{45}$).}
+    \label{fig.ej2:bode_aa}
+\end{figure}
+
+A partir del examen de la Figura \ref{fig.ej2:bode_aa}, se determinan gráficamente los siguientes valores:
+
+\begin{enumerate}
+    \item \textbf{Frecuencia y ganancia para $MF = 45^\circ$:} Localizando el desfasaje de $-135^\circ$ sobre la curva de fase,
+    se proyecta hacia el eje de frecuencias, leyendo:
+    \begin{equation}
+        f_{45} \approx 45,11\,\si{\kilo\hertz}
+    \end{equation}
+    Sobre la misma vertical en el gráfico de magnitud, la ganancia correspondiente se lee directamente como:
+    \begin{equation}
+        |G_{\text{aa}}(f_{45})|_{\si{\decibel}} \approx 45,18\,\si{\decibel} \quad (\approx 181,50\text{ veces})
+    \end{equation}
+    Por consiguiente, para fijar $MF = 45^\circ$ se requiere una atenuación de lazo de $\beta = 1/181,5 \approx 0,00551$ ($-45,18\,\si{\decibel}$).
+
+    \item \textbf{Margen de ganancia ($MG_{45}$):} El cruce de fase por $-180^\circ$ se localiza gráficamente en:
+    \begin{equation}
+        f_{180} \approx 84,49\,\si{\kilo\hertz}
+    \end{equation}
+    donde la curva de magnitud entrega:
+    \begin{equation}
+        |G_{\text{aa}}(f_{180})|_{\si{\decibel}} \approx 36,22\,\si{\decibel}
+    \end{equation}
+    El margen de ganancia para $MF = 45^\circ$ se obtiene de la cota vertical entre $f_{45}$ y $f_{180}$:
+    \begin{equation}
+        MG_{45} = 45,18\,\si{\decibel} - 36,22\,\si{\decibel} = 8,96\,\si{\decibel}
+    \end{equation}
+    mientras que el margen de ganancia directo respecto de $0\,\si{\decibel}$ se ubica en $-36,22\,\si{\decibel}$.
+
+    \item \textbf{Ancho de banda a lazo abierto ($BW$):} La cota de $-3\,\si{\decibel}$ respecto de continua se mantiene en:
+    \begin{equation}
+        BW = f_{-3\,\si{\decibel}} \approx 11,56\,\si{\kilo\hertz}
+    \end{equation}
+    evidenciando que este compensador no degrada el ancho de banda base de la planta.
+\end{enumerate}
+
+\clearpage
+
+\section{Ítem 5: Análisis Comparativo y Explicación de Diferencias}
+
+La Figura \ref{fig.ej2:bode_comparativa} ilustra la superposición directa de los diagramas de Bode para la planta original
+y las dos configuraciones compensadas. Por su parte, la Tabla \ref{tab.ej2:resumen_comparativo} resume las magnitudes
+cuantitativas deducidas gráficamente.
+
+\begin{figure}[!ht]
+    \centering
+    \input{figures/plot_ej2_bode_comparativa.tex}
+    \caption{Comparativa gráfica de Bode (magnitud y fase) entre la planta original $G(s)$, con compensador de retardo $G_{\text{ret}}(s)$ y con compensador de atraso-adelanto $G_{\text{aa}}(s)$.}
+    \label{fig.ej2:bode_comparativa}
+\end{figure}
+
+\begin{table}[!ht]
+    \centering
+    \renewcommand{\arraystretch}{0.92}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Parámetro / Especificación} & \textbf{Planta Original} & \textbf{Comp. Retardo} & \textbf{Comp. Atraso-Adelanto} \\
+        \hline\hline
+        Ganancia estática $K$ & $900$ ($59,08\,\si{\decibel}$) & $900$ ($59,08\,\si{\decibel}$) & $900$ ($59,08\,\si{\decibel}$) \\
+        Ancho de banda a $-3\,\si{\decibel}$ ($BW_{\text{LA}}$) & $11,59\,\si{\kilo\hertz}$ & $1,19\,\si{\kilo\hertz}$ & $11,56\,\si{\kilo\hertz}$ \\
+        Frecuencia para $MF = 45^\circ$ ($f_{45}$) & $52,90\,\si{\kilo\hertz}$ & $9,96\,\si{\kilo\hertz}$ & $45,11\,\si{\kilo\hertz}$ \\
+        Ganancia disponible en $f_{45}$ ($|G(f_{45})|$) & $43,44\,\si{\decibel}$ ($148,6\times$) & $38,25\,\si{\decibel}$ ($81,8\times$) & $45,18\,\si{\decibel}$ ($181,5\times$) \\
+        Frecuencia de cruce de fase $-180^\circ$ ($f_{180}$) & $110,99\,\si{\kilo\hertz}$ & $24,35\,\si{\kilo\hertz}$ & $84,49\,\si{\kilo\hertz}$ \\
+        Ganancia en cruce $-180^\circ$ ($|G(f_{180})|$) & $32,14\,\si{\decibel}$ & $25,21\,\si{\decibel}$ & $36,22\,\si{\decibel}$ \\
+        Margen de Ganancia para $MF = 45^\circ$ ($MG_{45}$) & $11,30\,\si{\decibel}$ & $13,04\,\si{\decibel}$ & $8,96\,\si{\decibel}$ \\
+        Margen de Ganancia directo ($MG$) & $-32,14\,\si{\decibel}$ & $-25,21\,\si{\decibel}$ & $-36,22\,\si{\decibel}$ \\
+        Frecuencia de cruce $0\,\si{\decibel}$ sin atenuar ($f_{0\,\si{\decibel}}$) & $464,42\,\si{\kilo\hertz}$ & $83,94\,\si{\kilo\hertz}$ & $373,66\,\si{\kilo\hertz}$ \\
+        Margen de Fase sin atenuar ($MF_{\text{directo}}$) & $-63,17^\circ$ & $-72,17^\circ$ & $-97,76^\circ$ \\
+        \hline
+    \end{tabular}%
+    }
+    \caption{Cuadro comparativo de las características obtenidas a partir de los diagramas de Bode para el Grupo 5.}
+    \label{tab.ej2:resumen_comparativo}
+\end{table}
+
+A partir de la confrontación de los resultados de los Ítems 3 y 4, se explican las siguientes diferencias fundamentales:
+
+\begin{enumerate}
+    \item \textbf{Impacto sobre el ancho de banda y la frecuencia de corte:} La frecuencia de corte de la función de
+    transferencia viene determinada por el punto donde la ganancia cae $3\,\si{\decibel}$ respecto del valor máximo en
+    baja frecuencia ($BW = f_{-3\,\si{\decibel}}$). En la planta original sin compensar, dicha frecuencia es
+    $BW = 11,59\,\si{\kilo\hertz}$, impuesta fundamentalmente por su primer polo ($f_1 = 12\,\si{\kilo\hertz}$).
+
+    Al incorporar el compensador de retardo, el polo introducido a baja frecuencia ($f_d = 1,2\,\si{\kilo\hertz}$) actúa como
+    dominante y fuerza una caída prematura de $-20\,\si{\decibel\per\decade}$, contrayendo drásticamente el ancho de banda a
+    $BW = 1,19\,\si{\kilo\hertz}$ (pérdida del $89,7\%$). En marcado contraste, la red de atraso-adelanto ubica su polo en
+    $f_p = 220\,\si{\kilo\hertz}$ y su cero en $f_z = 1,1\,\si{\mega\hertz}$, ambos por encima de los polos de la planta,
+    preservando la frecuencia de corte prácticamente intacta en $BW = 11,56\,\si{\kilo\hertz}$ y conservando plenamente la
+    velocidad de respuesta de la planta.
+
+    Por otro lado, la condición de margen de fase $MF = 45^\circ$ (desfasaje de $-135^\circ$) se alcanza a $f_{45} = 9,96\,\si{\kilo\hertz}$
+    en el compensador de retardo y a $f_{45} = 45,11\,\si{\kilo\hertz}$ en atraso-adelanto, corroborando que este último admite
+    operar a frecuencias sensiblemente mayores bajo el mismo margen de estabilidad.
+
+    \item \textbf{Margen de estabilidad y atenuación de alta frecuencia:} El compensador de retardo entrega un margen de ganancia
+    superior ($MG_{45} = 13,04\,\si{\decibel}$ frente a $8,96\,\si{\decibel}$).
+
+\end{enumerate}
