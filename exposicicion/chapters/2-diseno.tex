@@ -1,0 +1,162 @@
+\chapter{Diseño del filtro}
+\label{chap:diseno}
+
+\section{Topología adoptada}
+
+Se adopta la topología de la Figura~\ref{fig:circuito}: la resistencia $R$ y el capacitor $C$ en serie con
+la entrada, y el inductor $L$ en derivación sobre la salida. La elección se fundamenta en que, con esta
+disposición, la resistencia interna del generador $R_g$ queda en serie con $R$ y se incorpora al diseño
+como una resistencia total $R_t = R_g + R$, de modo que una resistencia de generador comparativamente baja
+no modifica apreciablemente el comportamiento del filtro.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \input{figures/circuito-pasa-alto.tex}
+    \caption{Circuito en el dominio del tiempo.}
+    \label{crkt:pasa-alto}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \input{figures/circuito-laplace.tex}
+    \caption{Modelo de impedancias en el dominio de Laplace.}
+    \label{crkt:laplace}
+  \end{subfigure}
+  \caption{Filtro pasa alto pasivo RLC de segundo orden.}
+  \label{fig:circuito}
+\end{figure}
+
+\section{Función de transferencia}
+
+Analizando el circuito de la Figura~\ref{crkt:laplace}, la corriente de malla es
+
+\begin{equation}
+  I(s) = \frac{V_i(s)}{R + \dfrac{1}{sC} + sL} = \frac{sC}{s^2 LC + sRC + 1}\, V_i(s),
+  \label{eq:corriente}
+\end{equation}
+
+y la tensión de salida es la caída sobre el inductor, $V_o(s) = sL\, I(s)$. Reemplazando la
+ecuación~\eqref{eq:corriente} y dividiendo numerador y denominador por $LC$ se obtiene la función de
+transferencia en términos de los componentes:
+
+\begin{equation}
+  H(s) = \frac{V_o(s)}{V_i(s)} = \frac{s^2 LC}{s^2 LC + sRC + 1}
+       = \frac{s^2}{s^2 + s\,\dfrac{R}{L} + \dfrac{1}{LC}}.
+  \label{eq:tf-componentes}
+\end{equation}
+
+La ecuación~\eqref{eq:tf-componentes} presenta un cero doble en el origen y dos polos dados por las raíces
+del polinomio característico, lo que confirma el comportamiento pasa alto de segundo orden: para $s \to 0$
+la ganancia tiende a cero y para $s \to \infty$ tiende a la unidad.
+
+\section{Forma canónica y ecuaciones de diseño}
+
+La forma canónica de un pasa alto de segundo orden es
+
+\begin{equation}
+  H(s) = \frac{s^2}{s^2 + \dfrac{\omega_0}{Q}\, s + \omega_0^2},
+  \label{eq:tf-canonica}
+\end{equation}
+
+donde $\omega_0$ es la pulsación natural y $Q$ el factor de calidad. Comparando término a término las
+ecuaciones~\eqref{eq:tf-componentes} y~\eqref{eq:tf-canonica} resulta el sistema
+
+\begin{gather*}
+  \omega_0^2 = \frac{1}{LC}, \qquad \frac{\omega_0}{Q} = \frac{R}{L},
+\end{gather*}
+
+de donde, fijando $R$ como parámetro libre, se despejan los valores de los componentes:
+
+\begin{equation}
+  L = \frac{R\,Q}{\omega_0}, \qquad C = \frac{1}{\omega_0\, R\, Q}.
+  \label{eq:diseno-LC}
+\end{equation}
+
+\subsection{Relación entre la frecuencia de corte y la pulsación natural}
+
+La pulsación natural $\omega_0$ coincide con la pulsación de corte $\omega_c$ (atenuación de
+\qty{-3}{\decibel}) únicamente cuando $Q = 1/\sqrt{2}$ (respuesta de Butterworth). Para cualquier otro valor
+de $Q$ es necesario introducir una constante de corrección $K$ tal que $\omega_0 = K\,\omega_c$. Su
+expresión se obtiene imponiendo la condición de \qty{-3}{\decibel} sobre el módulo de la
+ecuación~\eqref{eq:tf-canonica}. Definiendo $x = \omega/\omega_0$,
+
+\begin{gather*}
+  |H(jx)|^2 = \frac{x^4}{\left(1 - x^2\right)^2 + \dfrac{x^2}{Q^2}} = \frac{1}{2}
+  \;\Longrightarrow\;
+  x^4 + \left(2 - \frac{1}{Q^2}\right) x^2 - 1 = 0,
+\end{gather*}
+
+cuya única solución positiva, llamando $a = 1 - \dfrac{1}{2Q^2}$, es $x_c^2 = -a + \sqrt{a^2 + 1}$. Como
+$K = \omega_0/\omega_c = 1/x_c$, racionalizando se obtiene
+
+\begin{equation}
+  K = \sqrt{\left(1 - \frac{1}{2Q^2}\right) + \sqrt{\left(1 - \frac{1}{2Q^2}\right)^2 + 1}}.
+  \label{eq:factor-K}
+\end{equation}
+
+Reemplazando $\omega_0 = 2\pi f_c K$ en la ecuación~\eqref{eq:diseno-LC}, las ecuaciones de diseño
+quedan expresadas directamente en función de los datos del problema:
+
+\begin{equation}
+  L = \frac{R\,Q}{2\pi f_c\, K}, \qquad C = \frac{1}{2\pi f_c\, K\, Q\, R}.
+  \label{eq:diseno-final}
+\end{equation}
+
+\subsection{Factor de amortiguamiento}
+
+Expresando el denominador de la ecuación~\eqref{eq:tf-canonica} en la forma estándar de los sistemas de
+segundo orden, $s^2 + 2\xi\omega_0 s + \omega_0^2$, el factor de amortiguamiento resulta
+
+\begin{equation}
+  \xi = \frac{1}{2Q},
+  \label{eq:xi}
+\end{equation}
+
+y su valor determina el tipo de amortiguamiento: sobreamortiguado si $\xi > 1$ (raíces reales y distintas),
+críticamente amortiguado si $\xi = 1$ (raíz real doble) y subamortiguado si $\xi < 1$ (raíces complejas
+conjugadas).
+
+\section{Elección de la resistencia}
+
+Se elige $R = \qty{100}{\ohm}$ como compromiso entre dos criterios: un valor suficientemente alto para que
+la resistencia interna del generador (típicamente \qty{50}{\ohm} o menor) no altere de manera significativa
+el factor de calidad del filtro, y suficientemente bajo para que, según la ecuación~\eqref{eq:diseno-final},
+no resulten valores de inductancia excesivamente elevados.
+
+\section{Valores de los componentes}
+
+Aplicando las ecuaciones~\eqref{eq:factor-K}, \eqref{eq:diseno-final} y~\eqref{eq:xi} con
+$f_c = \qty{400}{\hertz}$ y $R = \qty{100}{\ohm}$ se obtienen los valores de la
+Tabla~\ref{tab:componentes}. A modo de ejemplo, para $Q = \num{0.25}$:
+
+\begin{gather*}
+  K = \sqrt{\left(1 - \frac{1}{2 \cdot \num{0.25}^2}\right)
+      + \sqrt{\left(1 - \frac{1}{2 \cdot \num{0.25}^2}\right)^2 + 1}} = \num{0.2666}, \\[4pt]
+  L = \frac{\qty{100}{\ohm} \cdot \num{0.25}}{2\pi \cdot \qty{400}{\hertz} \cdot \num{0.2666}}
+    = \qty{37.31}{\milli\henry}, \qquad
+  C = \frac{1}{2\pi \cdot \qty{400}{\hertz} \cdot \num{0.2666} \cdot \num{0.25} \cdot \qty{100}{\ohm}}
+    = \qty{59.70}{\micro\farad}.
+\end{gather*}
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    $Q$ & $K$ & $\omega_0$ [\unit{\radian\per\second}] & $f_0$ [\unit{\hertz}] & $L$ & $C$ & $\xi$ \\
+    \hline
+    \num{0.25} & \num{0.2666} & \num{670.0}  & \num{106.6} & \qty{37.31}{\milli\henry}
+               & \qty{59.70}{\micro\farad} & \num{2.000} \\
+    \num{0.75} & \num{1.0570} & \num{2656.5} & \num{422.8} & \qty{28.23}{\milli\henry}
+               & \qty{5.02}{\micro\farad}  & \num{0.667} \\
+    \hline
+  \end{tabular}
+  \caption{Constante de corrección, pulsación natural, componentes y factor de amortiguamiento de cada diseño.}
+  \label{tab:componentes}
+\end{table}
+
+En los capítulos siguientes se trabaja con los valores de $L$ y $C$ redondeados de la
+Tabla~\ref{tab:componentes}, por lo que los coeficientes de las funciones de transferencia difieren
+levemente de los teóricos; la frecuencia de corte resultante se verificó en \qty{-3.01}{\decibel} en ambos
+casos (Anexo~\ref{chap:anexo}).

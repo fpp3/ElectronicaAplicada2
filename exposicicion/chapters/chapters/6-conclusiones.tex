@@ -1,0 +1,28 @@
+\chapter{Conclusiones}
+\label{chap:conclusiones}
+
+Se diseñaron dos filtros pasa alto pasivos RLC de segundo orden para la frecuencia de corte asignada de
+\qty{400}{\hertz}, con factores de calidad de \num{0.25} y \num{0.75}, cumpliendo con la totalidad de los
+puntos de la consigna. A partir del análisis del circuito en el dominio de Laplace se dedujo la función de
+transferencia en términos de $R$, $L$ y $C$, y por comparación con la forma canónica se obtuvieron las
+ecuaciones de diseño. Un aspecto central del procedimiento fue la incorporación de la constante de
+corrección $K$, que relaciona la pulsación natural con la de corte: sin ella, la atenuación en
+\qty{400}{\hertz} no sería de \qty{-3}{\decibel} para ninguno de los dos valores de $Q$, ya que ninguno
+corresponde a una respuesta de Butterworth.
+
+Para $Q = \num{0.25}$ se obtuvo un filtro sobreamortiguado ($\xi = 2$) con dos polos reales muy separados,
+cuya respuesta al escalón decae sin oscilaciones, con un subpico de apenas el \qty{4.8}{\percent} y un
+tiempo de establecimiento de \qty{7.53}{\milli\second} fijado por el polo dominante. Para $Q = \num{0.75}$
+se obtuvo un filtro subamortiguado ($\xi = \num{0.667}$) con polos complejos conjugados, cuya respuesta es
+oscilatoria amortiguada, con un subpico del \qty{22.2}{\percent} pero un tiempo de establecimiento de solo
+\qty{1.82}{\milli\second}. En ambos casos la ubicación de las raíces en el plano complejo resultó
+coherente con el valor del factor de amortiguamiento calculado, y la frecuencia de corte se verificó
+numéricamente en \qty{-3.01}{\decibel}.
+
+La comparación de ambos diseños ilustra el compromiso fundamental entre velocidad de respuesta y ausencia
+de oscilaciones que caracteriza a los sistemas de segundo orden: un amortiguamiento elevado brinda una
+respuesta suave, robusta y predecible a costa de lentitud, poca selectividad y componentes de mayor valor,
+mientras que un amortiguamiento bajo ofrece rapidez, selectividad y componentes más pequeños a costa de
+sobrepicos y oscilaciones. La elección de uno u otro tipo depende, en definitiva, de la aplicación: de qué
+tan tolerable sea una excursión transitoria de signo contrario frente a la necesidad de una respuesta
+rápida y de una transición abrupta entre la banda de paso y la de rechazo.

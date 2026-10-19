@@ -1,0 +1,44 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    name=principal,
+    width=0.9\textwidth, height=0.55\textwidth,
+    xlabel={$t$ [\unit{\milli\second}]}, ylabel={Tensión [\unit{\volt}]},
+    xmin=0, xmax=12, ymin=-0.1, ymax=1.1,
+    grid=both, grid style={gray!30, dashed},
+    legend pos=north east, legend cell align=left, legend style={font=\footnotesize},
+    tick label style={font=\footnotesize},
+    samples=400, domain=0:12, no marks,
+  ]
+    \addplot[gray, thick, dotted] {1};
+    \addlegendentry{$v_i(t)$ (escalón unitario)}
+    \addplot[blue, very thick] {1.07734*exp(-2.50072*x) - 0.07734*exp(-0.17953*x)};
+    \addlegendentry{$v_o(t)$ para $Q = \num{0.25}$}
+    \addplot[red, dashed] {0.02};
+    \addlegendentry{banda de $\pm\qty{2}{\percent}$}
+    \addplot[red, dashed, forget plot] {-0.02};
+    \draw[dashed, gray] (axis cs:7.53,-0.1) -- (axis cs:7.53,0.08);
+  \end{axis}
+  % detalle ampliado de la zona del subpico
+  \begin{axis}[
+    at={(principal.north east)}, anchor=north east, xshift=-0.6cm, yshift=-2.0cm,
+    width=0.5\textwidth, height=0.28\textwidth,
+    xmin=0, xmax=12, ymin=-0.07, ymax=0.04,
+    ytick={-0.06,-0.04,-0.02,0,0.02},
+    scaled y ticks=false,
+    yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=2},
+    grid=both, grid style={gray!30, dashed},
+    tick label style={font=\scriptsize},
+    axis background/.style={fill=white},
+    samples=400, domain=0:12, no marks,
+  ]
+    \addplot[blue, very thick] {1.07734*exp(-2.50072*x) - 0.07734*exp(-0.17953*x)};
+    \addplot[red, dashed] {0.02};
+    \addplot[red, dashed] {-0.02};
+    \addplot[only marks, mark=*, mark size=1.5pt, black] coordinates {(2.269,-0.0478)};
+    \node[below right=1pt, font=\scriptsize] at (axis cs:2.269,-0.0478)
+      {subpico \qty{-4.8}{\percent} en $t = \qty{2.27}{\milli\second}$};
+    \draw[dashed, gray] (axis cs:7.53,-0.07) -- (axis cs:7.53,0.04)
+      node[pos=0.72, right, font=\scriptsize, black] {$t_s = \qty{7.53}{\milli\second}$};
+    \node[anchor=north west, font=\scriptsize\itshape] at (rel axis cs:0.02,0.98) {detalle};
+  \end{axis}
+\end{tikzpicture}
