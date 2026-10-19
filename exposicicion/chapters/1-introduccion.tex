@@ -1,23 +1,125 @@
 \chapter{Introducción}
 
-En el diseño de sistemas realimentados lineales, la estabilidad y la respuesta dinámica constituyen dos requerimientos
-interdependientes gobernados por la ubicación de los polos y ceros de la función de transferencia de lazo abierto. La
-introducción de realimentación negativa permite controlar la ganancia en continua, reducir distorsiones no lineales e
-incrementar la impedancia de entrada o reducir la de salida según la topología adoptada; no obstante, el desfasaje
-acumulado por los polos parásitos en alta frecuencia puede transformar la realimentación negativa en positiva, conduciendo
-al sistema hacia un comportamiento inestable o fuertemente oscilatorio.
+\section{Marco general}
 
-Para evaluar de forma cuantitativa la estabilidad relativa de un sistema realimentado sin necesidad de calcular
-explícitamente las raíces del polinomio característico en lazo cerrado, se recurre a los diagramas de Bode y a los conceptos
-de Margen de Fase ($MF$) y Margen de Ganancia ($MG$). Un margen de fase de $45^\circ$ constituye un criterio clásico de
-compromiso en ingeniería: provee una amortiguación adecuada en la respuesta temporal, limitando el sobreimpulso a valores
-inferiores al $25\%$ y garantizando un tiempo de establecimiento reducido sin riesgo de oscilaciones sostenidas.
+La respuesta en frecuencia de un sistema lineal queda determinada por la ubicación de los polos y ceros de su
+función de transferencia, y esa misma ubicación gobierna su comportamiento temporal. El caso más elemental en
+el que ambos aspectos pueden estudiarse de manera completa es el sistema de segundo orden: la posición de sus
+dos polos en el plano complejo fija el factor de amortiguamiento, y con él la forma de la respuesta ante un
+escalón (monótona, crítica u oscilatoria), el sobrepico y el tiempo de establecimiento. Un filtro pasa alto
+pasivo RLC es una realización física directa de ese sistema, en la que el factor de calidad $Q$ permite
+recorrer los distintos tipos de amortiguamiento con solo modificar el valor de los componentes.
 
-El presente informe aborda la resolución analítica de la Consigna 2 para los parámetros asignados al Grupo 5. El trabajo se
-centra en el análisis de una planta de tercer orden con ganancia $K = 900$ y polos reales en $12\,\si{\kilo\hertz}$,
-$70\,\si{\kilo\hertz}$ y $140\,\si{\kilo\hertz}$. A partir de su respuesta en frecuencia, se determinan el ancho de banda
-(frecuencia de corte a $-3\,\si{\decibel}$) y el margen de ganancia correspondiente a un margen de fase de $45^\circ$.
-Posteriormente, se diseñan y dimensionan dos técnicas de compensación pasiva: un compensador de retardo basado en un filtro pasa
-bajos RC fijando $C = 100\,\si{\nano\farad}$, y un compensador de atraso-adelanto con topología serie $R_1 \to R_2 \to C$ fijando
-$C = 100\,\si{\pico\farad}$. Finalmente, se desarrolla un análisis comparativo riguroso que contrasta el comportamiento en frecuencia
-y la preservación del ancho de banda en cada configuración.
+Los mismos conceptos se extienden al diseño de sistemas realimentados lineales, donde la estabilidad y la
+respuesta dinámica constituyen dos requerimientos interdependientes gobernados por los polos y ceros de la
+función de transferencia de lazo abierto. La introducción de realimentación negativa permite controlar la
+ganancia en continua, reducir la distorsión no lineal e incrementar la impedancia de entrada o reducir la de
+salida según la topología adoptada; no obstante, el desfasaje acumulado por los polos parásitos en alta
+frecuencia puede transformar la realimentación negativa en positiva, conduciendo al sistema hacia un
+comportamiento inestable o fuertemente oscilatorio.
+
+Para evaluar de forma cuantitativa la estabilidad relativa de un sistema realimentado, sin necesidad de
+calcular explícitamente las raíces del polinomio característico de lazo cerrado, se recurre a los diagramas de
+Bode y a los conceptos de margen de fase ($MF$) y margen de ganancia ($MG$). Un margen de fase de
+\qty{45}{\degree} constituye un criterio clásico de compromiso en ingeniería: equivale a un amortiguamiento
+adecuado de la respuesta temporal, limita el sobreimpulso a valores inferiores al \qty{25}{\percent} y
+garantiza un tiempo de establecimiento reducido sin riesgo de oscilaciones sostenidas. Cuando la planta por
+sí sola no alcanza ese margen con la ganancia requerida, se incorporan redes de compensación pasivas que
+modifican la respuesta en frecuencia de lazo abierto.
+
+\section{Objetivos}
+
+El presente trabajo práctico se compone de dos consignas que abordan, respectivamente, el análisis de un
+sistema de segundo orden en lazo abierto y la estabilidad de una planta de tercer orden realimentada, ambas
+para los parámetros asignados al Grupo 5.
+
+\subsection{Consigna 1: filtro pasa alto pasivo RLC}
+
+Se busca diseñar y analizar un filtro pasa alto pasivo de segundo orden con topología RLC, para la
+frecuencia de corte asignada, considerando dos valores del factor de calidad $Q$. En particular:
+
+\begin{itemize}
+  \item Obtener la función de transferencia del filtro en función de los valores de $R$, $L$ y $C$, y
+        dimensionar los componentes para cada valor de $Q$.
+  \item Calcular las raíces del polinomio característico y ubicarlas en el plano complejo.
+  \item Calcular el factor de amortiguamiento e identificar el tipo de amortiguamiento de cada filtro.
+  \item Obtener y graficar la respuesta temporal ante un escalón, midiendo sobre ella los parámetros
+        característicos (sobrepico, tiempo de caída y tiempo de establecimiento).
+  \item Comparar ambos diseños y describir las ventajas de cada tipo de amortiguamiento.
+\end{itemize}
+
+\subsection{Consigna 2: planta realimentada y compensación}
+
+Se busca analizar la estabilidad relativa de una planta de tercer orden, de ganancia $K$ y polos reales en
+$f_1$, $f_2$ y $f_3$, y mejorarla mediante redes de compensación pasivas. En particular:
+
+\begin{itemize}
+  \item Graficar el diagrama de Bode de la planta y obtener, a partir de él, la frecuencia de corte superior
+        (ancho de banda a \qty{-3}{\decibel}) y el margen de ganancia correspondiente a un margen de fase de
+        \qty{45}{\degree}.
+  \item Diseñar un compensador de retardo para la frecuencia $f_d$ asignada, mediante un filtro pasa bajos RC,
+        obtener su función de transferencia y el valor de sus componentes, y determinar sobre el nuevo diagrama
+        de Bode el margen de ganancia y el ancho de banda para $MF = \qty{45}{\degree}$.
+  \item Diseñar una red de atraso-adelanto con el polo $f_p$ y el cero $f_z$ asignados, obtener su función de
+        transferencia y el valor de sus componentes, y determinar sobre el diagrama de Bode resultante la
+        frecuencia y la ganancia para $MF = \qty{45}{\degree}$.
+  \item Comparar el comportamiento en frecuencia y la preservación del ancho de banda que se obtiene con cada
+        compensador, explicando las diferencias observadas.
+\end{itemize}
+
+\section{Parámetros asignados}
+
+Los parámetros de diseño corresponden al Grupo 5 de la Tabla~1 de la consigna y se resumen en la
+Tabla~\ref{tab:parametros}, junto con los valores que son una elección de diseño propia: la resistencia $R$
+del filtro, cuya justificación se da en el Capítulo~\ref{chap:diseno}, y los capacitores de referencia de
+cada compensador.
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{|l|c|}
+    \hline
+    Parámetro & Valor \\
+    \hline
+    \multicolumn{2}{|l|}{Consigna 1: filtro pasa alto RLC} \\
+    \hline
+    Frecuencia de corte $f_c$                        & \qty{400}{\hertz} \\
+    Factor de calidad $Q_1$                          & \num{0.25} \\
+    Factor de calidad $Q_2$                          & \num{0.75} \\
+    Resistencia $R$ (elegida)                        & \qty{100}{\ohm} \\
+    \hline
+    \multicolumn{2}{|l|}{Consigna 2: planta realimentada y compensación} \\
+    \hline
+    Ganancia de la planta $K$                        & \num{900} \\
+    Polo $f_1$                                       & \qty{12}{\kilo\hertz} \\
+    Polo $f_2$                                       & \qty{70}{\kilo\hertz} \\
+    Polo $f_3$                                       & \qty{140}{\kilo\hertz} \\
+    Margen de fase de diseño $MF$                    & \qty{45}{\degree} \\
+    Compensador de retardo $f_d$                     & \qty{1.2}{\kilo\hertz} \\
+    Capacitor del compensador de retardo (elegido)   & \qty{100}{\nano\farad} \\
+    Red atraso-adelanto, polo $f_p$                  & \qty{220}{\kilo\hertz} \\
+    Red atraso-adelanto, cero $f_z$                  & \qty{1.1}{\mega\hertz} \\
+    Capacitor de la red atraso-adelanto (elegido)    & \qty{100}{\pico\farad} \\
+    \hline
+  \end{tabular}
+  \caption{Parámetros de diseño asignados al grupo y valores elegidos.}
+  \label{tab:parametros}
+\end{table}
+
+\section{Organización del informe}
+
+El informe se divide en dos partes, una por consigna. En la primera, el Capítulo~\ref{chap:diseno} plantea
+la topología del filtro, deduce su función de transferencia y obtiene las ecuaciones de diseño comunes a
+ambos casos; los Capítulos~\ref{chap:q025} y~\ref{chap:q075} analizan cada filtro por separado (función de
+transferencia numérica, raíces, amortiguamiento y respuesta temporal), y el Capítulo~\ref{chap:comparacion}
+compara ambos diseños y discute las ventajas de cada tipo de amortiguamiento.
+
+% TODO: ajustar las etiquetas de los capítulos de la Consigna 2 a las que usa cada archivo.
+En la segunda parte, el Capítulo~\ref{chap:planta} obtiene el diagrama de Bode de la planta sin compensar y
+mide sobre él el ancho de banda y el margen de ganancia; el Capítulo~\ref{chap:retardo} diseña el
+compensador de retardo y el Capítulo~\ref{chap:atraso-adelanto} la red de atraso-adelanto, repitiendo en cada
+caso el análisis en frecuencia; y el Capítulo~\ref{chap:comparacion-compensadores} contrasta los resultados
+de ambas técnicas de compensación.
+
+Finalmente, el Capítulo~\ref{chap:conclusiones} presenta las conclusiones del trabajo. Todos los resultados
+analíticos de la primera parte fueron verificados numéricamente con el script que se adjunta en el
+Anexo~\ref{chap:anexo}.
