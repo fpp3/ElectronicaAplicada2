@@ -1,10 +1,10 @@
-\chapter{Diseño del filtro}
+\chapter{Consigna 1}
 \label{chap:diseno}
 
-\section{Topología adoptada}
+\section{Diseño del Filtro}
 
 Se adopta la topología de la Figura~\ref{fig:circuito}: la resistencia $R$ y el capacitor $C$ en serie con
-la entrada, y el inductor $L$ en derivación sobre la salida. La elección se fundamenta en que, con esta
+la entrada, y el inductor $L$ en paralelo sobre la salida. La elección se fundamenta en que, con esta
 disposición, la resistencia interna del generador $R_g$ queda en serie con $R$ y se incorpora al diseño
 como una resistencia total $R_t = R_g + R$, de modo que una resistencia de generador comparativamente baja
 no modifica apreciablemente el comportamiento del filtro.
@@ -140,7 +140,16 @@ Tabla~\ref{tab:componentes}. A modo de ejemplo, para $Q = \num{0.25}$:
     = \qty{59.70}{\micro\farad}.
 \end{gather*}
 
-\begin{table}[!ht]
+\begin{gather*}
+  K = \sqrt{\left(1 - \frac{1}{2 \cdot \num{0.75}^2}\right)
+      + \sqrt{\left(1 - \frac{1}{2 \cdot \num{0.75}^2}\right)^2 + 1}} = \num{1.057}, \\[4pt]
+  L = \frac{\qty{100}{\ohm} \cdot \num{0.75}}{2\pi \cdot \qty{400}{\hertz} \cdot \num{1.057}}
+    = \qty{28.23}{\milli\henry}, \qquad
+  C = \frac{1}{2\pi \cdot \qty{400}{\hertz} \cdot \num{1.057} \cdot \num{0.75} \cdot \qty{100}{\ohm}}
+    = \qty{5.02}{\micro\farad}.
+\end{gather*}
+
+\begin{table}[H]
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|}
     \hline
@@ -156,7 +165,3 @@ Tabla~\ref{tab:componentes}. A modo de ejemplo, para $Q = \num{0.25}$:
   \label{tab:componentes}
 \end{table}
 
-En los capítulos siguientes se trabaja con los valores de $L$ y $C$ redondeados de la
-Tabla~\ref{tab:componentes}, por lo que los coeficientes de las funciones de transferencia difieren
-levemente de los teóricos; la frecuencia de corte resultante se verificó en \qty{-3.01}{\decibel} en ambos
-casos (Anexo~\ref{chap:anexo}).
