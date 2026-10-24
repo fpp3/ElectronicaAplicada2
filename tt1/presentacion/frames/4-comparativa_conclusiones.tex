@@ -1,0 +1,254 @@
+% ==============================================================================
+% BLOQUE 4: GASTÓN GRASSO (Slides 25 a 32 — 8 diapositivas)
+% ==============================================================================
+
+% SLIDE 25: SUPERPOSICIÓN DE BODES
+\section{Comparativa y Cierre}
+\subsection{Superposición de Bodes}
+\begin{frame}
+  \frametitle{Comparativa de Bodes: Planta Original vs Compensadores}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      \centering
+      \adjustbox{max width=\linewidth, max height=5.5cm, keepaspectratio}{\input{figures/plot_ej2_bode_comparativa.tex}}
+    \end{column}
+
+    \begin{column}{0.40\textwidth}
+      \begin{tarjeta}
+        {\fontsize{8.5pt}{10pt}\selectfont \textbf{\color{NavyDark} Análisis Visual Comparativo:}}\\[2pt]
+        {\fontsize{7pt}{8.5pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \textbf{Curva Azul:} Planta original ($BW = \qty{11.59}{\kilo\hertz}$).
+          \item \textbf{Curva Roja:} Retardo. Caída prematura desde $1.2\text{ kHz}$; contrae el ancho de banda a $\qty{1.19}{\kilo\hertz}$ (pérdida del $\qty{89.7}{\percent}$).
+          \item \textbf{Curva Verde:} Atraso-Adelanto. Preserva la respuesta útil ($BW = \qty{11.56}{\kilo\hertz}$) y atenúa únicamente en alta frecuencia.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 26: CUADRO COMPARATIVO CUANTITATIVO
+\subsection{Cuadro Comparativo}
+\begin{frame}
+  \frametitle{Cuadro Comparativo Cuantitativo Integral (MF = 45°)}
+
+  \begin{tarjeta}
+    \centering
+    \setlength{\tabcolsep}{3.2pt}
+    \renewcommand{\arraystretch}{1.08}
+    {\fontsize{7.2pt}{9.0pt}\selectfont
+    \begin{tabular}{lccc}
+      \toprule
+      \textbf{Especificación / Parámetro} & \textbf{Planta Original} & \textbf{Comp. Retardo} & \textbf{Comp. Atraso-Adelanto} \\
+      \midrule
+      Ganancia estática continua ($K$) & $\qty{59.08}{\decibel}$ & $\qty{59.08}{\decibel}$ & $\qty{59.08}{\decibel}$ \\
+      Ancho de banda a $\qty{-3}{\decibel}$ ($BW_{\text{LA}}$) & $\qty{11.59}{\kilo\hertz}$ & $\qty{1.19}{\kilo\hertz}$ & $\mathbf{\qty{11.56}{\kilo\hertz}}$ \\
+      Variación porcentual ancho de banda & Base & \textbf{-89.7\%} & \textbf{-0.3\%} \\
+      Frecuencia para $MF = \ang{45}$ ($f_{45}$) & $\qty{52.90}{\kilo\hertz}$ & $\qty{9.96}{\kilo\hertz}$ & $\mathbf{\qty{45.11}{\kilo\hertz}}$ \\
+      Ganancia de lazo disponible en $f_{45}$ & $\qty{43.44}{\decibel}$ & $\qty{38.25}{\decibel}$ & $\qty{45.18}{\decibel}$ \\
+      Frecuencia de cruce por $\ang{-180}$ ($f_{180}$) & $\qty{110.99}{\kilo\hertz}$ & $\qty{24.35}{\kilo\hertz}$ & $\qty{84.49}{\kilo\hertz}$ \\
+      Ganancia en cruce de fase $\ang{-180}$ & $\qty{32.14}{\decibel}$ & $\qty{25.21}{\decibel}$ & $\qty{36.22}{\decibel}$ \\
+      Margen de Ganancia disponible ($MG_{45}$) & $\qty{11.30}{\decibel}$ & $\mathbf{\qty{13.04}{\decibel}}$ & $\mathbf{\qty{8.96}{\decibel}}$ \\
+      Margen de Ganancia directo sin atenuar & $\qty{-32.14}{\decibel}$ & $\qty{-25.21}{\decibel}$ & $\qty{-36.22}{\decibel}$ \\
+      \bottomrule
+    \end{tabular}
+    }
+  \end{tarjeta}
+\end{frame}
+
+% SLIDE 27: IMPACTO EN ANCHO DE BANDA
+\subsection{Análisis Comparativo}
+\begin{frame}
+  \frametitle{Impacto sobre el Ancho de Banda y Rapidez de Respuesta}
+
+  \begin{columns}[t, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Compensador de Retardo (Lag)}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Ancho de banda base de la planta:}
+          $BW = \qty{11.59}{\kilo\hertz}$, gobernado por su primer polo ($f_1 = \qty{12}{\kilo\hertz}$).
+          \item \textbf{Acción del polo dominante:}
+          Introduce polo en $f_d = \qty{1.2}{\kilo\hertz}$, forzando caída prematura de $-20\text{ dB/década}$.
+          \item \textbf{Contracción drástica de ancho de banda:}
+          $BW = f_{-3\text{dB}} \approx \mathbf{\qty{1.19}{\kilo\hertz}}$ (pérdida del $\mathbf{89.7\%}$).
+          \item \textbf{Frecuencia para $MF = \ang{45}$:}
+          Se alcanza a baja velocidad: $f_{45} \approx \mathbf{\qty{9.96}{\kilo\hertz}}$.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}[colframe=BlueAccent]
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{BlueAccent} Compensador Atraso-Adelanto}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Frecuencias de la red pasiva:}
+          Polo $f_p = \qty{220}{\kilo\hertz}$ y cero $f_z = \qty{1.1}{\mega\hertz}$, ambos por encima de la planta.
+          \item \textbf{Preservación de banda base:}
+          La ganancia y fase en bajas frecuencias se mantienen prácticamente intactas.
+          \item \textbf{Retención del espectro útil:}
+          $BW = f_{-3\text{dB}} \approx \mathbf{\qty{11.56}{\kilo\hertz}}$ (retiene el $\mathbf{99.7\%}$).
+          \item \textbf{Frecuencia para $MF = \ang{45}$:}
+          $f_{45} \approx \mathbf{\qty{45.11}{\kilo\hertz}}$ ($4.5$ veces más veloz).
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 28: MÁRGENES DE ESTABILIDAD
+\subsection{Márgenes de Estabilidad}
+\begin{frame}
+  \frametitle{Margen de Ganancia y Atenuación en Alta Frecuencia}
+
+  \begin{columns}[t, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Márgenes Obtenidos para $MF = \ang{45}$}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Planta sin compensar:}
+          Margen de ganancia directo fuertemente negativo ($MG = \mathbf{-32.14\ \unit{\decibel}}$).
+          \item \textbf{Compensador de retardo:}
+          Margen disponible $MG_{45} = \mathbf{\qty{13.04}{\decibel}}$ (cruce por $\ang{-180}$ en $f_{180} = \qty{24.35}{\kilo\hertz}$).
+          \item \textbf{Compensador atraso-adelanto:}
+          Margen disponible $MG_{45} = \mathbf{\qty{8.96}{\decibel}}$ (cruce por $\ang{-180}$ en $f_{180} = \qty{84.49}{\kilo\hertz}$).
+          \item \textbf{Criterio estándar de ingeniería:}
+          Ambas redes verifican holgadamente la condición de estabilidad robusta: $MG \ge \qty{6}{\decibel}$.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Atenuación y Dinámica de Fase}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Retardo RC:}
+          Mantiene pendiente de $-20\text{ dB/década}$ en todo el rango superior; máxima atenuación de alta frecuencia.
+          \item \textbf{Atraso-adelanto:}
+          La atenuación está acotada entre $f_p$ y $f_z$ por $\frac{R_2}{R_1+R_2} = \frac{1}{5}$ ($\qty{-13.98}{\decibel}$).
+          \item \textbf{Aporte del cero ($1.1\text{ MHz}$):}
+          Frena la caída de magnitud y recupera fase, estabilizando el lazo sin sacrificar la velocidad base.
+          \item \textbf{Compromiso:} Retardo entrega $\qty{4.08}{\decibel}$ más de margen, pero atraso-adelanto cuadruplica la velocidad.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 29: VENTAJAS POR RÉGIMEN
+\subsection{Regímenes de Amortiguamiento}
+\begin{frame}
+  \frametitle{Ventajas y Desventajas por Régimen de Amortiguamiento}
+
+  \begin{columns}[t, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Sobreamortiguado ($\xi = 2.0$, $Q = 0.25$)}}\\[2pt]
+        {\fontsize{7.5pt}{9.5pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \textbf{Sin sobreimpulso:} Dinámica monotónica sin \emph{ringing} (subpico despreciable de $\mathbf{-4.8\%}$).
+          \item \textbf{Alta robustez:} Muy tolerante frente a derivas y dispersión en $L$, $C$ o $R_g$.
+          \item \textbf{Compromiso de lentitud:} Establecimiento prolongado ($t_s = \mathbf{\qty{7.53}{\milli\second}}$, $\tau_1 = \qty{5.57}{\milli\second}$).
+          \item \textbf{Baja selectividad:} Transición suave de $-20\text{ dB/década}$ hasta el segundo polo.
+          \item \textbf{Componentes:} Exige capacidad elevada ($C = \qty{59.70}{\micro\farad}$).
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Subamortiguado ($\xi = 0.667$, $Q = 0.75$)}}\\[2pt]
+        {\fontsize{7.5pt}{9.5pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \textbf{Elevada rapidez:} Caída rápida ($t_{\text{caída}} = \qty{0.33}{\milli\second}$) y establecimiento $4\times$ menor ($t_s = \mathbf{\qty{1.82}{\milli\second}}$).
+          \item \textbf{Alta selectividad:} Caída abrupta de $-40\text{ dB/década}$ inmediatamente bajo $f_c$.
+          \item \textbf{Componentes compactos:} Capacidad $12\times$ menor ($C = \qty{5.02}{\micro\farad}$).
+          \item \textbf{Subpico pronunciado:} Oscilación amortiguada con subpico del $\mathbf{-22.2\%}$ ($T_d = \qty{3.17}{\milli\second}$).
+          \item \textbf{Crítico ($Q = 0.5$):} Óptimo sin sobreimpulso pero sensible a tolerancias.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 30: CRITERIOS DE ELECCIÓN
+\subsection{Aplicación en Ingeniería}
+\begin{frame}
+  \frametitle{Criterios de Elección según la Aplicación}
+
+  \begin{columns}[t, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Régimen de Amortiguamiento}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Sobreamortiguado:}
+          Recomendado cuando la señal alimenta etapas sensibles a excursiones de signo contrario (comparadores, detectores de nivel, limitadores de excursión), donde un sobreimpulso generaría disparos espurios.
+          \item \textbf{Subamortiguado:}
+          Óptimo para canales de transmisión selectivos y procesamiento de pulsos rápidos donde se priorice un tiempo de establecimiento mínimo ($t_s < \qty{2}{\milli\second}$) y atenuación abrupta en rechazo.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Red de Compensación}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Red de Atraso-Adelanto:}
+          Óptima en etapas de amplificación de instrumentación o procesamiento de señales donde el tiempo de establecimiento sea un parámetro crítico, requiriendo retener el $\qty{99.7}{\percent}$ del ancho de banda útil con $MG \ge \qty{6}{\decibel}$.
+          \item \textbf{Compensador de Retardo RC:}
+          Alternativa idónea en aplicaciones donde prime la inmunidad al ruido y la tolerancia frente a derivas térmicas o dispersión de fabricación, a costa de una respuesta temporal perceptiblemente más lenta.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 31: CONCLUSIONES
+\subsection{Conclusiones Integrales}
+\begin{frame}
+  \frametitle{Conclusiones Integrales del Proyecto}
+
+  \begin{columns}[t, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Filtro Pasa Alto de Segundo Orden}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Demostración de $\omega_0 \neq \omega_c$:} La constante de corrección $K$ fue indispensable para validar analíticamente los $\qty{-3.01}{\decibel}$ en $\qty{400}{\hertz}$.
+          \item \textbf{Correspondencia unívoca:} Las raíces en plano $s$ describen rigurosamente la dinámica observada en el dominio del tiempo.
+          \item \textbf{Compromiso resuelto:} Amortiguamiento elevado brinda suavidad y robustez; amortiguamiento bajo ofrece rapidez ($4\times$) y selectividad.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Control y Estabilidad de Tercer Orden}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Inestabilidad de planta pura:} Ganancia de $K=900$ con tres polos reales arroja $MG = \qty{-32.14}{\decibel}$, demandando compensación obligatoria.
+          \item \textbf{Criterio $MF = \ang{45}$ verificado:} Ambas redes garantizan estabilidad robusta ($MG \ge \qty{6}{\decibel}$) y sobreimpulso acotado a $< \qty{25}{\percent}$.
+          \item \textbf{Superioridad de atraso-adelanto:} Preserva el $\qty{99.7}{\percent}$ del ancho de banda base ($11.56\text{ kHz}$) y opera a $f_{45} = \qty{45.11}{\kilo\hertz}$.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}

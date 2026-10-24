@@ -1,0 +1,13 @@
+\begin{circuitikz}[american, scale=1.0]
+    \draw (0,3) node[left] {$V_i$} 
+          to[short, o-] (0.5,3)
+          to[R, l=$R_1$, -*] (3,3)
+          to[short, -o] (4.5,3) node[right] {$V_o$};
+    \draw (3,3) 
+          to[R, l=$R_2$, *-] (3,1.5)
+          to[C, l=$C$] (3,0) node[ground] {};
+    \draw (0,0) node[left] {} 
+          to[short, o-] (0.5,0) node[ground] {};
+    \draw (4.5,0) node[right] {} 
+          to[short, o-] (4.0,0) node[ground] {};
+\end{circuitikz}

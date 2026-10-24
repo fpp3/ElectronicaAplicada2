@@ -1,0 +1,277 @@
+% ==============================================================================
+% BLOQUE 3: ANGELO PRIETO (Slides 17 a 24 — 8 diapositivas)
+% ==============================================================================
+
+% SLIDE 17: PLANTA DE 3ER ORDEN
+\section{Compensación de Sistemas}
+\subsection{Planta de 3er Orden}
+\begin{frame}
+  \frametitle{Planta de Tercer Orden y Parámetros}
+
+  \begin{columns}[t, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Función de Transferencia:}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \[ G(s) = \frac{K}{\left(1 + \frac{s}{p_1}\right)\left(1 + \frac{s}{p_2}\right)\left(1 + \frac{s}{p_3}\right)} \]
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Ganancia estática en continua:}
+          $K = 900 \implies |G(0)| = \mathbf{\qty{59.08}{\decibel}}$.
+          \item \textbf{Ancho de banda base ($BW_{\text{LA}}$):}
+          $BW = f_{-3\text{dB}} \approx \mathbf{\qty{11.59}{\kilo\hertz}}$.
+          \item Dominado por el primer polo de $12\text{ kHz}$.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Polos Asignados (Grupo 5):}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{3pt}
+          \item \textbf{Primer polo ($f_{p1}$):}
+          $f_{p1} = \qty{12}{\kilo\hertz} \implies p_1 \approx \qty{75398}{\radian\per\second}$
+          \item \textbf{Segundo polo ($f_{p2}$):}
+          $f_{p2} = \qty{70}{\kilo\hertz} \implies p_2 \approx \qty{439823}{\radian\per\second}$
+          \item \textbf{Tercer polo ($f_{p3}$):}
+          $f_{p3} = \qty{140}{\kilo\hertz} \implies p_3 \approx \qty{879646}{\radian\per\second}$
+          \item Planta de orden 3 con alta ganancia y polos en alta frecuencia.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 18: ANÁLISIS DE BODE
+\subsection{Respuesta en Frecuencia}
+\begin{frame}
+  \frametitle{Respuesta en Frecuencia a Lazo Abierto (Bode)}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      \centering
+      \adjustbox{max width=\linewidth, max height=5.5cm, keepaspectratio}{\input{figures/plot_ej2_bode_planta.tex}}
+    \end{column}
+
+    \begin{column}{0.40\textwidth}
+      \begin{tarjeta}
+        {\fontsize{8.5pt}{10pt}\selectfont \textbf{\color{NavyDark} Comportamiento Asintótico:}}\\[2pt]
+        {\fontsize{7pt}{8.5pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \textbf{$f < 12\text{ kHz}$:} Ganancia $+59.08\text{ dB}$, fase $\ang{0}$.
+          \item \textbf{$12\text{k} < f < 70\text{ kHz}$:} Actúa $p_1$; pendiente $-20\ \text{dB/década}$, fase hacia $\ang{-90}$.
+          \item \textbf{$70\text{k} < f < 140\text{ kHz}$:} Actúan $p_1, p_2$; pendiente $-40\ \text{dB/década}$, cruce por $\ang{-180}$.
+          \item \textbf{$f > 140\text{ kHz}$:} Actúan 3 polos; pendiente $-60\ \text{dB/década}$, fase hacia $\ang{-270}$.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 19: DIAGNÓSTICO DE INESTABILIDAD
+\subsection{Diagnóstico de Inestabilidad}
+\begin{frame}
+  \frametitle{Diagnóstico de Inestabilidad a Lazo Cerrado}
+
+  \begin{columns}[t, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}[colframe=AlertRed]
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{AlertRed} Diagnóstico Numérico Directo:}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Cruce de fase por $\ang{-180}$:}
+          $f_{180} \approx \mathbf{\qty{110.99}{\kilo\hertz}}$
+          \item \textbf{Ganancia en el cruce de fase:}
+          $|G(f_{180})| \approx \mathbf{\qty{32.14}{\decibel}}$ ($40.5$ veces)
+          \item \textbf{Margen de Ganancia directo:}
+          $MG = 0 - 32.14 = \mathbf{-32.14\ \unit{\decibel}}$
+          \item \textbf{Cruce de ganancia por $\qty{0}{\decibel}$:}
+          $f_{0\si{\decibel}} \approx \qty{464.42}{\kilo\hertz}$ con fase $\ang{-243.17}$ ($MF = \ang{-63.17}$).
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Consecuencia Física:}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item Con realimentación unitaria directa, la planta es \textbf{incondicionalmente inestable}.
+          \item En $110.99\text{ kHz}$ el desfasaje de $\ang{-180}$ transforma la realimentación negativa en positiva con amplificación de $40.5$ veces.
+          \item Los polos de lazo cerrado migran al semiplano derecho $\to$ auto-oscilación violenta.
+          \item \textbf{Solución:} Es mandatorio diseñar redes de compensación en frecuencia.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 20: CALIBRACIÓN MF = 45°
+\subsection{Calibración para MF = 45°}
+\begin{frame}
+  \frametitle{Criterio de Calibración para Margen de Fase $MF = \ang{45}$}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}[colframe=AlertGreen]
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{AlertGreen} Determinación Gráfica en Bode:}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Fase requerida para $MF = \ang{45}$:}
+          $\phi = \ang{-180} + \ang{45} = \mathbf{\ang{-135}}$
+          \item \textbf{Frecuencia para $\phi = \ang{-135}$ ($f_{45}$):}
+          $f_{45} \approx \mathbf{\qty{52.90}{\kilo\hertz}}$
+          \item \textbf{Ganancia disponible en $f_{45}$:}
+          $|G(f_{45})| \approx \mathbf{\qty{43.44}{\decibel}}$ ($148.6$ veces)
+          \item \textbf{Margen de Ganancia disponible ($MG_{45}$):}
+          $MG_{45} = 43.44 - 32.14 = \mathbf{11.30\ \unit{\decibel}} > \qty{6}{\decibel}$
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Significado en Diseño:}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item Atenuar puramente con un divisor resistivo exigiría $\beta = 1/148.6 = \qty{-43.44}{\decibel}$.
+          \item $MG_{45} = \qty{11.30}{\decibel} > \qty{6}{\decibel}$ garantiza que la planta admite operar con $MF = \ang{45}$ manteniendo margen seguro.
+          \item Se abordarán dos estrategias pasivas:
+          \begin{itemize}\setlength{\itemsep}{1.5pt}
+            \item Compensador de Retardo (Lag).
+            \item Red de Atraso-Adelanto (Lead-Lag).
+          \end{itemize}
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 21: RETARDO SÍNTESIS
+\subsection{Compensador de Retardo}
+\begin{frame}
+  \frametitle{Síntesis del Compensador de Retardo (Lag)}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Topología y Dimensionamiento:}}\\[2pt]
+        {\fontsize{7.5pt}{9.2pt}\selectfont
+        \[ G_c(s) = \frac{1}{1 + sRC} = \frac{1}{1 + \frac{s}{2\pi f_d}}, \quad f_d = \qty{1.2}{\kilo\hertz} \]
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item Capacitor comercial adoptado: $C = \mathbf{\qty{100}{\nano\farad}}$ (film).
+          \item Resistencia calculada:
+          $R = \frac{1}{2\pi f_d C} \approx \qty{1326.29}{\ohm}$.
+          \item \textbf{Normalización comercial ($\qty{1}{\percent}$):}
+          $R = \mathbf{\qty{1.33}{\kilo\ohm}}$ (Serie E96).
+          \item \textbf{Principio del Polo Dominante:}
+          El polo en $1.2\text{ kHz}$ derriba la ganancia antes de que los polos en $70\text{k}$ y $140\text{ kHz}$ aporten desfasaje.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.50\textwidth}
+      \centering
+      \adjustbox{max width=\linewidth, max height=4.6cm, keepaspectratio}{\input{figures/crkt_ej2_compensador_retardo.tex}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 22: RETARDO BODE
+\begin{frame}
+  \frametitle{Compensador de Retardo: Respuesta y Pérdida de Ancho de Banda}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      \centering
+      \adjustbox{max width=\linewidth, max height=5.5cm, keepaspectratio}{\input{figures/plot_ej2_bode_retardo.tex}}
+    \end{column}
+
+    \begin{column}{0.40\textwidth}
+      \begin{tarjeta}
+        {\fontsize{8.5pt}{10pt}\selectfont \textbf{\color{NavyDark} Parámetros (MF = 45°):}}\\[2pt]
+        {\fontsize{7pt}{8.5pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \textbf{Colapso de ancho de banda:}\\
+          $BW = f_{-3\text{dB}} \approx \mathbf{\qty{1.19}{\kilo\hertz}}$\\
+          (pérdida del $\mathbf{89.7\%}$ de banda útil).
+          \item \textbf{Frecuencia para $MF = \ang{45}$:}\\
+          $f_{45} \approx \qty{9.96}{\kilo\hertz}$ ($|G| \approx \qty{38.25}{\decibel}$).
+          \item \textbf{Cruce por $\ang{-180}$:}\\
+          $f_{180} \approx \qty{24.35}{\kilo\hertz}$ ($|G| \approx \qty{25.21}{\decibel}$).
+          \item \textbf{Margen de Ganancia disponible:}\\
+          $MG_{45} = \mathbf{13.04\ \unit{\decibel}} > \qty{6}{\decibel}$.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 23: ATRASO-ADELANTO ESTRUCTURA
+\subsection{Compensador de Atraso-Adelanto}
+\begin{frame}
+  \frametitle{Red de Atraso-Adelanto: Estructura Topológica}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Topología Circuital y Objetivos:}}\\[2pt]
+        {\fontsize{7.5pt}{9.2pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \textbf{Estructura:} Rama serie con $R_1$, y rama derivación con $R_2$ en serie con $C$.
+          \item \textbf{Función de transferencia de la red:}
+          \[ G_{c2}(s) = \frac{1 + s R_2 C}{1 + s (R_1 + R_2) C} = \frac{1 + \frac{s}{2\pi f_z}}{1 + \frac{s}{2\pi f_p}} \]
+          \item \textbf{Frecuencias asignadas:}
+          Polo $f_p = \qty{220}{\kilo\hertz}$, Cero $f_z = \qty{1.1}{\mega\hertz}$.
+          \item \textbf{Preservación de Banda Base:}
+          Como $f_p, f_z \gg 12\text{ kHz}$, la banda base útil permanece inalterada.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.50\textwidth}
+      \centering
+      \adjustbox{max width=\linewidth, max height=4.8cm, keepaspectratio}{\input{figures/crkt_ej2_compensador_atraso_adelanto.tex}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 24: ATRASO-ADELANTO BODE Y RESULTADOS
+\begin{frame}
+  \frametitle{Red de Atraso-Adelanto: Respuesta y Preservación de Ancho de Banda}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      \centering
+      \adjustbox{max width=\linewidth, max height=5.5cm, keepaspectratio}{\input{figures/plot_ej2_bode_atraso_adelanto.tex}}
+    \end{column}
+
+    \begin{column}{0.40\textwidth}
+      \begin{tarjeta}
+        {\fontsize{8.5pt}{10pt}\selectfont \textbf{\color{NavyDark} Componentes y Desempeño:}}\\[2pt]
+        {\fontsize{7pt}{8.5pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \textbf{Componentes ($C = \qty{100}{\pico\farad}$ C0G):}\\
+          $R_2 = \mathbf{\qty{1.45}{\kilo\ohm}}$, $R_1 = \mathbf{\qty{5.76}{\kilo\ohm}}$ ($\qty{1}{\percent}$).
+          \item \textbf{Ancho de banda preservado:}\\
+          $BW \approx \mathbf{\qty{11.56}{\kilo\hertz}}$ ($\mathbf{99.7\%}$).
+          \item \textbf{Frecuencia para $MF = \ang{45}$:}\\
+          $f_{45} \approx \mathbf{\qty{45.11}{\kilo\hertz}}$ ($4.5\times$ más veloz).
+          \item \textbf{Margen de Ganancia disponible:}\\
+          $MG_{45} = \mathbf{8.96\ \unit{\decibel}} > \qty{6}{\decibel}$.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}

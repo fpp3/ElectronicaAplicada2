@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=0.9\textwidth, height=0.5\textwidth,
+    xlabel={$t$ [\unit{\milli\second}]}, ylabel={$v_o(t)$ [\unit{\volt}]},
+    xmin=0, xmax=8, ymin=-0.3, ymax=1.05,
+    grid=both, grid style={gray!30, dashed},
+    legend pos=north east, legend cell align=left, legend style={font=\footnotesize},
+    tick label style={font=\footnotesize},
+    samples=400, domain=0:8, no marks,
+  ]
+    \addplot[blue, very thick] {1.07734*exp(-2.50072*x) - 0.07734*exp(-0.17953*x)};
+    \addlegendentry{$Q = \num{0.25}$ ($\xi = 2$, sobreamortiguado)}
+    \addplot[red!80!black, very thick]
+      {exp(-1.77117*x)*(cos(deg(1.97975*x)) - 0.8946*sin(deg(1.97975*x)))};
+    \addlegendentry{$Q = \num{0.75}$ ($\xi = \num{0.667}$, subamortiguado)}
+    \addplot[gray, dashed] {0.02};
+    \addlegendentry{banda de $\pm\qty{2}{\percent}$}
+    \addplot[gray, dashed, forget plot] {-0.02};
+  \end{axis}
+\end{tikzpicture}

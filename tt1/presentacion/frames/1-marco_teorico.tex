@@ -1,0 +1,230 @@
+% ==============================================================================
+% BLOQUE 1: FRANCO PALOMBO (Slides 2 a 7 — Marco General y Fundamentos)
+% ==============================================================================
+
+% SLIDE 2: OBJETIVOS GENERALES
+\section{Marco General}
+\subsection{Objetivos del Proyecto}
+\begin{frame}
+  \frametitle{Objetivos Principales del Proyecto}
+
+  \begin{columns}[t, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Sistemas de Segundo Orden}}\\[2pt]
+        {\fontsize{7.5pt}{9pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item Filtro pasa alto RLC a $f_c = \qty{400}{\hertz}$ a $\qty{-3}{\decibel}$.
+          \item Amortiguamiento: $Q_1 = 0.25$ vs $Q_2 = 0.75$.
+          \item Factor corrector $K$ para compensar $\omega_0 \neq \omega_c$.
+          \item Raíces en plano $s$, componentes E96 y respuesta temporal.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Control y Estabilidad Realimentada}}\\[2pt]
+        {\fontsize{7.5pt}{9pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item Planta 3er orden ($K = 900 \implies \qty{59.08}{\decibel}$).
+          \item Diagnóstico de inestabilidad ($MG = \qty{-32.14}{\decibel}$).
+          \item Compensadores para $MF = \ang{45}$:
+          \begin{itemize}\setlength{\itemsep}{1pt}
+            \item Retardo ($f_d = \qty{1.2}{\kilo\hertz}$).
+            \item Atraso-Adelanto ($220\text{k} \to 1.1\text{ MHz}$).
+          \end{itemize}
+          \item Compromiso entre ancho de banda, rapidez y estabilidad.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 3: PARÁMETROS ASIGNADOS
+\subsection{Parámetros Oficiales}
+\begin{frame}
+  \frametitle{Parámetros de Diseño Asignados (Grupo 5)}
+
+  \begin{tarjeta}
+    \centering
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.12}
+    {\fontsize{7.5pt}{9.5pt}\selectfont
+    \begin{tabular}{@{}p{4.6cm}p{7.9cm}@{}}
+      \toprule
+      \textbf{Parámetro de Diseño} & \textbf{Valor Asignado / Especificación de Diseño} \\
+      \midrule
+      \multicolumn{2}{@{}l}{\textbf{\color{NavyDark}Filtro Pasa Alto RLC (Segundo Orden)}} \\
+      Frecuencia de corte ($f_c$) & $\qty{400}{\hertz}$ exactos a $\qty{-3.01}{\decibel}$ \\
+      Factores de calidad asignados & $Q_1 = 0.25$ (sobreamortiguado) \quad y \quad $Q_2 = 0.75$ (subamortiguado) \\
+      Resistencia $R$ (elección de diseño) & $\qty{100}{\ohm}$ (compromiso: $R > R_g = \qty{50}{\ohm}$ y valores de $L$ manejables) \\
+      \midrule
+      \multicolumn{2}{@{}l}{\textbf{\color{NavyDark}Planta Realimentada y Compensación (Tercer Orden)}} \\
+      Ganancia de la planta ($K$) & $K = 900 \implies |G(0)| = 20\log_{10}(900) \approx \mathbf{\qty{59.08}{\decibel}}$ \\
+      Polos reales de la planta & $f_1 = \qty{12}{\kilo\hertz}, \quad f_2 = \qty{70}{\kilo\hertz}, \quad f_3 = \qty{140}{\kilo\hertz}$ \\
+      Margen de Fase requerido ($MF$) & $MF = \ang{45}$ (amortiguamiento óptimo, sobreimpulso $< \qty{25}{\percent}$) \\
+      Compensador Retardo ($f_d$) & $f_d = \qty{1.2}{\kilo\hertz}$ con capacitor de referencia $C = \qty{100}{\nano\farad}$ \\
+      Compensador Atraso-Adelanto & Polo $f_p = \qty{220}{\kilo\hertz}$, Cero $f_z = \qty{1.1}{\mega\hertz}$ ($C = \qty{100}{\pico\farad}$) \\
+      \bottomrule
+    \end{tabular}
+    }
+  \end{tarjeta}
+\end{frame}
+
+% SLIDE 4: MARCO TEÓRICO DE ESTABILIDAD
+\subsection{Criterio de Estabilidad}
+\begin{frame}
+  \frametitle{Fundamentos: Criterio de Estabilidad de Bode y Márgenes}
+
+  \begin{columns}[t, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Condición de Barkhausen:}}\\[2pt]
+        {\fontsize{7.5pt}{9pt}\selectfont
+        Para realimentación unitaria:
+        \[ T(s) = \frac{G(s)}{1 + G(s)} \]
+        El denominador se anula si $G(j\omega) = -1$:
+        \begin{itemize}\setlength{\itemsep}{1.5pt}
+          \item Ganancia: $|G(j\omega)| = 1 \implies \qty{0}{\decibel}$.
+          \item Desfasaje: $\angle G(j\omega) = \ang{-180}$.
+        \end{itemize}
+        Al alcanzar $\ang{-180}$, la realimentación se transforma en positiva. Si a esa frecuencia $|G| > \qty{0}{\decibel}$, el lazo es inestable y auto-oscila.
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Definición de Márgenes:}}\\[2pt]
+        {\fontsize{7.5pt}{9pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \textbf{Margen de Fase ($MF$):}
+          $MF = \ang{180} + \angle G(f_{0\si{\decibel}})$.\\
+          Desfasaje adicional tolerable antes de oscilar.
+          \item \textbf{Margen de Ganancia ($MG$):}
+          $MG = 0 - |G(f_{180})|_{\si{\decibel}}$.\\
+          Atenuación adicional tolerable en cruce de fase.
+          \item \textbf{Criterio Robusto de Diseño:}
+          $MF \ge \ang{45}$ y $MG \ge \qty{6}{\decibel}$ para evitar sobreoscilaciones y tolerar dispersión.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 5: TOPOLOGÍA RLC
+\section{Filtro Pasa Alto RLC}
+\subsection{Topología del Filtro}
+\begin{frame}
+  \frametitle{Topología del Filtro Pasa Alto RLC}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.44\textwidth}
+      \begin{tarjeta}
+        {\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Elección Topológica y Justificación:}}\\[2pt]
+        {\fontsize{7.5pt}{9.2pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \textbf{Rama serie:} Resistencia $R$ y capacitor $C$.
+          \item \textbf{Rama derivación:} Inductor $L$ conectado a masa en bornes de salida.
+          \item \textbf{Resistencia de fuente $R_g$ ($\qty{50}{\ohm}$):} Queda en serie directa con $R$: $R_t = R + R_g = \qty{150}{\ohm}$. No altera la topología.
+          \item \textbf{Comportamiento asintótico:}
+          \begin{itemize}\setlength{\itemsep}{1pt}
+            \item Baja frec. ($s \to 0$): $C$ abre, $L$ cortoc. ($|H| \to 0$).
+            \item Alta frec. ($s \to \infty$): $C$ cortoc., $L$ abre ($|H| \to 1$).
+          \end{itemize}
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.54\textwidth}
+      \centering
+      \adjustbox{max width=\linewidth, max height=3.6cm, keepaspectratio}{\input{figures/circuito-pasa-alto.tex}}
+      \vspace{4pt}
+      \begin{tarjeta}[colframe=CardBorder, colback=CardBg, boxrule=0.5pt, top=3pt, bottom=3pt, left=5pt, right=5pt]
+        {\fontsize{7.5pt}{9pt}\selectfont
+        \textbf{\color{NavyDark} Parámetros del Circuito:} $R = \qty{100}{\ohm}$, $R_g = \qty{50}{\ohm}$, $R_t = \qty{150}{\ohm}$\\
+        \textbf{\color{CyanDark} Salida:} $v_o(t)$ tomada directamente sobre el inductor $L$ a masa.
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 6: DEDUCCIÓN DE TRANSFERENCIA
+\subsection{Función de Transferencia}
+\begin{frame}
+  \frametitle{Deducción Matemática de $H(s)$ en Laplace}
+
+  \begin{columns}[t, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Análisis de Malla en Laplace:}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        Impedancia total de la malla serie:
+        \[ Z_t(s) = R_t + sL + \frac{1}{sC} \]
+        Corriente que circula por el circuito:
+        \[ I(s) = \frac{V_i(s)}{Z_t(s)} = \frac{sC}{s^2 LC + sR_t C + 1} V_i(s) \]
+        Tensión de salida tomada en el inductor $L$:
+        \[ V_o(s) = sL \cdot I(s) \]
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Normalización de H(s):}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        Dividiendo numerador y denominador por $LC$:
+        \[ H(s) = \frac{V_o(s)}{V_i(s)} = \frac{s^2}{s^2 + s \frac{R_t}{L} + \frac{1}{LC}} \]
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \textbf{Numerador:} Cero doble en el origen ($s^2$).
+          \item \textbf{Denominador:} Polinomio mónico de segundo orden que fija los polos del filtro.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE 7: FORMA CANÓNICA Y PROPIEDADES
+\subsection{Forma Canónica y Propiedades}
+\begin{frame}
+  \frametitle{Forma Canónica de Segundo Orden y Parámetros}
+
+  \begin{columns}[t, onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Función Canónica Estándar:}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \[ H(s) = \frac{s^2}{s^2 + \frac{\omega_0}{Q} s + \omega_0^2} = \frac{s^2}{s^2 + 2\xi\omega_0 s + \omega_0^2} \]
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \textbf{Pulsación natural:} $\omega_0 = \frac{1}{\sqrt{LC}}$
+          \item \textbf{Factor de calidad:} $Q = \frac{\omega_0 L}{R_t} = \frac{1}{R_t} \sqrt{\frac{L}{C}}$
+          \item \textbf{Amortiguamiento:} $\xi = \frac{1}{2Q} = \frac{R_t}{2} \sqrt{\frac{C}{L}}$
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{tarjeta}
+        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Propiedades Frecuenciales:}}\\[2pt]
+        {\fontsize{8pt}{10pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{2.5pt}
+          \item \textbf{Cero doble en el origen ($s=0$):}
+          Genera una pendiente inicial de $+40\ \text{dB/década}$ ($+12\ \text{dB/octava}$) en banda atenuada.
+          \item \textbf{Asíntota de alta frecuencia:}
+          Para $\omega \gg \omega_0$, $H(j\omega) \to 1$ ($\qty{0}{\decibel}$, fase $\ang{0}$).
+          \item \textbf{Fase en resonancia:}
+          En $\omega = \omega_0$, la fase es exactamente $\ang{+90}$.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}

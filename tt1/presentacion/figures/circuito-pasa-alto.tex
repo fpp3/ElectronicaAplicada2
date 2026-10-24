@@ -1,0 +1,11 @@
+\begin{tikzpicture}[american]
+  \draw (0,0) to[short, o-] (0.4,0)
+        to[R, l=$R$] (2.2,0)
+        to[C, l=$C$] (4,0)
+        to[short, -o] (5.5,0);
+  \draw (4,0) to[L, l=$L$, *-*] (4,-2.5);
+  \draw (0,-2.5) to[short, o-o] (5.5,-2.5);
+  \draw (4,-2.5) node[ground]{};
+  \draw (0,0) to[open, v=$v_i(t)$] (0,-2.5);
+  \draw (5.5,0) to[open, v=$v_o(t)$] (5.5,-2.5);
+\end{tikzpicture}

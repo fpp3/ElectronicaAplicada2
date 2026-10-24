@@ -1,0 +1,182 @@
+\documentclass[aspectratio=169, 10pt]{beamer}
+
+% ==============================================================================
+% CONFIGURACIÓN TIPOGRÁFICA Y DE PAQUETES
+% ==============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot,es-noshorthands]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{plotmarks,fpu}
+\usepackage{adjustbox}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,raster}
+
+% Reducción de espaciados verticales globales en fórmulas display
+\setlength{\abovedisplayskip}{2pt}
+\setlength{\belowdisplayskip}{2pt}
+\setlength{\abovedisplayshortskip}{1pt}
+\setlength{\belowdisplayshortskip}{1pt}
+
+% ==============================================================================
+% PALETA DE COLORES PROFESIONAL
+% ==============================================================================
+\definecolor{NavyDark}{RGB}{15, 30, 54}        % Azul marino institucional profundo
+\definecolor{BlueAccent}{RGB}{20, 90, 160}      % Azul técnico acento
+\definecolor{CyanDark}{RGB}{10, 110, 140}       % Cyan sobrio
+\definecolor{SlateDark}{RGB}{35, 45, 55}        % Texto principal grafito
+\definecolor{SlateMuted}{RGB}{95, 105, 115}     % Texto secundario
+\definecolor{CardBg}{RGB}{248, 250, 252}        % Fondo tarjetas / canvas
+\definecolor{CardBorder}{RGB}{218, 225, 233}    % Borde tarjeta
+\definecolor{AlertRed}{RGB}{185, 28, 28}        % Rojo de advertencia
+\definecolor{AlertGreen}{RGB}{22, 101, 52}      % Verde de verificación
+\definecolor{AlertAmber}{RGB}{180, 83, 9}       % Ámbar preventivo
+
+% Colores de distincion institucional por bloque
+\definecolor{BadgeFrancoBg}{RGB}{224, 242, 254}
+\definecolor{BadgeFrancoFg}{RGB}{3, 105, 161}
+\definecolor{BadgeNachoBg}{RGB}{220, 252, 231}
+\definecolor{BadgeNachoFg}{RGB}{21, 128, 61}
+\definecolor{BadgeAngeloBg}{RGB}{254, 243, 199}
+\definecolor{BadgeAngeloFg}{RGB}{180, 83, 9}
+\definecolor{BadgeGastonBg}{RGB}{243, 232, 255}
+\definecolor{BadgeGastonFg}{RGB}{126, 34, 206}
+
+\setbeamercolor{background canvas}{bg=CardBg}
+\setbeamercolor{normal text}{fg=SlateDark}
+\setbeamercolor{structure}{fg=NavyDark}
+\setbeamercolor{item}{fg=BlueAccent}
+
+% Encabezado nativo limpio, moderno y elegante
+\setbeamertemplate{navigation symbols}{}
+
+\makeatletter
+\setbeamertemplate{frametitle}{%
+  \vspace{0.04cm}%
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.6cm,rightskip=0.6cm]{frametitle}%
+    \begin{minipage}{\dimexpr\paperwidth-1.2cm\relax}%
+      {\fontsize{6.8pt}{8pt}\selectfont \textbf{\color{NavyDark}\insertsectionhead\ \textbar\ \insertsubsectionhead}}\par\vspace{1.5pt}%
+      {\fontsize{10.5pt}{12.5pt}\selectfont \textbf{\color{SlateDark}\insertframetitle}}%
+    \end{minipage}%
+  \end{beamercolorbox}%
+  \vspace{-0.22cm}%
+}
+\makeatother
+
+% Pie de página elegante con posición fija y despejada
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.0ex,dp=0.6ex,leftskip=0.6cm,rightskip=0.6cm]{normal text}%
+      {\fontsize{6.5pt}{7.5pt}\selectfont \color{SlateMuted} UTN FRC \textbar\ Electrónica Aplicada II (4R2) -- Grupo 5}
+      \hfill
+      {\fontsize{7pt}{8pt}\selectfont \textbf{\color{NavyDark} \insertframenumber{} / \inserttotalframenumber}}
+    \end{beamercolorbox}%
+  }%
+  \vspace{0.03cm}
+}
+
+% Comandos de badges individuales por integrante
+\newcommand{\badgeFranco}{%
+  \tcbox[on line, enhanced, size=small, colback=BadgeFrancoBg, colframe=BadgeFrancoFg, boxrule=0.5pt, arc=1mm, top=1pt, bottom=1pt, left=3.5pt, right=3.5pt]{%
+    {\fontsize{6.5pt}{7.5pt}\selectfont \textbf{\color{BadgeFrancoFg} Franco Palombo}}%
+  }%
+}
+\newcommand{\badgeNacho}{%
+  \tcbox[on line, enhanced, size=small, colback=BadgeNachoBg, colframe=BadgeNachoFg, boxrule=0.5pt, arc=1mm, top=1pt, bottom=1pt, left=3.5pt, right=3.5pt]{%
+    {\fontsize{6.5pt}{7.5pt}\selectfont \textbf{\color{BadgeNachoFg} Ignacio Gil}}%
+  }%
+}
+\newcommand{\badgeAngelo}{%
+  \tcbox[on line, enhanced, size=small, colback=BadgeAngeloBg, colframe=BadgeAngeloFg, boxrule=0.5pt, arc=1mm, top=1pt, bottom=1pt, left=3.5pt, right=3.5pt]{%
+    {\fontsize{6.5pt}{7.5pt}\selectfont \textbf{\color{BadgeAngeloFg} Angelo Prieto}}%
+  }%
+}
+\newcommand{\badgeGaston}{%
+  \tcbox[on line, enhanced, size=small, colback=BadgeGastonBg, colframe=BadgeGastonFg, boxrule=0.5pt, arc=1mm, top=1pt, bottom=1pt, left=3.5pt, right=3.5pt]{%
+    {\fontsize{6.5pt}{7.5pt}\selectfont \textbf{\color{BadgeGastonFg} Gastón Grasso}}%
+  }%
+}
+
+% Caja de contenido espaciosa y legible
+\newtcolorbox{tarjeta}[1][]{
+  enhanced,
+  colback=white,
+  colframe=CardBorder,
+  boxrule=0.6pt,
+  arc=1.5mm,
+  top=4.5pt,
+  bottom=4.5pt,
+  left=6pt,
+  right=6pt,
+  #1
+}
+
+\begin{document}
+
+
+% SLIDE 1: PORTADA
+\begin{frame}[plain]
+  \vspace{0.2cm}
+  \begin{tarjeta}[colframe=NavyDark, boxrule=1.2pt, top=10pt, bottom=10pt, left=12pt, right=12pt]
+    {\fontsize{8.5pt}{10pt}\selectfont \textbf{\color{CyanDark} UNIVERSIDAD TECNOLÓGICA NACIONAL \textbar\ FACULTAD REGIONAL CÓRDOBA}}\\[1pt]
+    {\fontsize{7.5pt}{9pt}\selectfont \textbf{\color{SlateMuted} DEPARTAMENTO DE INGENIERÍA ELECTRÓNICA -- ELECTRÓNICA APLICADA II (4R2)}}\\[7pt]
+
+    {\fontsize{13pt}{16pt}\selectfont \textbf{\color{NavyDark} Respuesta en Frecuencia y Estabilidad con Realimentación}}\\[3.5pt]
+    {\fontsize{9.5pt}{12pt}\selectfont \color{BlueAccent} Filtro Pasa Alto RLC (2do Orden) y Compensación en Frecuencia de Planta (3er Orden)}\\[14pt]
+
+    \begin{columns}[c, onlytextwidth]
+      \begin{column}{0.23\textwidth}
+        \begin{tcolorbox}[enhanced, halign=center, colback=BadgeFrancoBg, colframe=BadgeFrancoFg, boxrule=0.6pt, arc=1.2mm, top=3pt, bottom=3pt, left=2pt, right=2pt]
+          {\fontsize{8pt}{9pt}\selectfont \textbf{\color{BadgeFrancoFg} Franco Palombo}}\\[1.5pt]
+          {\fontsize{6.5pt}{7.5pt}\selectfont \color{SlateMuted} Introducción y Marco}
+        \end{tcolorbox}
+      \end{column}
+      \begin{column}{0.23\textwidth}
+        \begin{tcolorbox}[enhanced, halign=center, colback=BadgeNachoBg, colframe=BadgeNachoFg, boxrule=0.6pt, arc=1.2mm, top=3pt, bottom=3pt, left=2pt, right=2pt]
+          {\fontsize{8pt}{9pt}\selectfont \textbf{\color{BadgeNachoFg} Ignacio Gil}}\\[1.5pt]
+          {\fontsize{6.5pt}{7.5pt}\selectfont \color{SlateMuted} Filtro Pasa Alto RLC}
+        \end{tcolorbox}
+      \end{column}
+      \begin{column}{0.23\textwidth}
+        \begin{tcolorbox}[enhanced, halign=center, colback=BadgeAngeloBg, colframe=BadgeAngeloFg, boxrule=0.6pt, arc=1.2mm, top=3pt, bottom=3pt, left=2pt, right=2pt]
+          {\fontsize{8pt}{9pt}\selectfont \textbf{\color{BadgeAngeloFg} Angelo Prieto}}\\[1.5pt]
+          {\fontsize{6.5pt}{7.5pt}\selectfont \color{SlateMuted} Planta y Compensación}
+        \end{tcolorbox}
+      \end{column}
+      \begin{column}{0.23\textwidth}
+        \begin{tcolorbox}[enhanced, halign=center, colback=BadgeGastonBg, colframe=BadgeGastonFg, boxrule=0.6pt, arc=1.2mm, top=3pt, bottom=3pt, left=2pt, right=2pt]
+          {\fontsize{8pt}{9pt}\selectfont \textbf{\color{BadgeGastonFg} Gastón Grasso}}\\[1.5pt]
+          {\fontsize{6.5pt}{7.5pt}\selectfont \color{SlateMuted} Comparativa y Cierre}
+        \end{tcolorbox}
+      \end{column}
+    \end{columns}
+    \vspace{6pt}
+    \flushright
+    {\fontsize{7pt}{8pt}\selectfont \color{SlateMuted} Grupo 5 -- Ciclo Lectivo 2026}
+  \end{tarjeta}
+\end{frame}
+
+
+\include{frames/1-marco_teorico}
+\include{frames/2-filtro_rlc}
+\include{frames/3-compensacion_sistemas}
+\include{frames/4-comparativa_conclusiones}
+
+% SLIDE 32: CIERRE
+\begin{frame}[plain]
+  \vspace{3.2cm}
+  \begin{center}
+    {\fontsize{28pt}{34pt}\selectfont \textbf{\color{NavyDark} MUCHAS GRACIAS}}
+  \end{center}
+\end{frame}
+
+\end{document}
