@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=6.6cm, height=5.3cm,
+    xlabel={$t$ [$\mu\text{s}$]},
+    ylabel={Respuesta $y(t)$},
+    xlabel style={font=\scriptsize},
+    ylabel style={font=\scriptsize},
+    xmin=0, xmax=50,
+    ymin=0, ymax=230,
+    xtick={0, 10, 20, 30, 40, 50},
+    ytick={0, 50, 100, 151.0, 205},
+    yticklabels={0, 50, 100, 151.0, 205},
+    grid=both, grid style={gray!25, dashed},
+    tick label style={font=\tiny},
+    legend pos=south east,
+    legend style={font=\tiny, fill=white, fill opacity=0.9},
+  ]
+    % Asíntota de régimen permanente
+    \addplot[red!80!black, dashed, line width=0.9pt] coordinates {(0, 151.02) (50, 151.02)};
+    \addlegendentry{$y_{\infty} \approx 151,0$}
+
+    % Respuesta al escalón
+    \addplot[line width=1.4pt, green!60!black] table [col sep=comma, x=t_us, y=y] {sources/plots/step_atraso_adelanto_lc_estable.csv};
+    \addlegendentry{Respuesta $y(t)$}
+  \end{axis}
+\end{tikzpicture}

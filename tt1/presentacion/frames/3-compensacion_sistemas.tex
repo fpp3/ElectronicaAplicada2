@@ -8,37 +8,122 @@
 \begin{frame}
   \frametitle{Planta de Tercer Orden y Parámetros}
 
-  \begin{columns}[t, onlytextwidth]
-    \begin{column}{0.48\textwidth}
-      \begin{tarjeta}
-        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Función de Transferencia:}}\\[2pt]
-        {\fontsize{8pt}{10pt}\selectfont
-        \[ G(s) = \frac{K}{\left(1 + \frac{s}{p_1}\right)\left(1 + \frac{s}{p_2}\right)\left(1 + \frac{s}{p_3}\right)} \]
-        \begin{itemize}\setlength{\itemsep}{2.5pt}
-          \item \textbf{Ganancia estática en continua:}
-          $K = 900 \implies |G(0)| = \mathbf{\qty{59.08}{\decibel}}$.
-          \item \textbf{Ancho de banda base ($BW_{\text{LA}}$):}
-          $BW = f_{-3\text{dB}} \approx \mathbf{\qty{11.59}{\kilo\hertz}}$.
-          \item Dominado por el primer polo de $12\text{ kHz}$.
+  \vfill
+  \centering
+  \begin{tarjeta}[width=0.85\textwidth, top=16pt, bottom=16pt]
+    \centering
+    {\large
+    \[
+      G(s) = \frac{K}{\left(1 + \dfrac{s}{2\pi \cdot 12\text{k}}\right)\left(1 + \dfrac{s}{2\pi \cdot 70\text{k}}\right)\left(1 + \dfrac{s}{2\pi \cdot 140\text{k}}\right)}
+    \]
+    }
+  \end{tarjeta}
+  \vfill
+\end{frame}
+
+% SLIDE NUEVA: MÁRGENES DE ESTABILIDAD EN BODE
+\begin{frame}
+  \frametitle{Márgenes de Estabilidad y Diagnóstico de Inestabilidad}
+
+  \centering
+  \adjustbox{max width=\textwidth, max height=7.2cm, keepaspectratio}{\input{figures/plot_ej2_bode_inestabilidad.tex}}
+\end{frame}
+
+% SLIDE: SISTEMA REALIMENTADO CON BETA = 1
+\begin{frame}
+  \frametitle{Diagrama de Realimentación de la Planta ($\beta = 1$)}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=14pt, bottom=14pt]
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.8cm, keepaspectratio}{\input{figures/crkt_ej2_diagrama_realimentacion.tex}}
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=6pt, bottom=6pt]
+        {\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Lazo Cerrado y Condición Crítica:}}\\[1pt]
+        {\fontsize{7.2pt}{9pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{1.5pt}
+          \item \textbf{Transferencia a Lazo Cerrado:}
+          \[ T(s) = \frac{V_o(s)}{V_i(s)} = \frac{G(s)}{1 + \beta \cdot G(s)} \]
+          \item \textbf{Realimentación Unitaria ($\beta = 1$):}
+          \[ T(s) = \frac{G(s)}{1 + G(s)} \]
+          \item \textbf{Ganancia de Lazo Abierto:}
+          $T_{\text{LA}}(s) = \beta \cdot G(s) = G(s)$.
+          \item \textbf{Criterio de Oscilación:}
+          El denominador se anula si:
+          \[ 1 + G(s) = 0 \iff G(j\omega) = -1 = 1\angle\ang{-180} \]
         \end{itemize}
         }
       \end{tarjeta}
     \end{column}
+  \end{columns}
+\end{frame}
 
-    \begin{column}{0.48\textwidth}
-      \begin{tarjeta}
-        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Polos Asignados (Grupo 5):}}\\[2pt]
-        {\fontsize{8pt}{10pt}\selectfont
-        \begin{itemize}\setlength{\itemsep}{3pt}
-          \item \textbf{Primer polo ($f_{p1}$):}
-          $f_{p1} = \qty{12}{\kilo\hertz} \implies p_1 \approx \qty{75398}{\radian\per\second}$
-          \item \textbf{Segundo polo ($f_{p2}$):}
-          $f_{p2} = \qty{70}{\kilo\hertz} \implies p_2 \approx \qty{439823}{\radian\per\second}$
-          \item \textbf{Tercer polo ($f_{p3}$):}
-          $f_{p3} = \qty{140}{\kilo\hertz} \implies p_3 \approx \qty{879646}{\radian\per\second}$
-          \item Planta de orden 3 con alta ganancia y polos en alta frecuencia.
-        \end{itemize}
-        }
+% SLIDE: ¿ES INESTABLE ESTE SISTEMA? (LAZO ABIERTO)
+\begin{frame}
+  \frametitle{¿Es inestable este sistema?}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Polos de Lazo Abierto $G(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_polos_la.tex}}
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Respuesta al Escalón $G(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_escalon_la.tex}}
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE: FUNCIÓN DE TRANSFERENCIA A LAZO CERRADO T(s)
+\begin{frame}
+  \frametitle{Función de Transferencia a Lazo Cerrado $T(s)$}
+
+  \vfill
+  \centering
+  \begin{tarjeta}[width=0.96\textwidth, top=18pt, bottom=18pt]
+    \centering
+    \adjustbox{max width=\linewidth}{%
+      $\displaystyle
+      T(s) = \frac{G(s)}{1+G(s)} = \frac{900}{\left(1 + \dfrac{s}{3.46 \cdot 10^6}\right)\left(1 - \dfrac{s}{1.03 \cdot 10^6 + j 2.56 \cdot 10^6}\right)\left(1 - \dfrac{s}{1.03 \cdot 10^6 - j 2.56 \cdot 10^6}\right)}
+      $%
+    }
+  \end{tarjeta}
+  \vfill
+\end{frame}
+
+% SLIDE: INESTABILIDAD A LAZO CERRADO T(s)
+\begin{frame}
+  \frametitle{Inestabilidad a Lazo Cerrado}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{AlertRed} Polos de Lazo Cerrado $T(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_polos_lc.tex}}
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{AlertRed} Respuesta al Escalón $T(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_escalon_lc.tex}}
       \end{tarjeta}
     \end{column}
   \end{columns}
@@ -49,109 +134,68 @@
 \begin{frame}
   \frametitle{Respuesta en Frecuencia a Lazo Abierto (Bode)}
 
-  \begin{columns}[c, onlytextwidth]
-    \begin{column}{0.58\textwidth}
-      \centering
-      \adjustbox{max width=\linewidth, max height=5.5cm, keepaspectratio}{\input{figures/plot_ej2_bode_planta.tex}}
-    \end{column}
-
-    \begin{column}{0.40\textwidth}
-      \begin{tarjeta}
-        {\fontsize{8.5pt}{10pt}\selectfont \textbf{\color{NavyDark} Comportamiento Asintótico:}}\\[2pt]
-        {\fontsize{7pt}{8.5pt}\selectfont
-        \begin{itemize}\setlength{\itemsep}{2pt}
-          \item \textbf{$f < 12\text{ kHz}$:} Ganancia $+59.08\text{ dB}$, fase $\ang{0}$.
-          \item \textbf{$12\text{k} < f < 70\text{ kHz}$:} Actúa $p_1$; pendiente $-20\ \text{dB/década}$, fase hacia $\ang{-90}$.
-          \item \textbf{$70\text{k} < f < 140\text{ kHz}$:} Actúan $p_1, p_2$; pendiente $-40\ \text{dB/década}$, cruce por $\ang{-180}$.
-          \item \textbf{$f > 140\text{ kHz}$:} Actúan 3 polos; pendiente $-60\ \text{dB/década}$, fase hacia $\ang{-270}$.
-        \end{itemize}
-        }
-      \end{tarjeta}
-    \end{column}
-  \end{columns}
+  \centering
+  \adjustbox{max width=\textwidth, max height=7.2cm, keepaspectratio}{\input{figures/plot_ej2_bode_planta.tex}}
 \end{frame}
 
-% SLIDE 19: DIAGNÓSTICO DE INESTABILIDAD
-\subsection{Diagnóstico de Inestabilidad}
-\begin{frame}
-  \frametitle{Diagnóstico de Inestabilidad a Lazo Cerrado}
-
-  \begin{columns}[t, onlytextwidth]
-    \begin{column}{0.48\textwidth}
-      \begin{tarjeta}[colframe=AlertRed]
-        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{AlertRed} Diagnóstico Numérico Directo:}}\\[2pt]
-        {\fontsize{8pt}{10pt}\selectfont
-        \begin{itemize}\setlength{\itemsep}{2.5pt}
-          \item \textbf{Cruce de fase por $\ang{-180}$:}
-          $f_{180} \approx \mathbf{\qty{110.99}{\kilo\hertz}}$
-          \item \textbf{Ganancia en el cruce de fase:}
-          $|G(f_{180})| \approx \mathbf{\qty{32.14}{\decibel}}$ ($40.5$ veces)
-          \item \textbf{Margen de Ganancia directo:}
-          $MG = 0 - 32.14 = \mathbf{-32.14\ \unit{\decibel}}$
-          \item \textbf{Cruce de ganancia por $\qty{0}{\decibel}$:}
-          $f_{0\si{\decibel}} \approx \qty{464.42}{\kilo\hertz}$ con fase $\ang{-243.17}$ ($MF = \ang{-63.17}$).
-        \end{itemize}
-        }
-      \end{tarjeta}
-    \end{column}
-
-    \begin{column}{0.48\textwidth}
-      \begin{tarjeta}
-        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Consecuencia Física:}}\\[2pt]
-        {\fontsize{8pt}{10pt}\selectfont
-        \begin{itemize}\setlength{\itemsep}{2.5pt}
-          \item Con realimentación unitaria directa, la planta es \textbf{incondicionalmente inestable}.
-          \item En $110.99\text{ kHz}$ el desfasaje de $\ang{-180}$ transforma la realimentación negativa en positiva con amplificación de $40.5$ veces.
-          \item Los polos de lazo cerrado migran al semiplano derecho $\to$ auto-oscilación violenta.
-          \item \textbf{Solución:} Es mandatorio diseñar redes de compensación en frecuencia.
-        \end{itemize}
-        }
-      \end{tarjeta}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-% SLIDE 20: CALIBRACIÓN MF = 45°
+% SLIDE: LAZO DE REALIMENTACIÓN PARA MF = 45°
 \subsection{Calibración para MF = 45°}
 \begin{frame}
-  \frametitle{Criterio de Calibración para Margen de Fase $MF = \ang{45}$}
+  \frametitle{Lazo de Realimentación para Margen de Fase $MF = \ang{45}$}
+
+  \vfill
+  \centering
+  % Tarjeta Superior: Diagrama de Realimentación Centrado
+  \begin{tarjeta}[width=0.76\textwidth, top=6pt, bottom=6pt]
+    \centering
+    \adjustbox{max width=\linewidth, max height=3.2cm, keepaspectratio}{\input{figures/crkt_ej2_diagrama_realimentacion_beta45.tex}}
+  \end{tarjeta}
+
+  \vspace{3pt}
+
+  % Tarjeta Inferior: Función de Transferencia T_estable(s)
+  \begin{tarjeta}[width=0.96\textwidth, top=8pt, bottom=8pt]
+    \centering
+    \adjustbox{max width=\linewidth}{%
+      $\displaystyle
+      T_{\text{estable}}(s) = \frac{G(s)}{1 + \beta \cdot G(s)} = \frac{T_0}{\left(1 + \dfrac{s}{1.13 \cdot 10^6}\right)\left(1 + \dfrac{s}{1.35 \cdot 10^5 + j 4.06 \cdot 10^5}\right)\left(1 + \dfrac{s}{1.35 \cdot 10^5 - j 4.06 \cdot 10^5}\right)}
+      $%
+    }
+  \end{tarjeta}
+  \vfill
+\end{frame}
+
+% SLIDE: POLOS Y ESCALÓN DE LAZO CERRADO ESTABLE
+\begin{frame}
+  \frametitle{Estabilidad a Lazo Cerrado con $\beta = \qty{-43.44}{\decibel}$ ($MF = \ang{45}$)}
 
   \begin{columns}[c, onlytextwidth]
-    \begin{column}{0.48\textwidth}
-      \begin{tarjeta}[colframe=AlertGreen]
-        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{AlertGreen} Determinación Gráfica en Bode:}}\\[2pt]
-        {\fontsize{8pt}{10pt}\selectfont
-        \begin{itemize}\setlength{\itemsep}{2.5pt}
-          \item \textbf{Fase requerida para $MF = \ang{45}$:}
-          $\phi = \ang{-180} + \ang{45} = \mathbf{\ang{-135}}$
-          \item \textbf{Frecuencia para $\phi = \ang{-135}$ ($f_{45}$):}
-          $f_{45} \approx \mathbf{\qty{52.90}{\kilo\hertz}}$
-          \item \textbf{Ganancia disponible en $f_{45}$:}
-          $|G(f_{45})| \approx \mathbf{\qty{43.44}{\decibel}}$ ($148.6$ veces)
-          \item \textbf{Margen de Ganancia disponible ($MG_{45}$):}
-          $MG_{45} = 43.44 - 32.14 = \mathbf{11.30\ \unit{\decibel}} > \qty{6}{\decibel}$
-        \end{itemize}
-        }
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Polos de Lazo Cerrado $T_{\text{estable}}(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_polos_lc_estable.tex}}
       \end{tarjeta}
     \end{column}
 
-    \begin{column}{0.48\textwidth}
-      \begin{tarjeta}
-        {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Significado en Diseño:}}\\[2pt]
-        {\fontsize{8pt}{10pt}\selectfont
-        \begin{itemize}\setlength{\itemsep}{2.5pt}
-          \item Atenuar puramente con un divisor resistivo exigiría $\beta = 1/148.6 = \qty{-43.44}{\decibel}$.
-          \item $MG_{45} = \qty{11.30}{\decibel} > \qty{6}{\decibel}$ garantiza que la planta admite operar con $MF = \ang{45}$ manteniendo margen seguro.
-          \item Se abordarán dos estrategias pasivas:
-          \begin{itemize}\setlength{\itemsep}{1.5pt}
-            \item Compensador de Retardo (Lag).
-            \item Red de Atraso-Adelanto (Lead-Lag).
-          \end{itemize}
-        \end{itemize}
-        }
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{AlertGreen} Respuesta al Escalón $T_{\text{estable}}(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_escalon_lc_estable.tex}}
       \end{tarjeta}
     \end{column}
   \end{columns}
+\end{frame}
+
+% SLIDE: BODE DE GANANCIA DE LAZO BETA * G(s)
+\begin{frame}
+  \frametitle{Diagrama de Bode de la Ganancia de Lazo $\beta \cdot G(s)$}
+
+  \centering
+  \adjustbox{max width=\textwidth, max height=7.2cm, keepaspectratio}{\input{figures/plot_ej2_bode_loop_gain.tex}}
 \end{frame}
 
 % SLIDE 21: RETARDO SÍNTESIS
@@ -185,35 +229,153 @@
   \end{columns}
 \end{frame}
 
-% SLIDE 22: RETARDO BODE
+% SLIDE RETARDO 1: PLANTA COMPENSADA (TIPO FILMINA 17)
 \begin{frame}
-  \frametitle{Compensador de Retardo: Respuesta y Pérdida de Ancho de Banda}
+  \frametitle{Planta Compensada con Retardo de Fase}
+
+  \vfill
+  \centering
+  \begin{tarjeta}[width=0.96\textwidth, top=16pt, bottom=16pt]
+    \centering
+    \adjustbox{max width=\linewidth}{%
+    $\displaystyle
+      G_{\text{comp}}(s) = \frac{900}{\left(1 + \dfrac{s}{2\pi \cdot 1.2\text{k}}\right)\left(1 + \dfrac{s}{2\pi \cdot 12\text{k}}\right)\left(1 + \dfrac{s}{2\pi \cdot 70\text{k}}\right)\left(1 + \dfrac{s}{2\pi \cdot 140\text{k}}\right)}
+    $%
+    }\par
+  \end{tarjeta}
+  \vfill
+\end{frame}
+
+% SLIDE RETARDO 2: BODE DE INESTABILIDAD (TIPO FILMINA 18)
+\begin{frame}
+  \frametitle{Compensador de Retardo: Márgenes a Lazo Abierto ($\beta = 1$)}
+
+  \centering
+  \adjustbox{max width=\textwidth, max height=7.2cm, keepaspectratio}{\input{figures/plot_ej2_bode_retardo_inestabilidad.tex}}
+\end{frame}
+
+% SLIDE RETARDO 3: DIAGRAMA DE REALIMENTACIÓN (TIPO FILMINA 19)
+\begin{frame}
+  \frametitle{Diagrama de Realimentación con Compensador ($\beta = 1$)}
 
   \begin{columns}[c, onlytextwidth]
-    \begin{column}{0.58\textwidth}
-      \centering
-      \adjustbox{max width=\linewidth, max height=5.5cm, keepaspectratio}{\input{figures/plot_ej2_bode_retardo.tex}}
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=14pt, bottom=14pt]
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.8cm, keepaspectratio}{\input{figures/crkt_ej2_diagrama_realimentacion_retardo.tex}}
+      \end{tarjeta}
     \end{column}
 
-    \begin{column}{0.40\textwidth}
-      \begin{tarjeta}
-        {\fontsize{8.5pt}{10pt}\selectfont \textbf{\color{NavyDark} Parámetros (MF = 45°):}}\\[2pt]
-        {\fontsize{7pt}{8.5pt}\selectfont
-        \begin{itemize}\setlength{\itemsep}{2pt}
-          \item \textbf{Colapso de ancho de banda:}\\
-          $BW = f_{-3\text{dB}} \approx \mathbf{\qty{1.19}{\kilo\hertz}}$\\
-          (pérdida del $\mathbf{89.7\%}$ de banda útil).
-          \item \textbf{Frecuencia para $MF = \ang{45}$:}\\
-          $f_{45} \approx \qty{9.96}{\kilo\hertz}$ ($|G| \approx \qty{38.25}{\decibel}$).
-          \item \textbf{Cruce por $\ang{-180}$:}\\
-          $f_{180} \approx \qty{24.35}{\kilo\hertz}$ ($|G| \approx \qty{25.21}{\decibel}$).
-          \item \textbf{Margen de Ganancia disponible:}\\
-          $MG_{45} = \mathbf{13.04\ \unit{\decibel}} > \qty{6}{\decibel}$.
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=6pt, bottom=6pt]
+        {\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Lazo Cerrado y Condición Crítica:}}\\[1pt]
+        {\fontsize{7.2pt}{9pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{1.5pt}
+          \item \textbf{Transferencia a Lazo Cerrado:}
+          \[ T(s) = \frac{V_o(s)}{V_i(s)} = \frac{G_c(s) \cdot G(s)}{1 + \beta \cdot G_c(s) \cdot G(s)} \]
+          \item \textbf{Realimentación Unitaria ($\beta = 1$):}
+          \[ T(s) = \frac{G_{\text{comp}}(s)}{1 + G_{\text{comp}}(s)} \]
+          \item \textbf{Ganancia de Lazo Abierto:}
+          $T_{\text{LA}}(s) = \beta \cdot G_{\text{comp}}(s) = G_{\text{comp}}(s)$.
+          \item \textbf{Diagnóstico de Inestabilidad:}
+          Como $MG = \qty{-25.21}{\decibel} < 0$ y $MF = \ang{-72.17} < 0$, con $\beta = 1$ el sistema a lazo cerrado sigue siendo \textbf{inestable}.
         \end{itemize}
         }
       \end{tarjeta}
     \end{column}
   \end{columns}
+\end{frame}
+
+% SLIDE RETARDO 4: ¿ES INESTABLE ESTE SISTEMA? (TIPO FILMINA 20)
+\begin{frame}
+  \frametitle{¿Es inestable este sistema a lazo abierto?}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Polos de Lazo Abierto $G_{\text{comp}}(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_polos_la_retardo.tex}}
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Respuesta al Escalón $G_{\text{comp}}(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_escalon_la_retardo.tex}}
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE RETARDO 5: BODE CON MF = 45° (TIPO FILMINA 23)
+\begin{frame}
+  \frametitle{Compensador de Retardo: Respuesta y Calibración para $MF = \ang{45}$}
+
+  \centering
+  \adjustbox{max width=\textwidth, max height=7.2cm, keepaspectratio}{\input{figures/plot_ej2_bode_retardo.tex}}
+\end{frame}
+
+% SLIDE RETARDO 6: LAZO DE REALIMENTACIÓN PARA MF = 45° (TIPO FILMINA 24)
+\begin{frame}
+  \frametitle{Lazo de Realimentación con Retardo para $MF = \ang{45}$}
+
+  \vfill
+  \centering
+  % Tarjeta Superior: Diagrama de Realimentación Centrado
+  \begin{tarjeta}[width=0.82\textwidth, top=6pt, bottom=6pt]
+    \centering
+    \adjustbox{max width=\linewidth, max height=3.2cm, keepaspectratio}{\input{figures/crkt_ej2_diagrama_realimentacion_retardo_beta45.tex}}
+  \end{tarjeta}
+
+  \vspace{3pt}
+
+  % Tarjeta Inferior: Función de Transferencia T_estable(s)
+  \begin{tarjeta}[width=0.98\textwidth, top=8pt, bottom=8pt]
+    \centering
+    \adjustbox{max width=\linewidth}{%
+      $\displaystyle
+      T_{\text{estable}}(s) = \frac{G_{\text{comp}}(s)}{1 + \beta \cdot G_{\text{comp}}(s)} = \frac{T_0}{\left(1 + \dfrac{s}{8.71 \cdot 10^5}\right)\left(1 + \dfrac{s}{4.72 \cdot 10^5}\right)\left(1 + \dfrac{s}{2.94 \cdot 10^4 + j 7.45 \cdot 10^4}\right)\left(1 + \dfrac{s}{2.94 \cdot 10^4 - j 7.45 \cdot 10^4}\right)}
+      $%
+    }
+  \end{tarjeta}
+  \vfill
+\end{frame}
+
+% SLIDE RETARDO 7: POLOS Y ESCALÓN DE LAZO CERRADO ESTABLE (TIPO FILMINA 25)
+\begin{frame}
+  \frametitle{Estabilidad a Lazo Cerrado con Compensador de Retardo ($MF = \ang{45}$)}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Polos de Lazo Cerrado $T_{\text{estable}}(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_polos_lc_retardo_estable.tex}}
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{AlertGreen} Respuesta al Escalón $T_{\text{estable}}(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_escalon_lc_retardo_estable.tex}}
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE RETARDO 8: BODE DE GANANCIA DE LAZO BETA * G_comp(s) (TIPO FILMINA 26)
+\begin{frame}
+  \frametitle{Diagrama de Bode de la Ganancia de Lazo $\beta \cdot G_{\text{comp}}(s)$}
+
+  \centering
+  \adjustbox{max width=\textwidth, max height=7.2cm, keepaspectratio}{\input{figures/plot_ej2_bode_retardo_loop_gain.tex}}
 \end{frame}
 
 % SLIDE 23: ATRASO-ADELANTO ESTRUCTURA
@@ -246,32 +408,151 @@
   \end{columns}
 \end{frame}
 
-% SLIDE 24: ATRASO-ADELANTO BODE Y RESULTADOS
+% SLIDE ATRASO-ADELANTO 1: PLANTA COMPENSADA (TIPO FILMINA 17/28)
 \begin{frame}
-  \frametitle{Red de Atraso-Adelanto: Respuesta y Preservación de Ancho de Banda}
+  \frametitle{Planta Compensada con Atraso-Adelanto}
+
+  \vfill
+  \centering
+  \begin{tarjeta}[width=0.96\textwidth, top=16pt, bottom=16pt]
+    \centering
+    \adjustbox{max width=\linewidth}{%
+    $\displaystyle
+      G_{\text{aa}}(s) = \frac{K \left(1 + \dfrac{s}{2\pi \cdot 1.1\text{M}}\right)}{\left(1 + \dfrac{s}{2\pi \cdot 220\text{k}}\right)\left(1 + \dfrac{s}{2\pi \cdot 12\text{k}}\right)\left(1 + \dfrac{s}{2\pi \cdot 70\text{k}}\right)\left(1 + \dfrac{s}{2\pi \cdot 140\text{k}}\right)}
+    $%
+    }\par
+  \end{tarjeta}
+  \vfill
+\end{frame}
+
+% SLIDE ATRASO-ADELANTO 2: BODE DE INESTABILIDAD (TIPO FILMINA 18/29)
+\begin{frame}
+  \frametitle{Compensador de Atraso-Adelanto: Márgenes a Lazo Abierto ($\beta = 1$)}
+
+  \centering
+  \adjustbox{max width=\textwidth, max height=7.2cm, keepaspectratio}{\input{figures/plot_ej2_bode_atraso_adelanto_inestabilidad.tex}}
+\end{frame}
+
+% SLIDE ATRASO-ADELANTO 3: DIAGRAMA DE REALIMENTACIÓN (TIPO FILMINA 19/30)
+\begin{frame}
+  \frametitle{Diagrama de Realimentación con Atraso-Adelanto ($\beta = 1$)}
 
   \begin{columns}[c, onlytextwidth]
-    \begin{column}{0.58\textwidth}
-      \centering
-      \adjustbox{max width=\linewidth, max height=5.5cm, keepaspectratio}{\input{figures/plot_ej2_bode_atraso_adelanto.tex}}
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=14pt, bottom=14pt]
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.8cm, keepaspectratio}{\input{figures/crkt_ej2_diagrama_realimentacion_atraso_adelanto.tex}}
+      \end{tarjeta}
     \end{column}
 
-    \begin{column}{0.40\textwidth}
-      \begin{tarjeta}
-        {\fontsize{8.5pt}{10pt}\selectfont \textbf{\color{NavyDark} Componentes y Desempeño:}}\\[2pt]
-        {\fontsize{7pt}{8.5pt}\selectfont
-        \begin{itemize}\setlength{\itemsep}{2pt}
-          \item \textbf{Componentes ($C = \qty{100}{\pico\farad}$ C0G):}\\
-          $R_2 = \mathbf{\qty{1.45}{\kilo\ohm}}$, $R_1 = \mathbf{\qty{5.76}{\kilo\ohm}}$ ($\qty{1}{\percent}$).
-          \item \textbf{Ancho de banda preservado:}\\
-          $BW \approx \mathbf{\qty{11.56}{\kilo\hertz}}$ ($\mathbf{99.7\%}$).
-          \item \textbf{Frecuencia para $MF = \ang{45}$:}\\
-          $f_{45} \approx \mathbf{\qty{45.11}{\kilo\hertz}}$ ($4.5\times$ más veloz).
-          \item \textbf{Margen de Ganancia disponible:}\\
-          $MG_{45} = \mathbf{8.96\ \unit{\decibel}} > \qty{6}{\decibel}$.
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=6pt, bottom=6pt]
+        {\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Lazo Cerrado y Condición Crítica:}}\\[1pt]
+        {\fontsize{7.2pt}{9pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{1.5pt}
+          \item \textbf{Transferencia a Lazo Cerrado:}
+          \[ T(s) = \frac{V_o(s)}{V_i(s)} = \frac{G_{c2}(s) \cdot G(s)}{1 + \beta \cdot G_{c2}(s) \cdot G(s)} \]
+          \item \textbf{Realimentación Unitaria ($\beta = 1$):}
+          \[ T(s) = \frac{G_{\text{aa}}(s)}{1 + G_{\text{aa}}(s)} \]
+          \item \textbf{Ganancia de Lazo Abierto:}
+          $T_{\text{LA}}(s) = \beta \cdot G_{\text{aa}}(s) = G_{\text{aa}}(s)$.
+          \item \textbf{Diagnóstico de Inestabilidad:}
+          Con $MG = \qty{-36.22}{\decibel} < 0$ y $MF = \ang{-97.76} < 0$, con $\beta = 1$ el sistema a lazo cerrado resulta fuertemente \textbf{inestable}.
         \end{itemize}
         }
       \end{tarjeta}
     \end{column}
   \end{columns}
+\end{frame}
+
+% SLIDE ATRASO-ADELANTO 4: ¿ES INESTABLE ESTE SISTEMA? (TIPO FILMINA 20/31)
+\begin{frame}
+  \frametitle{¿Es inestable este sistema a lazo abierto?}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Polos y Cero de Lazo Abierto $G_{\text{aa}}(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_polos_la_atraso_adelanto.tex}}
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Respuesta al Escalón $G_{\text{aa}}(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_escalon_la_atraso_adelanto.tex}}
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE ATRASO-ADELANTO 5: BODE CON MF = 45° (TIPO FILMINA 23/32)
+\begin{frame}
+  \frametitle{Compensador de Atraso-Adelanto: Calibración para $MF = \ang{45}$}
+
+  \centering
+  \adjustbox{max width=\textwidth, max height=7.2cm, keepaspectratio}{\input{figures/plot_ej2_bode_atraso_adelanto.tex}}
+\end{frame}
+
+% SLIDE ATRASO-ADELANTO 6: LAZO DE REALIMENTACIÓN PARA MF = 45° (TIPO FILMINA 24/33)
+\begin{frame}
+  \frametitle{Lazo de Realimentación con Atraso-Adelanto para $MF = \ang{45}$}
+
+  \vfill
+  \centering
+  % Tarjeta Superior: Diagrama de Realimentación Centrado
+  \begin{tarjeta}[width=0.82\textwidth, top=6pt, bottom=6pt]
+    \centering
+    \adjustbox{max width=\linewidth, max height=3.2cm, keepaspectratio}{\input{figures/crkt_ej2_diagrama_realimentacion_atraso_adelanto_beta45.tex}}
+  \end{tarjeta}
+
+  \vspace{3pt}
+
+  % Tarjeta Inferior: Función de Transferencia T_estable(s)
+  \begin{tarjeta}[width=0.98\textwidth, top=8pt, bottom=8pt]
+    \centering
+    \adjustbox{max width=\linewidth}{%
+      $\displaystyle
+      T_{\text{estable}}(s) = \frac{G_{\text{aa}}(s)}{1 + \beta \cdot G_{\text{aa}}(s)} = \frac{T_0 \left(1 + \dfrac{s}{6.91 \cdot 10^6}\right)}{\left(1 + \dfrac{s}{1.28 \cdot 10^6 \pm j 2.85 \cdot 10^5}\right)\left(1 + \dfrac{s}{1.08 \cdot 10^5 \pm j 3.58 \cdot 10^5}\right)}
+      $%
+    }
+  \end{tarjeta}
+  \vfill
+\end{frame}
+
+% SLIDE ATRASO-ADELANTO 7: POLOS Y ESCALÓN DE LAZO CERRADO ESTABLE (TIPO FILMINA 25/34)
+\begin{frame}
+  \frametitle{Estabilidad a Lazo Cerrado con Atraso-Adelanto ($MF = \ang{45}$)}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Polos y Cero de Lazo Cerrado $T_{\text{estable}}(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_polos_lc_atraso_adelanto_estable.tex}}
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{AlertGreen} Respuesta al Escalón $T_{\text{estable}}(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_escalon_lc_atraso_adelanto_estable.tex}}
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% SLIDE ATRASO-ADELANTO 8: BODE DE GANANCIA DE LAZO BETA * G_aa(s) (TIPO FILMINA 26/35)
+\begin{frame}
+  \frametitle{Diagrama de Bode de la Ganancia de Lazo $\beta \cdot G_{\text{aa}}(s)$}
+
+  \centering
+  \adjustbox{max width=\textwidth, max height=7.2cm, keepaspectratio}{\input{figures/plot_ej2_bode_atraso_adelanto_loop_gain.tex}}
 \end{frame}

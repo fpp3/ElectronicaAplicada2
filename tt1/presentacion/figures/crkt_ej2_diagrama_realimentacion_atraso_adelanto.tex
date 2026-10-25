@@ -1,0 +1,52 @@
+\begin{tikzpicture}[
+    auto,
+    >=Stealth,
+    block/.style={
+        draw=NavyDark,
+        fill=white,
+        line width=1.1pt,
+        rectangle,
+        rounded corners=3pt,
+        minimum height=1.1cm,
+        minimum width=1.8cm,
+        align=center,
+        font=\footnotesize\bfseries
+    },
+    sum/.style={
+        draw=NavyDark,
+        fill=white,
+        line width=1.1pt,
+        circle,
+        minimum size=0.6cm,
+        inner sep=0pt
+    },
+    branch/.style={circle, fill=NavyDark, inner sep=1.5pt}
+]
+    % Nodos
+    \coordinate (in) at (-0.3, 0);
+    \node [sum] (sum) at (1.0, 0) {};
+    \node [block, fill=CardBg, draw=NavyDark] (comp) at (2.7, 0) {Comp.\\[1pt]\color{NavyDark}\scriptsize$G_{c2}(s)$};
+    \node [block, fill=CardBg, draw=NavyDark] (plant) at (5.1, 0) {Planta\\[1pt]\color{BlueAccent}\scriptsize$G(s)$};
+    \node [branch] (branch) at (6.8, 0) {};
+    \coordinate (out) at (7.9, 0);
+    \node [block, draw=BlueAccent] (beta) at (3.9, -1.5) {Realimentación\\[1pt]\color{NavyDark}\scriptsize$\beta = 1$};
+
+    % Trayectoria directa
+    \draw [->, line width=1.0pt] (in) -- node[above, near start, font=\small\bfseries] {$V_i(s)$} node[very near end, above=2pt, font=\scriptsize\bfseries\color{AlertGreen}] {$+$} (sum);
+    \draw [->, line width=1.0pt] (sum) -- node[above, font=\tiny] {$E(s)$} (comp);
+    \draw [->, line width=1.0pt] (comp) -- (plant);
+    \draw [line width=1.0pt] (plant) -- (branch);
+    \draw [->, line width=1.0pt] (branch) -- node[above, near end, font=\small\bfseries] {$V_o(s)$} (out);
+
+    % Trayectoria de realimentación
+    \draw [->, line width=1.0pt] (branch) |- (beta);
+    \draw [->, line width=1.0pt] (beta) -| node[very near end, right=2pt, font=\scriptsize\bfseries\color{AlertRed}] {$-$} (sum);
+
+    % Signo más fino en el sumador
+    \draw [line width=0.5pt, gray!60] (0.88, 0) -- (1.12, 0);
+    \draw [line width=0.5pt, gray!60] (1.0, -0.12) -- (1.0, 0.12);
+
+    % Señal de realimentación
+    \node at (1.9, -1.25) [font=\tiny] {$B(s)$};
+    \node at (3.9, -2.35) [font=\scriptsize\color{SlateDark}] {Realimentación unitaria directa ($\beta = 1$)};
+\end{tikzpicture}

@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=6.6cm, height=5.3cm,
+    xlabel={$t$ [$\mu\text{s}$]},
+    ylabel={Respuesta $y(t)$},
+    xlabel style={font=\scriptsize},
+    ylabel style={font=\scriptsize},
+    xmin=0, xmax=800,
+    ymin=0, ymax=1020,
+    xtick={0, 200, 400, 600, 800},
+    ytick={0, 300, 600, 900},
+    grid=both, grid style={gray!25, dashed},
+    tick label style={font=\tiny},
+    legend pos=south east,
+    legend style={font=\tiny, fill=white, fill opacity=0.9},
+  ]
+    % Nivel asintótico K = 900
+    \addplot[red!80!black, dashed, line width=0.9pt] coordinates {(0, 900) (800, 900)};
+    \addlegendentry{$K = 900$ (asíntota)}
+
+    % Curva de respuesta al escalón
+    \addplot[line width=1.3pt, blue!85!black] table [col sep=comma, x=t_us, y=y] {sources/plots/step_retardo_la.csv};
+    \addlegendentry{Respuesta $y(t)$}
+
+  \end{axis}
+\end{tikzpicture}

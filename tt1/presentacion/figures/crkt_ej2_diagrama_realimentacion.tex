@@ -1,0 +1,50 @@
+\begin{tikzpicture}[
+    auto,
+    >=Stealth,
+    block/.style={
+        draw=NavyDark,
+        fill=white,
+        line width=1.1pt,
+        rectangle,
+        rounded corners=3pt,
+        minimum height=1.15cm,
+        minimum width=2.4cm,
+        align=center,
+        font=\footnotesize\bfseries
+    },
+    sum/.style={
+        draw=NavyDark,
+        fill=white,
+        line width=1.1pt,
+        circle,
+        minimum size=0.65cm,
+        inner sep=0pt
+    },
+    branch/.style={circle, fill=NavyDark, inner sep=1.6pt}
+]
+    % Nodos
+    \coordinate (in) at (0, 0);
+    \node [sum] (sum) at (1.3, 0) {};
+    \node [block, fill=CardBg] (plant) at (4.0, 0) {Planta\\[1pt]\color{BlueAccent}\small$G(s)$};
+    \node [branch] (branch) at (6.6, 0) {};
+    \coordinate (out) at (7.9, 0);
+    \node [block, draw=BlueAccent] (beta) at (4.0, -1.6) {Realimentación\\[1pt]\color{NavyDark}\small$\beta = 1$};
+
+    % Trayectoria directa
+    \draw [->, line width=1.0pt] (in) -- node[above, near start, font=\small\bfseries] {$V_i(s)$} node[very near end, above=1pt, font=\scriptsize\bfseries\color{AlertGreen}] {$+$} (sum);
+    \draw [->, line width=1.0pt] (sum) -- node[above, font=\footnotesize] {$E(s)$} (plant);
+    \draw [line width=1.0pt] (plant) -- (branch);
+    \draw [->, line width=1.0pt] (branch) -- node[above, near end, font=\small\bfseries] {$V_o(s)$} (out);
+
+    % Trayectoria de realimentación
+    \draw [->, line width=1.0pt] (branch) |- (beta);
+    \draw [->, line width=1.0pt] (beta) -| node[very near end, right=2pt, font=\scriptsize\bfseries\color{AlertRed}] {$-$} (sum);
+
+    % Signo más fino en el sumador
+    \draw [line width=0.5pt, gray!60] (1.18, 0) -- (1.42, 0);
+    \draw [line width=0.5pt, gray!60] (1.3, -0.12) -- (1.3, 0.12);
+
+    % Señal de realimentación B(s)
+    \node at (2.2, -1.35) [font=\footnotesize] {$B(s)$};
+    \node at (4.0, -2.45) [font=\scriptsize\color{SlateDark}] {Realimentación unitaria directa ($\beta = 1$)};
+\end{tikzpicture}

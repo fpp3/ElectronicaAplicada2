@@ -1,0 +1,97 @@
+\begin{tikzpicture}
+    \pgfplotsset{
+        bode plot/.style={
+            /pgf/number format/read comma as period,
+            grid=both,
+            major grid style={solid, gray!45},
+            minor grid style={dotted, gray!35},
+            axis line style={black, line width=0.6pt},
+            axis x line* = bottom,
+            axis y line* = left,
+            extra description/.code={
+                \draw[gray!45] (rel axis cs:0,1) -- (rel axis cs:1,1) -- (rel axis cs:1,0);
+            },
+            width=15.5cm,
+            height=6.5cm,
+            xmin=100, xmax=10000000,
+            enlarge x limits=false,
+            tick label style={font=\small},
+            label style={font=\normalsize},
+        }
+    }
+
+    % Subplot 1: Magnitud
+    \begin{semilogxaxis}[
+        bode plot,
+        ylabel={Magnitud [\si{\decibel}]},
+        ymin=-70, ymax=30,
+        ytick={-60, -40, -20, 0, 20},
+        xticklabel=\empty,
+        legend pos=south west,
+        legend style={font=\small, fill=white, fill opacity=0.9, text opacity=1},
+        name=magplot,
+    ]
+        % Curva de lazo abierto L(s) = beta * G(s)
+        \addplot[line width=1.3pt, green!50!black] table [col sep=comma, x=freq, y=mag_db] {sources/plots/bode_loop_gain_beta.csv};
+        \addlegendentry{$T_{\text{la}}(s) = \beta \cdot G(s)$}
+
+        % Nivel 0 dB
+        \addplot[black!70, densely dotted, line width=0.8pt] coordinates {(100, 0) (10000000, 0)};
+        \node[black!70, anchor=south east, font=\scriptsize] at (axis cs:9000000, 1.5) {$0\,\text{dB}$};
+
+        % Guía vertical f_45 (Cruce por 0 dB)
+        \draw[teal!80!black, dashed, line width=1.0pt] (axis cs:52901, -70) -- (axis cs:52901, 0);
+        \addplot[only marks, mark=*, mark size=2.8pt, teal!80!black] coordinates {(52901, 0)};
+        \node[teal!80!black, fill=white, fill opacity=0.9, text opacity=1, inner sep=1.5pt, font=\small, anchor=south west] 
+            at (axis cs:52901, 3) {$f_{0\text{dB}} = 52,90\,\text{kHz}\ (0\,\text{dB})$};
+
+        % Guía vertical f_180
+        \draw[magenta!80!black, dashed, line width=1.0pt] (axis cs:110993, -70) -- (axis cs:110993, 0);
+        \addplot[only marks, mark=square*, mark size=2.4pt, magenta!80!black] coordinates {(110993, -11.30)};
+        \node[magenta!80!black, fill=white, fill opacity=0.9, text opacity=1, inner sep=1.5pt, font=\small, anchor=south east] 
+            at (axis cs:105000, -9.5) {$-11,30\,\text{dB}$};
+
+        % Cota de Margen de Ganancia (MG = +11.30 dB)
+        \draw[orange!90!black, <->, line width=1.1pt] (axis cs:110993, 0) -- (axis cs:110993, -11.30);
+        \node[orange!90!black, anchor=west, font=\footnotesize\bfseries] at (axis cs:125000, -5.65) {$MG = +11,30\,\text{dB}$};
+    \end{semilogxaxis}
+
+    % Subplot 2: Fase
+    \begin{semilogxaxis}[
+        bode plot,
+        ylabel={Fase [\si{\degree}]},
+        ymin=-270, ymax=0,
+        ytick={-270, -225, -180, -135, -90, -45, 0},
+        xlabel={$f$ [\si{\hertz}]},
+        at={(magplot.below south west)},
+        yshift=0.0cm,
+        anchor=north west,
+        name=phaseplot,
+    ]
+        % Curva de fase
+        \addplot[line width=1.3pt, green!50!black] table [col sep=comma, x=freq, y=phase_deg] {sources/plots/bode_loop_gain_beta.csv};
+
+        % Guías horizontales
+        \addplot[purple, densely dashed, line width=0.8pt] coordinates {(100, -135) (10000000, -135)};
+        \node[purple, anchor=south east, font=\scriptsize] at (axis cs:9000000, -132) {$-135^\circ\ (MF = 45^\circ)$};
+
+        \addplot[red!80!black, densely dotted, line width=0.8pt] coordinates {(100, -180) (10000000, -180)};
+        \node[red!80!black, anchor=south east, font=\scriptsize] at (axis cs:9000000, -177) {$-180^\circ$};
+
+        % Guía vertical f_45
+        \draw[teal!80!black, dashed, line width=1.0pt] (axis cs:52901, -270) -- (axis cs:52901, -135);
+        \addplot[only marks, mark=*, mark size=2.8pt, teal!80!black] coordinates {(52901, -135)};
+        \node[teal!80!black, fill=white, fill opacity=0.9, text opacity=1, inner sep=1.5pt, font=\scriptsize, anchor=north east] 
+            at (axis cs:50000, -140) {$f_{45} = 52,90\,\text{kHz}$};
+
+        % Cota de Margen de Fase (MF = 45 deg)
+        \draw[teal!80!black, <->, line width=1.1pt] (axis cs:52901, -180) -- (axis cs:52901, -135);
+        \node[teal!80!black, anchor=west, font=\footnotesize\bfseries] at (axis cs:60000, -157.5) {$MF = 45^\circ$};
+
+        % Guía vertical f_180
+        \draw[magenta!80!black, dashed, line width=1.0pt] (axis cs:110993, -270) -- (axis cs:110993, -180);
+        \addplot[only marks, mark=square*, mark size=2.4pt, magenta!80!black] coordinates {(110993, -180)};
+        \node[magenta!80!black, fill=white, fill opacity=0.9, text opacity=1, inner sep=1.5pt, font=\scriptsize, anchor=north] 
+            at (axis cs:110993, -188) {$f_{180} = 110,99\,\text{kHz}$};
+    \end{semilogxaxis}
+\end{tikzpicture}
