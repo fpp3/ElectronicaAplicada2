@@ -10,7 +10,7 @@
 
 | Bloque | Integrante | Temática Asignada | Filminas | Tiempo Objetivo |
 | :--- | :--- | :--- | :---: | :---: |
-| **Bloque 1** | **Franco Palombo** | Apertura, Objetivos, Parámetros y Fundamento Teórico | Filminas 1 a 7 | **03:30 min** |
+| **Bloque 1** | **Franco Palombo** | Apertura, Parámetros, Criterio de Estabilidad, Diagrama de Bode y Fundamento Teórico | Filminas 1 a 7 | **03:30 min** |
 | **Bloque 2** | **Ignacio Gil** | **Filtro Pasa Alto RLC:** Diseño de Ingeniería, Factor K, Q=0.25 vs Q=0.75 | Filminas 8 a 16 | **04:00 min** |
 | **Bloque 3** | **Angelo Prieto** | **Compensación de Sistemas:** Planta 3er Orden, Inestabilidad, Retardo y Atraso-Adelanto | Filminas 17 a 24 | **03:45 min** |
 | **Bloque 4** | **Gastón Grasso** | Comparativa de Bodes, Análisis de Banda y Estabilidad, Aplicaciones y Conclusiones | Filminas 25 a 32 | **03:45 min** |
@@ -25,7 +25,7 @@
 ---
 
 ### Filmina 1: Portada y Presentación del Equipo
-* **Elementos en pantalla:** Membrete UTN FRC, título formal del proyecto, tarjetas de los 4 integrantes con sus temas asignados.
+* **Elementos en pantalla:** Membrete institucional UTN FRC con logo oficial, título formal del proyecto e integrantes en una línea formal unificada.
 * **Acción física:** Mirar a los docentes a los ojos, postura erguida, tono seguro, pausado y profesional.
 * **Texto a exponer (lectura en voz alta):**
 > "Buenos días ingenieros y compañeros. Somos el Grupo 5 de la comisión 4R2 de Electrónica Aplicada II, integrado por Ignacio Gil, Angelo Prieto, Gastón Grasso y quien les habla, Franco Palombo.
@@ -34,60 +34,62 @@
 >
 > El proyecto profundiza en dos núcleos esenciales de la ingeniería electrónica: por un lado, el modelado dinámico y frecuencial de un sistema lineal pasivo de segundo orden; y por el otro, la estabilidad relativa y las técnicas de compensación en frecuencia sobre una planta realimentada de tercer orden con alta ganancia.
 >
-> Hemos distribuido la exposición en cuatro bloques coordinados: yo brindaré el marco general, los criterios de estabilidad y el fundamento de segundo orden; Ignacio Gil desarrollará el cálculo analítico y los regímenes de amortiguamiento del filtro RLC; Angelo Prieto presentará la planta de tercer orden y sus redes de compensación; y finalmente Gastón Grasso analizará el contraste global, el impacto en ancho de banda y estabilidad, los criterios de selección de regímenes y compensadores según la aplicación, y las conclusiones integrales del proyecto."
+> Hemos distribuido la exposición en cuatro bloques coordinados: yo brindaré el marco general, los parámetros de diseño asignados, el criterio de estabilidad de Bode con la interpretación gráfica de sus márgenes y el fundamento de segundo orden; Ignacio Gil desarrollará el cálculo analítico y los regímenes de amortiguamiento del filtro RLC; Angelo Prieto presentará la planta de tercer orden y sus redes de compensación; y finalmente Gastón Grasso analizará el contraste global, el impacto en ancho de banda y estabilidad, los criterios de selección según la aplicación y las conclusiones integrales del proyecto."
 
 ---
 
-### Filmina 2: Objetivos Principales del Proyecto
-* **Elementos en pantalla:** Tarjetas paralelas con los objetivos centrales del filtro pasa alto y del sistema realimentado de control.
-* **Acción física:** Explicar con claridad las dos metas principales del diseño sin apurarse.
-* **Texto a exponer (lectura en voz alta):**
-> "Como objetivos concretos, el proyecto se divide en dos metas de diseño:
->
-> Por un lado, diseñamos un filtro pasa alto pasivo RLC con una frecuencia de corte rigurosa de 400 Hz a -3.01 dB, contrastando dos regímenes de amortiguamiento impuestos por la cátedra: fuertemente sobreamortiguado con Q1 = 0.25 y subamortiguado selectivo con Q2 = 0.75. Para lograrlo con precisión, dedujimos un factor de corrección K que compensa el alejamiento entre la pulsación natural y la frecuencia de corte.
->
-> Por el otro lado, caracterizamos una planta lineal de tercer orden con ganancia estática de 59.08 dB, diagnosticamos su severa inestabilidad a lazo cerrado y sintetizamos dos redes compensadoras pasivas (retardo puro y atraso-adelanto) para garantizar un Margen de Fase robusto de 45 grados."
-
----
-
-### Filmina 3: Parámetros de Diseño Asignados (Grupo 5)
-* **Elementos en pantalla:** Tabla formal con los parámetros asignados por la cátedra y las elecciones de diseño.
-* **Acción física:** Señalar los valores en pantalla para dar testimonio de rigor metodológico.
+### Filmina 2: Parámetros de Diseño Asignados
+* **Elementos en pantalla:** Tabla formal con los parámetros y especificaciones de diseño asignados por la cátedra para el filtro pasa alto RLC y la planta realimentada de tercer orden con sus compensadores.
+* **Acción física:** Señalar los valores en pantalla para dar testimonio del marco de partida riguroso.
 * **Texto a exponer (lectura en voz alta):**
 > "En pantalla observamos los parámetros asignados a nuestro grupo:
-> * Para el filtro RLC de segundo orden: frecuencia de corte fc = 400 Hz a -3.01 dB, factores de calidad Q1 = 0.25 (sobreamortiguado) y Q2 = 0.75 (subamortiguado), y una resistencia R elegida libremente en 100 ohms como compromiso para no cargar al generador de 50 ohms y mantener inductancias de valor manejable.
+> * Para el filtro RLC de segundo orden: frecuencia de corte fc = 400 Hz a -3.01 dB, factores de calidad Q1 = 0.25 (fuertemente sobreamortiguado) y Q2 = 0.75 (subamortiguado selectivo), y una resistencia R adoptada en 100 ohms como compromiso de diseño para no cargar al generador de 50 ohms y mantener inductancias de valor manejable.
 > * Para la planta de tercer orden: ganancia estática K = 900 (59.08 dB), polos reales en 12 kHz, 70 kHz y 140 kHz, y un Margen de Fase de diseño requerido de 45 grados.
-> * Para la compensación: retardo con frecuencia característica fd = 1.2 kHz y capacitor de referencia de 100 nanofaradios; y red de atraso-adelanto con polo en 220 kHz, cero en 1.1 MHz y capacitor de referencia de 100 picofaradios.
+> * Para la compensación: retardo puro con frecuencia característica fd = 1.2 kHz y capacitor de referencia de 100 nanofaradios; y red de atraso-adelanto con polo en 220 kHz, cero en 1.1 MHz y capacitor de referencia de 100 picofaradios.
 >
-> Todos los cálculos parten de las expresiones analíticas exactas y el rigor metodológico."
+> Todas las deducciones parten estrictamente de las expresiones analíticas exactas."
 
 ---
 
-### Filmina 4: Fundamentos: Criterio de Estabilidad de Bode y Márgenes
-* **Elementos en pantalla:** Condición de Barkhausen a la izquierda; Definición gráfica y matemática de Margen de Fase (MF) y Margen de Ganancia (MG) a la derecha.
+### Filmina 3: Fundamentos: Criterio de Estabilidad de Bode y Márgenes
+* **Elementos en pantalla:** Condición de Estabilidad a la izquierda (realimentación unitaria, condición de oscilación en $|G|=1$ y $\angle G = -180^\circ$); Definición de Márgenes a la derecha ($MF$, $MG$ y Criterio Robusto de Diseño).
 * **Acción física:** Explicar el concepto físico de realimentación positiva al alcanzar los -180 grados.
 * **Texto a exponer (lectura en voz alta):**
-> "Antes de entrar al filtro, es fundamental revisar el criterio de estabilidad que rige todo el trabajo.
+> "Antes de ingresar al diseño de los circuitos, es fundamental revisar el criterio de estabilidad que gobierna todo el análisis.
 >
-> En un sistema realimentado unitario con función a lazo cerrado T(s) = G(s) / [1 + G(s)], la inestabilidad se produce si el lazo alcanza la condición de Barkhausen: G(jω) = -1. Esto significa simultáneamente que la ganancia de lazo es igual a 0 dB y que el desfasaje acumulado llega a -180 grados.
+> En un sistema realimentado unitario con función a lazo cerrado T(s) = G(s) / [1 + G(s)], el denominador se anula si la función de lazo abierto alcanza la condición crítica G(jω) = -1. Esto significa simultáneamente dos condiciones:
+> * Ganancia de lazo unitaria, es decir, cero decibeles.
+> * Y un desfasaje acumulado de exactamente menos 180 grados.
 >
-> Al alcanzar -180 grados, la inversión de fase convierte la realimentación negativa en realimentación positiva. Si a esa frecuencia la ganancia de lazo es mayor o igual a 0 dB, el sistema oscila y se vuelve inestable.
+> Al alcanzar menos 180 grados, el signo negativo de la realimentación se invierte, transformándola en realimentación positiva. Si a esa frecuencia la ganancia de lazo es mayor o igual a cero decibeles, el sistema oscila y se vuelve inestable.
 >
-> Para cuantificar la robustez del sistema definimos dos márgenes: el Margen de Fase (MF), como la distancia angular que le resta a la fase para llegar a -180 grados cuando la magnitud cruza por 0 dB; y el Margen de Ganancia (MG), como la atenuación adicional requerida en la frecuencia donde la fase corta los -180 grados. En ingeniería de control, el umbral de diseño robusto exige MF >= 45 grados y MG >= 6 dB para evitar sobreoscilaciones destructivas."
+> Para cuantificar analíticamente cuán lejos se encuentra el lazo de esa condición crítica, definimos dos márgenes: el Margen de Fase (MF), que mide los grados que restan para alcanzar menos 180 grados cuando la ganancia cruza por cero decibeles; y el Margen de Ganancia (MG), que mide la atenuación requerida en la frecuencia donde la fase corta los menos 180 grados. Para garantizar un comportamiento dinámico sin sobreoscilaciones perjudiciales y tolerar dispersión de componentes, el criterio de diseño robusto exige MF >= 45 grados y MG >= 6 dB."
+
+---
+
+### Filmina 4: Visualización de Márgenes de Fase y Ganancia en Diagrama de Bode
+* **Elementos en pantalla:** Diagrama de Bode conceptual interactivo en dos planos (magnitud y fase) con las frecuencias de cruce $\omega_{0\text{dB}}$ y $\omega_{180}$, la cota de $0\text{ dB}$, el límite crítico de $-180^\circ$ y las flechas de Margen de Fase ($MF > 0$) y Margen de Ganancia ($MG > 0$). A la derecha, tarjeta con la lectura matemática e interpretación física.
+* **Acción física:** Señalar primero en el gráfico superior el cruce por 0 dB y bajar la mirada al gráfico de fase para mostrar el MF; luego señalar en el gráfico inferior el cruce por -180° y subir al gráfico de magnitud para mostrar el MG.
+* **Texto a exponer (lectura en voz alta):**
+> "Para comprender cómo se manifiestan estos márgenes en la práctica de la ingeniería, en pantalla observamos su lectura gráfica sobre el diagrama de Bode a lazo abierto:
+>
+> En primer lugar, en el trazado de magnitud identificamos la frecuencia de cruce omega cero dB, donde la curva atraviesa el nivel de cero decibeles. Proyectando esa frecuencia verticalmente hacia el diagrama de fase, medimos la distancia angular hasta el límite crítico de menos 180 grados. Esa distancia vertical es el Margen de Fase (MF). Físicamente, representa el retardo de fase máximo que el lazo puede admitir a ganancia unitaria antes de que la realimentación se vuelva positiva y oscile.
+>
+> En segundo lugar, en el trazado de fase buscamos la frecuencia omega 180, donde la curva cruza la cota crítica de menos 180 grados. Proyectando verticalmente hacia el trazado de magnitud, medimos la distancia desde la curva hasta el nivel de cero decibeles. Esa atenuación es el Margen de Ganancia (MG), que cuantifica la amplificación adicional que el lazo podría tolerar antes de alcanzar ganancia unitaria en la frecuencia de inversión de fase.
+>
+> En este ejemplo ambos márgenes son positivos, demostrando un sistema estable. Más adelante veremos cómo la planta de tercer orden viola severamente este criterio y cómo la corregimos mediante compensación."
 
 ---
 
 ### Filmina 5: Topología del Filtro Pasa Alto RLC
-* **Elementos en pantalla:** Tarjeta con justificación topológica y diagrama circuital serie-paralelo del filtro RLC con la resistencia interna Rg.
-* **Acción física:** Apuntar a la rama serie y a la rama derivación en el esquema.
+* **Elementos en pantalla:** Esquema circuital del filtro pasa alto pasivo de segundo orden RLC con generador y resistencia interna Rg, junto con la justificación topológica y el comportamiento asintótico.
+* **Acción física:** Señalar la resistencia Rg en serie y el inductor en derivación a masa.
 * **Texto a exponer (lectura en voz alta):**
-> "Entrando en el diseño del filtro pasa alto, adoptamos la topología pasiva de segundo orden.
+> "Entrando en el diseño del filtro pasa alto, adoptamos la topología pasiva de segundo orden RLC serie-derivación.
 >
-> El circuito consta de una rama serie compuesta por la resistencia R y el capacitor C, y una rama en derivación hacia masa constituida por el inductor L, sobre cuyos bornes tomamos la tensión de salida vo(t).
+> Un detalle de ingeniería central es la resistencia interna del generador Rg = 50 ohms: queda conectada en serie directa con la resistencia R de 100 ohms elegida, conformando una resistencia total de malla Rt = 150 ohms. Esta resistencia protege al generador frente a condiciones de cortocircuito incluso cuando las reactancias del capacitor o del inductor se hacen cero.
 >
-> Físicamente, a muy baja frecuencia el inductor se comporta como un cortocircuito a masa y el capacitor bloquea la continua, con lo cual la ganancia tiende a cero. A muy alta frecuencia ocurre lo opuesto: el capacitor se cortocircuita y el inductor se abre, transfiriendo la totalidad de la tensión a la salida.
->
-> Un aspecto metodológico clave es la resistencia interna del generador Rg = 50 ohms: al estar en serie directa con R, conforma una resistencia total de malla Rt = R + Rg, sin alterar en absoluto la estructura circuital."
+> En cuanto a su funcionamiento asintótico: a muy baja frecuencia el inductor se comporta como un cortocircuito a masa y el capacitor bloquea la continua, con lo cual la transferencia tiende a cero. A muy alta frecuencia ocurre exactamente lo opuesto: el capacitor se cortocircuita y el inductor se abre, transfiriendo la totalidad de la señal a la salida."
 
 ---
 

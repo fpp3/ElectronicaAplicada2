@@ -1,0 +1,81 @@
+\begin{tikzpicture}
+  \pgfplotsset{
+    bode style/.style={
+      width=9.8cm, height=4.2cm,
+      xmin=0.2, xmax=40,
+      grid=both,
+      major grid style={solid, gray!35},
+      minor grid style={dotted, gray!20},
+      tick label style={font=\scriptsize},
+      label style={font=\footnotesize},
+      axis line style={black!70, line width=0.6pt},
+    }
+  }
+
+  % Subplot 1: Magnitud
+  \begin{semilogxaxis}[
+    bode style,
+    name=mag,
+    ylabel={Magnitud [\si{\decibel}]},
+    ymin=-36, ymax=24,
+    ytick={-30, -20, -10, 0, 10, 20},
+    xticklabel=\empty,
+    domain=0.2:40, samples=120,
+  ]
+    % Curva |G(jw)|
+    \addplot[NavyDark, line width=1.4pt] {20*log10(5 / (sqrt(1 + x^2) * sqrt(1 + (x/4)^2) * sqrt(1 + (x/16)^2)))};
+
+    % Linea 0 dB
+    \addplot[black!70, dashed, line width=0.8pt] coordinates {(0.2, 0) (40, 0)};
+    \node[black!70, font=\scriptsize\bfseries, anchor=south east] at (axis cs:38, 1) {$0\ \si{\decibel}$};
+
+    % Cruce por 0 dB (omega_0dB = 3.51 rad/s)
+    \draw[BlueAccent, dashed, line width=0.9pt] (axis cs:3.51, -36) -- (axis cs:3.51, 0);
+    \addplot[only marks, mark=*, mark size=2.4pt, BlueAccent] coordinates {(3.51, 0)};
+    \node[BlueAccent, font=\scriptsize\bfseries, anchor=south] at (axis cs:3.51, 3.5) {$\omega_{0\si{\decibel}}$};
+
+    % Cruce de fase a -180 (omega_180 = 9.17 rad/s, Mag = -14.48 dB)
+    \draw[AlertAmber, dashed, line width=0.9pt] (axis cs:9.17, -36) -- (axis cs:9.17, 0);
+    \addplot[only marks, mark=square*, mark size=2.2pt, AlertAmber] coordinates {(9.17, -14.48)};
+    \node[AlertAmber, font=\scriptsize\bfseries, anchor=south] at (axis cs:9.17, 3.5) {$\omega_{180}$};
+
+    % Flecha Margen de Ganancia (MG)
+    \draw[{Stealth[length=4.5pt]}-{Stealth[length=4.5pt]}, AlertAmber, line width=1.4pt] 
+      (axis cs:9.17, -14.48) -- (axis cs:9.17, 0)
+      node[midway, right=3pt, font=\scriptsize\bfseries, fill=white, fill opacity=0.9, text opacity=1, inner sep=1.5pt] {$MG > 0$};
+  \end{semilogxaxis}
+
+  % Subplot 2: Fase
+  \begin{semilogxaxis}[
+    bode style,
+    name=phase,
+    at={(mag.south west)},
+    anchor=north west,
+    yshift=-0.4cm,
+    xlabel={Frecuencia $\omega$ [\si{\radian\per\second}]},
+    ylabel={Fase [$^\circ$]},
+    ymin=-245, ymax=-10,
+    ytick={-225, -180, -135, -90, -45},
+    domain=0.2:40, samples=120,
+  ]
+    % Curva Fase
+    \addplot[NavyDark, line width=1.4pt] {-atan(x) - atan(x/4) - atan(x/16)};
+
+    % Linea -180 deg
+    \addplot[AlertRed, densely dashed, line width=0.9pt] coordinates {(0.2, -180) (40, -180)};
+    \node[AlertRed, font=\scriptsize\bfseries, anchor=south west] at (axis cs:0.22, -175) {$-180^\circ$};
+
+    % Guia vertical desde omega_0dB
+    \draw[BlueAccent, dashed, line width=0.9pt] (axis cs:3.51, -245) -- (axis cs:3.51, -127.6);
+    \addplot[only marks, mark=*, mark size=2.4pt, BlueAccent] coordinates {(3.51, -127.6)};
+
+    % Flecha Margen de Fase (MF)
+    \draw[{Stealth[length=4.5pt]}-{Stealth[length=4.5pt]}, BlueAccent, line width=1.4pt]
+      (axis cs:3.51, -180) -- (axis cs:3.51, -127.6)
+      node[midway, left=4pt, font=\scriptsize\bfseries, fill=white, fill opacity=0.9, text opacity=1, inner sep=1.5pt] {$MF > 0$};
+
+    % Guia vertical desde omega_180
+    \draw[AlertAmber, dashed, line width=0.9pt] (axis cs:9.17, -245) -- (axis cs:9.17, -180);
+    \addplot[only marks, mark=square*, mark size=2.2pt, AlertAmber] coordinates {(9.17, -180)};
+  \end{semilogxaxis}
+\end{tikzpicture}
