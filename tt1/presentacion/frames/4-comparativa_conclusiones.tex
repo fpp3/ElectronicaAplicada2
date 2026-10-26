@@ -185,45 +185,60 @@
 % ------------------------------------------------------------------------------
 % 2. CONTRASTE DEL FILTRO RLC (2DO ORDEN)
 % ------------------------------------------------------------------------------
-\subsection{Contraste del Filtro RLC}
+\subsection{Contraste Temporal del Filtro RLC}
 \begin{frame}
-  \frametitle{Comparativa Temporal y Frecuencial del Filtro RLC (2do Orden)}
+  \frametitle{Filtro RLC: Comparativa de Respuesta Temporal al Escalón}
 
   \begin{columns}[c, onlytextwidth]
-    \begin{column}{0.49\textwidth}
-      \begin{tarjeta}[top=4pt, bottom=4pt]
-        {\centering\fontsize{8pt}{9.5pt}\selectfont \textbf{\color{NavyDark} Respuesta al Escalón Unitario}\par}
-        \vspace{2pt}
-        \centering
-        \adjustbox{max width=\linewidth, max height=3.6cm, keepaspectratio}{\input{figures/escalon-comparacion.tex}}
-      \end{tarjeta}
+    \begin{column}{0.58\textwidth}
+      \centering
+      \adjustbox{max width=\linewidth, max height=5.5cm, keepaspectratio}{{\textwidth=16cm\input{figures/escalon-comparacion.tex}}}
     \end{column}
 
-    \begin{column}{0.49\textwidth}
-      \begin{tarjeta}[top=4pt, bottom=4pt]
-        {\centering\fontsize{8pt}{9.5pt}\selectfont \textbf{\color{NavyDark} Módulo de Respuesta en Frecuencia}\par}
-        \vspace{2pt}
-        \centering
-        \adjustbox{max width=\linewidth, max height=3.6cm, keepaspectratio}{\input{figures/bode-comparacion.tex}}
+    \begin{column}{0.40\textwidth}
+      \begin{tarjeta}
+        {\fontsize{8.5pt}{10pt}\selectfont \textbf{\color{NavyDark} Dinámica Temporal:}}\\[2pt]
+        {\fontsize{7.2pt}{8.8pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{3pt}
+          \item \textbf{Sobreamortiguado ($Q = 0.25$):}\\
+          Caída suave ($t_c = \qty{0.70}{\milli\second}$), subpico mínimo ($\mathbf{-4.8\%}$), respuesta monótona sin oscilaciones, pero lenta ($t_s = \qty{7.53}{\milli\second}$).
+          \item \textbf{Subamortiguado ($Q = 0.75$):}\\
+          Caída rápida ($t_c = \qty{0.33}{\milli\second}$), establecimiento $4\times$ menor ($t_s = \mathbf{\qty{1.82}{\milli\second}}$), con subpico de $\mathbf{-22.2\%}$.
+          \item \textbf{Ubicación de polos:}\\
+          Dos raíces reales lentas frente a un par complejo conjugado oscilatorio.
+        \end{itemize}
+        }
       \end{tarjeta}
     \end{column}
   \end{columns}
+\end{frame}
 
-  \vspace{3pt}
-  \begin{tarjeta}[top=3pt, bottom=3pt]
-    {\fontsize{7.2pt}{8.8pt}\selectfont
-    \begin{columns}[c, onlytextwidth]
-      \begin{column}{0.48\textwidth}
-        \textbf{\color{NavyDark} Sobreamortiguado ($Q=0.25$, $\xi=2.0$):}
-        Caída suave, $t_{\text{caída}} = \qty{0.70}{\milli\second}$, subpico $\mathbf{-4.8\%}$, $t_s = \qty{7.53}{\milli\second}$. Raíces reales en $-179.5$ y $-2500.7\text{ rad/s}$.
-      \end{column}
-      \begin{column}{0.48\textwidth}
-        \textbf{\color{BlueAccent} Subamortiguado ($Q=0.75$, $\xi=0.667$):}
-        Caída rápida, $t_{\text{caída}} = \qty{0.33}{\milli\second}$, subpico $\mathbf{-22.2\%}$, $t_s = \qty{1.82}{\milli\second}$ ($4\times$ más veloz). Polos: $-1771.2 \pm j 1979.8\text{ rad/s}$.
-      \end{column}
-    \end{columns}
-    }
-  \end{tarjeta}
+\subsection{Contraste Frecuencial del Filtro RLC}
+\begin{frame}
+  \frametitle{Filtro RLC: Comparativa Frecuencial de Módulo (Bode)}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      \centering
+      \adjustbox{max width=\linewidth, max height=5.5cm, keepaspectratio}{{\textwidth=16cm\input{figures/bode-comparacion.tex}}}
+    \end{column}
+
+    \begin{column}{0.40\textwidth}
+      \begin{tarjeta}
+        {\fontsize{8.5pt}{10pt}\selectfont \textbf{\color{NavyDark} Respuesta en Frecuencia:}}\\[2pt]
+        {\fontsize{7.2pt}{8.8pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{3pt}
+          \item \textbf{Corte idéntico en $\qty{400}{\hertz}$:}\\
+          Ambas curvas cruzan con exactitud por $\qty{-3.01}{\decibel}$ gracias al factor de corrección $K$.
+          \item \textbf{Banda de paso plana:}\\
+          Convergencia exacta a ganancia unitaria ($\qty{0}{\decibel}$) en alta frecuencia.
+          \item \textbf{Divergencia en rechazo:}\\
+          Por debajo de $\qty{400}{\hertz}$, el filtro subamortiguado cae con una pendiente mucho más abrupta.
+        \end{itemize}
+        }
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \subsection{Selectividad del Filtro RLC}
