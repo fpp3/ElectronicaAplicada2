@@ -8,7 +8,7 @@
 % SLIDE 4: MARCO TEÓRICO DE ESTABILIDAD
 \subsection{Criterio de Estabilidad}
 \begin{frame}
-  \frametitle{Criterio de Estabilidad de Bode y Márgenes}
+  \frametitle{Criterio de Estabilidad de y Márgenes}
 
   \begin{columns}[t, onlytextwidth]
     \begin{column}{0.48\textwidth}
@@ -157,12 +157,13 @@
       \begin{tarjeta}
         {\fontsize{9pt}{11pt}\selectfont \textbf{\color{NavyDark} Análisis de Malla en Laplace:}}\\[2pt]
         {\fontsize{8pt}{10pt}\selectfont
-        Impedancia total de la malla serie:
+        Impedancia total:
         \[ Z_t(s) = R + sL + \frac{1}{sC} \]
         Corriente que circula por el circuito:
         \[ I(s) = \frac{V_i(s)}{Z_t(s)} = \frac{sC}{s^2 LC + sR C + 1} V_i(s) \]
         Tensión de salida tomada en el inductor $L$:
         \[ V_o(s) = sL \cdot I(s) \]
+        \[ V_o(s) = \frac{s^2LC}{s^2 LC + sR C + 1} V_i(s) \]
         }
       \end{tarjeta}
     \end{column}
