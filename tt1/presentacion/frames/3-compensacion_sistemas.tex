@@ -29,6 +29,32 @@
   \adjustbox{max width=\textwidth, max height=7.2cm, keepaspectratio}{\input{figures/plot_ej2_bode_inestabilidad.tex}}
 \end{frame}
 
+% SLIDE: ¿ES INESTABLE ESTE SISTEMA? (LAZO ABIERTO)
+\begin{frame}
+  \frametitle{¿Es inestable este sistema?}
+
+  \begin{columns}[c, onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Polos de Lazo Abierto $G(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_polos_la.tex}}
+      \end{tarjeta}
+    \end{column}
+
+    \begin{column}{0.49\textwidth}
+      \begin{tarjeta}[top=5pt, bottom=5pt]
+        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Respuesta al Escalón $G(s)$}\par}
+        \vspace{2pt}
+        \centering
+        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_escalon_la.tex}}
+      \end{tarjeta}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
 % SLIDE: SISTEMA REALIMENTADO CON BETA = 1
 \begin{frame}
   \frametitle{Diagrama de Realimentación de la Planta ($\beta = 1$)}
@@ -57,31 +83,6 @@
           \[ 1 + G(s) = 0 \iff G(j\omega) = -1 = 1\angle\ang{-180} \]
         \end{itemize}
         }
-      \end{tarjeta}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-% SLIDE: ¿ES INESTABLE ESTE SISTEMA? (LAZO ABIERTO)
-\begin{frame}
-  \frametitle{¿Es inestable este sistema?}
-
-  \begin{columns}[c, onlytextwidth]
-    \begin{column}{0.49\textwidth}
-      \begin{tarjeta}[top=5pt, bottom=5pt]
-        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Polos de Lazo Abierto $G(s)$}\par}
-        \vspace{2pt}
-        \centering
-        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_polos_la.tex}}
-      \end{tarjeta}
-    \end{column}
-
-    \begin{column}{0.49\textwidth}
-      \begin{tarjeta}[top=5pt, bottom=5pt]
-        {\centering\fontsize{8.5pt}{10.5pt}\selectfont \textbf{\color{NavyDark} Respuesta al Escalón $G(s)$}\par}
-        \vspace{2pt}
-        \centering
-        \adjustbox{max width=\linewidth, max height=4.7cm, keepaspectratio}{\input{figures/plot_escalon_la.tex}}
       \end{tarjeta}
     \end{column}
   \end{columns}
