@@ -18,13 +18,14 @@
     \end{column}
 
     \begin{column}{0.40\textwidth}
-      \begin{tarjeta}
+      \begin{tarjeta}[top=4pt, bottom=4pt]
         {\fontsize{8.5pt}{10pt}\selectfont \textbf{\color{NavyDark} Análisis Visual Comparativo:}}\\[2pt]
-        {\fontsize{7.2pt}{8.8pt}\selectfont
-        \begin{itemize}\setlength{\itemsep}{2.5pt}
-          \item \textbf{Curva Azul (Planta):} Gran ancho de banda ($BW = \qty{11.59}{\kilo\hertz}$), pero incondicionalmente inestable ($MG = \qty{-32.14}{\decibel}$).
-          \item \textbf{Curva Roja (Retardo):} Caída prematura desde $\qty{1.2}{\kilo\hertz}$; contrae el ancho de banda a $\qty{1.19}{\kilo\hertz}$ (pérdida del $\qty{89.7}{\percent}$).
-          \item \textbf{Curva Verde (Atraso-Adelanto):} Calca la respuesta en banda útil ($BW = \qty{11.56}{\kilo\hertz}$, retiene el $\qty{99.7}{\percent}$) y atenúa únicamente en alta frecuencia.
+        {\fontsize{7.0pt}{8.5pt}\selectfont
+        \begin{itemize}\setlength{\itemsep}{1.5pt}
+          \item \textbf{Continua ($K = \qty{59.08}{\decibel}$):} Sin atenuar ($\beta = 1$), las tres curvas son inestables a lazo cerrado.
+          \item \textbf{Curva Roja (Retardo):} Caída prematura desde $\qty{1.2}{\kilo\hertz}$; contrae el ancho de banda a $\qty{1.19}{\kilo\hertz}$ ($\mathbf{-89.7\%}$).
+          \item \textbf{Curva Verde (Atraso-Adelanto):} Calca la banda útil ($BW = \qty{11.56}{\kilo\hertz}$, retiene $\mathbf{99.7\%}$) y atenúa en alta frecuencia.
+          \item \textbf{Puntos $f_{45}$:} Fijan la atenuación $\beta$ requerida para $MF = \ang{45}$ con estabilidad robusta ($MG \ge \qty{6}{\decibel}$).
         \end{itemize}
         }
       \end{tarjeta}
