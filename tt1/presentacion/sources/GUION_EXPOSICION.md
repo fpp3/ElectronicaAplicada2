@@ -12,9 +12,9 @@
 | :--- | :--- | :--- | :---: | :---: |
 | **Bloque 1** | **Franco Palombo** | Apertura, Parámetros, Criterio de Estabilidad, Diagrama de Bode y Fundamento Teórico | Filminas 1 a 7 | **03:30 min** |
 | **Bloque 2** | **Ignacio Gil** | **Filtro Pasa Alto RLC:** Diseño de Ingeniería, Factor K, Q=0.25 vs Q=0.75 | Filminas 8 a 16 | **04:00 min** |
-| **Bloque 3** | **Angelo Prieto** | **Compensación de Sistemas:** Planta 3er Orden, Inestabilidad, Retardo y Atraso-Adelanto | Filminas 17 a 24 | **03:45 min** |
-| **Bloque 4** | **Gastón Grasso** | Comparativa de Bodes, Análisis de Banda y Estabilidad, Aplicaciones y Conclusiones | Filminas 25 a 32 | **03:45 min** |
-| **Total** | **Grupo 5** | **Exposición Formal Completa + Apertura a Preguntas** | **32 Filminas** | **~15:00 min** |
+| **Bloque 3** | **Angelo Prieto** | **Compensación de Sistemas:** Planta 3er Orden, Inestabilidad, Retardo y Atraso-Adelanto | Filminas 17 a 44 | **04:30 min** |
+| **Bloque 4** | **Gastón Grasso** | Comparativa Global, Selectividad, Viabilidad Constructiva y Conclusiones | Filminas 45 a 54 | **04:45 min** |
+| **Total** | **Grupo 5** | **Exposición Formal Completa + Apertura a Preguntas** | **54 Filminas** | **~16:45 min** |
 
 ---
 
@@ -34,7 +34,7 @@
 >
 > El proyecto profundiza en dos núcleos esenciales de la ingeniería electrónica: por un lado, el modelado dinámico y frecuencial de un sistema lineal pasivo de segundo orden; y por el otro, la estabilidad relativa y las técnicas de compensación en frecuencia sobre una planta realimentada de tercer orden con alta ganancia.
 >
-> Hemos distribuido la exposición en cuatro bloques coordinados: yo brindaré el marco general, los parámetros de diseño asignados, el criterio de estabilidad de Bode con la interpretación gráfica de sus márgenes y el fundamento de segundo orden; Ignacio Gil desarrollará el cálculo analítico y los regímenes de amortiguamiento del filtro RLC; Angelo Prieto presentará la planta de tercer orden y sus redes de compensación; y finalmente Gastón Grasso analizará el contraste global, el impacto en ancho de banda y estabilidad, los criterios de selección según la aplicación y las conclusiones integrales del proyecto."
+> Hemos distribuido la exposición en cuatro bloques coordinados: yo brindaré el marco general, los parámetros de diseño asignados, el criterio de estabilidad de Bode con la interpretación gráfica de sus márgenes y el fundamento de segundo orden; Ignacio Gil desarrollará el cálculo analítico y los regímenes de amortiguamiento del filtro RLC; Angelo Prieto presentará la planta de tercer orden y sus redes de compensación; y finalmente Gastón Grasso analizará el contraste global, el impacto en ancho de banda y estabilidad, los casos de uso comunes en la industria, la matriz de decisión y las conclusiones integrales del proyecto."
 
 ---
 
@@ -404,116 +404,142 @@
 
 # BLOQUE 4: ANÁLISIS COMPARATIVO GLOBAL, APLICACIONES Y CONCLUSIONES
 ### Responsable: Gastón Grasso
-**Tiempo asignado:** 11:15 a 15:00 (3 minutos 45 segundos)
+**Tiempo asignado:** 12:00 a 16:45 (4 minutos 45 segundos)
 
 ---
 
-### Filmina 25: Comparativa de Bodes: Planta Original vs Compensadores
-* **Elementos en pantalla:** Gráfico comparativo de Bode con las tres curvas superpuestas: Curva azul (planta original), Curva roja (retardo RC) y Curva verde (atraso-adelanto).
+### Filmina 45: Comparativa de Bodes: Planta Original vs Compensadores
+* **Elementos en pantalla:** Gráfico comparativo de Bode con las tres curvas superpuestas: Curva azul (planta original), Curva roja (retardo RC) y Curva verde (atraso-adelanto). A la derecha, tarjeta con desglose analítico visual.
 * **Acción física:** Apuntar a la pantalla y guiar visualmente la mirada de los profesores a través de las tres curvas.
 * **Texto a exponer (lectura en voz alta):**
-> "Muchas gracias Angelo. Para integrar los resultados de estabilidad, en esta filmina superponemos las tres respuestas en frecuencia en un único diagrama de Bode:
+> "Muchas gracias Angelo. Para integrar los resultados del análisis de estabilidad y compensación, en esta filmina superponemos las tres respuestas en frecuencia en un único diagrama de Bode:
 >
-> La curva azul representa la planta original sin compensar: con gran ancho de banda (11.59 kHz) pero condenada a la auto-oscilación violenta por su margen de ganancia negativo.
+> La curva azul representa la planta original sin compensar: con un ancho de banda útil de 11.59 kHz pero incondicionalmente inestable al cerrar el lazo, dado su margen de ganancia negativo de -32.14 dB.
 >
-> La curva roja muestra el compensador de retardo: fíjense cómo derriba la magnitud prematuramente a partir de 1.2 kHz. Logra estabilizar el lazo, pero comprime el ancho de banda a un angosto embudo de 1.19 kHz.
+> La curva roja muestra el compensador de retardo: fíjense cómo derriba la magnitud prematuramente a partir de 1.2 kHz. Logra estabilizar el lazo, pero comprime el ancho de banda útil a un estrecho cuello de botella de 1.19 kHz, representando una pérdida del 89.7% del espectro original.
 >
-> En cambio, la curva verde ilustra la red de atraso-adelanto: prácticamente calca la respuesta de la planta original en toda su banda útil hasta los 12 kHz, e introduce su acción atenuadora únicamente en alta frecuencia.
+> En cambio, la curva verde ilustra la red de atraso-adelanto: prácticamente calca la respuesta de la planta original en toda su banda de paso hasta los 12 kHz, preservando 11.56 kHz, e introduce su acción atenuadora únicamente en alta frecuencia.
 >
-> El gráfico evidencia con total nitidez la superioridad dinámica de la compensación atraso-adelanto."
+> El gráfico evidencia con total claridad la superioridad dinámica de la compensación atraso-adelanto."
 
 ---
 
-### Filmina 26: Cuadro Comparativo Cuantitativo Integral (MF = 45°)
+### Filmina 46: Cuadro Comparativo Cuantitativo Integral ($MF = 45^\circ$)
 * **Elementos en pantalla:** Tabla comparativa numérica exhaustiva con las 9 variables de diseño para la planta original, compensador de retardo y atraso-adelanto.
 * **Acción física:** Recorrer las filas clave de la tabla con precisión métrica.
 * **Texto a exponer (lectura en voz alta):**
-> "En pantalla sintetizamos la totalidad de los datos analíticos de estabilidad y desempeño:
+> "En esta tabla sintetizamos la totalidad de los datos analíticos de estabilidad y desempeño:
 >
-> Ambos compensadores conservan la ganancia estática en continua intacta en +59.08 dB y garantizan el Margen de Fase requerido de 45 grados.
+> Un primer aspecto fundamental es que ambos compensadores conservan intacta la ganancia estática en continua en +59.08 dB (900 veces), garantizando precisión y error de régimen permanente nulo ante entradas constantes.
 >
-> Pero si observamos la variación porcentual del ancho de banda:
-> * El compensador de retardo pierde un -89.7% del espectro útil.
-> * El compensador de atraso-adelanto apenas sufre un desvío residual del -0.3%, operando a una frecuencia de cruce 4.5 veces más veloz (45.11 kHz contra 9.96 kHz).
+> Sin embargo, al observar la variación porcentual del ancho de banda útil a lazo abierto:
+> * El compensador de retardo sufre una pérdida drástica del -89.7% del espectro útil.
+> * El compensador de atraso-adelanto apenas registra una variación residual del -0.3%, reteniendo 11.56 kHz y operando a una frecuencia de cruce de 45.11 kHz, cuatro veces y media más veloz que el retardo (9.96 kHz).
 >
-> Ambas alternativas cumplen con creces el Margen de Ganancia industrial de seguridad: 13.04 dB en retardo y 8.96 dB en atraso-adelanto, ambos superando holgadamente el umbral normativo de 6 dB."
+> Ambas alternativas verifican con creces el criterio estándar de estabilidad robusta en ingeniería (MG >= 6 dB): 13.04 dB en retardo y 8.96 dB en atraso-adelanto."
 
 ---
 
-### Filmina 27: Impacto sobre el Ancho de Banda y Rapidez de Respuesta
-* **Elementos en pantalla:** Dos columnas comparando en profundidad el impacto en el ancho de banda y la rapidez de respuesta temporal entre el compensador de retardo y la red atraso-adelanto.
-* **Acción física:** Contrastar la acción del polo dominante frente a la red pasiva con frecuencias superiores a la planta.
+### Filmina 47: Impacto sobre el Ancho de Banda y Rapidez de Respuesta
+* **Elementos en pantalla:** Dos columnas comparando en profundidad el impacto en el ancho de banda y la rapidez entre el compensador de retardo y la red atraso-adelanto.
+* **Acción física:** Contrastar la acción del polo dominante frente a la red pasiva con singularidades en alta frecuencia.
 * **Texto a exponer (lectura en voz alta):**
 > "Profundizando en este balance dinámico, examinamos el impacto sobre el ancho de banda y la rapidez:
 >
-> En el compensador de retardo, el polo dominante introducido en 1.2 kHz fuerza una caída prematura de -20 dB por década. Como el ancho de banda base de la planta era de 11.59 kHz, este polo contrae drásticamente el ancho de banda a lazo abierto a solo 1.19 kHz, representando una pérdida neta del 89.7% del espectro útil. Por ende, la frecuencia de cruce para Margen de Fase de 45 grados se alcanza a baja velocidad: apenas 9.96 kHz.
+> En el compensador de retardo, el polo introducido en 1.2 kHz actúa como polo dominante, forzando una caída prematura de -20 dB por década. Como el ancho de banda base de la planta era de 11.59 kHz, este polo contrae drásticamente el ancho de banda a lazo abierto a solo 1.19 kHz. Por ende, la frecuencia de cruce para Margen de Fase de 45 grados se alcanza a baja velocidad: apenas 9.96 kHz.
 >
-> En marcado contraste, la red de atraso-adelanto ubica su polo en 220 kHz y su cero en 1.1 MHz, ambas frecuencias situadas holgadamente por encima del primer polo de la planta en 12 kHz. De este modo, la ganancia y la fase en bajas frecuencias se mantienen intactas: el ancho de banda útil resulta de 11.56 kHz, reteniendo el 99.7% del ancho de banda original, y permitiendo operar a una frecuencia de cruce de 45.11 kHz, cuatro veces y media más veloz."
+> En marcado contraste, la red de atraso-adelanto sitúa su polo en 220 kHz y su cero en 1.1 MHz, ambas frecuencias ubicadas holgadamente por encima del primer polo de la planta en 12 kHz. De este modo, la ganancia y la fase en bajas frecuencias se mantienen intactas: el ancho de banda útil resulta de 11.56 kHz, reteniendo el 99.7% del ancho de banda original, y permitiendo operar a una frecuencia de cruce de 45.11 kHz, 4.5 veces más rápida."
 
 ---
 
-### Filmina 28: Margen de Ganancia y Atenuación en Alta Frecuencia
-* **Elementos en pantalla:** Dos tarjetas: Márgenes de ganancia obtenidos a la izquierda; Atenuación y dinámica de fase a la derecha.
+### Filmina 48: Margen de Ganancia y Mecanismos de Atenuación
+* **Elementos en pantalla:** Dos tarjetas: Márgenes obtenidos para $MF = 45^\circ$ a la izquierda; Atenuación y dinámica de fase a la derecha.
 * **Acción física:** Enfatizar la diferencia en la atenuación de alta frecuencia entre una pendiente infinita y un escalón acotado.
 * **Texto a exponer (lectura en voz alta):**
 > "Analizando los márgenes de estabilidad y el mecanismo de atenuación:
 >
-> La planta sin compensar presentaba un margen fuertemente negativo de -32.14 dB. Con la compensación, ambas redes logran estabilidad robusta superando el umbral de ingeniería de 6 dB: el compensador de retardo entrega un Margen de Ganancia de 13.04 dB cruzando por -180 grados en 24.35 kHz; mientras que el atraso-adelanto entrega 8.96 dB cruzando en 84.49 kHz.
+> La planta sin compensar presentaba un margen fuertemente negativo de -32.14 dB. Con la compensación, ambas redes logran estabilidad robusta superando el umbral de 6 dB: el retardo entrega un Margen de Ganancia de 13.04 dB cruzando por -180 grados en 24.35 kHz; mientras que el atraso-adelanto entrega 8.96 dB cruzando en 84.49 kHz.
 >
-> La diferencia esencial radica en la pendiente en alta frecuencia: la red de retardo mantiene la pendiente de -20 dB por década en todo el espectro superior, proporcionando la máxima atenuación de ruidos de alta frecuencia.
+> La diferencia esencial radica en la pendiente en alta frecuencia:
+> * La red de retardo mantiene indefinidamente la pendiente de -20 dB por década en todo el espectro superior, proporcionando la máxima atenuación de ruidos de alta frecuencia.
+> * En la red de atraso-adelanto, en cambio, la atenuación está estrictamente acotada entre el polo en 220 kHz y el cero en 1.1 MHz por el divisor resistivo R2 sobre R1 más R2, equivalente a un quinto o -13.98 dB. A partir de 1.1 MHz el cero detiene la caída y recupera fase.
 >
-> En la red de atraso-adelanto, en cambio, la atenuación se encuentra estrictamente acotada entre el polo en 220 kHz y el cero en 1.1 MHz a un factor R2 sobre R1 más R2, equivalente a un quinto o -13.98 dB. A partir de 1.1 MHz el cero detiene la caída y recupera fase. El retardo brinda 4.08 dB más de margen, pero el atraso-adelanto cuadruplica la velocidad del lazo."
+> El retardo brinda 4.08 dB más de margen, pero el atraso-adelanto cuadruplica la velocidad del lazo."
 
 ---
 
-### Filmina 29: Ventajas y Desventajas por Régimen de Amortiguamiento
-* **Elementos en pantalla:** Dos tarjetas analizando detalladamente las ventajas y desventajas de los regímenes sobreamortiguado y subamortiguado.
-* **Acción física:** Explicar el balance entre suavidad aperiódica y rapidez transitoria.
+### Filmina 49: Viabilidad Constructiva y Aplicaciones de los Compensadores
+* **Elementos en pantalla:** Dos tarjetas detallando las áreas de aplicación óptima y los aspectos constructivos en placa para atraso-adelanto y retardo RC.
+* **Acción física:** Explicar el compromiso constructivo entre los 100 pF y los 100 nF.
 * **Texto a exponer (lectura en voz alta):**
-> "Retomando el análisis del filtro de segundo orden, comparamos formalmente las ventajas y desventajas de ambos regímenes:
+> "Desde la perspectiva constructiva y de viabilidad técnica de nuestro diseño:
 >
-> El régimen sobreamortiguado, con Q1 = 0.25 y factor de amortiguamiento xi = 2.0, tiene la gran ventaja de una respuesta estrictamente no oscilatoria, libre de ringing y con un subpico prácticamente nulo de solo el -4.8%. Además, es sumamente robusto frente a derivas en los componentes o variaciones en la impedancia de la fuente Rg. Su desventaja es un tiempo de establecimiento prolongado de 7.53 milisegundos, una transición en frecuencia poco selectiva de -20 dB por década, y la necesidad de capacidades elevadas de 59.70 microfaradios.
+> La red de atraso-adelanto resulta la opción superadora para etapas de amplificación de instrumentación o procesamiento de señales donde el tiempo de establecimiento sea un parámetro crítico, ya que preserva el 99.7% del ancho de banda útil con un margen de ganancia robusto de 8.96 dB. Su consideración constructiva clave radica en el capacitor de 100 picofaradios: al ser un valor pequeño, requiere un diseño cuidadoso de pistas en la PCB para mitigar capacidades parásitas que puedan desplazar las frecuencias singulares de la red.
 >
-> Por el contrario, el régimen subamortiguado, con Q2 = 0.75 y xi = 0.667, reduce el tiempo de caída a menos de la mitad (0.33 milisegundos) y se establece cuatro veces más rápido, en solo 1.82 milisegundos, con una pendiente abrupta de -40 dB por década y una capacidad doce veces menor (5.02 microfaradios). Su costo es el subpico del -22.2% y las oscilaciones transitorias amortiguadas con período de 3.17 milisegundos.
->
-> El amortiguamiento crítico con Q = 0.5 representa la frontera más veloz sin sobrepaso, pero en la práctica es un punto sensible donde cualquier tolerancia puede desviar el circuito al régimen subamortiguado."
+> Por otro lado, la compensación por retardo RC se perfila como la alternativa idónea en aplicaciones donde prime la inmunidad al ruido y la tolerancia frente a derivas térmicas o dispersión de fabricación. Su capacitor de 100 nanofaradios es totalmente insensible a capacidades parásitas de pista, garantizando robustez a costa de una respuesta temporal perceptiblemente más lenta."
 
 ---
 
-### Filmina 30: Criterios de Elección según la Aplicación
-* **Elementos en pantalla:** Criterios prácticos de selección para amortiguamiento (filtro RLC) a la izquierda y para compensadores (planta lineal) a la derecha.
-* **Acción física:** Argumentar la decisión ingenieril para diferentes escenarios reales.
+### Filmina 50: Comparativa Temporal y Frecuencial del Filtro RLC (2do Orden)
+* **Elementos en pantalla:** Superposición directa de respuestas al escalón a la izquierda y diagramas de Bode a la derecha. Cuadro inferior con raíces y parámetros temporales de Q=0.25 y Q=0.75.
+* **Acción física:** Integrar el análisis del filtro de segundo orden vinculando el tiempo con la frecuencia.
 * **Texto a exponer (lectura en voz alta):**
-> "¿Cómo decide un ingeniero qué régimen o compensador implementar?
+> "Retomando el análisis del filtro pasa alto de segundo orden, en pantalla superponemos las respuestas temporales al escalón y las curvas de módulo en frecuencia:
 >
-> Para el filtro pasa alto RLC:
-> * El régimen sobreamortiguado es mandatorio cuando la señal ataca etapas sensibles a sobreimpulsos o inversiones de polaridad (como comparadores analógicos, detectores de nivel o circuitos digitales de disparo), donde un pico negativo generaría conmutaciones espurias destructivas.
-> * El régimen subamortiguado es óptimo para canales de transmisión selectivos y procesamiento de pulsos rápidos donde se priorice el mínimo tiempo de establecimiento (ts menor a 2 milisegundos) y una fuerte atenuación en banda de rechazo.
->
-> Para la compensación de la planta:
-> * La red de atraso-adelanto es la opción superadora en etapas de amplificación para instrumentación y procesamiento ágil donde el ancho de banda y la velocidad sean prioritarios, reteniendo el 99.7% del espectro con Margen de Ganancia mayor a 6 dB.
-> * El compensador de retardo es idóneo en sistemas de control sometidos a ambientes con elevado ruido electromagnético o procesos lentos con tolerancias térmicas amplias, donde prime la máxima atenuación en alta frecuencia y la robustez estática por sobre la velocidad de respuesta."
+> Si bien ambos filtros comparten rigurosamente la frecuencia de corte asignada de 400 Hz a -3.01 dB, su comportamiento transitorio es claramente distinto:
+> * Para Q = 0.25 (ξ = 2.0, sobreamortiguado), las raíces reales se ubican en -179.5 rad/s y -2500.7 rad/s. La respuesta decae de forma monótona, con un subpico de apenas el -4.8%, pero tarda 7.53 milisegundos en establecerse, gobernada por la constante de tiempo del polo dominante en 28.6 Hz.
+> * Para Q = 0.75 (ξ = 0.667, subamortiguado), las raíces forman un par complejo conjugado en -1771.2 ± j 1979.8 rad/s. La respuesta es notablemente más veloz: el tiempo de caída se reduce a la mitad (0.33 ms) y el tiempo de establecimiento a la cuarta parte (1.82 ms), a costa de un subpico pronunciado del -22.2%."
 
 ---
 
-### Filmina 31: Conclusiones Integrales del Proyecto
-* **Elementos en pantalla:** Dos tarjetas con las conclusiones finales del proyecto para ambos sistemas, sintetizando los aportes analíticos y de diseño del proyecto.
+### Filmina 51: Análisis de Selectividad y Atenuación en Banda de Rechazo
+* **Elementos en pantalla:** Dos tarjetas: Pendiente y rechazo fuera de banda a la izquierda; Banda de paso y pico resonante a la derecha.
+* **Acción física:** Señalar el ejemplo cuantitativo a 100 Hz calculado en el diseño.
+* **Texto a exponer (lectura en voz alta):**
+> "La diferencia transitoria tiene su correlato directo en la selectividad en frecuencia:
+>
+> En el filtro sobreamortiguado, los dos polos reales se encuentran muy separados (28.6 Hz y 398 Hz), por lo que entre ambas frecuencias la pendiente de atenuación es de solo 20 dB por década y la transición hacia la banda de rechazo es gradual.
+>
+> En cambio, en el filtro subamortiguado los polos complejos actúan en conjunto alrededor de f0 = 422.8 Hz, alcanzando la pendiente de 40 dB por década inmediatamente por debajo de la frecuencia de corte.
+>
+> Si evaluamos una señal de interferencia a 100 Hz (dos octavas por debajo de fc), esta se atenúa 12.6 dB con Q = 0.25 y 25.0 dB con Q = 0.75, logrando el doble de atenuación en decibeles.
+>
+> Además, para Q = 0.75 el pico de resonancia en la banda de paso es de apenas 0.05 dB (un factor de 1.006), por lo que la banda útil se mantiene prácticamente tan plana como en un Butterworth."
+
+---
+
+### Filmina 52: Ventajas, Desventajas y Casos de Uso del Filtro RLC
+* **Elementos en pantalla:** Dos tarjetas analizando detalladamente las ventajas, desventajas y casos de uso para los regímenes sobreamortiguado y subamortiguado, incluyendo el amortiguamiento crítico.
+* **Acción física:** Resaltar los criterios de aplicación según el régimen dinámico.
+* **Texto a exponer (lectura en voz alta):**
+> "Sintetizando las ventajas y criterios de aplicación de cada régimen:
+>
+> El régimen sobreamortiguado (Q = 0.25) tiene como ventaja principal una respuesta no oscilatoria, libre de ringing y con subpico mínimo. Esto resulta ventajoso cuando la señal filtrada alimenta etapas sensibles a excursiones de signo contrario (como comparadores, detectores de nivel o etapas con limitación de excursión). Además, es muy robusto frente a tolerancias en L, C o la resistencia del generador Rg. Su desventaja es el tiempo de establecimiento largo (7.53 ms) y componentes mayores (C = 59.70 microfaradios).
+>
+> El amortiguamiento crítico con Q = 0.5 representa la respuesta más rápida sin sobrepasar el valor final, óptima cuando se exige no tener sobreimpulso, pero es un punto frágil frente a la dispersión de componentes.
+>
+> Por último, el régimen subamortiguado (Q = 0.75) es cuatro veces más rápido (ts = 1.82 ms) y más selectivo. Al ser omega 0 cercano a omega c, requiere un capacitor doce veces menor (5.02 microfaradios), lo que facilita su implementación con componentes no electrolíticos de mejor tolerancia. Su costo es el subpico del -22.2%."
+
+---
+
+### Filmina 53: Conclusiones Integrales del Proyecto
+* **Elementos en pantalla:** Dos tarjetas con las conclusiones finales del proyecto para el filtro pasa alto de segundo orden a la izquierda y para la planta de tercer orden a la derecha.
 * **Acción física:** Tono conclusivo, firme y seguro.
 * **Texto a exponer (lectura en voz alta):**
 > "Como conclusiones finales de nuestro trabajo técnico destacamos:
 >
-> En el filtro pasa alto de segundo orden, demostramos que la pulsación natural omega cero solo coincide con la frecuencia de corte en aproximaciones de Butterworth; para cualquier otro factor Q, la deducción analítica de la constante de corrección K resultó indispensable para garantizar con exactitud los -3.01 dB en 400 Hz. Comprobamos la correspondencia matemática unívoca entre la ubicación de los polos en el plano complejo y la dinámica temporal.
+> En el filtro pasa alto de segundo orden, demostramos que la pulsación natural omega cero solo coincide con la frecuencia de corte en aproximaciones de Butterworth; para cualquier otro factor Q, la deducción analítica de la constante de corrección K resultó indispensable para garantizar con exactitud los -3.01 dB en 400 Hz. Comprobamos la correspondencia matemática unívoca entre la ubicación de los polos en el plano complejo y la dinámica temporal, cuantificando el compromiso entre velocidad y ausencia de oscilaciones.
 >
-> En la planta de tercer orden, diagnosticamos la severa inestabilidad inherente a una planta lineal con ganancia estática de 59.08 dB, cuyo cruce de fase en 110.99 kHz arrojaba un margen de ganancia negativo de -32.14 dB.
+> En la planta de tercer orden, diagnosticamos la severa inestabilidad inherente a una ganancia estática de 59.08 dB, cuyo cruce de fase en 110.99 kHz arrojaba un margen de ganancia negativo de -32.14 dB ante realimentación unitaria.
 >
-> Demostramos que el criterio de diseño de Margen de Fase de 45 grados garantiza la estabilidad a lazo cerrado con márgenes de ganancia robustos superiores a 6 dB y sobreimpulso controlado. Y comprobamos cuantitativamente la superioridad de la red de atraso-adelanto, que retiene el 99.7% del ancho de banda útil frente al colapso del 89.7% provocado por el polo dominante del retardo.
+> Demostramos que el criterio de diseño de Margen de Fase de 45 grados garantiza la estabilidad a lazo cerrado con márgenes de ganancia robustos superiores a 6 dB. Y comprobamos cuantitativamente la superioridad de la red de atraso-adelanto, que retiene el 99.7% del ancho de banda útil frente al colapso del 89.7% provocado por el polo dominante del retardo.
 >
 > Muchas gracias."
 
 ---
 
-### Filmina 32: MUCHAS GRACIAS
-* **Elementos en pantalla:** "MUCHAS GRACIAS" en tipografía bold institucional y centrada.
+### Filmina 54: MUCHAS GRACIAS
+* **Elementos en pantalla:** "MUCHAS GRACIAS" en tipografía bold institucional y centrada con membrete oficial UTN FRC.
 * **Acción física:** Esperar unos segundos en silencio con compostura, abrir formalmente la ronda de preguntas invitando al tribunal docente.
 * **Texto a exponer (lectura en voz alta):**
 > "Quedamos a total disposición del tribunal docente para responder sus consultas y profundizar en cualquier aspecto analítico o de diseño de nuestra presentación. Muchas gracias."
@@ -547,3 +573,11 @@ A continuación se detallan las preguntas más probables de la cátedra junto a 
 #### Pregunta 6: En la práctica de laboratorio, ¿cómo verificarían experimentalmente el Margen de Fase sin abrir físicamente el lazo?
 * **Integrante sugerido:** Gastón Grasso o Angelo Prieto
 * **Respuesta clave:** Se inyecta una señal escalón de pequeña amplitud a lazo cerrado y se mide en el osciloscopio el sobreimpulso porcentual transitorio Mp. A través de la correlación de segundo orden aproximada entre amortiguamiento y margen de fase, para un MF = 45 grados, el sobreimpulso medido debe situarse entre el 20% y el 25%. Si se observa un sobreimpulso significativamente mayor, significa que el margen de fase real es inferior a 45 grados debido a la acción de polos secundarios no modelados.
+
+#### Pregunta 7: En el diseño del compensador de atraso-adelanto, ¿por qué eligieron C = 100 pF y qué consideraciones constructivas deben tenerse en cuenta?
+* **Integrante sugerido:** Gastón Grasso
+* **Respuesta clave:** El valor C = 100 pF fue fijado como especificación de cátedra para ubicar el cero en 1.1 MHz y el polo en 220 kHz con resistencias comerciales factibles (R1 = 5.76 kohms y R2 = 1.45 kohms). Al ser una capacidad tan reducida, constructivamente exige un diseño cuidadoso de pistas en la PCB para mitigar capacidades parásitas (que suelen rondar entre 5 y 15 pF) que puedan alterar las frecuencias de corte calculadas.
+
+#### Pregunta 8: ¿En qué tipo de aplicaciones prácticas se prefiere el filtro pasa alto sobreamortiguado?
+* **Integrante sugerido:** Gastón Grasso
+* **Respuesta clave:** El régimen sobreamortiguado resulta ventajoso cuando la señal filtrada alimenta etapas sensibles a excursiones de signo contrario, como comparadores, detectores de nivel o etapas con limitación de excursión, ya que su respuesta es monótona y sin ringing, evitando conmutaciones falsas o no deseadas. Además, es la opción más robusta frente a la tolerancia de los componentes o variaciones en la resistencia del generador.
