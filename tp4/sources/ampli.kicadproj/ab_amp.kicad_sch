@@ -3293,25 +3293,25 @@
 		(fields_autoplaced yes)
 		(uuid "24aea879-4420-49cb-8113-8047af4c7cb9")
 		(property "Reference" "R201"
-			(at 63.5 78.7401 0)
+			(at 68.58 76.1999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "560"
-			(at 63.5 76.2001 0)
+			(at 68.58 78.7399 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
@@ -3358,6 +3358,13 @@
 				(path "/575d2c4d-166b-4823-8620-39df449a3f3f/5e788c1d-24ec-410a-ad5f-d3bba515788f"
 					(reference "R201")
 					(unit 1)
+					(variant
+						(name "spk_10w")
+						(field
+							(name "Value")
+							(value "390")
+						)
+					)
 				)
 			)
 		)
@@ -4194,25 +4201,25 @@
 		(fields_autoplaced yes)
 		(uuid "97013a6d-20fc-4169-a220-a14d15131904")
 		(property "Reference" "R202"
-			(at 76.2 116.8401 0)
+			(at 81.28 114.2999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "2k2"
-			(at 76.2 114.3001 0)
+			(at 81.28 116.8399 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
@@ -4427,6 +4434,39 @@
 			)
 		)
 		(property "Sim.Pins" "1=C 2=B 3=E"
+			(at 107.95 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Library" "/home/fpp/Documentos/UTN/ElectronicaAplicada2/tp4/sources/sim/bjt.lib"
+			(at 107.95 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Name" "BC327"
+			(at 107.95 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Type" "GUMMELPOON"
 			(at 107.95 102.87 0)
 			(hide yes)
 			(show_name no)
@@ -4841,6 +4881,13 @@
 				(path "/575d2c4d-166b-4823-8620-39df449a3f3f/5e788c1d-24ec-410a-ad5f-d3bba515788f"
 					(reference "R205")
 					(unit 1)
+					(variant
+						(name "spk_10w")
+						(field
+							(name "Value")
+							(value "33k")
+						)
+					)
 				)
 			)
 		)
@@ -5005,6 +5052,13 @@
 				(path "/575d2c4d-166b-4823-8620-39df449a3f3f/5e788c1d-24ec-410a-ad5f-d3bba515788f"
 					(reference "R204")
 					(unit 1)
+					(variant
+						(name "spk_10w")
+						(field
+							(name "Value")
+							(value "390")
+						)
+					)
 				)
 			)
 		)
@@ -5032,7 +5086,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "12k"
+		(property "Value" "6k8"
 			(at 132.08 100.3299 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5087,6 +5141,13 @@
 				(path "/575d2c4d-166b-4823-8620-39df449a3f3f/5e788c1d-24ec-410a-ad5f-d3bba515788f"
 					(reference "R206")
 					(unit 1)
+					(variant
+						(name "spk_10w")
+						(field
+							(name "Value")
+							(value "3k9")
+						)
+					)
 				)
 			)
 		)
@@ -5183,6 +5244,39 @@
 				)
 			)
 		)
+		(property "Sim.Library" "/home/fpp/Documentos/UTN/ElectronicaAplicada2/tp4/sources/sim/bjt.lib"
+			(at 76.2 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Name" "BC337"
+			(at 76.2 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Type" "GUMMELPOON"
+			(at 76.2 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "4584e816-37ff-443c-b214-2f8e96db4c8f")
 		)
@@ -5214,7 +5308,7 @@
 		(fields_autoplaced yes)
 		(uuid "f8a274e5-848e-4c30-adcc-6458ed4b9474")
 		(property "Reference" "Q201"
-			(at 63.5 104.1401 0)
+			(at 63.5 101.5999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5225,7 +5319,7 @@
 			)
 		)
 		(property "Value" "BC337"
-			(at 63.5 101.6001 0)
+			(at 63.5 104.1399 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5283,6 +5377,39 @@
 			)
 		)
 		(property "Sim.Pins" "1=C 2=B 3=E"
+			(at 68.58 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Library" "/home/fpp/Documentos/UTN/ElectronicaAplicada2/tp4/sources/sim/bjt.lib"
+			(at 68.58 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Name" "BC337"
+			(at 68.58 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Type" "GUMMELPOON"
 			(at 68.58 102.87 0)
 			(hide yes)
 			(show_name no)
@@ -5393,6 +5520,39 @@
 			)
 		)
 		(property "Sim.Pins" "1=C 2=B 3=E"
+			(at 182.88 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Library" "/home/fpp/Documentos/UTN/ElectronicaAplicada2/tp4/sources/sim/bjt.lib"
+			(at 182.88 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Name" "BC337"
+			(at 182.88 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Type" "GUMMELPOON"
 			(at 182.88 90.17 0)
 			(hide yes)
 			(show_name no)

@@ -667,6 +667,24 @@
           "label": "Sim.Device",
           "name": "Sim.Device",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Library",
+          "name": "Sim.Library",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Name",
+          "name": "Sim.Name",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Params",
+          "name": "Sim.Params",
+          "show": false
         }
       ],
       "filter_string": "",
@@ -705,6 +723,14 @@
     "meta": {
       "version": 1
     },
+    "ngspice": {
+      "fix_include_paths": true,
+      "meta": {
+        "version": 0
+      },
+      "model_mode": 4,
+      "workbook_filename": "ampli.wbk"
+    },
     "page_layout_descr_file": "",
     "plot_directory": "",
     "reuse_designators": true,
@@ -717,8 +743,17 @@
         "uuid": "575d2c4d-166b-4823-8620-39df449a3f3f"
       }
     ],
-    "used_designators": "RV1-3,RV301-303,C1-8,C201-203,C301-312,#PWR1-13,J1-15,J101-111,JP301,R1-24,R201-212,R301-316,U1-3,U201,U301-302,Q1-5,Q201-208",
-    "variants": []
+    "used_designators": "#GND101,V101-104,RV1-3,RV301-303,C1-8,C201-203,C301-312,#PWR1-13,J1-15,J101-111,JP301,R1-24,R101,R201-214,R301-316,U1-3,U201,U301-302,Q1-5,Q201-208",
+    "variants": [
+      {
+        "description": "Para carga de 6Ohm 10W",
+        "name": "spk_10w"
+      },
+      {
+        "description": "Para carga de 4Ohm 3W",
+        "name": "spk_3w"
+      }
+    ]
   },
   "sheets": [
     [
