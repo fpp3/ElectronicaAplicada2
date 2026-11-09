@@ -10,21 +10,21 @@ diseño exigidas ($I_{Lmin} = \SI{100}{\milli\ampere}$, $I_{Lmax} = \SI{3}{\ampe
 \label{sec.c5:rcar}
 
 La regulación de carga expresa la variación porcentual de la tensión de salida cuando la corriente de carga
-pasa de su valor mínimo especificado a plena carga (Ecuación 6-42 de \cite{gonzalez_fuentes2}):
+pasa de su valor mínimo especificado a plena carga:
 \begin{equation}
     R_{car} = \frac{V_{o(NL)} - V_{o(FL)}}{V_{o(nom)}} \times 100
     \label{eq.c5:rcar}
 \end{equation}
-A partir de los datos registrados en el archivo \lstinline{vRL_120_4.txt}:
+A partir de los datos registrados en la simulacion:
 \begin{itemize}
     \item A corriente mínima ($I_{Lmin} = \SI{100}{\milli\ampere}$, $R_L = \SI{120}{\ohm}$):
-    $V_{o(NL)} = \SI{12.00156}{\volt}$.
+    $V_{o(NL)} = \SI{12.00154}{\volt}$.
     \item A plena carga nominal ($I_{Lmax} = \SI{3.0}{\ampere}$, $R_L = \SI{4}{\ohm}$):
-    $V_{o(FL)} = \SI{11.99944}{\volt}$.
+    $V_{o(FL)} = \SI{11.99992}{\volt}$.
 \end{itemize}
-La variación absoluta es de apenas $\Delta V_o = \SI{2.12}{\milli\volt}$. Aplicando la ecuación~\eqref{eq.c5:rcar}:
+La variación absoluta es de apenas $\Delta V_o = \SI{1.62}{\milli\volt}$. Aplicando la ecuación~\eqref{eq.c5:rcar}:
 \begin{equation}
-    R_{car} = \frac{\SI{12.00156}{\volt} - \SI{11.99944}{\volt}}{\SI{12.00}{\volt}} \times 100 = \SI{0.0177}{\percent}
+    R_{car} = \frac{\SI{12.00154}{\volt} - \SI{11.99992}{\volt}}{\SI{12.00}{\volt}} \times 100 = \mathbf{\SI{0.0135}{\percent}}
     \label{eq.c5:rcar_num}
 \end{equation}
 
@@ -32,16 +32,16 @@ La variación absoluta es de apenas $\Delta V_o = \SI{2.12}{\milli\volt}$. Aplic
 \label{sec.c5:rsal}
 
 La resistencia dinámica de salida modela la pendiente de caída de tensión frente a incrementos en la demanda
-de corriente (Ecuación 6-43 de \cite{gonzalez_fuentes2}):
+de corriente:
 \begin{equation}
     R_{sal} = \frac{\Delta V_o}{\Delta I_L} = \frac{V_{o(NL)} - V_{o(FL)}}{I_{Lmax} - I_{Lmin}}
     \label{eq.c5:rsal}
 \end{equation}
 Reemplazando los valores experimentales:
 \begin{equation}
-    R_{sal} = \frac{\SI{2.12}{\milli\volt}}{\SI{3.00}{\ampere} - \SI{0.10}{\ampere}}
-            = \frac{\SI{2.12}{\milli\volt}}{\SI{2.90}{\ampere}}
-            = \mathbf{\SI{0.731}{\milli\ohm}}
+    R_{sal} = \frac{\SI{1.62}{\milli\volt}}{\SI{3.00}{\ampere} - \SI{0.10}{\ampere}}
+            = \frac{\SI{1.62}{\milli\volt}}{\SI{2.90}{\ampere}}
+            = \mathbf{\SI{0.559}{\milli\ohm}}
     \label{eq.c5:rsal_num}
 \end{equation}
 El valor obtenido en el orden de los submiliohmios confirma el comportamiento cuasi-ideal del lazo de regulación
@@ -51,22 +51,22 @@ del integrado LM7812 asistido por el booster exterior.
 \label{sec.c5:rred}
 
 La regulación de red mide la capacidad de la fuente para aislar la salida frente a fluctuaciones en la red eléctrica
-de entrada no regulada (Ecuación 6-41 de \cite{gonzalez_fuentes2}):
+de entrada no regulada:
 \begin{equation}
     R_{red} = \frac{\Delta V_o}{\Delta V_{in}} \times 100
     \label{eq.c5:rred}
 \end{equation}
 Para evaluar una tolerancia de línea del $\pm 10\%$ sobre la tensión nominal de entrada ($V_{in} = \SI{18}{\volt}$):
 \begin{itemize}
-    \item $V_{in1} = 18 - 10\% = \SI{16.2}{\volt} \implies V_o = \SI{11.99944}{\volt}$
-    (datos de \lstinline{vRl_vin_variable_regulacion_red.txt}).
-    \item $V_{in2} = 18 + 10\% = \SI{19.8}{\volt} \implies V_o = \SI{11.99945}{\volt}$.
+    \item $V_{in1} = 18 - 10\% = \SI{16.2}{\volt} \implies V_o = \SI{11.99994}{\volt}$.
+    \item $V_{in2} = 18 + 10\% = \SI{19.8}{\volt} \implies V_o = \SI{11.99994}{\volt}$.
 \end{itemize}
-Ante una variación de entrada de $\Delta V_{in} = \SI{3.6}{\volt}$, la tensión de salida experimenta un corrimiento
-de solo $\Delta V_o = \SI{10}{\micro\volt}$. Por ende:
+A partir del barrido continuo, ante una variación
+$\Delta V_{in} = \SI{3.6}{\volt}$, la tensión de salida experimenta un corrimiento de solo
+$\Delta V_o = \SI{7.0}{\micro\volt}$. Por ende:
 \begin{equation}
-    R_{red} = \frac{\SI{10}{\micro\volt}}{\SI{3.6}{\volt}} \times 100 = \mathbf{\SI{0.00028}{\percent}}
-    \quad \left(\SI{0.0028}{\milli\volt/\volt}\right)
+    R_{red} = \frac{\SI{7.0}{\micro\volt}}{\SI{3.6}{\volt}} \times 100 = \mathbf{\SI{0.00019}{\percent}}
+    \quad \left(\SI{0.0019}{\milli\volt/\volt}\right)
     \label{eq.c5:rred_num}
 \end{equation}
 
@@ -74,26 +74,33 @@ de solo $\Delta V_o = \SI{10}{\micro\volt}$. Por ende:
 \label{sec.c5:ct}
 
 El coeficiente de temperatura cuantifica el desplazamiento térmico de la referencia interna bandgap y del lazo
-amplificador (Ecuación 6-44 de \cite{gonzalez_fuentes2}):
+amplificador:
 \begin{equation}
     C.T. = \frac{\Delta V_o}{\Delta T}
     \label{eq.c5:ct}
 \end{equation}
-A partir del ensayo de temperatura (\lstinline{vRL_temp_0_25_55.txt}) a plena carga nominal ($R_L = \SI{4}{\ohm}$):
+A partir del ensayo de temperatura a plena carga nominal ($R_L = \SI{4}{\ohm}$):
 \begin{itemize}
-    \item A $T_1 = \SI{0}{\celsius}$: $V_o(\SI{0}{\celsius}) = \SI{12.04379}{\volt}$.
-    \item A $T_2 = \SI{25}{\celsius}$: $V_o(\SI{25}{\celsius}) = \SI{12.00316}{\volt}$.
+    \item A $T_1 = \SI{0}{\celsius}$: $V_o(\SI{0}{\celsius}) = \SI{12.04432}{\volt}$.
+    \item A $T_2 = \SI{25}{\celsius}$: $V_o(\SI{25}{\celsius}) = \SI{12.00366}{\volt}$.
+    \item A $T_3 = \SI{55}{\celsius}$: $V_o(\SI{55}{\celsius}) = \SI{11.94056}{\volt}$.
 \end{itemize}
-Para el intervalo $\Delta T = \SI{25}{\celsius}$:
+Para el intervalo $\Delta T = \SI{25}{\celsius}$ ($0$ a $\SI{25}{\celsius}$):
 \begin{equation}
-    C.T. = \frac{\SI{12.00316}{\volt} - \SI{12.04379}{\volt}}{\SI{25}{\celsius}}
-         = \frac{\SI{-40.63}{\milli\volt}}{\SI{25}{\celsius}}
-         = \mathbf{\SI{-1.625}{\milli\volt/\celsius}}
+    C.T. = \frac{\SI{12.00366}{\volt} - \SI{12.04432}{\volt}}{\SI{25}{\celsius}}
+         = \frac{\SI{-40.66}{\milli\volt}}{\SI{25}{\celsius}}
+         = \mathbf{\SI{-1.626}{\milli\volt/\celsius}}
     \label{eq.c5:ct_num}
 \end{equation}
 Normalizado a la tensión nominal de $\SI{12}{\volt}$, representa un coeficiente relativo de:
 \begin{equation*}
-    C.T._{rel} = \frac{\SI{-1.625}{\milli\volt/\celsius}}{\SI{12}{\volt}} \times 10^6 \approx \SI{-135.4}{ppm/\celsius}
+    C.T._{rel} = \frac{\SI{-1.626}{\milli\volt/\celsius}}{\SI{12}{\volt}} \times 10^6 \approx \SI{-135.5}{ppm/\celsius}
+\end{equation*}
+En el rango completo de operación industrial hasta $\SI{55}{\celsius}$ ($\Delta T = \SI{55}{\celsius}$):
+\begin{equation*}
+    C.T._{0-55} = \frac{\SI{11.94056}{\volt} - \SI{12.04432}{\volt}}{\SI{55}{\celsius}}
+                = \mathbf{\SI{-1.887}{\milli\volt/\celsius}}
+                \quad (\approx \SI{-157.2}{ppm/\celsius})
 \end{equation*}
 
 \section{Tensión de ripple y Rechazo de rizado ($RR$)}
@@ -101,7 +108,7 @@ Normalizado a la tensión nominal de $\SI{12}{\volt}$, representa un coeficiente
 
 Para determinar la atenuación del zumbido de rectificación, se inyectó a la entrada una señal senoidal de
 $100\text{ Hz}$ con amplitud de $\SI{1}{\volt}$ (equivalente a $V_{rip(in)} = \SI{2.0}{\volt_{pp}}$) montada sobre el nivel
-continuo de $\SI{18}{\volt}$ (\lstinline{V1 N001 0 SINE(18 1 100)}), operando a plena carga ($I_L = \SI{3}{\ampere}$).
+continuo de $\SI{18}{\volt}$, operando a plena carga ($I_L = \SI{3}{\ampere}$).
 
 \begin{figure}[!ht]
     \centering
@@ -110,23 +117,23 @@ continuo de $\SI{18}{\volt}$ (\lstinline{V1 N001 0 SINE(18 1 100)}), operando a 
     \label{fig.c5:ripple}
 \end{figure}
 
-Del registro transitorio en régimen estacionario (\lstinline{vRl_vin_variable_ripple.txt}), ilustrado en la
+Del registro transitorio en régimen estacionario, ilustrado en la
 figura~\ref{fig.c5:ripple}, se extrae una tensión de rizado pico a pico residual en la carga de:
 \begin{equation}
-    V_{rpp(out)} = \SI{8.58}{\micro\volt}
+    V_{rpp(out)} = \SI{3.5}{\micro\volt}
     \label{eq.c5:vrpp}
 \end{equation}
-De acuerdo a la Ecuación 6-78 de la cátedra \cite{gonzalez_fuentes2}, la tensión eficaz de ripple para una
+La tensión eficaz de ripple para una
 señal de rizado se calcula como:
 \begin{equation}
-    V_{ef-rip} = \frac{V_{rpp(out)}}{3.464} = \frac{\SI{8.58}{\micro\volt}}{3.464} = \mathbf{\SI{2.48}{\micro\volt_{rms}}}
+    V_{ef-rip} = \frac{V_{rpp(out)}}{3.464} = \frac{\SI{3.5}{\micro\volt}}{3.464} = \mathbf{\SI{1.01}{\micro\volt_{rms}}}
     \label{eq.c5:vef_rip}
 \end{equation}
 El factor de rechazo de ripple ($RR$) de la fuente resulta:
 \begin{equation}
     RR = 20 \log_{10} \left( \frac{V_{rip\_in(pp)}}{V_{rpp(out)}} \right)
-       = 20 \log_{10} \left( \frac{\SI{2.0}{\volt}}{\SI{8.58}{\micro\volt}} \right)
-       = \mathbf{\SI{107.35}{\decibel}}
+       = 20 \log_{10} \left( \frac{\SI{2.0}{\volt}}{\SI{3.5}{\micro\volt}} \right)
+       = \mathbf{\SI{115.14}{\decibel}}
     \label{eq.c5:rr}
 \end{equation}
 Este nivel de rechazo supera holgadamente los $\SI{60}{\decibel}$ especificados típicamente en la hoja de datos
@@ -147,14 +154,15 @@ Parámetro de Calidad & Símbolo & Valor Obtenido & Unidad \\
 \hline
 Tensión nominal de salida & $V_{out}$ & $12.00$ & \si{\volt} \\
 Corriente máxima de diseño & $I_{Lmax}$ & $3.00$ & \si{\ampere} \\
-Regulación de carga & $R_{car}$ & $0.0177$ & \si{\percent} \\
-Resistencia dinámica de salida & $R_{sal}$ & $0.731$ & \si{\milli\ohm} \\
-Regulación de red / línea & $R_{red}$ & $0.00028$ & \si{\percent} \\
-Factor de regulación de línea & $F_{red}$ & $0.0028$ & \si{\milli\volt/\volt} \\
-Coeficiente de temperatura & $C.T.$ & $-1.625$ & \si{\milli\volt/\celsius} \\
-Tensión de ripple pico a pico & $V_{rpp}$ & $8.58$ & \si{\micro\volt} \\
-Tensión de ripple eficaz & $V_{ef-rip}$ & $2.48$ & \si{\micro\volt_{rms}} \\
-Rechazo de ripple ($100\text{ Hz}$) & $RR$ & $107.35$ & \si{\decibel} \\
+Regulación de carga & $R_{car}$ & $0.0135$ & \si{\percent} \\
+Resistencia dinámica de salida & $R_{sal}$ & $0.559$ & \si{\milli\ohm} \\
+Regulación de red / línea & $R_{red}$ & $0.00019$ & \si{\percent} \\
+Factor de regulación de línea & $F_{red}$ & $0.0019$ & \si{\milli\volt/\volt} \\
+Coeficiente de temperatura ($0\text{--}\SI{25}{\celsius}$) & $C.T.$ & $-1.626$ & \si{\milli\volt/\celsius} \\
+Coeficiente de temperatura ($0\text{--}\SI{55}{\celsius}$) & $C.T._{55}$ & $-1.887$ & \si{\milli\volt/\celsius} \\
+Tensión de ripple pico a pico & $V_{rpp}$ & $3.5$ & \si{\micro\volt} \\
+Tensión de ripple eficaz & $V_{ef-rip}$ & $1.01$ & \si{\micro\volt_{rms}} \\
+Rechazo de ripple ($100\text{ Hz}$) & $RR$ & $115.14$ & \si{\decibel} \\
 \hline
 \end{tabular}
 \end{table}

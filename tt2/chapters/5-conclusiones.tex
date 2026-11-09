@@ -11,25 +11,29 @@ A partir del análisis teórico y de los resultados numéricos obtenidos, se des
 \begin{enumerate}
     \item \textbf{Cumplimiento de especificaciones nominales:} En el rango especificado de demanda de carga
     ($\SI{100}{\milli\ampere} \le I_L \le \SI{3}{\ampere}$), la fuente presentó una regulación sobresaliente con
-    una caída de tensión de apenas $\SI{2.12}{\milli\volt}$ ($\Delta V_o / V_{nom} = \SI{0.0177}{\percent}$) y una
-    resistencia interna dinámica de $R_{sal} = \SI{0.731}{\milli\ohm}$.
+    una caída de tensión de apenas $\SI{1.62}{\milli\volt}$ ($\Delta V_o / V_{nom} = \SI{0.0135}{\percent}$) y una
+    resistencia interna dinámica de $R_{sal} = \SI{0.559}{\milli\ohm}$. El ajuste de $R_2 = \SI{2.2}{\ohm}$ permitió
+    cumplir el requerimiento operativo de que a plena carga nominal ($I_L = \SI{3.0}{\ampere}$), el regulador integrado
+    suministre $\SI{0.93}{\ampere}$ ($<\SI{1.0}{\ampere}$ nominal) y el transistor de paso exterior $Q_1$ asuma los
+    restantes $\SI{2.07}{\ampere}$, preservando la vida útil del integrado.
     
-    \item \textbf{Efectividad de la protección de sobrecarga:} El limitador discreto basado en $Q_2$ (BC557B) y
-    $R_{sc} = \SI{0.27}{\ohm}$ permaneció completamente inactivo en régimen normal ($V_{Rsh} \le \SI{0.505}{\volt}$),
-    sin alterar el desempeño del regulador. Ante condiciones de cortocircuito severo ($R_L = \SI{0.5}{\ohm}$), la
-    tensión colapsó a $\SI{2.06}{\volt}$ y la corriente del transistor de paso quedó estrictamente confinada en
-    $I_{C(Q1)} = \SI{2.649}{\ampere}$, convalidando la formulación analítica de diseño ($I_{c1(max)} = \SI{2.59}{\ampere}$)
-    con un desvío menor al $\SI{2.3}{\percent}$.
+    \item \textbf{Efectividad de la protección de sobrecarga y limitación:} El limitador discreto basado en $Q_2$
+    (TIP42C) y $R_{sc} = \SI{0.33}{\ohm}$ comienza a intervenir gradualmente ante sobrecargas mayores a la corriente nominal.
+    Ante condiciones de cortocircuito severo ($R_L = \SI{0.5}{\ohm}$), la tensión colapsa a $\SI{1.88}{\volt}$, la corriente
+    total de falla se pliega a $\SI{3.77}{\ampere}$ y la corriente del transistor de paso queda estrictamente confinada en
+    $I_{C(Q1)} = \SI{2.310}{\ampere}$, convalidando la formulación analítica de diseño ($I_{c1(max)} \approx \SI{2.45}{\ampere}$)
+    con un margen de seguridad confiable.
     
-    \item \textbf{Verificación térmica y SOA del encapsulado TO-3:} La selección del encapsulado metálico
-    TO-3 para el transistor de potencia MJ2955 resultó adecuada para la aplicación. En régimen nominal la
-    potencia disipada por $Q_1$ es de $\SI{10.04}{\watt}$, mientras que en condición de falla por cortocircuito
-    alcanza los $\SI{40.36}{\watt}$. Ambos valores se ubican ampliamente dentro de la envolvente del Área de
-    Operación Segura en continua ($P_{Dmax} = \SI{150}{\watt}$, $V_{CE} < \SI{40}{\volt}$), descartando el riesgo de
-    destrucción por segunda ruptura térmica.
+    \item \textbf{Optimización del diseño y verificación térmica:} La sustitución del tradicional MJ2955 (TO-3, $\SI{15}{\ampere}$)
+    por transistores TIP42C (TO-220, $\SI{6}{\ampere}$, $\SI{65}{\watt}$) tanto para el transistor de paso $Q_1$ como
+    para el sensor $Q_2$ aportó una solución técnica equilibrada y económica, unificando la lista de materiales (BOM)
+    y eliminando la saturación de corriente que sufrían los transistores de pequeña señal. En régimen nominal la potencia
+    disipada por $Q_1$ es de $\SI{11.04}{\watt}$ y la del LM7812 es de $\SI{4.14}{\watt}$, mientras que en cortocircuito
+    la disipación en $Q_1$ alcanza los $\SI{35.48}{\watt}$, ubicándose holgadamente dentro del Área de Operación Segura (SOA)
+    del dispositivo ($P_{Dmax} = \SI{65}{\watt}$).
     
     \item \textbf{Atenuación de perturbaciones y estabilidad de red:} La fuente demostró una elevada inmunidad
-    frente a ruidos de entrada, registrando un factor de regulación de red de $R_{red} = \SI{0.00028}{\percent}$ y un
-    rechazo de rizado a $\SI{100}{\hertz}$ de $RR = \SI{107.35}{\decibel}$ con una tensión eficaz residual de
-    $V_{ef-rip} = \SI{2.48}{\micro\volt_{rms}}$.
+    frente a ruidos de entrada, registrando un factor de regulación de red de $R_{red} = \SI{0.00019}{\percent}$ y un
+    rechazo de rizado a $\SI{100}{\hertz}$ de $RR = \SI{115.14}{\decibel}$ con una tensión eficaz residual de apenas
+    $V_{ef-rip} = \SI{1.01}{\micro\volt_{rms}}$.
 \end{enumerate}

@@ -9,7 +9,7 @@
     major grid style={line width=.2pt, draw=gray!40},
     x dir=reverse,
     xmin=0.4, xmax=4.2,
-    ymin=0, ymax=7.5,
+    ymin=0, ymax=6.0,
     legend pos=north west,
     legend style={font=\small}
 ]
@@ -23,12 +23,12 @@
 ] coordinates {
     (4.0, 3.000)
     (3.5, 3.428)
-    (3.0, 4.000)
-    (2.5, 4.799)
-    (2.0, 5.997)
-    (1.5, 6.961)
-    (1.0, 4.578)
-    (0.5, 4.112)
+    (3.0, 3.999)
+    (2.5, 4.798)
+    (2.0, 5.296)
+    (1.5, 4.245)
+    (1.0, 3.946)
+    (0.5, 3.766)
 };
 \addlegendentry{Corriente total $I_L$}
 
@@ -39,14 +39,14 @@
     mark size=2pt,
     line width=1.1pt
 ] coordinates {
-    (4.0, 1.818)
-    (3.5, 2.138)
-    (3.0, 2.553)
-    (2.5, 3.064)
-    (2.0, 3.775)
-    (1.5, 4.343)
-    (1.0, 2.946)
-    (0.5, 2.649)
+    (4.0, 2.074)
+    (3.5, 2.213)
+    (3.0, 2.360)
+    (2.5, 2.548)
+    (2.0, 2.664)
+    (1.5, 2.423)
+    (1.0, 2.353)
+    (0.5, 2.310)
 };
 \addlegendentry{Transistor $I_C(Q_1)$}
 
@@ -57,22 +57,22 @@
     mark size=2pt,
     line width=1.1pt
 ] coordinates {
-    (4.0, 1.181)
-    (3.5, 1.290)
-    (3.0, 1.447)
-    (2.5, 1.735)
-    (2.0, 2.223)
-    (1.5, 2.619)
-    (1.0, 1.631)
-    (0.5, 1.462)
+    (4.0, 0.926)
+    (3.5, 1.215)
+    (3.0, 1.639)
+    (2.5, 2.250)
+    (2.0, 2.632)
+    (1.5, 1.821)
+    (1.0, 1.593)
+    (0.5, 1.456)
 };
 \addlegendentry{Regulador $I_{out}(\text{LM7812})$}
 
-% Limite teorico de Ic1max
-\addplot[dashed, color=blue!50!black, line width=0.8pt] coordinates {
-    (0.4, 2.59) (4.2, 2.59)
+% Limite nominal del LM7812
+\addplot[dashed, color=red!60!black, line width=0.8pt] coordinates {
+    (0.4, 1.00) (4.2, 1.00)
 };
-\node[anchor=south east, text=blue!50!black, font=\footnotesize] at (axis cs: 0.5, 2.65) {$I_{ext(max)} \approx \SI{2.59}{\ampere}$};
+\node[anchor=south east, text=red!60!black, font=\footnotesize] at (axis cs: 4.1, 1.05) {$I_{nom(7812)} = \SI{1.0}{\ampere}$};
 
 \end{axis}
 \end{tikzpicture}

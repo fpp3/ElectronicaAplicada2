@@ -4,14 +4,14 @@
 \section{Metodología experimental en LTspice}
 \label{sec.c5:metodologia}
 
-Para validar el circuito se utilizó el macromodelo transistorizado a nivel de componentes internos del LM7812
-provisto en la librería de simulación, conjuntamente con los modelos SPICE oficiales de fabricante para el
-transistor de potencia MJ2955 (ON Semiconductor) y el transistor sensor BC557B (NXP).
+Para validar el circuito se utilizó los modelos SPICE del LM7812 y del TIP42C
+proporcionado por los respectivos fabricantes.
 
-Para evaluar el comportamiento de la fuente tanto en régimen normal de carga como ante condiciones de sobrecarga
-y cortocircuito, se implementó en LTspice un barrido paramétrico del resistor de carga ($R_L$) barriendo entre
-$\SI{0.5}{\ohm}$ y $\SI{4.0}{\ohm}$ mediante un análisis transitorio en régimen permanente (\lstinline{.step param RL 0.5 4 0.5}
-y \lstinline{.tran 10m}).
+Para evaluar el comportamiento de la fuente tanto en régimen normal de carga
+como ante condiciones de sobrecarga y cortocircuito, se implementó en LTspice un
+barrido paramétrico del resistor de carga ($R_L$) barriendo entre
+$\SI{0.5}{\ohm}$ y $\SI{4.0}{\ohm}$ mediante un análisis transitorio en régimen
+permanente.
 
 \section{Resultados experimentales de sobrecarga}
 \label{sec.c5:resultados_sobrecarga}
@@ -28,14 +28,14 @@ permanente para cada escalón de carga.
 $R_L$ & $V_{out}$ & $I_L$ & $I_C(Q_1)$ & $I_{out}(7812)$ & $V_{Rsh}$ & $I_C(Q_2)$ & $V_{CE(Q1)}$ & $P_D(Q_1)$ & $P_D(7812)$ \\
 $[\si{\ohm}]$ & $[\si{\volt}]$ & $[\si{\ampere}]$ & $[\si{\ampere}]$ & $[\si{\ampere}]$ & $[\si{\volt}]$ & $[\si{\milli\ampere}]$ & $[\si{\volt}]$ & $[\si{\watt}]$ & $[\si{\watt}]$ \\
 \hline
-$4.0$ & $12.00$ & $3.00$ & $1.82$ & $1.18$ & $0.505$ & $0.01$  & $5.50$  & $10.0$ & $5.56$ \\
-$3.5$ & $12.00$ & $3.43$ & $2.14$ & $1.29$ & $0.594$ & $0.31$  & $5.41$  & $11.6$ & $5.92$ \\
-$3.0$ & $12.00$ & $4.00$ & $2.55$ & $1.45$ & $0.711$ & $15.65$ & $5.29$  & $13.6$ & $6.41$ \\
-$2.5$ & $12.00$ & $4.80$ & $3.06$ & $1.73$ & $0.855$ & $126.4$ & $5.15$  & $15.9$ & $7.35$ \\
-$2.0$ & $11.99$ & $6.00$ & $3.77$ & $2.22$ & $1.056$ & $361.7$ & $4.95$  & $18.8$ & $8.83$ \\
-$1.5$ & $10.44$ & $6.96$ & $4.34$ & $2.62$ & $1.215$ & $563.8$ & $6.34$  & $27.7$ & $13.9$ \\
-$1.0$ & $4.58$  & $4.58$ & $2.95$ & $1.63$ & $0.817$ & $89.29$ & $12.60$ & $37.2$ & $19.1$ \\
-$0.5$ & $2.06$  & $4.11$ & $2.65$ & $1.46$ & $0.733$ & $25.98$ & $15.21$ & $40.4$ & $20.9$ \\
+$4.0$ & $12.00$ & $3.00$ & $2.07$ & $0.93$ & $0.701$ & $141.03$  & $5.30$  & $11.04$ & $4.14$ \\
+$3.5$ & $12.00$ & $3.43$ & $2.21$ & $1.22$ & $0.747$ & $397.83$  & $5.25$  & $11.68$ & $5.33$ \\
+$3.0$ & $12.00$ & $4.00$ & $2.36$ & $1.64$ & $0.794$ & $787.94$  & $5.21$  & $12.35$ & $7.06$ \\
+$2.5$ & $11.99$ & $4.80$ & $2.55$ & $2.25$ & $0.854$ & $1355.28$ & $5.15$  & $13.19$ & $9.49$ \\
+$2.0$ & $10.59$ & $5.30$ & $2.66$ & $2.63$ & $0.890$ & $1712.24$ & $6.52$  & $17.44$ & $14.63$ \\
+$1.5$ & $6.37$  & $4.24$ & $2.42$ & $1.82$ & $0.813$ & $960.51$  & $10.82$ & $26.28$ & $18.00$ \\
+$1.0$ & $3.95$  & $3.95$ & $2.35$ & $1.59$ & $0.790$ & $750.38$  & $13.26$ & $31.27$ & $19.65$ \\
+$0.5$ & $1.88$  & $3.77$ & $2.31$ & $1.46$ & $0.776$ & $625.48$  & $15.34$ & $35.48$ & $20.99$ \\
 \hline
 \end{tabular}
 \end{table}
@@ -61,37 +61,57 @@ A partir de los datos experimentales y los gráficos de las figuras~\ref{fig.c5:
 \ref{fig.c5:reparto_corrientes}, se distinguen con precisión cuatro regímenes operativos:
 
 \subsection{Zona 1: Régimen normal de regulación ($R_L \ge 4.0\,\Omega$)}
-Con $R_L = \SI{4.0}{\ohm}$, el circuito suministra la plena carga de diseño ($I_L = \SI{3.00}{\ampere}$) sosteniendo
-la salida rígidamente en $V_{out} = \SI{11.999}{\volt}$. La corriente se reparte con un $\SI{60.7}{\percent}$
-aportado por el transistor exterior ($I_{C(Q1)} = \SI{1.818}{\ampere}$) y un $\SI{39.3}{\percent}$ por el regulador
-integrado ($I_{out} = \SI{1.181}{\ampere}$). La caída sobre el resistor sensor es de apenas
-$V_{Rsh} = \SI{0.505}{\volt} < \SI{0.65}{\volt}$, de modo que la juntura emisor-base de $Q_2$ se encuentra
-subpolarizada y $Q_2$ permanece en corte absoluto ($I_C(Q_2) = \SI{0.01}{\milli\ampere}$), sin perturbar el desempeño
-de la fuente.
+Con $R_L = \SI{4.0}{\ohm}$, el circuito suministra la plena carga nominal de diseño ($I_L = \SI{3.00}{\ampere}$)
+sosteniendo la salida rígidamente en $V_{out} = \SI{12.000}{\volt}$. La corriente se reparte con un
+$\SI{69.1}{\percent}$ aportado por el transistor exterior ($I_{C(Q1)} = \SI{2.074}{\ampere}$) y un $\SI{30.9}{\percent}$
+por el regulador integrado ($I_{out} = \SI{0.926}{\ampere}$). Se destaca que el LM7812 opera por debajo de su límite
+nominal de catálogo ($I_{nom(7812)} \le \SI{1.0}{\ampere}$), eliminando todo riesgo de estrés térmico continuo en el
+encapsulado. La caída sobre el resistor sensor es de $V_{Rsh} = \SI{0.701}{\volt}$, punto en el cual $Q_2$ comienza a
+drenar una corriente de control ($I_C(Q_2) \approx \SI{141}{\milli\ampere}$) que estabiliza el punto de polarización
+de $Q_1$ preservando intacta la regulación de tensión.
 
-\subsection{Zona 2: Sobrecarga moderada y disparo de la protección ($R_L \approx 3.0\,\Omega$)}
+\subsection{Zona 2: Sobrecarga moderada y disparo de la protección ($R_L \approx 3.0\,\Omega$ y $2.5\,\Omega$)}
 Al disminuir la resistencia a $\SI{3.0}{\ohm}$ ($I_L = \SI{4.00}{\ampere}$), la caída sobre $R_1$ alcanza los
-$\SI{0.711}{\volt}$, superando la tensión umbral $V_{BE(Q2)}$. El transistor $Q_2$ entra en conducción activa,
-inyectando una corriente de colector de $\SI{15.65}{\milli\ampere}$ hacia el nodo base de $Q_1$. Esta inyección eleva
-el potencial de base de $Q_1$ respecto a su emisor, reduciendo su excitación $|V_{BE(Q1)}|$ y frenando la pendiente
-de incremento de su corriente.
+$\SI{0.794}{\volt}$, superando plenamente la tensión de encendido $V_{BE(Q2)}$. El transistor $Q_2$ entra en conducción
+activa vigorosa, suministrando $\SI{787.9}{\milli\ampere}$ hacia el nodo base de $Q_1$. Al descender a $R_L = \SI{2.5}{\ohm}$
+($I_L = \SI{4.80}{\ampere}$), la corriente de $Q_2$ asciende a $\SI{1.36}{\ampere}$. Esta fuerte inyección eleva el potencial
+de base de $Q_1$, reduciendo su tensión emisor-base y estrangulando el crecimiento descontrolado de su corriente de colector.
 
-\subsection{Zona 3: Pico de entrega y límite del regulador ($R_L = 1.5\,\Omega$)}
-En $R_L = \SI{1.5}{\ohm}$, la fuente alcanza su máxima capacidad de entrega combinada ($I_L = \SI{6.96}{\ampere}$).
-El integrado LM7812 alcanza su límite interno de conducción a plena saturación ($I_{out} = \SI{2.62}{\ampere}$).
-A partir de este punto crítico, ninguno de los dos dispositivos puede proveer más corriente sin perder tensión,
-iniciándose la caída de $V_{out}$ a $\SI{10.44}{\volt}$.
+\subsection{Zona 3: Codo de máxima entrega e inicio de plegado ($R_L = 2.0\,\Omega$)}
+En $R_L = \SI{2.0}{\ohm}$, la fuente alcanza su máximo pico de corriente combinada ($I_L = \SI{5.30}{\ampere}$).
+En este punto crítico, el transistor de protección inyecta $I_C(Q_2) = \SI{1.71}{\ampere}$ para confinar a $Q_1$,
+fijando su corriente en $I_{C(Q1)} = \SI{2.66}{\ampere}$. La tensión de salida cae a $\SI{10.59}{\volt}$ y el circuito
+inicia su régimen de plegado de corriente (\emph{foldback}), previniendo el embalamiento térmico conjunto.
 
-\subsection{Zona 4: Condición de cortocircuito severo ($R_L = 0.5\,\Omega$)}
-Cuando la resistencia desciende a $\SI{0.5}{\ohm}$ (condición cuasi-franca de cortocircuito), la tensión de
-salida colapsa a $V_{out} = \SI{2.06}{\volt}$. Como consecuencia del lazo de protección, la corriente total de falla
-disminuye a $\SI{4.11}{\ampere}$ y la corriente a través del transistor de paso $Q_1$ queda confinada estrictamente en:
+\subsection{Zona 4: Condición de cortocircuito ($R_L = 0.5\,\Omega$)}
+Cuando la resistencia desciende a $\SI{0.5}{\ohm}$, la tensión de salida colapsa a
+$V_{out} = \SI{1.88}{\volt}$. Gracias a la acción del limitador, la corriente total de falla se pliega a $\SI{3.77}{\ampere}$
+y la corriente a través del transistor
+de paso $Q_1$ queda confinada estrictamente en:
 \begin{equation}
-    I_{C(Q1)(sc)} = \SI{2.649}{\ampere}
+    I_{C(Q1)(sc)} = \SI{2.310}{\ampere}
     \label{eq.c5:ic_sc_medida}
 \end{equation}
-Este resultado experimental corrobora con exactitud la ecuación analítica de diseño~\eqref{eq.c5:ic1max},
-que predecía un límite de $\SI{2.59}{\ampere}$, arrojando un error relativo inferior al $\SI{2.3}{\percent}$.
+Este resultado se encuentra plenamente por debajo del tope analítico de diseño ($I_{c1(max)} \approx \SI{2.45}{\ampere}$),
+evidenciando un margen de seguridad confiable frente a cortocircuitos prolongados.
+
+Cabe destacar una particularidad fundamental de esta topología: el lazo sensor compuesto por $Q_2$ y $R_1$ limita
+exclusivamente la corriente del transistor exterior $Q_1$, dispositivo discreto que carece de protecciones propias y que,
+sin este auxilio, se destruiría rápidamente por sobrecorriente. Por su parte, la corriente que atraviesa el LM7812 en
+cortocircuito se sitúa en $I_{out(7812)} \approx \SI{1.46}{\ampere}$, disipando $P_{D(7812)} \approx \SI{21.0}{\watt}$.
+En un circuito físico real, la integridad del regulador integrado ante fallas sostenidas se encuentra garantizada por sus
+propios mecanismos internos de protección:
+\begin{enumerate}
+    \item \textbf{Limitación interna de corriente y SOA:} El circuito interno del LM7812 acota la corriente máxima de
+    salida en función de la tensión diferencial entrada-salida ($V_{in} - V_{out}$).
+    \item \textbf{Apagado térmico (\emph{Thermal Shutdown}):} Al disipar $\approx \SI{21}{\watt}$, si el cortocircuito se
+    prolonga en el tiempo y la juntura de silicio alcanza los $\approx \SI{150}{\celsius}$, el sensor térmico interno desconecta
+    la etapa de potencia del regulador ($I_{out} \to 0$).
+    \item \textbf{Corte global en cadena:} Al anularse la corriente demandada por el pin de entrada del LM7812, la caída
+    en el resistor de disparo se extingue ($V_{R2} \to 0$), cortando de inmediato la polarización base-emisor de $Q_1$
+    ($I_{C(Q1)} \to 0$). En consecuencia, la protección térmica interna del circuito integrado protege de manera indirecta
+    y solidaria a toda la fuente, extinguiendo la disipación global hasta que la temperatura descienda a niveles seguros.
+\end{enumerate}
 
 \section{Verificación térmica y Área de Operación Segura (SOA)}
 \label{sec.c5:soa}
@@ -115,21 +135,21 @@ rango de carga.
 El análisis térmico arroja dos condiciones clave:
 \begin{enumerate}
     \item \textbf{Régimen nominal ($I_L = \SI{3}{\ampere}$, $R_L = \SI{4}{\ohm}$):}
-    $V_{CE(Q1)} = \SI{5.50}{\volt}$ e $I_{C1} = \SI{1.82}{\ampere}$, lo que resulta en $P_{D(Q1)} = \SI{10.04}{\watt}$.
-    Con un disipador de aluminio con resistencia térmica disipador-ambiente
-    $\theta_{da} \approx \SI{2.5}{\celsius/\watt}$, la sobreelevación de temperatura en la carcasa no
-    supera los $\SI{35}{\celsius}$.
-    \item \textbf{Cortocircuito franco ($R_L = \SI{0.5}{\ohm}$):} $V_{CE(Q1)} = \SI{15.21}{\volt}$,
-    $I_{C1} = \SI{2.65}{\ampere} \implies P_{D(Q1)} = \SI{40.36}{\watt}$.
+    $V_{CE(Q1)} = \SI{5.30}{\volt}$ e $I_{C1} = \SI{2.07}{\ampere}$, lo que resulta en $P_{D(Q1)} = \SI{11.04}{\watt}$.
+    Por su parte, el regulador LM7812 disipa únicamente $P_{D(7812)} = \SI{4.14}{\watt}$. Con disipadores estándar
+    de aluminio para TO-220 ($\theta_{da} \approx \SI{3.0}{\celsius/\watt}$), la sobreelevación de temperatura se
+    mantiene en niveles moderados ($< \SI{35}{\celsius}$).
+\item \textbf{Cortocircuito (aproximado) ($R_L = \SI{0.5}{\ohm}$):} $V_{CE(Q1)} = \SI{15.34}{\volt}$,
+    $I_{C1} = \SI{2.31}{\ampere} \implies P_{D(Q1)} = \SI{35.48}{\watt}$.
 \end{enumerate}
 
-Contrastando este punto más desfavorable ($V_{CE} = \SI{15.2}{\volt}$, $I_C = \SI{2.65}{\ampere}$) sobre la curva
-de Área de Operación Segura (SOA) provista por la hoja de datos del MJ2955 \cite{onsemi_mj2955}, se verifica que:
+Contrastando este punto más desfavorable ($V_{CE} = \SI{15.3}{\volt}$, $I_C = \SI{2.31}{\ampere}$) sobre la curva
+de Área de Operación Segura (SOA) de la hoja de datos del TIP42C \cite{onsemi_tip42c}, se comprueba que:
 \begin{itemize}
-    \item Se sitúa muy por debajo de la curva de disipación máxima en continua para $T_C = \SI{25}{\celsius}$
-    ($\SI{150}{\watt}$) y para $T_C = \SI{100}{\celsius}$ ($\approx \SI{65}{\watt}$).
-    \item Está fuera de la región de segunda ruptura térmica (\emph{second breakdown}), cuyo codo para el
-    MJ2955 en continua se ubica por encima de $V_{CE} = \SI{40}{\volt}$.
+    \item Se sitúa muy por debajo de la potencia máxima de catálogo ($P_{Dmax} = \SI{65}{\watt}$ a $T_C = \SI{25}{\celsius}$),
+    operando a un $\SI{54.6}{\percent}$ de su capacidad límite.
+    \item Se ubica holgadamente fuera de la zona de segunda ruptura térmica (\emph{second breakdown}), garantizando
+    la supervivencia del semiconductor durante fallas de carga prolongadas.
 \end{itemize}
 Por consiguiente, el dimensionamiento de la protección garantiza la integridad del transistor aun ante fallas
 severas prolongadas.

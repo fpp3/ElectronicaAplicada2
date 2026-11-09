@@ -6,18 +6,23 @@
 
 Para la implementación del circuito se seleccionaron los siguientes dispositivos:
 \begin{enumerate}
-    \item \textbf{Regulador Integrado LM7812:} Regulador lineal positivo fijo de tres terminales. De acuerdo a la
-    consigna, se adopta la versión en encapsulado metálico TO-3 (sufijo K), caracterizado por una resistencia
-    térmica juntura-carcasa reducida ($\theta_{jc} \approx \SI{4}{\celsius/\watt}$ frente a los
-    $\SI{5}{\celsius/\watt}$ del encapsulado plástico TO-220), lo que optimiza la transferencia de calor hacia el
+    \item \textbf{Regulador Integrado LM7812:} Regulador lineal positivo fijo de tres terminales. En estricto
+    cumplimiento de la consigna, se adopta la versión en encapsulado metálico TO-3 (sufijo K), caracterizado por una
+    resistencia térmica juntura-carcasa reducida ($\theta_{jc} \approx \SI{4}{\celsius/\watt}$), lo que optimiza la transferencia de calor hacia el
     disipador común \cite{ti_lm78xx}.
-    \item \textbf{Transistor de paso de potencia $Q_1$ (MJ2955):} Se seleccionó el transistor PNP de potencia
-    MJ2955, complementario del 2N3055, provisto en encapsulado hermético TO-3. Admite una corriente continua de
-    colector de hasta $\SI{15}{\ampere}$, una tensión colector-emisor máxima $V_{CEO} = \SI{60}{\volt}$ y una
-    potencia máxima disipable $P_D = \SI{150}{\watt}$ a $T_C = \SI{25}{\celsius}$ \cite{onsemi_mj2955}.
-    \item \textbf{Transistor sensor de sobrecarga $Q_2$ (BC557B):} Transistor bipolar PNP de pequeña señal en
-    encapsulado TO-92 ($V_{CEO} = \SI{45}{\volt}$, $I_{Cmax} = \SI{100}{\milli\ampere}$, $h_{FE} \approx 200$--$450$).
-    Su función es monitorear la caída sobre el resistor sensor y actuar sobre la base de $Q_1$.
+    \item \textbf{Transistor de paso de potencia $Q_1$ (TIP42C):} Transistor bipolar PNP de potencia en encapsulado
+    plástico TO-220 ($I_C = \SI{6}{\ampere}$, $V_{CEO} = \SI{100}{\volt}$, $P_D = \SI{65}{\watt}$ a
+    $T_C = \SI{25}{\celsius}$) \cite{onsemi_tip42c}.
+    \item \textbf{Transistor sensor de sobrecarga $Q_2$ (TIP42C):} Para el circuito de sensado y limitación se
+    utiliza un segundo transistor TIP42C idéntico a $Q_1$. Esta selección permite:
+    \begin{itemize}
+        \item \emph{Unificación de lista de materiales (BOM):} Se reduce la cantidad de componentes distintos en compras
+        y montaje de laboratorio.
+        \item \emph{Capacidad de corriente en sobrecarga profunda:} En condición de falla severa, el integrado
+        LM7812 colapsa su tensión y traga su corriente máxima de cortocircuito interna; para estrangular efectivamente
+        la base de $Q_1$, $Q_2$ debe suministrar hasta $\approx \SI{1}{\ampere}$ hacia ese nodo. El TIP42C maneja esa corriente de base con holgura y con un $V_{CE(sat)}$
+        despreciable.
+    \end{itemize}
 \end{enumerate}
 
 \section{Tensión de entrada no regulada $V_{in}$}
@@ -30,7 +35,7 @@ sumarse la tensión en el resistor exterior de disparo $R_{ext}$ ($\approx \SI{0
     V_{in(min)} &\ge V_{out} + V_{drop} + V_{Rext} \\
     V_{in(min)} &\ge \SI{12}{\volt} + \SI{2.5}{\volt} + \SI{0.7}{\volt} = \SI{15.2}{\volt}
 \end{align*}
-Adoptamos como tensión de entrada nominal continua $V_{in} = \SI{18}{\volt}$. Esta elección proporciona un margen
+Para la simulación se adoptó como tensión de entrada nominal continua $V_{in} = \SI{18}{\volt}$. Esta elección proporciona un margen
 de seguridad dinámico de casi $\SI{3}{\volt}$ sobre el límite de dropout, garantizando que variaciones de línea
 del $\pm 10\%$ ($16.2\text{ V} \le V_{in} \le 19.8\text{ V}$) no provoquen abandono de regulación.
 
@@ -39,28 +44,39 @@ del $\pm 10\%$ ($16.2\text{ V} \le V_{in} \le 19.8\text{ V}$) no provoquen aband
 
 \subsection{Resistor de disparo del transistor de paso ($R_{ext}$ / $R_2$)}
 El resistor $R_{ext}$ conecta el riel de entrada no regulado con la entrada del integrado y la base de $Q_1$. A bajas
-corrientes de carga, el transistor $Q_1$ permanece cortado y la totalidad de la corriente circula por el LM7812.
-Para que $Q_1$ comience a conducir cuando la corriente del regulador alcance un umbral seguro
-$I_{reg(th)} \approx \SI{580}{\milli\ampere}$, se dimensiona:
+corrientes de carga, el transistor $Q_1$ permanece fuera de conducción y la totalidad de la corriente circula por el LM7812.
+Para asegurar que a plena carga nominal ($I_L = \SI{3}{\ampere}$) el regulador integrado no sobrepase su corriente nominal
+de catálogo ($I_{nom(7812)} = \SI{1.0}{\ampere}$), el transistor exterior debe comenzar a conducir a una corriente inferior
+$I_{reg(th)} \approx \SI{320}{\milli\ampere}$, absorbiendo el excedente de corriente:
 \begin{equation}
-    R_{ext} = \frac{V_{BE(Q1)}}{I_{reg(th)}} = \frac{\SI{0.7}{\volt}}{\SI{0.58}{\ampere}} \approx \SI{1.2}{\ohm}
+    R_{ext} = \frac{V_{BE(Q1)}}{I_{reg(th)}} = \frac{\SI{0.7}{\volt}}{\SI{0.32}{\ampere}} \approx \SI{2.19}{\ohm}
     \label{eq.c5:rext}
 \end{equation}
-Se adopta el valor normalizado comercial $R_2 = \SI{1.2}{\ohm}$.
+Se adopta el valor comercial normalizado $R_2 = \SI{2.2}{\ohm}$ ($\SI{2}{\watt}$). Con este dimensionamiento, a plena carga
+($I_L = \SI{3.0}{\ampere}$, $R_L = \SI{4}{\ohm}$), el regulador integrado suministra únicamente $\SI{0.93}{\ampere}$
+($<\SI{1.0}{\ampere}$), mientras que $Q_1$ entrega los restantes $\SI{2.07}{\ampere}$, operando ambos dispositivos
+dentro de sus márgenes térmicos y de corriente nominales seguros.
 
 \subsection{Resistor sensor de corriente de sobrecarga ($R_{sc}$ / $R_1$)}
 El resistor $R_{sc}$ se intercala en serie con el emisor de $Q_1$. A plena carga nominal ($I_L = \SI{3}{\ampere}$), la
-corriente se reparte entregando $Q_1$ aproximadamente $\SI{1.8}{\ampere}$ y el regulador $\SI{1.2}{\ampere}$.
-La protección de sobrecarga debe dispararse cuando la corriente del transistor exterior supere un margen seguro,
-fijado en $I_{ext(max)} \approx \SI{2.6}{\ampere}$ \cite{gonzalez_fuentes3}:
+corriente se reparte entregando $Q_1$ aproximadamente $\SI{2.07}{\ampere}$ y el regulador $\SI{0.93}{\ampere}$.
+La protección de sobrecarga debe comenzar a actuar cuando la corriente del transistor exterior supere el régimen
+nominal y confinarla rígidamente ante cortocircuito.
+Considerando que a plena conducción de sensado ($I_{C(Q2)} \approx \SI{1}{\ampere}$) la caída base-emisor real del
+transistor de potencia es $V_{BE(Q2)} \approx \SI{0.81}{\volt}$:
 \begin{equation}
-    R_{sc} = \frac{V_{BE(Q2)}}{I_{ext(max)}} = \frac{\SI{0.7}{\volt}}{\SI{2.6}{\ampere}} = \SI{0.269}{\ohm}
+    R_{sc} = \frac{V_{BE(Q2)}}{I_{ext(max)}} = \frac{\SI{0.81}{\volt}}{\SI{2.45}{\ampere}} \approx \SI{0.33}{\ohm}
     \label{eq.c5:rsc}
 \end{equation}
-Se adopta el valor comercial estándar de potencia $R_1 = \SI{0.27}{\ohm}$ (resistor de alambre cementado o metal
-film de $\SI{5}{\watt}$). Con este valor, la corriente máxima teórica de colector de $Q_1$ queda fijada en:
+Se adopta el valor comercial estándar normalizado $R_1 = \SI{0.33}{\ohm}$ (resistor cerámico bobinado de $\SI{5}{\watt}$).
+Con este valor, el umbral de disparo inicial (con $V_{BE} \approx \SI{0.70}{\volt}$) se establece en:
 \begin{equation}
-    I_{c1(max)} = \frac{V_{BE(Q2)}}{R_{sc}} = \frac{\SI{0.7}{\volt}}{\SI{0.27}{\ohm}} = \SI{2.59}{\ampere}
+    I_{c1(th)} = \frac{\SI{0.70}{\volt}}{\SI{0.33}{\ohm}} \approx \SI{2.12}{\ampere}
+    \label{eq.c5:ic1th}
+\end{equation}
+mientras que en cortocircuito franco la corriente de $Q_1$ queda acotada teóricamente en:
+\begin{equation}
+    I_{c1(max)} = \frac{V_{BE(Q2)}}{R_{sc}} = \frac{\SI{0.81}{\volt}}{\SI{0.33}{\ohm}} \approx \SI{2.45}{\ampere}
     \label{eq.c5:ic1max}
 \end{equation}
 
@@ -82,7 +98,7 @@ El circuito esquemático completo diseñado se presenta en la figura~\ref{fig.c5
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.88\textwidth]{sch_ltspice.png}
+    \includegraphics[width=0.88\textwidth]{pictures/sch_ltspice.png}
     \caption{Circuito esquemático completo de la fuente regulada con elevador de corriente y limitador de sobrecarga.}
     \label{fig.c5:esquematico}
 \end{figure}
