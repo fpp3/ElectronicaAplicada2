@@ -1,0 +1,35 @@
+\chapter{Conclusiones}
+\label{sec.c5:conclusiones}
+
+En este trabajo se completó el cálculo, diseño y evaluación por simulación de una fuente de
+alimentación regulada lineal de $\SI{12}{\volt}$ y $\SI{3}{\ampere}$ basada en el integrado LM7812 en encapsulado TO-3,
+incorporando un circuito exterior de elevación de corriente y protección contra sobrecargas según la
+Consigna 5.
+
+A partir del análisis teórico y de los resultados numéricos obtenidos, se destacan las siguientes conclusiones:
+
+\begin{enumerate}
+    \item \textbf{Cumplimiento de especificaciones nominales:} En el rango especificado de demanda de carga
+    ($\SI{100}{\milli\ampere} \le I_L \le \SI{3}{\ampere}$), la fuente presentó una regulación sobresaliente con
+    una caída de tensión de apenas $\SI{2.12}{\milli\volt}$ ($\Delta V_o / V_{nom} = \SI{0.0177}{\percent}$) y una
+    resistencia interna dinámica de $R_{sal} = \SI{0.731}{\milli\ohm}$.
+    
+    \item \textbf{Efectividad de la protección de sobrecarga:} El limitador discreto basado en $Q_2$ (BC557B) y
+    $R_{sc} = \SI{0.27}{\ohm}$ permaneció completamente inactivo en régimen normal ($V_{Rsh} \le \SI{0.505}{\volt}$),
+    sin alterar el desempeño del regulador. Ante condiciones de cortocircuito severo ($R_L = \SI{0.5}{\ohm}$), la
+    tensión colapsó a $\SI{2.06}{\volt}$ y la corriente del transistor de paso quedó estrictamente confinada en
+    $I_{C(Q1)} = \SI{2.649}{\ampere}$, convalidando la formulación analítica de diseño ($I_{c1(max)} = \SI{2.59}{\ampere}$)
+    con un desvío menor al $\SI{2.3}{\percent}$.
+    
+    \item \textbf{Verificación térmica y SOA del encapsulado TO-3:} La selección del encapsulado metálico
+    TO-3 para el transistor de potencia MJ2955 resultó adecuada para la aplicación. En régimen nominal la
+    potencia disipada por $Q_1$ es de $\SI{10.04}{\watt}$, mientras que en condición de falla por cortocircuito
+    alcanza los $\SI{40.36}{\watt}$. Ambos valores se ubican ampliamente dentro de la envolvente del Área de
+    Operación Segura en continua ($P_{Dmax} = \SI{150}{\watt}$, $V_{CE} < \SI{40}{\volt}$), descartando el riesgo de
+    destrucción por segunda ruptura térmica.
+    
+    \item \textbf{Atenuación de perturbaciones y estabilidad de red:} La fuente demostró una elevada inmunidad
+    frente a ruidos de entrada, registrando un factor de regulación de red de $R_{red} = \SI{0.00028}{\percent}$ y un
+    rechazo de rizado a $\SI{100}{\hertz}$ de $RR = \SI{107.35}{\decibel}$ con una tensión eficaz residual de
+    $V_{ef-rip} = \SI{2.48}{\micro\volt_{rms}}$.
+\end{enumerate}

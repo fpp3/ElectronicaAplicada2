@@ -1,0 +1,51 @@
+\documentclass[]{informeutn}
+
+\usepackage{siunitx}
+\usepackage{icomma}
+\usepackage[backend=bibtex, style=alphabetic, sorting=ynt]{biblatex}
+\addbibresource{fuentes.bib}
+
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\graphicspath{{images/}{figures/}{pictures/}{./}}
+
+\lstdefinestyle{ltspice}{
+  backgroundcolor=\color{gray!10},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  frame=single,
+  breaklines=true,
+  captionpos=b
+}
+
+% Datos de la carátula
+\materia{Electrónica Aplicada II}
+\titulo{Fuentes de Alimentación Lineales}
+\subtitulo{Regulador Integrado con Elevador de Corriente y Protección de Sobrecarga -- Consigna 5}
+\comision{4R2}
+\autores{
+    Gil, Ignacio - 401891\\
+    Grasso, Gaston - 401892\\
+    Palombo, Franco - 401910\\
+    Prieto, Angelo - 401012
+}
+\fecha{\today}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+  \setcounter{page}{1}
+  \thispagestyle{plain}
+
+  \input{chapters/1-introduccion.tex}
+  \input{chapters/2-diseno-teorico.tex}
+  \input{chapters/3-simulacion-sobrecarga.tex}
+  \input{chapters/4-parametros-calidad.tex}
+  \input{chapters/5-conclusiones.tex}
+  
+  \nocite{*}
+  \printbibliography[heading=bibnumbered, title={Fuentes}]
+\end{document}

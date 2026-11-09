@@ -1,0 +1,20 @@
+Version 4
+SymbolType CELL
+RECTANGLE Normal -80 -48 80 48
+TEXT 0 -10 Center 2 LM7812
+TEXT 0 14 Center 0 +12V
+WINDOW 0 0 -54 Bottom 2
+WINDOW 3 0 54 Top 2
+SYMATTR Value LM7812
+SYMATTR Prefix X
+SYMATTR ModelFile lm7812.lib
+SYMATTR Description Regulador lineal positivo integrado +12V
+PIN -80 0 LEFT 16
+PINATTR PinName IN
+PINATTR SpiceOrder 1
+PIN 0 48 BOTTOM 16
+PINATTR PinName GND
+PINATTR SpiceOrder 2
+PIN 80 0 RIGHT 16
+PINATTR PinName OUT
+PINATTR SpiceOrder 3

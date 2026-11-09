@@ -1,0 +1,81 @@
+* ==============================================================================
+* Modelo SPICE: Regulador Lineal Integrado de Tension Positiva LM7812 (+12V)
+* ==============================================================================
+*
+* Descripcion:
+*   Circuito equivalente macromodelo a nivel transistorizado del regulador
+*   fijo de 12V familia LM78XX (con referencia bandgap, amplificador de error,
+*   etapa de potencia Darlington y proteccion interna de corriente).
+*
+* Asignacion de Pines (Pinout):
+*   Pin 1: IN   (Tension de entrada sin regular, Vi >= 14.5V)
+*   Pin 2: GND  (Terminal comun / Masa)
+*   Pin 3: OUT  (Tension de salida regulada +12V)
+*
+* Orden de pines para subcircuito SPICE: IN (1), GND (2), OUT (3)
+* ==============================================================================
+
+.SUBCKT LM7812 1 2 3
+*              IN GND OUT
+QT6          23  10  2   Q_NPN 0.1
+QT7          5   4   10  Q_NPN 0.1
+QT5          7   6   5   Q_NPN 0.1
+QT1          1   9   8   Q_NPN 0.1
+QT3          11  8   7   Q_NPN 0.1
+QT2          11  13  12  Q_NPN 0.1
+QT17         1   15  14  Q_NPN 10
+C2           10  23      4P
+R16          12  5       500
+R12          16  2       12.1K
+QT18         17  23  16  Q_NPN 0.1
+D1           18  19  	 D_D 
+R11          20  21      850
+R5           22  3       100
+QT14         24  18  2   Q_NPN 0.1
+R21          6   2       2.67K
+R20          3   6       5.22K
+DZ2          25  26      D_5V1 
+R19          1   26      16K
+R18          14  3       250M
+R17          25  14      380
+R15          25  15      1.62K
+QT16         1   20  15  Q_NPN 1
+QT15         2   24  21  Q_PNP 0.1 
+R14          21  24      4K
+C1           27  24      20P
+R13          19  2       4K
+QT13         24  27  18  Q_NPN 0.1
+QT12         20  25  22  Q_NPN 1 
+QT11         20  28  2   Q_NPN 0.1
+QT10         20  11  1   Q_PNP 0.1
+R10          17  27      16.5K
+R9           5   4       1.9K
+R8           4   23      26
+R7           10  2       1.2K
+R6           29  2       1K
+QT9          11  11  1   Q_PNP 0.1
+QT8          27  16  29  Q_NPN 0.1
+QT4          15  6   17  Q_NPN 0.1
+DZ1          2   9       D_5V6
+R4           1   9       80K
+R3           28  2       830
+R2           13  28      4.97K
+R1           8   13      7K
+
+* Modelos de semiconductores internos
+.MODEL D_5V1 D( IS=10F N=1.16 BV=5.1 IBV=0.5M CJ0=1P TT=10P )
+.MODEL D_5V6 D( IS=10F N=1.16 BV=5.6 IBV=5U CJ0=1P TT=10P )
+.MODEL Q_NPN NPN( IS=10F NF=1.16 NR=1.16 BF=80 CJC=1P CJE=2P TF=10P TR=1N )
+.MODEL Q_PNP PNP( IS=10F NF=1.16 NR=1.16 BF=80 CJC=1P CJE=2P TF=10P TR=1N )
+.MODEL D_D   D( IS=1F N=1.16 CJ0=1P TT=10P )
+
+.ENDS LM7812
+
+* ==============================================================================
+* Modelos para los transistores PNP del elevador de corriente y sobrecarga
+* ==============================================================================
+* Q1: Transistor de potencia PNP (Booster de corriente)
+.MODEL TIP2955 PNP (IS=1.23E-11 BF=65 VAF=100 IKF=4.5 ISE=3.5E-10 NE=1.5 BR=4 VAR=20 IKR=0.5 RB=0.5 RE=0.03 RC=0.08 CJE=4.5E-10 CJC=2.8E-10 TF=4E-8 TR=1.5E-6)
+.MODEL TIP42C  PNP (IS=3.6E-13 BF=75 VAF=100 IKF=2.5 ISE=1E-11 NE=1.5 BR=3 RB=0.8 RE=0.05 RC=0.15 CJE=2.5E-10 CJC=1.8E-10 TF=3E-8 TR=1E-6)
+* Transistor de potencia PNP en encapsulado metalico TO-3 (onsemi)
+.MODEL MJ2955 PNP (IS=6.5e-13 BF=50 NF=1.0 VAF=50 IKF=4.0 ISE=1.5e-11 NE=2.0 BR=4.0 NR=1.0 VAR=15 IKR=1.0 ISC=0 NC=2.0 RB=0.4 IRB=0.1 RBM=0.15 RE=0.05 RC=0.15 CJE=400p VJE=0.75 MJE=0.33 CJC=300p VJC=0.5 MJC=0.33 TF=50n TR=1.0u XTF=2.0 VTF=4.0 ITF=1.0 PTF=0)
