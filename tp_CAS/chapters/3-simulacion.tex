@@ -1,0 +1,55 @@
+\chapter{Simulación}
+\label{sec:simulacion}
+
+\section{Circuito Simulado}
+
+El circuito se simuló en KiCad con el motor ngspice (Anexo~\ref{sec:anexos}), utilizando los modelos
+SPICE del LM335 y del MCP6001 provistos por los fabricantes. El modelo del sensor posee un terminal $T$ cuya tensión
+fija la temperatura en \si{\celsius}, por lo que se realizó un análisis DC barriendo la fuente $V_1$ de \SI{0}{\volt}
+a \SI{50}{\volt} en pasos de \SI{1}{\volt} (\texttt{.dc V1 0 50 1}). El esquemático de simulación y la netlist completa se
+encuentran en el anexo.
+
+\section{Resultados de la Simulación}
+
+La Figura~\ref{fig:sim_transferencia} muestra la tensión de salida en función de la temperatura junto a la recta
+ideal, y la Tabla~\ref{tab:sim} resume los valores en puntos representativos. El error se expresa en grados
+equivalentes, dividiendo la diferencia de tensión por la sensibilidad ideal de $\SI{100}{\milli\volt/\celsius}$.
+
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $T$ [\unit{\celsius}] & $V_T$ [\unit{\volt}] & $V_o$ simulada [\unit{\volt}] & $V_o$ ideal [\unit{\volt}]
+      & Error [\unit{\celsius}] \\
+    \hline
+    \num{0} & \num{2.7322} & \num{0.0486} & \num{0} & \num{0.49} \\
+    \num{10} & \num{2.8321} & \num{1.0480} & \num{1} & \num{0.48} \\
+    \num{20} & \num{2.9321} & \num{2.0475} & \num{2} & \num{0.47} \\
+    \num{30} & \num{3.0320} & \num{3.0469} & \num{3} & \num{0.47} \\
+    \num{40} & \num{3.1320} & \num{4.0463} & \num{4} & \num{0.46} \\
+    \num{50} & \num{3.2319} & \num{4.9995} & \num{5} & \num{-0.01} \\
+    \hline
+  \end{tabular}
+  \caption{Resultados de la simulación DC ($V_{REF} = \SI{2.7266}{\volt}$ simulada).}
+  \label{tab:sim}
+\end{table}
+
+\begin{figure}[!ht]
+  \centering
+  \input{figures/plot_sim_transferencia.tex}
+  \caption{Transferencia simulada del CAS en el rango de temperatura.}
+  \label{fig:sim_transferencia}
+\end{figure}
+
+La sensibilidad obtenida entre \SI{0}{\celsius} y \SI{49}{\celsius} es de $\SI{99.94}{\milli\volt/\celsius}$,
+prácticamente igual a la ideal, lo que confirma la ganancia $A_v = 10$ de la etapa restadora. La salida presenta un
+desplazamiento aproximadamente constante de $\SI{48}{\milli\volt}$ (\SI{0.48}{\celsius}), originado en que el sensor
+entrega $\SI{2.7322}{\volt}$ a \SI{0}{\celsius} (\SI{273.15}{\kelvin}) mientras que la referencia es de
+$\SI{2.7266}{\volt}$: el divisor normalizado da $\SI{2.727}{\volt}$ en lugar de $\SI{2.73}{\volt}$, y a esto se suma la
+tensión de \textit{offset} del seguidor. La diferencia de $\SI{5.5}{\milli\volt}$ queda amplificada diez veces.
+
+Por encima de \SI{49.5}{\celsius} aproximadamente, la salida satura en $\SI{4.9995}{\volt}$ contra el riel positivo:
+la recta simulada alcanzaría unos $\SI{5.05}{\volt}$ a \SI{50}{\celsius}. Por esto el error a \SI{50}{\celsius}
+resulta casi nulo, pero se pierde la linealidad en el último medio grado del rango. Al mismo tiempo, la saturación
+protege la entrada del conversor, ya que la salida nunca supera la alimentación.

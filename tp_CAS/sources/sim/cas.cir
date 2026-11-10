@@ -1,0 +1,21 @@
+.title KiCad schematic
+.include "../CAS/MCP6001.txt"
+.include "../CAS/lm335.lib"
+XU3 Net-_U3-+_ Net-_U3--_ +5V GND /Vout MCP6001
+R5 Net-_U3-+_ GND 100k
+R4 Net-_U1--_ Net-_U3--_ 10k
+R3 Net-_U3--_ /Vout 100k
+R6 Net-_U2-K_ Net-_U3-+_ 10k
+V2 +5V GND DC 5 
+R1 +5V Net-_U1-+_ 10k
+XU1 Net-_U1-+_ Net-_U1--_ +5V GND Net-_U1--_ MCP6001
+R7 +5V Net-_U2-K_ 1.8k
+XU2 GND Net-_U2-K_ unconnected-_U2-ADJ-Pad1_ Net-_U2-T_ lm335
+V1 Net-_U2-T_ GND DC 1 
+R2 Net-_U1-+_ GND 12k
+* Barrido de temperatura: V1 fija la temperatura del sensor en grados Celsius
+.control
+dc V1 0 50 1
+wrdata cas_dc.raw v(/vout) v(net-_u2-k_) v(net-_u1--_)
+.endc
+.end

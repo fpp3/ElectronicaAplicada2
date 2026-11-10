@@ -1,0 +1,77 @@
+\chapter{Desarrollo y Diseño}
+\label{sec:desarrollo}
+
+\section{Función de Transferencia Requerida}
+
+La transferencia buscada es una recta que pasa por los puntos $(V_{i1}; V_{o1}) = (\SI{2.73}{\volt}; \SI{0}{\volt})$
+y $(V_{i2}; V_{o2}) = (\SI{3.23}{\volt}; \SI{5}{\volt})$:
+\begin{gather*}
+  V_o - V_{o1} = \frac{V_{o2} - V_{o1}}{V_{i2} - V_{i1}} \left( V_i - V_{i1} \right)
+  \quad\Rightarrow\quad
+  V_o = \frac{\SI{5}{\volt}}{\SI{0.5}{\volt}} \left( V_i - \SI{2.73}{\volt} \right)
+\end{gather*}
+\begin{equation}
+  V_o = A_v \left( V_i - V_{REF} \right), \qquad A_v = 10, \qquad V_{REF} = \SI{2.73}{\volt}
+  \label{eq:transferencia}
+\end{equation}
+
+Es decir, el CAS debe restar a la señal del sensor una tensión de referencia de $\SI{2.73}{\volt}$ y amplificar la
+diferencia diez veces.
+
+\section{Topología del Circuito Acondicionador}
+
+Se eligió una configuración restadora ($U_3$ en la Figura~\ref{crkt:completo}), que resta primero la referencia y luego amplifica
+la diferencia. La topología propuesta por la cátedra amplifica primero y luego resta, por lo que también se amplifica
+la componente continua del sensor: la tensión intermedia supera los \SI{15}{\volt} ($10 \cdot \SI{2.73}{\volt}$), lo
+cual no es posible con una alimentación simple de \SI{5}{\volt}.
+
+Si se cumple la condición de apareamiento $R_3/R_4 = R_5/R_6$, la salida resulta:
+\begin{equation}
+  V_o = \frac{R_3}{R_4} \left( V_i - V_{REF} \right)
+  \label{eq:restador}
+\end{equation}
+Comparando con la Ecuación~\ref{eq:transferencia}, $R_3/R_4 = A_v = 10$. Fijando $R_3 = R_5 = \SI{100}{\kilo\ohm}$ se
+obtiene $R_4 = R_6 = \SI{10}{\kilo\ohm}$.
+
+\begin{figure}[!ht]
+  \centering
+  \resizebox{0.72\textwidth}{!}{\input{figures/crkt_completo.tex}}
+  \caption{Circuito acondicionador completo.}
+  \label{crkt:completo}
+\end{figure}
+
+\section{Tensión de Referencia}
+
+La referencia se obtiene de la alimentación de \SI{5}{\volt} mediante un divisor resistivo:
+\begin{gather*}
+  V_{REF} = \frac{R_2}{R_1 + R_2} \cdot \SI{5}{\volt}
+  \quad\Rightarrow\quad
+  R_1 = R_2 \left( \frac{\SI{5}{\volt}}{V_{REF}} - 1 \right) = 0.8315 \cdot R_2
+\end{gather*}
+La combinación de valores normalizados que mejor aproxima esta relación es $R_1 = \SI{10}{\kilo\ohm}$ y
+$R_2 = \SI{12}{\kilo\ohm}$, con la que $V_{REF} = \SI{2.727}{\volt}$. Como la resistencia de Thévenin del divisor
+($\SI{5.45}{\kilo\ohm}$) es comparable con $R_4$, se agrega un seguidor de tensión ($U_1$) que evita que la
+etapa restadora cargue al divisor y altere tanto la referencia como la condición de apareamiento.
+
+\section{Polarización del Sensor}
+
+$R_7$ se calcula para que circule $I_1 = \SI{1}{\milli\ampere}$ por el sensor en el peor caso, a \SI{50}{\celsius}.
+La corriente total $I_T$ que entrega $R_7$ se divide entre el sensor y la rama $R_6$-$R_5$ de entrada al restador:
+\begin{gather*}
+  I_2 = \frac{V_{\SI{50}{\celsius}}}{R_6 + R_5} = \frac{\SI{3.23}{\volt}}{\SI{110}{\kilo\ohm}}
+    = \SI{29.36}{\micro\ampere}
+  \qquad
+  I_T = I_1 + I_2 = \SI{1.02936}{\milli\ampere}
+  \\
+  R_7 = \frac{\SI{5}{\volt} - V_{\SI{50}{\celsius}}}{I_T} = \frac{\SI{1.77}{\volt}}{\SI{1.02936}{\milli\ampere}}
+    = \SI{1719.5}{\ohm} \;\Rightarrow\; R_7 = \SI{1.8}{\kilo\ohm}
+\end{gather*}
+Con el valor normalizado, la corriente por el sensor varía entre $\SI{1.24}{\milli\ampere}$ (\SI{0}{\celsius}) y
+$\SI{0.95}{\milli\ampere}$ (\SI{50}{\celsius}), dentro del rango de operación de $\SI{400}{\micro\ampere}$ a
+$\SI{5}{\milli\ampere}$ que indica la hoja de datos del LM335.
+
+\section{Elección del Amplificador Operacional}
+
+Se utiliza el MCP6001, que admite alimentación simple de \SI{1.8}{\volt} a \SI{6}{\volt} y tiene entradas y salida
+\textit{rail-to-rail}. Esto permite alimentarlo directamente entre GND y \SI{5}{\volt} y que la salida alcance valores
+cercanos a \SI{0}{\volt} y \SI{5}{\volt}, necesarios en los extremos del rango.

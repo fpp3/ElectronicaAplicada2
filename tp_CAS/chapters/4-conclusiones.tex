@@ -1,0 +1,19 @@
+\chapter{Conclusiones}
+\label{sec:conclusiones}
+
+Se diseñó y simuló un circuito acondicionador de señal que adapta la salida del sensor LM335, de \SI{2.73}{\volt} a
+\SI{3.23}{\volt}, al rango de \SI{0}{\volt} a \SI{5}{\volt} del conversor A/D para temperaturas entre
+\SI{0}{\celsius} y \SI{50}{\celsius}. La configuración restadora con referencia por divisor y seguidor permitió
+trabajar con una única alimentación de \SI{5}{\volt}, evitando las tensiones intermedias superiores a \SI{15}{\volt}
+de la topología que amplifica antes de restar.
+
+La simulación verificó la ganancia de diseño, con una sensibilidad de $\SI{99.94}{\milli\volt/\celsius}$ frente a los
+$\SI{100}{\milli\volt/\celsius}$ requeridos. El error se concentra en un desplazamiento constante de cerca de
+\SI{0.5}{\celsius}, debido a que la referencia obtenida con resistencias normalizadas ($\SI{2.727}{\volt}$) es menor
+que la tensión real del sensor a \SI{0}{\celsius} ($\SI{2.7315}{\volt}$), y en la saturación de la salida en el último
+medio grado del rango.
+
+Ambos efectos pueden corregirse ajustando la referencia: reemplazando parte del divisor por un potenciómetro de ajuste
+para llevar $V_{REF}$ a $\SI{2.7315}{\volt}$, o calibrando el sensor mediante su terminal ADJ. También puede
+compensarse en el microcontrolador, restando el desplazamiento medido. Con estas consideraciones se cumplen los
+objetivos del trabajo práctico.

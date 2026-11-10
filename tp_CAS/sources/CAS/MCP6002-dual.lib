@@ -1,0 +1,5 @@
+.include MCP6001.txt
+.subckt MCP6002 1out 1in- 1in+ vss 2in+ 2in- 2out vdd
+XA 1in+ 1in- vdd vss 1out MCP6001
+XB 2in+ 2in- vdd vss 2out MCP6001
+.ends

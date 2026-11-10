@@ -1,0 +1,4 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "LM335_sim") (type "KiCad") (uri "${KIPRJMOD}/LM335_sim.kicad_sym") (options "") (descr ""))
+)

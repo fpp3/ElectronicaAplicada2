@@ -1,0 +1,26 @@
+\begin{circuitikz}[american]
+  % Amplificadores operacionales
+  \node[op amp, noinv input up] (U1) at (3,4.5) {$U_1$};
+  \node[op amp] (U3) at (10,4) {$U_3$};
+
+  % Divisor de referencia y seguidor
+  \draw (0,7.2) node[vcc]{$\SI{5}{\volt}$} to[R, l_={\shortstack{$R_1$\\ \SI{10}{\kilo\ohm}}}] (0,0 |- U1.+) coordinate (A)
+    to[R, l_={\shortstack{$R_2$\\ \SI{12}{\kilo\ohm}}}] ++(0,-2) node[ground]{};
+  \draw (A) to[short, *-] (U1.+);
+  \draw (U1.-) -- ++(0,-0.8) -| (U1.out);
+
+  % Etapa restadora
+  \draw (U3.-) -- ++(-0.5,0) coordinate (m);
+  \draw (U3.+) -- ++(-0.5,0) coordinate (p);
+  \draw (U1.out) to[short, *-] ++(0.6,0) node[below]{$V_{REF}$} to[R, l={\shortstack{$R_4$ \SI{10}{\kilo\ohm}}}] ++(2.2,0) |- (m);
+  \draw (m) to[short, *-] ++(0,1.4) coordinate (t) to[R, l={\shortstack{$R_3$ \SI{100}{\kilo\ohm}}}] (t -| U3.out) -- (U3.out);
+  \draw (U3.out) to[short, *-o] ++(0.8,0) node[right]{$V_o$};
+
+  % Polarizacion del sensor
+  \coordinate (K) at (5.4,1.2);
+  \draw (K) to[R, l={\shortstack{$R_7$\\ \SI{1.8}{\kilo\ohm}}}, *-] ++(0,1.6) node[vcc]{$\SI{5}{\volt}$};
+  \draw (K) ++(0,-2) node[ground]{} to[zD, l=LM335] (K);
+  \node[left] at (K) {$V_T$};
+  \draw (K) to[R, l={\shortstack{$R_6$ \SI{10}{\kilo\ohm}}}] (K -| p) coordinate (q) -- (p);
+  \draw (q) to[short, *-] ++(0,-0.3) to[R, l={\shortstack{$R_5$\\ \SI{100}{\kilo\ohm}}}] ++(0,-1.7) node[ground]{};
+\end{circuitikz}
