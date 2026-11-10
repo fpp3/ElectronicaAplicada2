@@ -153,3 +153,146 @@ de Área de Operación Segura (SOA) de la hoja de datos del TIP42C \cite{onsemi_
 \end{itemize}
 Por consiguiente, el dimensionamiento de la protección garantiza la integridad del transistor aun ante fallas
 severas prolongadas.
+
+\section{Cálculo y dimensionamiento de disipadores térmicos}
+\label{sec.c5:disipadores}
+
+Para garantizar la integridad y confiabilidad operativa de la fuente bajo régimen de plena carga nominal continua
+($I_L = \SI{3.0}{\ampere}$, $R_L = \SI{4}{\ohm}$), se procede a dimensionar térmicamente los tres componentes
+semiconductores activos del circuito: el transistor de potencia $Q_1$, el transistor sensor $Q_2$ y el regulador
+integrado LM7812.
+
+De acuerdo a los lineamientos pedagógicos y analíticos de la cátedra \cite{gonzalez_fuentes2}, el flujo de calor
+generado en la juntura semiconductora se modela mediante la analogía eléctrica-térmica gobernada por la ley de Ohm térmica,
+donde la potencia disipada $P_D$ $[\si{\watt}]$ actúa como fuente de calor, la temperatura $T$ $[\si{\celsius}]$
+como potencial térmico y las resistencias térmicas $R_{th}$ $[\si{\celsius/\watt}]$ representan la oposición al flujo calórico.
+
+En la figura~\ref{fig.c5:circuito_termico} se presentan los dos circuitos térmicos equivalentes de análisis: la operación
+del semiconductor al aire libre sin disipador (caso a) y la operación asistida con disipador térmico (caso b).
+
+\begin{figure}[!ht]
+    \centering
+    \input{figures/circuito_termico.tex}
+    \caption{Circuitos térmicos equivalentes en régimen permanente: a) sin disipador y b) con disipador térmico.}
+    \label{fig.c5:circuito_termico}
+\end{figure}
+
+El dimensionamiento térmico se desarrolla en tres etapas consecutivas:
+
+\begin{enumerate}
+    \item \textbf{Evaluación de la necesidad de disipador (operación al aire libre):}  
+    A partir de la potencia disipada $P_D$ a plena carga y la resistencia térmica juntura-ambiente provista por
+    el fabricante ($R_{th(j-a)}$), se determina la temperatura alcanzada por la juntura $T_j$ sin auxilio de disipador:
+    \begin{equation}
+        T_j = T_a + P_D \cdot R_{th(j-a)}
+        \label{eq.c5:tj_sin_disipador}
+    \end{equation}
+    Si la temperatura resultante supera el límite térmico absoluto del fabricante ($T_{j(max)} = \SI{150}{\celsius}$),
+    el dispositivo sufriría destrucción térmica inmediata, haciéndose indispensable el agregado de un disipador.
+    Evaluando los tres componentes en régimen permanente a plena carga nominal ($I_L = \SI{3.0}{\ampere}$):
+    \begin{itemize}
+        \item \textbf{Transistor de paso $Q_1$ (TIP42C, TO-220):} En simulación se tiene $V_{CE(Q1)} = \SI{5.30}{\volt}$
+        e $I_{C(Q1)} = \SI{2.07}{\ampere}$, disipando $P_{D(Q1)} = \SI{11.04}{\watt}$. Con $R_{th(j-a)} = \SI{62.5}{\celsius/\watt}$ \cite{onsemi_tip42c},
+        a temperatura de referencia ambiente $T_a = \SI{25}{\celsius}$ la juntura alcanzaría:
+        \begin{equation*}
+            T_j = \SI{25}{\celsius} + \SI{10.27}{\watt} \cdot \SI{62.5}{\celsius/\watt} \approx \mathbf{\SI{667}{\celsius}}
+        \end{equation*}
+        (o bien, a la temperatura de servicio en gabinete $T_a = \SI{40}{\celsius}$ con $P_D = \SI{11.04}{\watt}$,
+        $T_j = \SI{40}{\celsius} + \SI{11.04}{\watt} \times \SI{62.5}{\celsius/\watt} = \mathbf{\SI{730}{\celsius}}$).
+        Al superar holgadamente la temperatura destructiva ($\SI{150}{\celsius}$), \textbf{$Q_1$ requiere obligatoriamente disipador térmico}.
+        
+        \item \textbf{Transistor sensor $Q_2$ (TIP42C, TO-220):} A plena carga nominal, conduce únicamente una reducida corriente
+        de control ($I_{C(Q2)} = \SI{141.0}{\milli\ampere}$, $V_{EC(Q2)} \approx \SI{1.62}{\volt}$), disipando
+        $P_{D(Q2)} \approx \SI{0.229}{\watt}$. A $T_a = \SI{40}{\celsius}$:
+        \begin{equation*}
+            T_j = \SI{40}{\celsius} + \SI{0.229}{\watt} \cdot \SI{62.5}{\celsius/\watt} = \mathbf{\SI{54.3}{\celsius}}
+        \end{equation*}
+        Puesto que $T_j = \SI{54.3}{\celsius} \ll \SI{150}{\celsius}$, \textbf{$Q_2$ no requiere ningún tipo de disipador térmico},
+        evacuando sus $\SI{229}{\milli\watt}$ directamente al aire a través de su encapsulado.
+        
+        \item \textbf{Regulador integrado LM7812 (LM7812K, TO-3):} Conducen $I_{out(7812)} = \SI{0.926}{\ampere}$
+        con caída $V_{drop} \approx \SI{4.47}{\volt}$, disipando $P_{D(7812)} = \mathbf{\SI{4.14}{\watt}}$.
+        Para el encapsulado metálico TO-3 ($R_{th(j-a)} \approx \SI{35}{\celsius/\watt}$) \cite{ti_lm78xx}, a $T_a = \SI{40}{\celsius}$:
+        \begin{equation*}
+            T_j = \SI{40}{\celsius} + \SI{4.14}{\watt} \cdot \SI{35}{\celsius/\watt} = \mathbf{\SI{184.9}{\celsius}}
+        \end{equation*}
+        (a $T_a = \SI{25}{\celsius}$, $T_j = \SI{169.9}{\celsius}$). Superando el límite de $\SI{150}{\celsius}$ y provocando
+        la parada térmica por protección interna, \textbf{el LM7812 requiere obligatoriamente disipador térmico}.
+    \end{itemize}
+    
+    \item \textbf{Resistencia térmica juntura-ambiente admisible ($R_{th(j-a)max}$):}  
+    Fijando una temperatura ambiente máxima de servicio $T_a = \SI{40}{\celsius}$ (interior de gabinete) y una temperatura
+    máxima admisible de juntura $T_{j(adm)} = \SI{100}{\celsius}$ (criterio conservador adoptado por la cátedra \cite{gonzalez_fuentes2}
+    para brindar un margen de seguridad de $\SI{50}{\celsius}$ ante sobrecargas), se calcula la resistencia térmica total
+    admisible para los dos componentes que requieren disipación asistida ($Q_1$ y LM7812):
+    \begin{equation}
+        R_{th(j-a)max} = \frac{T_{j(adm)} - T_a}{P_D}
+        \label{eq.c5:rth_ja_max}
+    \end{equation}
+    \begin{itemize}
+        \item \textbf{Para el transistor $Q_1$ ($P_D = \SI{11.04}{\watt}$):}
+        \begin{equation}
+            R_{th(j-a)max(Q1)} = \frac{\SI{100}{\celsius} - \SI{40}{\celsius}}{\SI{11.04}{\watt}} = \frac{\SI{60}{\celsius}}{\SI{11.04}{\watt}} = \mathbf{\SI{5.43}{\celsius/\watt}}
+            \label{eq.c5:rth_ja_max_q1}
+        \end{equation}
+        
+        \item \textbf{Para el regulador LM7812 ($P_D = \SI{4.14}{\watt}$):}
+        \begin{equation}
+            R_{th(j-a)max(7812)} = \frac{\SI{100}{\celsius} - \SI{40}{\celsius}}{\SI{4.14}{\watt}} = \frac{\SI{60}{\celsius}}{\SI{4.14}{\watt}} = \mathbf{\SI{14.49}{\celsius/\watt}}
+            \label{eq.c5:rth_ja_max_lm}
+        \end{equation}
+    \end{itemize}
+    
+    \item \textbf{Determinación de la resistencia térmica del disipador ($R_{th(s-a)}$):}  
+    A partir de la rama serie del circuito térmico de la figura~\ref{fig.c5:circuito_termico}b:
+    \begin{equation}
+        R_{th(s-a)} \le R_{th(j-a)max} - R_{th(j-c)} - R_{th(c-s)}
+        \label{eq.c5:rth_sa}
+    \end{equation}
+    donde se adoptan los valores de $R_{th(c-s)}$ de la tabla normalizada de la cátedra para la condición de
+    \textbf{contacto directo y silicona} (la de menor resistencia térmica disponible):
+    \begin{itemize}
+        \item Para encapsulado TO-220 ($Q_1$): $R_{th(c-s)} = \mathbf{\SI{0.50}{\celsius/\watt}}$, con $R_{th(j-c)} = \frac{150 - 25}{\SI{65}{\watt}} \approx \mathbf{\SI{1.92}{\celsius/\watt}}$ \cite{onsemi_tip42c}.
+        \item Para encapsulado metálico TO-3 (LM7812): $R_{th(c-s)} = \mathbf{\SI{0.20}{\celsius/\watt}}$, con $R_{th(j-c)} \approx \mathbf{\SI{4.00}{\celsius/\watt}}$ \cite{ti_lm78xx}.
+    \end{itemize}
+    Sustituyendo los valores en la inecuación~\eqref{eq.c5:rth_sa}:
+    \begin{itemize}
+        \item \textbf{Disipador para $Q_1$:}
+        \begin{align}
+            R_{th(s-a)(Q1)} &\le R_{th(j-a)max(Q1)} - R_{th(j-c)} - R_{th(c-s)} \notag \\
+            &\le \SI{5.43}{\celsius/\watt} - \SI{1.92}{\celsius/\watt} - \SI{0.50}{\celsius/\watt} = \mathbf{\SI{3.01}{\celsius/\watt}}
+            \label{eq.c5:rth_sa_q1}
+        \end{align}
+        Se debe seleccionar un disipador comercial aletado para TO-220 con una resistencia térmica $R_{th(s-a)} \le \SI{3.0}{\celsius/\watt}$.
+        
+        \item \textbf{Disipador para el regulador LM7812:}
+        \begin{align}
+            R_{th(s-a)(7812)} &\le R_{th(j-a)max(7812)} - R_{th(j-c)} - R_{th(c-s)} \notag \\
+            &\le \SI{14.49}{\celsius/\watt} - \SI{4.00}{\celsius/\watt} - \SI{0.20}{\celsius/\watt} = \mathbf{\SI{10.29}{\celsius/\watt}}
+            \label{eq.c5:rth_sa_lm}
+        \end{align}
+        Dado que el requerimiento es moderado, es suficiente emplear un disipador estampado o aletado comercial para TO-3 de $R_{th(s-a)} \le \SI{10}{\celsius/\watt}$.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Tabla comparativa consolidada de requerimientos térmicos}
+En la tabla~\ref{tab.c5:resumen_termico} se compendian los resultados térmicos obtenidos para los tres componentes
+bajo régimen de plena carga nominal continua.
+
+\begin{table}[!ht]
+\centering
+\small
+\setlength{\tabcolsep}{3.5pt}
+\caption{Determinación térmica y necesidad de disipador a plena carga ($I_L = \SI{3.0}{\ampere}$).}
+\label{tab.c5:resumen_termico}
+\begin{tabular}{lcccccc}
+\hline
+Componente & Encaps. & $P_D$ & $T_j\text{ sin disip.}$ & ¿Disipador? & $R_{th(j-a)max}$ & $R_{th(s-a)}$ \\
+ & & $[\si{\watt}]$ & $[\si{\celsius}]$ & & $[\si{\celsius/\watt}]$ & $[\si{\celsius/\watt}]$ \\
+\hline
+Transistor $Q_1$ & TO-220 & $11.04$ & $\approx 667$--$730$ & \textbf{SÍ} & $5.43$ & $\le \mathbf{3.01}$ \\
+Transistor $Q_2$ & TO-220 & $0.23$  & $54.3$ & \textbf{NO} & -- & No requiere \\
+Regulador LM7812 & TO-3   & $4.14$  & $184.9$ & \textbf{SÍ} & $14.49$ & $\le \mathbf{10.29}$ \\
+\hline
+\end{tabular}
+\end{table}

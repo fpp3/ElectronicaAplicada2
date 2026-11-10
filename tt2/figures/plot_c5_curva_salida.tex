@@ -37,12 +37,12 @@
     (0, 12) (3, 12) (3, 0)
 };
 \node[anchor=south west, text=red!70!black, font=\footnotesize] at (axis cs: 0.2, 12.1) {$V_{nom} = \SI{12}{\volt}$};
-\node[anchor=south, text=red!70!black, font=\footnotesize] at (axis cs: 3.0, 0.2) {$I_{Lmax} = \SI{3}{\ampere}$};
+\node[anchor=south west, text=red!70!black, font=\footnotesize] at (axis cs: 3.05, 0.4) {$I_{L(nom)} = \SI{3}{\ampere}$};
 
 % Anotacion de zona de foldback / corto
-\draw[->, >=stealth, line width=0.8pt, color=orange!80!black] 
-    (axis cs: 5.0, 9.5) -- (axis cs: 4.1, 5.0) 
-    node[midway, left, font=\footnotesize, align=right] {Disparo de protección\\y plegado (Foldback)};
+\draw[->, >=stealth, line width=0.9pt, color=orange!80!black] 
+    (axis cs: 5.0, 9.5) -- (axis cs: 4.15, 5.2)
+    node[midway, sloped, above=2pt, font=\scriptsize, align=center, text=orange!80!black] {Disparo de protección\\y plegado (Foldback)};
 
 \end{axis}
 \end{tikzpicture}

@@ -24,12 +24,10 @@ A partir del análisis teórico y de los resultados numéricos obtenidos, se des
     $I_{C(Q1)} = \SI{2.310}{\ampere}$, convalidando la formulación analítica de diseño ($I_{c1(max)} \approx \SI{2.45}{\ampere}$)
     con un margen de seguridad confiable.
     
-    \item \textbf{Optimización del diseño y verificación térmica:} La sustitución del tradicional MJ2955 (TO-3, $\SI{15}{\ampere}$)
-    por transistores TIP42C (TO-220, $\SI{6}{\ampere}$, $\SI{65}{\watt}$) tanto para el transistor de paso $Q_1$ como
+    \item \textbf{Optimización del diseño y verificación térmica:} El uso de transistores TIP42C (TO-220, $\SI{6}{\ampere}$, $\SI{65}{\watt}$) tanto para el transistor de paso $Q_1$ como
     para el sensor $Q_2$ aportó una solución técnica equilibrada y económica, unificando la lista de materiales (BOM)
-    y eliminando la saturación de corriente que sufrían los transistores de pequeña señal. En régimen nominal la potencia
-    disipada por $Q_1$ es de $\SI{11.04}{\watt}$ y la del LM7812 es de $\SI{4.14}{\watt}$, mientras que en cortocircuito
-    la disipación en $Q_1$ alcanza los $\SI{35.48}{\watt}$, ubicándose holgadamente dentro del Área de Operación Segura (SOA)
+    y evitando saturación de corriente. En régimen nominal la potencia
+    disipada por $Q_1$ es de $\SI{11.04}{\watt}$ y la del LM7812 es de $\SI{4.14}{\watt}$ ubicándose holgadamente dentro del Área de Operación Segura (SOA)
     del dispositivo ($P_{Dmax} = \SI{65}{\watt}$).
     
     \item \textbf{Atenuación de perturbaciones y estabilidad de red:} La fuente demostró una elevada inmunidad
