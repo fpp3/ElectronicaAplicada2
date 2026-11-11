@@ -1,6 +1,29 @@
 \chapter{Diseño y Cálculo Analítico}
 \label{sec.c5:diseno_teorico}
 
+\section{Topología seleccionada}
+\label{sec.c5:topologia}
+
+El circuito integrado LM7812 presenta una capacidad máxima de corriente nominal de salida de $\SI{1}{\ampere}$
+(con un límite de disparo típico interno de $\SI{1.5}{\ampere}$ a $\SI{2.2}{\ampere}$). Dado que la carga
+especificada demanda hasta $\SI{3}{\ampere}$, el integrado resulta insuficiente por sí solo para abastecer la
+demanda continua sin ingresar en protección térmica o sobre-corriente interna.
+
+Para superar esta restricción, adoptamos la configuración de \emph{elevador de corriente con transistor de paso
+exterior y limitador de sobrecarga}, correspondiente a la Figura 6-67 del material teórico de la cátedra
+\cite{gonzalez_fuentes3}. En este circuito, un transistor de potencia PNP ($Q_1$) conduce la mayor parte de la
+corriente que excede la capacidad del regulador, mientras que un segundo transistor discreto ($Q_2$) junto a un resistor
+de sensado ($R_{sc}$) forman un lazo de realimentación negativa para limitar rígidamente la corriente máxima
+en caso de falla o cortocircuito franco en la salida.
+El esquemático de la topología adoptada se muestra en la figura~\ref{fig.c5:esquematico_tikz}.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\textwidth}{!}{\input{figures/esquematico_circuito.tex}}
+    \caption{Esquemático de la fuente regulada con elevador de corriente ($Q_1$) y limitador de sobrecarga ($Q_2$, $R_{sc}$).}
+    \label{fig.c5:esquematico_tikz}
+\end{figure}
+
 \section{Selección de componentes activos}
 \label{sec.c5:seleccion_activos}
 
@@ -35,7 +58,8 @@ sumarse la tensión en el resistor exterior de disparo $R_{ext}$ ($\approx \SI{0
     V_{in(min)} &\ge V_{out} + V_{drop} + V_{Rext} \\
     V_{in(min)} &\ge \SI{12}{\volt} + \SI{2.5}{\volt} + \SI{0.7}{\volt} = \SI{15.2}{\volt}
 \end{align*}
-Para la simulación se adoptó como tensión de entrada nominal continua $V_{in} = \SI{18}{\volt}$. Esta elección proporciona un margen
+Según fuera conveniente, se adopto una senoidal de $V_P = \SI{18}{\volt}$ (simulando la salida de un rectificador)
+o una tensión continua de $V_i = \SI{18}{\volt}$ para la simulación. Esta elección proporciona un margen
 de seguridad dinámico de casi $\SI{3}{\volt}$ sobre el límite de dropout, garantizando que variaciones de línea
 del $\pm 10\%$ ($16.2\text{ V} \le V_{in} \le 19.8\text{ V}$) no provoquen abandono de regulación.
 
@@ -83,18 +107,19 @@ Siguiendo las recomendaciones de aplicación del fabricante y de la cátedra
 \cite{gonzalez_fuentes2}:
 \begin{itemize}
     \item $C_1 = \SI{0.33}{\micro\farad}$ (disco cerámico): conectado entre el pin IN del LM7812 y masa, atenúa
-    efectos inductivos de línea y previene autooscilaciones parásitas de alta frecuencia.
+    efectos inductivos de línea y previene auto-oscilaciones parásitas de alta frecuencia.
     \item $C_2 = \SI{0.1}{\micro\farad}$ (disco cerámico): colocado en paralelo inmediato a la salida OUT del
     LM7812, garantiza el margen de fase del lazo de amplificación de error interno.
     \item $C_3 = \SI{100}{\micro\farad}$ (electrolítico de aluminio, $\SI{25}{\volt}$): reservorio de baja
     frecuencia para absorber transitorios abruptos de demanda de carga.
 \end{itemize}
 
-El circuito esquemático completo diseñado se presenta en la figura~\ref{fig.c5:esquematico}.
+El circuito esquemático completo, tal como fue implementado en LTspice, se presenta en la
+figura~\ref{fig.c5:esquematico}.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.88\textwidth]{pictures/sch_ltspice.png}
+    \includegraphics[width=0.88\textwidth]{pictures/simulacion_byn_ltspice.png}
     \caption{Circuito esquemático completo de la fuente regulada con elevador de corriente y limitador de sobrecarga.}
     \label{fig.c5:esquematico}
 \end{figure}

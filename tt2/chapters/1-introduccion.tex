@@ -18,18 +18,3 @@ La consigna establece las siguientes condiciones operativas para el circuito:
     \item Protección: incorporación obligatoria de una etapa limitadora de sobrecarga y cortocircuito.
     \item Evaluación de desempeño: determinación de la totalidad de los factores de calidad de la fuente.
 \end{itemize}
-
-\section{Justificación de la topología seleccionada}
-\label{sec.c5:topologia}
-
-El circuito integrado LM7812 presenta una capacidad máxima de corriente nominal de salida de $\SI{1}{\ampere}$
-(con un límite de disparo típico interno de $\SI{1.5}{\ampere}$ a $\SI{2.2}{\ampere}$). Dado que la carga
-especificada demanda hasta $\SI{3}{\ampere}$, el integrado resulta insuficiente por sí solo para abastecer la
-demanda continua sin ingresar en protección térmica o sobrecorriente interna.
-
-Para superar esta restricción, adoptamos la configuración de \emph{elevador de corriente con transistor de paso
-exterior y limitador de sobrecarga}, correspondiente a la Figura 6-67 del material teórico de la cátedra
-\cite{gonzalez_fuentes3}. En este circuito, un transistor de potencia PNP ($Q_1$) conduce la mayor parte de la
-corriente que excede la capacidad del regulador, mientras que un segundo transistor discreto ($Q_2$) junto a un resistor
-de sensado ($R_{sc}$) forman un lazo de realimentación negativa para limitar rígidamente la corriente máxima
-en caso de falla o cortocircuito franco en la salida.

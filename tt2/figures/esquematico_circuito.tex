@@ -1,0 +1,59 @@
+\begin{circuitikz}[american, thick, font=\small, scale=0.9, transform shape]
+    % --- Entrada y resistor sensor Rsc ---
+    \coordinate (G0) at (0,0);
+    \coordinate (A)  at (0,5.7);
+    \coordinate (Na) at (1.2,5.7);
+    \coordinate (Nb) at (3.6,5.7);
+    \draw (G0) to[sV, l={\shortstack[r]{$V_{in}$\\\SI{18}{\volt} $\pm$ \SI{1}{\volt}\\\SI{100}{\hertz}}}] (A) -- (Na);
+    \draw (Na) to[R, l={$R_{sc}$}, a={\SI{0.33}{\ohm}}, *-*] (Nb);
+
+    % --- Q2: sensor de sobrecarga (E a Vin, B entre Rsc y Q1) ---
+    \node[pnp, rotate=-90, yscale=-1, anchor=B] (Q2) at (Nb |- 0,3.9) {};
+    \node[anchor=north] at ([yshift=-2pt]Q2.center) {$Q_2$};
+    \draw (Nb) -- (Q2.B);
+    \draw (Na) -- (Na |- Q2.E) coordinate (Ne) -- (Q2.E);
+
+    % --- Q1: transistor de paso ---
+    \node[pnp, rotate=90, anchor=E] (Q1) at (4.6,5.7) {};
+    \node[anchor=south] at ([yshift=4pt]Q1.center) {$Q_1$};
+    \draw (Nb) -- (Q1.E);
+    \coordinate (C) at (Q1.B |- Q2.C);
+    \draw (Q1.B) -- (C);
+    \draw (Q2.C) -- (C);
+
+    % --- Rext (disparo de Q1) y C1 ---
+    \draw (Ne) to[short, *-] (Na |- 0,1.6)
+          to[R, l_={$R_{ext}$}, a^={\SI{2.2}{\ohm}}] (C |- 0,1.6) coordinate (D);
+    \draw (C) to[short, *-*] (D);
+    \draw (D) to[C, l_={$C_1$}, a^={\SI{0.33}{\micro\farad}}, -*] (D |- G0);
+
+    % --- Regulador LM7812 ---
+    \coordinate (In)  at (6.4,0 |- C);
+    \coordinate (Out) at (11.0,0 |- C);
+    \node[draw, minimum width=3.2cm, minimum height=1.4cm] (U) at (8.7,0 |- C) {\textbf{LM7812}};
+    \node[anchor=west, font=\scriptsize] at (U.west) {IN};
+    \node[anchor=east, font=\scriptsize] at (U.east) {OUT};
+    \node[anchor=south, font=\scriptsize] at (U.south) {GND};
+    \draw (C) -- (In) to[short, *-] (U.west);
+    \draw (U.east) -- (Out);
+    \draw (U.south) to[short, -*] (U.south |- G0);
+    \draw (U.south |- G0) -- ++(0,-0.3) node[ground] {};
+
+    % --- Diodo de protección D1 (OUT -> IN) ---
+    \draw (Out) -- ++(0,1.4) coordinate (Dd)
+          to[D, l_={$D_1$\,(1N4007)}] (In |- Dd) -- (In);
+
+    % --- Salida: colector de Q1, capacitores y carga ---
+    \coordinate (Vo) at (12.2,0 |- C);
+    \draw (Q1.C) -- (Vo |- Nb) -- (Vo);
+    \draw (Out) to[short, *-*] (Vo);
+    \draw (Vo) to[C, l_={\shortstack[l]{$C_2$\\\SI{0.1}{\micro\farad}}}, -*] (Vo |- G0);
+    \draw (Vo) to[short, -] (14.4,0 |- Vo) coordinate (V3)
+          to[eC, l_={\shortstack[l]{$C_3$\\\SI{100}{\micro\farad}}}, -*] (V3 |- G0);
+    \draw (V3) -- (16.6,0 |- V3) coordinate (V4)
+          to[R, l_={\shortstack[l]{$R_L$\\\SIrange[range-phrase=--, range-units=single]{0.5}{4}{\ohm}}}] (V4 |- G0);
+    \draw (V4) to[short, -o] ++(1,0) node[right] {$V_{out}$};
+
+    % --- Riel de masa ---
+    \draw (G0) -- (V4 |- G0);
+\end{circuitikz}
