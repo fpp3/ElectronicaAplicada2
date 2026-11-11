@@ -1,7 +1,9 @@
 \begin{tikzpicture}
+  \colorlet{simazul}{blue!85!black}
+  \colorlet{simrojo}{red!80!black}
   \begin{axis}[
     width=0.75\textwidth,
-    height=6cm,
+    height=4.6cm,
     grid=both,
     grid style={line width=.1pt, draw=gray!25},
     major grid style={line width=.2pt, draw=gray!45},
@@ -10,11 +12,13 @@
     xmin=0, xmax=50,
     ymin=0, ymax=5.5,
     xtick={0,10,20,30,40,50},
-    legend style={at={(0.02,0.98)}, anchor=north west, font=\footnotesize},
+    legend style={at={(0.5,1.03)}, anchor=south, font=\footnotesize, legend columns=2,
+      /tikz/every even column/.append style={column sep=0.4cm}},
+    ytick={0,1,2,3,4,5},
   ]
-    \addplot[thick, color=blue!85!black] table [x=temp, y=vout] {sources/sim/cas_dc.dat};
+    \addplot[thick, color=simazul] table [x=temp, y=vout] {sources/sim/cas_dc.dat};
     \addlegendentry{$V_o$ simulada}
-    \addplot[thick, dashed, color=red!80!black, domain=0:50] {0.1*x};
-    \addlegendentry{$V_o$ ideal ($\SI{100}{\milli\volt/\celsius}$)}
+    \addplot[thick, dashed, color=simrojo, domain=0:50] {0.1*x};
+    \addlegendentry{$V_o$ ideal}
   \end{axis}
 \end{tikzpicture}
