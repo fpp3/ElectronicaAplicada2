@@ -4,7 +4,7 @@
 En esta actividad evaluativa correspondiente a la Unidad Temática 6 (Fuentes de
 Alimentación) se aborda el cálculo, diseño y verificación experimental por
 simulación de una fuente de alimentación lineal regulada con protección contra
-sobrecargas, en cumplimiento de los requerimientos fijados para de Grupo 5.
+sobrecargas, en cumplimiento de los requerimientos fijados para el Grupo 5.
 
 \section{Especificaciones de diseño}
 \label{sec.c5:especificaciones}
@@ -18,3 +18,12 @@ La consigna establece las siguientes condiciones operativas para el circuito:
     \item Protección: incorporación obligatoria de una etapa limitadora de sobrecarga y cortocircuito.
     \item Evaluación de desempeño: determinación de la totalidad de los factores de calidad de la fuente.
 \end{itemize}
+
+Dado que la corriente requerida supera la capacidad nominal de $\SI{1}{\ampere}$ del LM7812, el diseño
+incorpora un transistor de paso exterior que actúa como elevador de corriente, junto con un limitador
+discreto que fija la corriente máxima ante sobrecargas y cortocircuitos. Los valores de diseño se obtienen
+analíticamente y se validan mediante simulación en LTspice, a partir de la cual se caracteriza el
+comportamiento de la protección y se determinan los factores de calidad de la fuente: regulación de carga,
+resistencia de salida, regulación de red, coeficiente térmico y rechazo de rizado. Finalmente, se verifica
+la disipación de potencia de los semiconductores dentro de su Área de Operación Segura y se dimensionan los
+disipadores térmicos necesarios para su funcionamiento continuo a plena carga.

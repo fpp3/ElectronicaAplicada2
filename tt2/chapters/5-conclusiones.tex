@@ -1,37 +1,41 @@
 \chapter{Conclusiones}
 \label{sec.c5:conclusiones}
 
-En este trabajo se completó el cálculo, diseño y evaluación por simulación de una fuente de
-alimentación regulada lineal de $\SI{12}{\volt}$ y $\SI{3}{\ampere}$ basada en el integrado LM7812 en encapsulado TO-3,
-incorporando un circuito exterior de elevación de corriente y protección contra sobrecargas según la
-Consigna 5.
+En este trabajo se completó el cálculo, diseño y verificación por simulación de una fuente de alimentación
+lineal regulada de $\SI{12}{\volt}$ y $\SI{3}{\ampere}$ basada en el integrado LM7812 en encapsulado TO-3,
+con protección contra sobrecargas, conforme a los requerimientos fijados para el Grupo 5.
 
-A partir del análisis teórico y de los resultados numéricos obtenidos, se destacan las siguientes conclusiones:
+Como el LM7812 por sí solo no puede entregar más de $\SI{1}{\ampere}$, la solución se apoyó en un transistor de
+paso exterior $Q_1$ que actúa como elevador de corriente. El ajuste de $R_2 = \SI{2.2}{\ohm}$ permitió repartir la
+corriente de modo que, a plena carga ($I_L = \SI{3.0}{\ampere}$), el regulador suministre $\SI{0.93}{\ampere}$,
+por debajo de su valor nominal, mientras $Q_1$ asume los $\SI{2.07}{\ampere}$ restantes, preservando así la vida
+útil del integrado. Con esta distribución, en todo el rango especificado de carga
+($\SI{100}{\milli\ampere} \le I_L \le \SI{3}{\ampere}$) la tensión de salida se mantuvo prácticamente constante,
+con una caída de apenas $\SI{1.62}{\milli\volt}$ ($R_{car} = \SI{0.0135}{\percent}$).
 
-\begin{enumerate}
-    \item \textbf{Cumplimiento de especificaciones nominales:} En el rango especificado de demanda de carga
-    ($\SI{100}{\milli\ampere} \le I_L \le \SI{3}{\ampere}$), la fuente presentó una regulación sobresaliente con
-    una caída de tensión de apenas $\SI{1.62}{\milli\volt}$ ($\Delta V_o / V_{nom} = \SI{0.0135}{\percent}$) y una
-    resistencia interna dinámica de $R_{sal} = \SI{0.559}{\milli\ohm}$. El ajuste de $R_2 = \SI{2.2}{\ohm}$ permitió
-    cumplir el requerimiento operativo de que a plena carga nominal ($I_L = \SI{3.0}{\ampere}$), el regulador integrado
-    suministre $\SI{0.93}{\ampere}$ ($<\SI{1.0}{\ampere}$ nominal) y el transistor de paso exterior $Q_1$ asuma los
-    restantes $\SI{2.07}{\ampere}$, preservando la vida útil del integrado.
-    
-    \item \textbf{Efectividad de la protección de sobrecarga y limitación:} El limitador discreto basado en $Q_2$
-    (TIP42C) y $R_{sc} = \SI{0.33}{\ohm}$ comienza a intervenir gradualmente ante sobrecargas mayores a la corriente nominal.
-    Ante condiciones de cortocircuito severo ($R_L = \SI{0.5}{\ohm}$), la tensión colapsa a $\SI{1.88}{\volt}$, la corriente
-    total de falla se pliega a $\SI{3.77}{\ampere}$ y la corriente del transistor de paso queda estrictamente confinada en
-    $I_{C(Q1)} = \SI{2.310}{\ampere}$, convalidando la formulación analítica de diseño ($I_{c1(max)} \approx \SI{2.45}{\ampere}$)
-    con un margen de seguridad confiable.
-    
-    \item \textbf{Optimización del diseño y verificación térmica:} El uso de transistores TIP42C (TO-220, $\SI{6}{\ampere}$, $\SI{65}{\watt}$) tanto para el transistor de paso $Q_1$ como
-    para el sensor $Q_2$ aportó una solución técnica equilibrada y económica, unificando la lista de materiales (BOM)
-    y evitando saturación de corriente. En régimen nominal la potencia
-    disipada por $Q_1$ es de $\SI{11.04}{\watt}$ y la del LM7812 es de $\SI{4.14}{\watt}$ ubicándose holgadamente dentro del Área de Operación Segura (SOA)
-    del dispositivo ($P_{Dmax} = \SI{65}{\watt}$).
-    
-    \item \textbf{Atenuación de perturbaciones y estabilidad de red:} La fuente demostró una elevada inmunidad
-    frente a ruidos de entrada, registrando un factor de regulación de red de $R_{red} = \SI{0.00019}{\percent}$ y un
-    rechazo de rizado a $\SI{100}{\hertz}$ de $RR = \SI{115.14}{\decibel}$ con una tensión eficaz residual de apenas
-    $V_{ef-rip} = \SI{1.01}{\micro\volt_{rms}}$.
-\end{enumerate}
+La etapa limitadora formada por $Q_2$ y $R_{sc} = \SI{0.33}{\ohm}$ cumplió el requisito de protección: comienza a
+intervenir gradualmente una vez superada la corriente nominal y, ante un cortocircuito severo ($R_L = \SI{0.5}{\ohm}$),
+la tensión de salida colapsa a $\SI{1.88}{\volt}$ y la corriente total se limita a $\SI{3.77}{\ampere}$. En esa
+condición la corriente de $Q_1$ queda confinada en $\SI{2.310}{\ampere}$, valor coherente con el previsto
+analíticamente ($I_{c1(max)} \approx \SI{2.45}{\ampere}$), lo que valida el procedimiento de diseño con un margen
+de seguridad adecuado. La elección del TIP42C tanto para $Q_1$ como para $Q_2$ resultó además una solución
+equilibrada y económica, ya que unifica la lista de materiales sin comprometer el desempeño.
+
+En cuanto a la evaluación de desempeño exigida, la simulación en LTspice permitió determinar la totalidad de los
+factores de calidad de la fuente. A la buena regulación de carga se suma una resistencia de salida de
+$R_{sal} = \SI{0.559}{\milli\ohm}$ y una elevada inmunidad frente a perturbaciones de la entrada, con una
+regulación de red de $R_{red} = \SI{0.00019}{\percent}$ y un rechazo de rizado a $\SI{100}{\hertz}$ de
+$RR = \SI{115.14}{\decibel}$, que deja un ripple residual de apenas $\SI{1.01}{\micro\volt_{rms}}$. El coeficiente
+térmico de $\SI{-1.626}{\milli\volt/\celsius}$ entre $0$ y $\SI{25}{\celsius}$ (y de
+$\SI{-1.887}{\milli\volt/\celsius}$ hasta $\SI{55}{\celsius}$) indica que la temperatura es la principal fuente de
+desviación de la tensión de salida, aunque su efecto se mantiene acotado a pocas décimas de volt en todo el rango
+analizado.
+
+Por último, la verificación térmica mostró que, en régimen nominal, $Q_1$ disipa $\SI{11.04}{\watt}$ y el LM7812
+$\SI{4.14}{\watt}$, valores que se ubican dentro del Área de Operación Segura de los dispositivos pero que exigen
+disipadores para un funcionamiento continuo. Se seleccionaron disipadores comerciales con resistencias térmicas
+inferiores a las cotas calculadas de $\SI{3.01}{\celsius/\watt}$ para $Q_1$ y $\SI{10.29}{\celsius/\watt}$ para
+el regulador, mientras que $Q_2$, con apenas $\SI{0.23}{\watt}$, no lo requiere. De este modo, la fuente diseñada
+satisface en conjunto las especificaciones de la consigna: entrega la tensión y corriente requeridas, se protege
+frente a sobrecargas y cortocircuitos, presenta factores de calidad sobresalientes y puede operar de forma
+segura a plena carga.
