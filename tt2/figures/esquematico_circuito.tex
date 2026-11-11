@@ -4,7 +4,7 @@
     \coordinate (A)  at (0,5.7);
     \coordinate (Na) at (1.2,5.7);
     \coordinate (Nb) at (3.6,5.7);
-    \draw (G0) to[sV, l={\shortstack[r]{$V_{in}$\\\SI{18}{\volt} $\pm$ \SI{1}{\volt}\\\SI{100}{\hertz}}}] (A) -- (Na);
+    \draw (G0) to[open, v^<=$V_{in}$, o-o] (A) -- (Na);
     \draw (Na) to[R, l={$R_{sc}$}, a={\SI{0.33}{\ohm}}, *-*] (Nb);
 
     % --- Q2: sensor de sobrecarga (E a Vin, B entre Rsc y Q1) ---
@@ -51,7 +51,7 @@
     \draw (Vo) to[short, -] (14.4,0 |- Vo) coordinate (V3)
           to[eC, l_={\shortstack[l]{$C_3$\\\SI{100}{\micro\farad}}}, -*] (V3 |- G0);
     \draw (V3) -- (16.6,0 |- V3) coordinate (V4)
-          to[R, l_={\shortstack[l]{$R_L$\\\SIrange[range-phrase=--, range-units=single]{0.5}{4}{\ohm}}}] (V4 |- G0);
+          to[R, l_=$R_L$] (V4 |- G0);
     \draw (V4) to[short, -o] ++(1,0) node[right] {$V_{out}$};
 
     % --- Riel de masa ---
