@@ -88,10 +88,9 @@ Cuando la resistencia desciende a $\SI{0.5}{\ohm}$, la tensión de salida colaps
 $V_{out} = \SI{1.88}{\volt}$. Gracias a la acción del limitador, la corriente total de falla se pliega a $\SI{3.77}{\ampere}$
 y la corriente a través del transistor
 de paso $Q_1$ queda confinada estrictamente en:
-\begin{equation}
+\begin{equation*}
     I_{C(Q1)(sc)} = \SI{2.310}{\ampere}
-    \label{eq.c5:ic_sc_medida}
-\end{equation}
+\end{equation*}
 Este resultado se encuentra plenamente por debajo del tope analítico de diseño ($I_{c1(max)} \approx \SI{2.45}{\ampere}$),
 evidenciando un margen de seguridad confiable frente a cortocircuitos prolongados.
 
@@ -118,10 +117,9 @@ propios mecanismos internos de protección:
 
 La potencia disipada en el transistor de paso se calcula a partir de la tensión colector-emisor y la corriente de
 colector:
-\begin{equation}
+\begin{equation*}
     P_{D(Q1)} = V_{CE(Q1)} \cdot I_{C(Q1)}
-    \label{eq.c5:potencia_q1}
-\end{equation}
+\end{equation*}
 En la figura~\ref{fig.c5:potencias} se grafica la evolución de la potencia disipada en $Q_1$ y en el LM7812 en todo el
 rango de carga.
 
@@ -162,10 +160,12 @@ Para garantizar la integridad y confiabilidad operativa de la fuente bajo régim
 semiconductores activos del circuito: el transistor de potencia $Q_1$, el transistor sensor $Q_2$ y el regulador
 integrado LM7812.
 
-De acuerdo a los lineamientos pedagógicos y analíticos de la cátedra \cite{gonzalez_fuentes2}, el flujo de calor
-generado en la juntura semiconductora se modela mediante la analogía eléctrica-térmica gobernada por la ley de Ohm térmica,
-donde la potencia disipada $P_D$ $[\si{\watt}]$ actúa como fuente de calor, la temperatura $T$ $[\si{\celsius}]$
-como potencial térmico y las resistencias térmicas $R_{th}$ $[\si{\celsius/\watt}]$ representan la oposición al flujo calórico.
+El flujo de calor generado en la juntura semiconductora se puede modelar
+mediante una analogía eléctrica-térmica de la ley de Ohm,
+donde la potencia disipada $P_D$ $[\si{\watt}]$ actúa como fuente de calor, la
+temperatura $T$ $[\si{\celsius}]$ como potencial térmico y las resistencias
+térmicas $R_{th}$ $[\si{\celsius/\watt}]$ representan la oposición al flujo
+calórico.
 
 En la figura~\ref{fig.c5:circuito_termico} se presentan los dos circuitos térmicos equivalentes de análisis: la operación
 del semiconductor al aire libre sin disipador (caso a) y la operación asistida con disipador térmico (caso b).
@@ -183,10 +183,9 @@ El dimensionamiento térmico se desarrolla en tres etapas consecutivas:
     \item \textbf{Evaluación de la necesidad de disipador (operación al aire libre):}  
     A partir de la potencia disipada $P_D$ a plena carga y la resistencia térmica juntura-ambiente provista por
     el fabricante ($R_{th(j-a)}$), se determina la temperatura alcanzada por la juntura $T_j$ sin auxilio de disipador:
-    \begin{equation}
+    \begin{equation*}
         T_j = T_a + P_D \cdot R_{th(j-a)}
-        \label{eq.c5:tj_sin_disipador}
-    \end{equation}
+    \end{equation*}
     Si la temperatura resultante supera el límite térmico absoluto del fabricante ($T_{j(max)} = \SI{150}{\celsius}$),
     el dispositivo sufriría destrucción térmica inmediata, haciéndose indispensable el agregado de un disipador.
     Evaluando los tres componentes en régimen permanente a plena carga nominal ($I_L = \SI{3.0}{\ampere}$):
@@ -212,7 +211,7 @@ El dimensionamiento térmico se desarrolla en tres etapas consecutivas:
         
         \item \textbf{Regulador integrado LM7812 (LM7812K, TO-3):} Conducen $I_{out(7812)} = \SI{0.926}{\ampere}$
         con caída $V_{drop} \approx \SI{4.47}{\volt}$, disipando $P_{D(7812)} = \mathbf{\SI{4.14}{\watt}}$.
-        Para el encapsulado metálico TO-3 ($R_{th(j-a)} \approx \SI{35}{\celsius/\watt}$) \cite{ti_lm78xx}, a $T_a = \SI{40}{\celsius}$:
+        Para el encapsulado metálico TO-3 ($R_{th(j-a)} \approx \SI{35}{\celsius/\watt}$) a $T_a = \SI{40}{\celsius}$:
         \begin{equation*}
             T_j = \SI{40}{\celsius} + \SI{4.14}{\watt} \cdot \SI{35}{\celsius/\watt} = \mathbf{\SI{184.9}{\celsius}}
         \end{equation*}
@@ -222,25 +221,21 @@ El dimensionamiento térmico se desarrolla en tres etapas consecutivas:
     
     \item \textbf{Resistencia térmica juntura-ambiente admisible ($R_{th(j-a)max}$):}  
     Fijando una temperatura ambiente máxima de servicio $T_a = \SI{40}{\celsius}$ (interior de gabinete) y una temperatura
-    máxima admisible de juntura $T_{j(adm)} = \SI{100}{\celsius}$ (criterio conservador adoptado por la cátedra \cite{gonzalez_fuentes2}
-    para brindar un margen de seguridad de $\SI{50}{\celsius}$ ante sobrecargas), se calcula la resistencia térmica total
+    máxima admisible de juntura $T_{j(adm)} = \SI{100}{\celsius}$ para brindar un margen de seguridad de $\SI{50}{\celsius}$ ante sobrecargas, se calcula la resistencia térmica total
     admisible para los dos componentes que requieren disipación asistida ($Q_1$ y LM7812):
-    \begin{equation}
+    \begin{equation*}
         R_{th(j-a)max} = \frac{T_{j(adm)} - T_a}{P_D}
-        \label{eq.c5:rth_ja_max}
-    \end{equation}
+    \end{equation*}
     \begin{itemize}
         \item \textbf{Para el transistor $Q_1$ ($P_D = \SI{11.04}{\watt}$):}
-        \begin{equation}
+        \begin{equation*}
             R_{th(j-a)max(Q1)} = \frac{\SI{100}{\celsius} - \SI{40}{\celsius}}{\SI{11.04}{\watt}} = \frac{\SI{60}{\celsius}}{\SI{11.04}{\watt}} = \mathbf{\SI{5.43}{\celsius/\watt}}
-            \label{eq.c5:rth_ja_max_q1}
-        \end{equation}
+        \end{equation*}
         
         \item \textbf{Para el regulador LM7812 ($P_D = \SI{4.14}{\watt}$):}
-        \begin{equation}
+        \begin{equation*}
             R_{th(j-a)max(7812)} = \frac{\SI{100}{\celsius} - \SI{40}{\celsius}}{\SI{4.14}{\watt}} = \frac{\SI{60}{\celsius}}{\SI{4.14}{\watt}} = \mathbf{\SI{14.49}{\celsius/\watt}}
-            \label{eq.c5:rth_ja_max_lm}
-        \end{equation}
+        \end{equation*}
     \end{itemize}
     
     \item \textbf{Determinación de la resistencia térmica del disipador ($R_{th(s-a)}$):}  
@@ -253,25 +248,23 @@ El dimensionamiento térmico se desarrolla en tres etapas consecutivas:
     \textbf{contacto directo y silicona} (la de menor resistencia térmica disponible):
     \begin{itemize}
         \item Para encapsulado TO-220 ($Q_1$): $R_{th(c-s)} = \mathbf{\SI{0.50}{\celsius/\watt}}$, con $R_{th(j-c)} = \frac{150 - 25}{\SI{65}{\watt}} \approx \mathbf{\SI{1.92}{\celsius/\watt}}$ \cite{onsemi_tip42c}.
-        \item Para encapsulado metálico TO-3 (LM7812): $R_{th(c-s)} = \mathbf{\SI{0.20}{\celsius/\watt}}$, con $R_{th(j-c)} \approx \mathbf{\SI{4.00}{\celsius/\watt}}$ \cite{ti_lm78xx}.
+        \item Para encapsulado metálico TO-3 (LM7812): $R_{th(c-s)} = \mathbf{\SI{0.20}{\celsius/\watt}}$, con $R_{th(j-c)} \approx \mathbf{\SI{4.00}{\celsius/\watt}}$.
     \end{itemize}
     Sustituyendo los valores en la inecuación~\eqref{eq.c5:rth_sa}:
     \begin{itemize}
         \item \textbf{Disipador para $Q_1$:}
-        \begin{align}
-            R_{th(s-a)(Q1)} &\le R_{th(j-a)max(Q1)} - R_{th(j-c)} - R_{th(c-s)} \notag \\
+        \begin{align*}
+            R_{th(s-a)(Q1)} &\le R_{th(j-a)max(Q1)} - R_{th(j-c)} - R_{th(c-s)} \\
             &\le \SI{5.43}{\celsius/\watt} - \SI{1.92}{\celsius/\watt} - \SI{0.50}{\celsius/\watt} = \mathbf{\SI{3.01}{\celsius/\watt}}
-            \label{eq.c5:rth_sa_q1}
-        \end{align}
-        Se debe seleccionar un disipador comercial aletado para TO-220 con una resistencia térmica $R_{th(s-a)} \le \SI{3.0}{\celsius/\watt}$.
+        \end{align*}
+        Se debe seleccionar un disipador comercial aletado para TO-220 con una resistencia térmica $R_{th(s-a)} \le \SI{3.0}{\celsius/\watt}$. En base al catálogo comercial seleccionado (anexo~\ref{sec.anexo:disipador_to220}), se adopta el disipador \textbf{Wakefield-Vette Serie 647 / 657} (modelo 647-25ABEP o 657-25ABEP de \SI{63.5}{\milli\meter} de altura), el cual presenta una resistencia térmica $R_{th(s-a)} = \SI{2.8}{\celsius/\watt}$ (con ventilación forzada moderada de $\SI{200}{LFM}$) o $\approx \SI{4.1}{\celsius/\watt}$ en convección natural, garantizando una adecuada evacuación del calor.
         
         \item \textbf{Disipador para el regulador LM7812:}
-        \begin{align}
-            R_{th(s-a)(7812)} &\le R_{th(j-a)max(7812)} - R_{th(j-c)} - R_{th(c-s)} \notag \\
+        \begin{align*}
+            R_{th(s-a)(7812)} &\le R_{th(j-a)max(7812)} - R_{th(j-c)} - R_{th(c-s)} \\
             &\le \SI{14.49}{\celsius/\watt} - \SI{4.00}{\celsius/\watt} - \SI{0.20}{\celsius/\watt} = \mathbf{\SI{10.29}{\celsius/\watt}}
-            \label{eq.c5:rth_sa_lm}
-        \end{align}
-        Dado que el requerimiento es moderado, es suficiente emplear un disipador estampado o aletado comercial para TO-3 de $R_{th(s-a)} \le \SI{10}{\celsius/\watt}$.
+        \end{align*}
+        Dado que el requerimiento es moderado, es suficiente emplear un disipador comercial para TO-3 con $R_{th(s-a)} \le \SI{10.29}{\celsius/\watt}$. A partir de la hoja de datos comercial (anexo~\ref{sec.anexo:disipador_to3}), se adopta el disipador \textbf{Aavid / Boyd Serie Diamond Basket 5750} (modelos 575603 a 575903), el cual para una potencia disipada de $\SI{4.14}{\watt}$ ofrece en régimen de convección natural una resistencia térmica $R_{th(s-a)} \approx 5.0\text{ a }\SI{7.5}{\celsius/\watt}$, verificando ampliamente la cota admisible calculada.
     \end{itemize}
 \end{enumerate}
 

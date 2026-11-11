@@ -9,7 +9,7 @@ Para la implementación del circuito se seleccionaron los siguientes dispositivo
     \item \textbf{Regulador Integrado LM7812:} Regulador lineal positivo fijo de tres terminales. En estricto
     cumplimiento de la consigna, se adopta la versión en encapsulado metálico TO-3 (sufijo K), caracterizado por una
     resistencia térmica juntura-carcasa reducida ($\theta_{jc} \approx \SI{4}{\celsius/\watt}$), lo que optimiza la transferencia de calor hacia el
-    disipador común \cite{ti_lm78xx}.
+    disipador común.
     \item \textbf{Transistor de paso de potencia $Q_1$ (TIP42C):} Transistor bipolar PNP de potencia en encapsulado
     plástico TO-220 ($I_C = \SI{6}{\ampere}$, $V_{CEO} = \SI{100}{\volt}$, $P_D = \SI{65}{\watt}$ a
     $T_C = \SI{25}{\celsius}$) \cite{onsemi_tip42c}.
@@ -48,10 +48,9 @@ corrientes de carga, el transistor $Q_1$ permanece fuera de conducción y la tot
 Para asegurar que a plena carga nominal ($I_L = \SI{3}{\ampere}$) el regulador integrado no sobrepase su corriente nominal
 de catálogo ($I_{nom(7812)} = \SI{1.0}{\ampere}$), el transistor exterior debe comenzar a conducir a una corriente inferior
 $I_{reg(th)} \approx \SI{320}{\milli\ampere}$, absorbiendo el excedente de corriente:
-\begin{equation}
+\begin{equation*}
     R_{ext} = \frac{V_{BE(Q1)}}{I_{reg(th)}} = \frac{\SI{0.7}{\volt}}{\SI{0.32}{\ampere}} \approx \SI{2.19}{\ohm}
-    \label{eq.c5:rext}
-\end{equation}
+\end{equation*}
 Se adopta el valor comercial normalizado $R_2 = \SI{2.2}{\ohm}$ ($\SI{2}{\watt}$). Con este dimensionamiento, a plena carga
 ($I_L = \SI{3.0}{\ampere}$, $R_L = \SI{4}{\ohm}$), el regulador integrado suministra únicamente $\SI{0.93}{\ampere}$
 ($<\SI{1.0}{\ampere}$), mientras que $Q_1$ entrega los restantes $\SI{2.07}{\ampere}$, operando ambos dispositivos
@@ -64,26 +63,23 @@ La protección de sobrecarga debe comenzar a actuar cuando la corriente del tran
 nominal y confinarla rígidamente ante cortocircuito.
 Considerando que a plena conducción de sensado ($I_{C(Q2)} \approx \SI{1}{\ampere}$) la caída base-emisor real del
 transistor de potencia es $V_{BE(Q2)} \approx \SI{0.81}{\volt}$:
-\begin{equation}
+\begin{equation*}
     R_{sc} = \frac{V_{BE(Q2)}}{I_{ext(max)}} = \frac{\SI{0.81}{\volt}}{\SI{2.45}{\ampere}} \approx \SI{0.33}{\ohm}
-    \label{eq.c5:rsc}
-\end{equation}
+\end{equation*}
 Se adopta el valor comercial estándar normalizado $R_1 = \SI{0.33}{\ohm}$ (resistor cerámico bobinado de $\SI{5}{\watt}$).
 Con este valor, el umbral de disparo inicial (con $V_{BE} \approx \SI{0.70}{\volt}$) se establece en:
-\begin{equation}
+\begin{equation*}
     I_{c1(th)} = \frac{\SI{0.70}{\volt}}{\SI{0.33}{\ohm}} \approx \SI{2.12}{\ampere}
-    \label{eq.c5:ic1th}
-\end{equation}
+\end{equation*}
 mientras que en cortocircuito franco la corriente de $Q_1$ queda acotada teóricamente en:
-\begin{equation}
+\begin{equation*}
     I_{c1(max)} = \frac{V_{BE(Q2)}}{R_{sc}} = \frac{\SI{0.81}{\volt}}{\SI{0.33}{\ohm}} \approx \SI{2.45}{\ampere}
-    \label{eq.c5:ic1max}
-\end{equation}
+\end{equation*}
 
 \section{Filtros capacitivos de desacoplo y estabilidad}
 \label{sec.c5:capacitores}
 
-Siguiendo las recomendaciones de aplicación del fabricante \cite{ti_lm78xx} y de la cátedra
+Siguiendo las recomendaciones de aplicación del fabricante y de la cátedra
 \cite{gonzalez_fuentes2}:
 \begin{itemize}
     \item $C_1 = \SI{0.33}{\micro\farad}$ (disco cerámico): conectado entre el pin IN del LM7812 y masa, atenúa

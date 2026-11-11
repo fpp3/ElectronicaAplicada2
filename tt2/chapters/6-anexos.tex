@@ -1,0 +1,59 @@
+\chapter{Anexo}
+\label{chap:anexos}
+\refstepcounter{section}
+\addcontentsline{toc}{section}{\protect\numberline{\thesection}Transistores de potencia TIP41 / TIP42 (ON Semiconductor)}
+\label{sec.anexo:tip42}
+
+\vspace{-15pt}
+\noindent\centering
+\includegraphics[page=1, width=0.88\textwidth]{sources/TIP41.PDF}
+
+\clearpage
+
+\includepdf[
+    pages={2},
+    scale=0.82,
+    offset=0 -3mm,
+    pagecommand={\thispagestyle{fancy}}
+]{sources/TIP41.PDF}
+
+\includepdf[
+    pages={1,2,7},
+    scale=0.82,
+    offset=0 -3mm,
+    pagecommand={\thispagestyle{fancy}},
+    addtotoc={
+        1, section, 1, {Regulador integrado L7812 / LM7812 (STMicroelectronics)}, sec.anexo:lm7812
+    }
+]{sources/L7800.PDF}
+
+\includepdf[
+    pages={1-2},
+    scale=0.82,
+    offset=0 -3mm,
+    pagecommand={\thispagestyle{fancy}},
+    addtotoc={
+        1, section, 1, {Disipador para encapsulado TO-3: Diamond Basket 5750 (Aavid / Boyd)}, sec.anexo:disipador_to3
+    }
+]{sources/disipador_to3.pdf}
+
+\includepdf[
+    pages={1},
+    viewport=0 0 636 840,
+    clip,
+    scale=0.82,
+    offset=0 -3mm,
+    pagecommand={\thispagestyle{fancy}},
+    addtotoc={
+        1, section, 1, {Disipador para encapsulado TO-220: Series 647 y 657 (Wakefield-Vette)}, sec.anexo:disipador_to220
+    }
+]{sources/disipador_to220.pdf}
+
+\includepdf[
+    pages={1},
+    viewport=636 0 1272 840,
+    clip,
+    scale=0.82,
+    offset=0 -3mm,
+    pagecommand={\thispagestyle{fancy}}
+]{sources/disipador_to220.pdf}
