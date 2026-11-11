@@ -63,7 +63,7 @@ etapa restadora cargue al divisor y altere tanto la referencia como la condició
 \section{Polarización del Sensor}
 
 $R_7$ se calcula para que circule $I_1 = \SI{1}{\milli\ampere}$ por el sensor en el peor caso, a \SI{50}{\celsius}.
-La corriente total $I_T$ que entrega $R_7$ se divide entre el sensor y la rama $R_6$-$R_5$ de entrada al restador:
+La corriente total $I_T$ que pasa por $R_7$ se divide entre el sensor y la rama $R_6$-$R_5$ de entrada al restador:
 \begin{gather*}
   I_2 = \frac{V_{\SI{50}{\celsius}}}{R_6 + R_5} = \frac{\SI{3.23}{\volt}}{\SI{110}{\kilo\ohm}}
     = \SI{29.36}{\micro\ampere}
@@ -75,7 +75,8 @@ La corriente total $I_T$ que entrega $R_7$ se divide entre el sensor y la rama $
 \end{gather*}
 Con el valor normalizado, la corriente por el sensor varía entre $\SI{1.24}{\milli\ampere}$ (\SI{0}{\celsius}) y
 $\SI{0.95}{\milli\ampere}$ (\SI{50}{\celsius}), dentro del rango de operación de $\SI{400}{\micro\ampere}$ a
-$\SI{5}{\milli\ampere}$ que indica la hoja de datos del LM335.
+$\SI{5}{\milli\ampere}$ que indica la hoja de datos del LM335, y consiguiendo la corriente de mayor precision que nos
+da el fabricante.
 
 \section{Elección del Amplificador Operacional}
 
