@@ -4,7 +4,7 @@
 \section{Circuito Simulado}
 
 El circuito se simuló en KiCad con el motor ngspice (Anexo~\ref{sec:anexos}), utilizando los modelos
-SPICE del LM335 y del MCP6001 provistos por los fabricantes. El modelo del sensor posee un terminal $T$ cuya tensión
+SPICE del LM335 y del MCP6001 incluidos en el anexo. El modelo del sensor posee un terminal $T$ cuya tensión
 fija la temperatura en \si{\celsius}, por lo que se realizó un análisis DC barriendo la fuente $V_1$ de \SI{0}{\volt}
 a \SI{50}{\volt} en pasos de \SI{1}{\volt} (\texttt{.dc V1 0 50 1}). El esquemático de simulación y la netlist completa se
 encuentran en el anexo.
@@ -35,7 +35,7 @@ equivalentes, dividiendo la diferencia de tensión por la sensibilidad ideal de 
   \label{tab:sim}
 \end{table}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
   \centering
   \input{figures/plot_sim_transferencia.tex}
   \caption{Transferencia simulada del CAS en el rango de temperatura.}

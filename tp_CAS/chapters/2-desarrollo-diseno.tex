@@ -4,7 +4,7 @@
 \section{Función de Transferencia Requerida}
 
 La transferencia buscada es una recta que pasa por los puntos $(V_{i1}; V_{o1}) = (\SI{2.73}{\volt}; \SI{0}{\volt})$
-y $(V_{i2}; V_{o2}) = (\SI{3.23}{\volt}; \SI{5}{\volt})$:
+y $(V_{i2}; V_{o2}) = (\SI{3.23}{\volt}; \SI{5}{\volt})$ (Figura~\ref{fig:transferencia_requerida}):
 \begin{gather*}
   V_o - V_{o1} = \frac{V_{o2} - V_{o1}}{V_{i2} - V_{i1}} \left( V_i - V_{i1} \right)
   \quad\Rightarrow\quad
@@ -18,12 +18,19 @@ y $(V_{i2}; V_{o2}) = (\SI{3.23}{\volt}; \SI{5}{\volt})$:
 Es decir, el CAS debe restar a la señal del sensor una tensión de referencia de $\SI{2.73}{\volt}$ y amplificar la
 diferencia diez veces.
 
+\begin{figure}[!ht]
+  \centering
+  \input{figures/plot_transferencia_requerida.tex}
+  \caption{Función de transferencia requerida del CAS.}
+  \label{fig:transferencia_requerida}
+\end{figure}
+
 \section{Topología del Circuito Acondicionador}
 
 Se eligió una configuración restadora ($U_3$ en la Figura~\ref{crkt:completo}), que resta primero la referencia y luego amplifica
 la diferencia. La topología propuesta por la cátedra amplifica primero y luego resta, por lo que también se amplifica
-la componente continua del sensor: la tensión intermedia supera los \SI{15}{\volt} ($10 \cdot \SI{2.73}{\volt}$), lo
-cual no es posible con una alimentación simple de \SI{5}{\volt}.
+la componente continua del sensor: la tensión intermedia supera los \SI{15}{\volt} ($10 \cdot \SI{2.73}{\volt}$), inviable
+con una alimentación simple de \SI{5}{\volt}.
 
 Si se cumple la condición de apareamiento $R_3/R_4 = R_5/R_6$, la salida resulta:
 \begin{equation}
@@ -72,6 +79,6 @@ $\SI{5}{\milli\ampere}$ que indica la hoja de datos del LM335.
 
 \section{Elección del Amplificador Operacional}
 
-Se utiliza el MCP6001, que admite alimentación simple de \SI{1.8}{\volt} a \SI{6}{\volt} y tiene entradas y salida
-\textit{rail-to-rail}. Esto permite alimentarlo directamente entre GND y \SI{5}{\volt} y que la salida alcance valores
-cercanos a \SI{0}{\volt} y \SI{5}{\volt}, necesarios en los extremos del rango.
+Se utiliza el MCP6001, de alimentación simple (\SI{1.8}{\volt} a \SI{6}{\volt}) y con entradas y salida
+\textit{rail-to-rail}, lo que permite alimentarlo entre GND y \SI{5}{\volt} y llevar la salida cerca de ambos
+extremos del rango.
